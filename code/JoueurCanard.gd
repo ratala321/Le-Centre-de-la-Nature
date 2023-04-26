@@ -76,7 +76,7 @@ func mouvementJoueur(delta):
 	#fonction qui saisie l'entree du mouvement du joueur
 	vecteurDirectionJoueur = entreeMouvement()
 
-	#fonction qui determine si le joueur saute ou non?
+	#fonction qui determine si le joueur a la permission de sauter
 	permissionSautJoueur = evaluationSautJoueur(vecteurDirectionJoueur)
 
 	#reinitialiser la valeur y du vecteurDirectionJoueur si vecteur n'est pas un objet?
@@ -204,21 +204,25 @@ func applicationMouvement(delta, directionJoueur, vitesseEsquiveJoueur) -> void:
 	#application du mouvement
 	position += directionJoueur * vitesseJoueur * delta * vitesseEsquiveJoueur
 
+
 ##permet d'appliquer les animations liees au mouvement
 func applicationAnimationMouvement() -> void:
 	#application des animations
 	#appliquer en fonction de la direction du vecteurDirectionJoueur
 	pass
 
+
 ##permet de deplacer le joueur vers un position donnee en parametre
 func starting_position(pos) -> void:
 	#application de la position de depart au joueur
 	position = pos
 
+
 ##permet d'afficher une ligne suivant le joueur lors de l'esquive
 func affichageLigneEsquive() -> void:
 	$DashLine2D.show()
 	$DashLine2D/DashLineTimer.start()
+
 
 ##permet de relancer le chronometre limitant le nombre d'esquive
 func relanceChronoEsquive() -> void:
@@ -228,3 +232,18 @@ func relanceChronoEsquive() -> void:
 #################################
 #FIN FONCTIONS LIEES AU MOUVEMENT
 #################################
+
+
+##########################
+#INTERACTION PAR LE JOUEUR
+##########################
+
+##emet le signal [signal interaction_joueur_] lorsque le joueur appuie sur la touche
+##correspondant a l'action [b]interaction_joueur[/b]
+func interactionJoueur() -> void:
+	if Input.is_action_pressed("interaction_joueur"):
+		emit_signal("interaction_joueur_")
+
+##############################
+#FIN INTERACTION PAR LE JOUEUR
+##############################
