@@ -2,15 +2,17 @@ extends CharacterBody3D
 
 @export var vitesseJoueur = 14
 
-##constante direction valeur en x et y du vecteur de direction
+##direction valeur en x et y du vecteur de direction
 const DIRECTION_DROITE : int = -1
 const DIRECTION_GAUCHE : int = 1
 const DIRECTION_HAUT : int = 1
 const DIRECTION_BAS : int = -1
-##constante de la vitesse d'esquive initiale
+##vitesse d'esquive initiale
 const VITESSE_ESQUIVE_JOUEUR_INITIALE : int = 1
-##constante de la force l'impulsion du saut du joueur
+##force l'impulsion du saut du joueur
 const IMPULSION_SAUT_JOUEUR : int = 10
+##intervalle de temps entre deux esquives du joueur
+const INTERVALLE_ESQUIVE_JOUEUR : int = 3
 
 #-----------------------
 #constantes de direction
@@ -190,7 +192,7 @@ func entreeEsquive() -> int:
 	var vitesseEsquiveJoueur = VITESSE_ESQUIVE_JOUEUR_INITIALE
 
 	#saisie de l'input pour le dash
-	if Input.is_action_just_pressed("dash") && $DashTimer.is_stopped():
+	if Input.is_action_just_pressed("dash") && $ChronometreEsquive.is_stopped():
 		#fonction reinitialisant le chronometre d'esquive et emettant le signal esquive
 		relanceChronoEsquive()
 		#fonction affichant la ligne d'esquive se trouvant derriere le joueur
@@ -247,7 +249,7 @@ func affichageLigneEsquive() -> void:
 
 ##permet de relancer le chronometre limitant le nombre d'esquive
 func relanceChronoEsquive() -> void:
-	$DashTimer.start()
+	$ChronometreEsquive.start(INTERVALLE_ESQUIVE_JOUEUR)
 	emit_signal("esquive_")
 
 #################################
