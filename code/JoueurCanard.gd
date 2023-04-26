@@ -12,7 +12,7 @@ const DIRECTION_BAS : int = -1
 ##vitesse d'esquive initiale
 const VITESSE_ESQUIVE_JOUEUR_INITIALE : int = 1
 ##force l'impulsion du saut du joueur
-const IMPULSION_SAUT_JOUEUR : int = 10
+const IMPULSION_SAUT_JOUEUR : int = 20
 ##intervalle de temps entre deux esquives du joueur
 const INTERVALLE_ESQUIVE_JOUEUR : int = 3
 
@@ -76,6 +76,14 @@ func _ready():
 func _process(delta):
 	mouvementJoueur(delta)
 
+	applicationGravite()
+
+
+##?
+func applicationGravite() -> void:
+	velocity.y = -IMPULSION_SAUT_JOUEUR / 8
+	move_and_slide()
+
 
 #############################
 #FONCTIONS LIEES AU MOUVEMENT
@@ -99,8 +107,6 @@ func mouvementJoueur(delta):
 
 	#reinitialiser la valeur y du vecteurDirectionJoueur
 	vecteurDirectionJoueur.y = 0
-
-	print("direction y du vecteur direction joueur : " + str(vecteurDirectionJoueur.y))
 
 	#tourne le joueur face a la direction de son mouvement
 	rotationJoueur(vecteurDirectionJoueur)
@@ -223,9 +229,9 @@ func applicationMouvement(delta, directionJoueur, vitesseEsquiveJoueur, permissi
 
 #permet d'appliquer le saut au personnage du joueur
 func applicationSaut() -> void:
-	#A TESTER? position vs physique
-	#position.y += IMPULSION_SAUT_JOUEUR * delta
 	#methode avec force physique
+	velocity.y = IMPULSION_SAUT_JOUEUR
+	move_and_slide()
 	pass
 
 
