@@ -128,7 +128,7 @@ func entreeMouvementHorizontal() -> Vector3:
 
 ##permet de saisir l'entree du joueur pour le mouvement vertical
 ##
-##notes sur l'implementation : renvoie un int destine a etre place en
+##[b]notes sur l'implementation[/b] : renvoie un int destine a etre place en
 ##y dans la vecteur de la direction du mouvement
 func entreeMouvementVertical() -> Vector3:
 	var directionVerticaleJoueur : int = 0
