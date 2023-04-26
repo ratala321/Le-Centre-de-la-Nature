@@ -2,6 +2,8 @@ extends CharacterBody3D
 
 @export var vitesseJoueur = 14
 
+@onready var chronometreEsquive = get_node("ChronometreEsquive")
+
 ##direction valeur en x et y du vecteur de direction
 const DIRECTION_DROITE : int = -1
 const DIRECTION_GAUCHE : int = 1
@@ -67,6 +69,10 @@ signal interaction_joueur_
 var stfu
 
 
+func _ready():
+	chronometreEsquive.set_one_shot(true)
+
+
 func _process(delta):
 	mouvementJoueur(delta)
 
@@ -127,13 +133,13 @@ func entreeMouvementHorizontal() -> Vector3:
 
 	#bloc de saisie d'input pour la direction du mouvement
 	if Input.is_action_pressed("mouvement_haut"):
-		directionJoueur.z = DIRECTION_HAUT 
+		directionHorizontaleJoueur.z = DIRECTION_HAUT 
 	if Input.is_action_pressed("mouvement_bas"):
-		directionJoueur.z = DIRECTION_BAS
+		directionHorizontaleJoueur.z = DIRECTION_BAS
 	if Input.is_action_pressed("mouvement_droite"):
-		directionJoueur.x = DIRECTION_DROITE
+		directionHorizontaleJoueur.x = DIRECTION_DROITE
 	if Input.is_action_pressed("mouvement_gauche"):
-		directionJoueur.x = DIRECTION_GAUCHE
+		directionHorizontaleJoueur.x = DIRECTION_GAUCHE
 	
 	return directionHorizontaleJoueur
 
@@ -142,7 +148,7 @@ func entreeMouvementHorizontal() -> Vector3:
 ##
 ##[b]notes sur l'implementation[/b] : renvoie un int destine a etre place en
 ##y dans la vecteur de la direction du mouvement
-func entreeMouvementVertical() -> Vector3:
+func entreeMouvementVertical() -> int:
 	var directionVerticaleJoueur : int = 0
 
 	#bloc de saisie d'input pour la direction du mouvement
@@ -192,7 +198,7 @@ func entreeEsquive() -> int:
 	var vitesseEsquiveJoueur = VITESSE_ESQUIVE_JOUEUR_INITIALE
 
 	#saisie de l'input pour l'esquive
-	if Input.is_action_just_pressed("esquive") && get_node("ChronometreEsquive").is_stopped():
+	if Input.is_action_just_pressed("esquive") && chronometreEsquive.is_stopped():
 		#fonction reinitialisant le chronometre d'esquive et emettant le signal esquive
 		relanceChronoEsquive()
 		#fonction affichant la ligne d'esquive se trouvant derriere le joueur
@@ -226,6 +232,7 @@ func applicationSaut() -> void:
 	#A TESTER? position vs physique
 	#position.y += IMPULSION_SAUT_JOUEUR * delta
 	#methode avec force physique
+	pass
 
 
 ##permet d'appliquer les animations liees au mouvement
@@ -249,7 +256,7 @@ func affichageLigneEsquive() -> void:
 
 ##permet de relancer le chronometre limitant le nombre d'esquive
 func relanceChronoEsquive() -> void:
-	get_node("ChronometreEsquive").start(INTERVALLE_ESQUIVE_JOUEUR)
+	chronometreEsquive.start(INTERVALLE_ESQUIVE_JOUEUR)
 	emit_signal("esquive_")
 
 #################################

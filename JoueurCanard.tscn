@@ -267,4 +267,6 @@ transform = Transform3D(0.070505, 0, 0.997511, 0, 1, 0, -0.997511, 0, 0.070505, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0572429, 0.922335, 0)
 shape = SubResource("CapsuleShape3D_6rmec")
 
+[node name="ChronometreEsquive" type="Timer" parent="."]
+
 [editable path="KayKit_AnimatedCharacter_v12"]
