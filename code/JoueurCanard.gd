@@ -9,6 +9,12 @@ const DIRECTION_HAUT : int = 1
 const DIRECTION_BAS : int = -1
 ##constante de la vitesse d'esquive initiale
 const VITESSE_ESQUIVE_JOUEUR_INITIALE : int = 1
+##constante de la force l'impulsion du saut du joueur
+const IMPULSION_SAUT_JOUEUR : int = 10
+
+#-----------------------
+#constantes de direction
+#-----------------------
 ##valeur du vecteur correspodant a la direction droite
 const DIRECTION_DROITE_VECTEUR : Vector3 = Vector3(-1, 0 ,0)
 ##valeur du vecteur correspodant a la direction gauche
@@ -25,6 +31,10 @@ const DIRECTION_DIAGONALE_AVANT_GAUCHE_VECTEUR : Vector3 = Vector3(1, 0 ,1)
 const DIRECTION_DIAGONALE_ARRIERE_DROITE_VECTEUR : Vector3 = Vector3(-1, 0 ,-1)
 ##valeur du vecteur correspodant a la direction diagonale arriere et gauche
 const DIRECTION_DIAGONALE_ARRIERE_GAUCHE_VECTEUR : Vector3 = Vector3(1, 0 ,-1)
+
+#----------------------
+#constantes de rotation
+#----------------------
 ##valeur du vecteur de rotation du joueur lors d'un deplacement vers la droite
 const ROTATION_DROITE_VECTEUR : Vector3 = Vector3(0,-PI/2,0)
 ##valeur du vecteur de rotation du joueur lors d'un deplacement vers la gauche
@@ -96,7 +106,7 @@ func mouvementJoueur(delta):
 	applicationAnimationMouvement()
 	
 	#fonction appliquant le mouvement
-	applicationMouvement(delta, vecteurDirectionJoueur, vitesseEsquiveJoueur)
+	applicationMouvement(delta, vecteurDirectionJoueur, vitesseEsquiveJoueur, permissionSautJoueur)
 
 ##permet de saisir l'entree du joueur pour le mouvement
 func entreeMouvement() -> Vector3:
@@ -200,9 +210,20 @@ func normalisationMouvementDiagonal(directionJoueur) -> Vector3:
 
 
 ##permet d'appliquer le mouvement au personnage du joueur
-func applicationMouvement(delta, directionJoueur, vitesseEsquiveJoueur) -> void:
-	#application du mouvement
+func applicationMouvement(delta, directionJoueur, vitesseEsquiveJoueur, permissionSautJoueur : bool) -> void:
+	#application du mouvement horizontal
 	position += directionJoueur * vitesseJoueur * delta * vitesseEsquiveJoueur
+
+	#application du saut
+	if (permissionSautJoueur):
+		applicationSaut()
+
+
+#permet d'appliquer le saut au personnage du joueur
+func applicationSaut() -> void:
+	#A TESTER? position vs physique
+	#position.y += IMPULSION_SAUT_JOUEUR * delta
+	#methode avec force physique
 
 
 ##permet d'appliquer les animations liees au mouvement
