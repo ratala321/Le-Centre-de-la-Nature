@@ -97,7 +97,8 @@ func mouvementJoueur(delta):
 	#fonction qui determine si le joueur a la permission de sauter
 	permissionSautJoueur = evaluationSautJoueur(vecteurDirectionJoueur)
 
-	#reinitialiser la valeur y du vecteurDirectionJoueur si vecteur n'est pas un objet?
+	#reinitialiser la valeur y du vecteurDirectionJoueur
+	vecteurDirectionJoueur.y = 0
 
 	print("direction y du vecteur direction joueur : " + str(vecteurDirectionJoueur.y))
 
@@ -151,7 +152,7 @@ func entreeMouvementHorizontal() -> Vector3:
 func entreeMouvementVertical() -> int:
 	var directionVerticaleJoueur : int = 0
 
-	#bloc de saisie d'input pour la direction du mouvement
+	#saisie de l'input correspondant au saut du joueur
 	if Input.is_action_pressed("saut"):
 		directionVerticaleJoueur = 1
 	
@@ -160,15 +161,8 @@ func entreeMouvementVertical() -> int:
 
 ##? test pour voir si le vecteur est un objet
 func evaluationSautJoueur(vecteurDirectionJoueur : Vector3) -> bool:
-	#vrai si le joueur a la permission de sauter
-	var permissionSautJoueur : bool = false
-
-	#bloc evaluant si le joueur a la permission de sauter
-	if (vecteurDirectionJoueur.y == 1):
-		vecteurDirectionJoueur.y = 0
-		permissionSautJoueur = true
 	
-	return permissionSautJoueur
+	return vecteurDirectionJoueur.y != 0
 
 
 
