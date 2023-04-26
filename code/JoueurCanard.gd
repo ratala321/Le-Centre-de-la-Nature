@@ -57,7 +57,7 @@ const ROTATION_ARRIERE_GAUCHE_VECTEUR : Vector3 = Vector3(0,3*PI/4,0)
 
 ##signal lorsque quelque chose entre en contact avec le joueur
 signal player_hit_
-##signal lorsque le joueur dash
+##signal lorsque le joueur esquive
 signal esquive_
 ##signal lorsque le joueur appuie sur la touche d'interaction generale
 signal interaction_joueur_
@@ -191,8 +191,8 @@ func rotationJoueur(directionJoueur : Vector3) -> void:
 func entreeEsquive() -> int:
 	var vitesseEsquiveJoueur = VITESSE_ESQUIVE_JOUEUR_INITIALE
 
-	#saisie de l'input pour le dash
-	if Input.is_action_just_pressed("dash") && $ChronometreEsquive.is_stopped():
+	#saisie de l'input pour l'esquive
+	if Input.is_action_just_pressed("esquive") && get_node("ChronometreEsquive").is_stopped():
 		#fonction reinitialisant le chronometre d'esquive et emettant le signal esquive
 		relanceChronoEsquive()
 		#fonction affichant la ligne d'esquive se trouvant derriere le joueur
@@ -249,7 +249,7 @@ func affichageLigneEsquive() -> void:
 
 ##permet de relancer le chronometre limitant le nombre d'esquive
 func relanceChronoEsquive() -> void:
-	$ChronometreEsquive.start(INTERVALLE_ESQUIVE_JOUEUR)
+	get_node("ChronometreEsquive").start(INTERVALLE_ESQUIVE_JOUEUR)
 	emit_signal("esquive_")
 
 #################################
