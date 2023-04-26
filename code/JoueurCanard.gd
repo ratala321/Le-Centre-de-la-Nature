@@ -77,7 +77,9 @@ func mouvementJoueur(delta):
 	vecteurDirectionJoueur = entreeMouvement()
 
 	#fonction qui determine si le joueur saute ou non?
-	permissionSautJoueur = sautJoueur(vecteurDirectionJoueur)
+	permissionSautJoueur = evaluationSautJoueur(vecteurDirectionJoueur)
+
+	#reinitialiser la valeur y du vecteurDirectionJoueur si vecteur n'est pas un objet?
 
 	print("direction y du vecteur direction joueur : " + str(vecteurDirectionJoueur.y))
 
@@ -102,7 +104,7 @@ func entreeMouvement() -> Vector3:
 
 	directionJoueur = entreeMouvementHorizontal()
 
-	directionJoueur = entreeMouvementVertical()
+	directionJoueur.y = entreeMouvementVertical()
 	
 	return directionJoueur
 
@@ -124,8 +126,32 @@ func entreeMouvementHorizontal() -> Vector3:
 	return directionHorizontaleJoueur
 
 
-##?
+##permet de saisir l'entree du joueur pour le mouvement vertical
+##
+##notes sur l'implementation : renvoie un int destine a etre place en
+##y dans la vecteur de la direction du mouvement
 func entreeMouvementVertical() -> Vector3:
+	var directionVerticaleJoueur : int = 0
+
+	#bloc de saisie d'input pour la direction du mouvement
+	if Input.is_action_pressed("saut"):
+		directionVerticaleJoueur = 1
+	
+	return directionVerticaleJoueur
+
+
+##? test pour voir si le vecteur est un objet
+func evaluationSautJoueur(vecteurDirectionJoueur : Vector3) -> bool:
+	#vrai si le joueur a la permission de sauter
+	var permissionSautJoueur : bool = false
+
+	#bloc evaluant si le joueur a la permission de sauter
+	if (vecteurDirectionJoueur.y == 1):
+		vecteurDirectionJoueur.y = 0
+		permissionSautJoueur = true
+	
+	return permissionSautJoueur
+
 
 
 ##permet d'effectuer la rotation du joueur en fonction de la direction du mouvement
