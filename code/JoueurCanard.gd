@@ -80,6 +80,8 @@ func _process(delta):
 
 	appliquerGravite()
 
+	emettreInteractionJoueur()
+
 
 ##Permet d'appliquer la gravite sur le personnage du joueur
 func appliquerGravite() -> void:
@@ -103,19 +105,19 @@ func mouvementJoueur(delta):
 	vecteurDirectionJoueur = saisirEntreeMouvement()
 
 	#tourne le joueur face a la direction de son mouvement
-	rotationJoueur(vecteurDirectionJoueur)
+	appliquerRotationJoueur(vecteurDirectionJoueur)
 	
 	#fonction normalisant le mouvement diagonal
-	vecteurDirectionJoueur = normalisationMouvementDiagonal(vecteurDirectionJoueur)
+	vecteurDirectionJoueur = normaliserMouvementDiagonal(vecteurDirectionJoueur)
 
 	#fonction qui saisie l'entree de l'esquive du joueur
-	#vitesseEsquiveJoueur = entreeEsquive()
+	#vitesseEsquiveJoueur = saisirEntreeEsquive()
 	
 	#fonction appliquant les animations de mouvement
-	applicationAnimationMouvement()
+	appliquerAnimationMouvement()
 	
 	#fonction appliquant le mouvement
-	applicationMouvement(delta, vecteurDirectionJoueur, vitesseEsquiveJoueur)
+	appliquerMouvement(delta, vecteurDirectionJoueur, vitesseEsquiveJoueur)
 
 ##permet de saisir l'entree du joueur pour le mouvement
 func saisirEntreeMouvement() -> Vector3:
@@ -159,8 +161,11 @@ func saisirEntreeMouvementVertical() -> int:
 	return directionVerticaleJoueur
 
 
-##? test pour voir si le vecteur est un objet
-func evaluationSautJoueur(vecteurDirectionJoueur : Vector3) -> bool:
+##permet de determiner si le joueur a saisie une touche pour le saut
+##
+##[b]notes sur l'implementation[/b] : lorsque le joueur saisie la touche de saut,
+##la valeur en y du vecteurDirectionJoueur n'est pas egale a 0
+func evaluerSaisieSautJoueur(vecteurDirectionJoueur : Vector3) -> bool:
 	
 	return vecteurDirectionJoueur.y != 0
 
@@ -168,7 +173,7 @@ func evaluationSautJoueur(vecteurDirectionJoueur : Vector3) -> bool:
 
 ##permet d'effectuer la rotation du joueur en fonction de la direction du mouvement
 ##c-a-d le joueur fera face a la direction de son mouvement
-func rotationJoueur(directionJoueur : Vector3) -> void:
+func appliquerRotationJoueur(directionJoueur : Vector3) -> void:
 	if directionJoueur == DIRECTION_ARRIERE_VECTEUR:
 		set_rotation(ROTATION_ARRIERE_VECTEUR)
 	elif directionJoueur == DIRECTION_AVANT_VECTEUR:
@@ -188,22 +193,22 @@ func rotationJoueur(directionJoueur : Vector3) -> void:
 
 
 ##permet de saisir l'entree du joueur pour l'esquive
-func entreeEsquive() -> int:
+func saisirEntreeEsquive() -> int:
 	var vitesseEsquiveJoueur = VITESSE_ESQUIVE_JOUEUR_INITIALE
 
 	#saisie de l'input pour l'esquive
 	if Input.is_action_just_pressed("esquive") && chronometreEsquive.is_stopped():
 		#fonction reinitialisant le chronometre d'esquive et emettant le signal esquive
-		relanceChronoEsquive()
+		relancerChronoEsquive()
 		#fonction affichant la ligne d'esquive se trouvant derriere le joueur
-		affichageLigneEsquive()
+		afficherLigneEsquive()
 
 	return vitesseEsquiveJoueur
 		
 
 ##permet de faire en sorte que le mouvement diagonal soit equivalent
 ##aux autres mouvements en terme de vitesse
-func normalisationMouvementDiagonal(directionJoueur) -> Vector3:
+func normaliserMouvementDiagonal(directionJoueur) -> Vector3:
 	#normalisation du mouvement diagonal
 	if directionJoueur != Vector3.ZERO:
 		directionJoueur = directionJoueur.normalized()
@@ -212,10 +217,10 @@ func normalisationMouvementDiagonal(directionJoueur) -> Vector3:
 
 
 ##permet d'appliquer le mouvement au personnage du joueur
-func applicationMouvement(delta, directionJoueur, vitesseEsquiveJoueur) -> void:
+func appliquerMouvement(delta, directionJoueur, vitesseEsquiveJoueur) -> void:
 	#application du saut
-	if (evaluationSautJoueur(directionJoueur)):
-		applicationSaut()
+	if (evaluerSaisieSautJoueur(directionJoueur)):
+		appliquerSaut()
 
 	#reinitialiser la valeur y du vecteurDirectionJoueur
 	directionJoueur.y = 0
@@ -225,7 +230,7 @@ func applicationMouvement(delta, directionJoueur, vitesseEsquiveJoueur) -> void:
 
 
 #permet d'appliquer le saut au personnage du joueur
-func applicationSaut() -> void:
+func appliquerSaut() -> void:
 	#methode avec force physique
 	velocity.y = IMPULSION_SAUT_JOUEUR
 	move_and_slide()
@@ -233,7 +238,7 @@ func applicationSaut() -> void:
 
 
 ##permet d'appliquer les animations liees au mouvement
-func applicationAnimationMouvement() -> void:
+func appliquerAnimationMouvement() -> void:
 	#application des animations
 	#appliquer en fonction de la direction du vecteurDirectionJoueur
 	pass
@@ -246,13 +251,13 @@ func starting_position(pos) -> void:
 
 
 ##permet d'afficher une ligne suivant le joueur lors de l'esquive
-func affichageLigneEsquive() -> void:
+func afficherLigneEsquive() -> void:
 	$DashLine2D.show()
 	$DashLine2D/DashLineTimer.start()
 
 
 ##permet de relancer le chronometre limitant le nombre d'esquive
-func relanceChronoEsquive() -> void:
+func relancerChronoEsquive() -> void:
 	chronometreEsquive.start(INTERVALLE_ESQUIVE_JOUEUR)
 	emit_signal("esquive_")
 
@@ -267,7 +272,7 @@ func relanceChronoEsquive() -> void:
 
 ##emet le signal [signal interaction_joueur_] lorsque le joueur appuie sur la touche
 ##correspondant a l'action [b]interaction_joueur[/b]
-func interactionJoueur() -> void:
+func emettreInteractionJoueur() -> void:
 	if Input.is_action_pressed("interaction_joueur"):
 		emit_signal("interaction_joueur_")
 
