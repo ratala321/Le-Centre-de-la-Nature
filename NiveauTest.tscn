@@ -1,25 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://3ekx0s8cgi7h"]
 
 [ext_resource type="PackedScene" uid="uid://dq04vglibsi8r" path="res://JoueurCanard.tscn" id="1_0iw8u"]
-[ext_resource type="Texture2D" uid="uid://dcbyybrn7muy4" path="res://icon.svg" id="2_2o6l8"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_c4v7h"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ckacd"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4xsu1"]
 
 [node name="NiveauTest" type="Node"]
 
 [node name="JoueurCanard" parent="." instance=ExtResource("1_0iw8u")]
 floor_stop_on_slope = false
 floor_block_on_wall = false
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(14.4559, 0, 0, 0, 1.00406, 0, 0, 0, 7.47266, 0, -0.501065, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_c4v7h")
-
-[node name="Sprite3D" type="Sprite3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, -0.110706, 0.993853, 0, -0.993853, -0.110706, 0, 0, 0)
-texture = ExtResource("2_2o6l8")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.845505, -0.0104825, -0.533864, 0.0122135, 0.999925, -0.000290603, 0.533827, -0.00627466, 0.84557, -0.696256, 1.58441, 3.09883)
@@ -35,3 +26,16 @@ sky_mode = 1
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-1, 8.28502e-08, 2.79031e-08, 8.74228e-08, 0.947696, 0.319174, 7.44182e-15, 0.319174, -0.947696, -0.00795746, 2.10054, -2.01388)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.22329, 0)
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+physics_material_override = SubResource("PhysicsMaterial_ckacd")
+
+[node name="CollisionSol" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_4xsu1")

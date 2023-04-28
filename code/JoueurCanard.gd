@@ -67,12 +67,15 @@ signal esquive_
 signal interaction_joueur_
 
 
+##raycast3D pointant vers le sol
+var raycastJoueurSol : RayCast3D = RayCast3D.new()
 #temporaire pour les connexions
 var stfu
 
 
 func _ready():
 	chronometreEsquive.set_one_shot(true)
+	raycastJoueurSol.target_position = Vector3(0,-2,0)
 
 
 func _process(delta):
@@ -219,7 +222,7 @@ func normaliserMouvementDiagonal(directionJoueur) -> Vector3:
 ##permet d'appliquer le mouvement au personnage du joueur
 func appliquerMouvement(delta, directionJoueur, vitesseEsquiveJoueur) -> void:
 	#application du saut
-	if (evaluerSaisieSautJoueur(directionJoueur)):
+	if (evaluerSaisieSautJoueur(directionJoueur) and evaluerJoueurAuSol()):
 		appliquerSaut()
 
 	#reinitialiser la valeur y du vecteurDirectionJoueur
@@ -260,6 +263,13 @@ func afficherLigneEsquive() -> void:
 func relancerChronoEsquive() -> void:
 	chronometreEsquive.start(INTERVALLE_ESQUIVE_JOUEUR)
 	emit_signal("esquive_")
+
+##permet d'evaluer si le joueur est au sol
+func evaluerJoueurAuSol() -> bool:
+	print(raycastJoueurSol.is_colliding())
+	raycastJoueurSol.enabled = true
+	raycastJoueurSol.force_raycast_update()
+	return raycastJoueurSol.is_colliding()
 
 #################################
 #FIN FONCTIONS LIEES AU MOUVEMENT
