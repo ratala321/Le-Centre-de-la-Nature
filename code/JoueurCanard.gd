@@ -1,8 +1,9 @@
 extends CharacterBody3D
 
-@export var vitesseJoueur = 14
+@export var vitesseJoueur = 350
 
 @onready var chronometreEsquive = get_node("ChronometreEsquive")
+@onready var raycastJoueurSol = get_node("RayEstAuSol")
 
 ##direction valeur en x et y du vecteur de direction
 const DIRECTION_DROITE : int = -1
@@ -11,12 +12,28 @@ const DIRECTION_HAUT : int = 1
 const DIRECTION_BAS : int = -1
 ##vitesse d'esquive initiale
 const VITESSE_ESQUIVE_JOUEUR_INITIALE : int = 1
+##force gravitationnelle lorsque le joueur est au sol
+const GRAVITE_SOL_JOUEUR : int = -100
+
+
+#------------------------
+#constantes liees au saut
+#------------------------
+##?
+const HAUTEUR_MAXIMALE_SAUT : int = 5000
+##?
+const TEMPS_HAUTEUR_MAXIMALE_SAUT : int = 5
+##?
+const TEMPS_DESCENTE_SAUT : int = 2
+##force gravitationnelle lorsque le joueur est en saut
+const GRAVITE_SAUT_JOUEUR : int = -2*HAUTEUR_MAXIMALE_SAUT / (TEMPS_HAUTEUR_MAXIMALE_SAUT**2)
 ##force l'impulsion du saut du joueur
-const IMPULSION_SAUT_JOUEUR : int = 20
-##force gravitationnelle poussant le joueur vers le sol
-const GRAVITE_JOUEUR : int = -IMPULSION_SAUT_JOUEUR / 8
+const IMPULSION_SAUT_JOUEUR : int = 2 * HAUTEUR_MAXIMALE_SAUT / TEMPS_HAUTEUR_MAXIMALE_SAUT
+
+
 ##intervalle de temps entre deux esquives du joueur
 const INTERVALLE_ESQUIVE_JOUEUR : int = 3
+
 
 #-----------------------
 #constantes de direction
@@ -37,6 +54,7 @@ const DIRECTION_DIAGONALE_AVANT_GAUCHE_VECTEUR : Vector3 = Vector3(1, 0 ,1)
 const DIRECTION_DIAGONALE_ARRIERE_DROITE_VECTEUR : Vector3 = Vector3(-1, 0 ,-1)
 ##valeur du vecteur correspodant a la direction diagonale arriere et gauche
 const DIRECTION_DIAGONALE_ARRIERE_GAUCHE_VECTEUR : Vector3 = Vector3(1, 0 ,-1)
+
 
 #----------------------
 #constantes de rotation
@@ -67,29 +85,31 @@ signal esquive_
 signal interaction_joueur_
 
 
-##raycast3D pointant vers le sol
-var raycastJoueurSol : RayCast3D = RayCast3D.new()
+##raycast3D pointant vers le sol? ne fonctionne pas lorsqu'il est initialise en code
+#var raycastJoueurSol : RayCast3D = RayCast3D.new()
 #temporaire pour les connexions
 var stfu
 
 
 func _ready():
 	chronometreEsquive.set_one_shot(true)
-	raycastJoueurSol.target_position = Vector3(0,-2,0)
+	#raycastJoueurSol.target_position = Vector3(0,-2,0)?
 
 
-func _process(delta):
+func _physics_process(delta):
+	appliquerGravite(delta)
+	
 	mouvementJoueur(delta)
-
-	appliquerGravite()
 
 	emettreInteractionJoueur()
 
 
-##Permet d'appliquer la gravite sur le personnage du joueur
-func appliquerGravite() -> void:
-	velocity.y = GRAVITE_JOUEUR
-	move_and_slide()
+##Permet d'appliquer la gravite sur le personnage du joueur?
+func appliquerGravite(delta) -> void:
+	if (evaluerJoueurAuSol):
+		velocity.y += GRAVITE_SOL_JOUEUR * delta
+	else:
+		velocity.y += GRAVITE_SAUT_JOUEUR * delta
 
 
 #############################
@@ -223,20 +243,19 @@ func normaliserMouvementDiagonal(directionJoueur) -> Vector3:
 func appliquerMouvement(delta, directionJoueur, vitesseEsquiveJoueur) -> void:
 	#application du saut
 	if (evaluerSaisieSautJoueur(directionJoueur) and evaluerJoueurAuSol()):
-		appliquerSaut()
+		appliquerSaut(delta)
 
-	#reinitialiser la valeur y du vecteurDirectionJoueur
-	directionJoueur.y = 0
-
-	#application du mouvement horizontal
-	position += directionJoueur * vitesseJoueur * delta * vitesseEsquiveJoueur
+	#application du mouvement horizontal sur l'axe x
+	velocity.x = directionJoueur.x * vitesseJoueur * delta * vitesseEsquiveJoueur
+	#application du mouvement horizontal sur l'axe z
+	velocity.z = directionJoueur.z * vitesseJoueur * delta * vitesseEsquiveJoueur
+	move_and_slide()
 
 
 #permet d'appliquer le saut au personnage du joueur
-func appliquerSaut() -> void:
+func appliquerSaut(delta) -> void:
 	#methode avec force physique
-	velocity.y = IMPULSION_SAUT_JOUEUR
-	move_and_slide()
+	velocity.y = IMPULSION_SAUT_JOUEUR * delta
 	pass
 
 
@@ -264,11 +283,8 @@ func relancerChronoEsquive() -> void:
 	chronometreEsquive.start(INTERVALLE_ESQUIVE_JOUEUR)
 	emit_signal("esquive_")
 
-##permet d'evaluer si le joueur est au sol
+##permet d'evaluer si le joueur est au sol?
 func evaluerJoueurAuSol() -> bool:
-	print(raycastJoueurSol.is_colliding())
-	raycastJoueurSol.enabled = true
-	raycastJoueurSol.force_raycast_update()
 	return raycastJoueurSol.is_colliding()
 
 #################################

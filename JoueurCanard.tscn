@@ -269,4 +269,7 @@ shape = SubResource("CapsuleShape3D_6rmec")
 
 [node name="ChronometreEsquive" type="Timer" parent="."]
 
+[node name="RayEstAuSol" type="RayCast3D" parent="."]
+target_position = Vector3(0, -0.05, 0)
+
 [editable path="KayKit_AnimatedCharacter_v12"]
