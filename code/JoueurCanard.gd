@@ -78,11 +78,11 @@ func _ready():
 func _process(delta):
 	mouvementJoueur(delta)
 
-	applicationGravite()
+	appliquerGravite()
 
 
 ##Permet d'appliquer la gravite sur le personnage du joueur
-func applicationGravite() -> void:
+func appliquerGravite() -> void:
 	velocity.y = GRAVITE_JOUEUR
 	move_and_slide()
 
@@ -98,17 +98,9 @@ func mouvementJoueur(delta):
 	var vecteurDirectionJoueur = Vector3.ZERO
 	#reinitialisation du vecteur lie a la direction du mouvement
 	var vitesseEsquiveJoueur = VITESSE_ESQUIVE_JOUEUR_INITIALE
-	#determine si le joueur sautera
-	var permissionSautJoueur : bool = false
 	
 	#fonction qui saisie l'entree du mouvement du joueur
-	vecteurDirectionJoueur = entreeMouvement()
-
-	#fonction qui determine si le joueur a la permission de sauter
-	permissionSautJoueur = evaluationSautJoueur(vecteurDirectionJoueur)
-
-	#reinitialiser la valeur y du vecteurDirectionJoueur
-	vecteurDirectionJoueur.y = 0
+	vecteurDirectionJoueur = saisirEntreeMouvement()
 
 	#tourne le joueur face a la direction de son mouvement
 	rotationJoueur(vecteurDirectionJoueur)
@@ -123,21 +115,21 @@ func mouvementJoueur(delta):
 	applicationAnimationMouvement()
 	
 	#fonction appliquant le mouvement
-	applicationMouvement(delta, vecteurDirectionJoueur, vitesseEsquiveJoueur, permissionSautJoueur)
+	applicationMouvement(delta, vecteurDirectionJoueur, vitesseEsquiveJoueur)
 
 ##permet de saisir l'entree du joueur pour le mouvement
-func entreeMouvement() -> Vector3:
+func saisirEntreeMouvement() -> Vector3:
 	var directionJoueur = Vector3.ZERO
 
-	directionJoueur = entreeMouvementHorizontal()
+	directionJoueur = saisirEntreeMouvementHorizontal()
 
-	directionJoueur.y = entreeMouvementVertical()
+	directionJoueur.y = saisirEntreeMouvementVertical()
 	
 	return directionJoueur
 
 
 ##permet de saisir l'entree du joueur pour le mouvement horizontal
-func entreeMouvementHorizontal() -> Vector3:
+func saisirEntreeMouvementHorizontal() -> Vector3:
 	var directionHorizontaleJoueur = Vector3.ZERO
 
 	#bloc de saisie d'input pour la direction du mouvement
@@ -157,7 +149,7 @@ func entreeMouvementHorizontal() -> Vector3:
 ##
 ##[b]notes sur l'implementation[/b] : renvoie un int destine a etre place en
 ##y dans la vecteur de la direction du mouvement
-func entreeMouvementVertical() -> int:
+func saisirEntreeMouvementVertical() -> int:
 	var directionVerticaleJoueur : int = 0
 
 	#saisie de l'input correspondant au saut du joueur
@@ -220,13 +212,16 @@ func normalisationMouvementDiagonal(directionJoueur) -> Vector3:
 
 
 ##permet d'appliquer le mouvement au personnage du joueur
-func applicationMouvement(delta, directionJoueur, vitesseEsquiveJoueur, permissionSautJoueur : bool) -> void:
+func applicationMouvement(delta, directionJoueur, vitesseEsquiveJoueur) -> void:
+	#application du saut
+	if (evaluationSautJoueur(directionJoueur)):
+		applicationSaut()
+
+	#reinitialiser la valeur y du vecteurDirectionJoueur
+	directionJoueur.y = 0
+
 	#application du mouvement horizontal
 	position += directionJoueur * vitesseJoueur * delta * vitesseEsquiveJoueur
-
-	#application du saut
-	if (permissionSautJoueur):
-		applicationSaut()
 
 
 #permet d'appliquer le saut au personnage du joueur
