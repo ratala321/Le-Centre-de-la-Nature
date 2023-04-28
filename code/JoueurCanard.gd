@@ -13,6 +13,8 @@ const DIRECTION_BAS : int = -1
 const VITESSE_ESQUIVE_JOUEUR_INITIALE : int = 1
 ##force l'impulsion du saut du joueur
 const IMPULSION_SAUT_JOUEUR : int = 20
+##force gravitationnelle poussant le joueur vers le sol
+const GRAVITE_JOUEUR : int = -IMPULSION_SAUT_JOUEUR / 8
 ##intervalle de temps entre deux esquives du joueur
 const INTERVALLE_ESQUIVE_JOUEUR : int = 3
 
@@ -79,9 +81,9 @@ func _process(delta):
 	applicationGravite()
 
 
-##?
+##Permet d'appliquer la gravite sur le personnage du joueur
 func applicationGravite() -> void:
-	velocity.y = -IMPULSION_SAUT_JOUEUR / 8
+	velocity.y = GRAVITE_JOUEUR
 	move_and_slide()
 
 
