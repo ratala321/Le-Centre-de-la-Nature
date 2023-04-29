@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var vitesseJoueur = 350
+@export var vitesseJoueur = 450
 
 @onready var chronometreEsquive = get_node("ChronometreEsquive")
 @onready var raycastJoueurSol = get_node("RayEstAuSol")
@@ -19,14 +19,14 @@ const GRAVITE_SOL_JOUEUR : int = -100
 #------------------------
 #constantes liees au saut
 #------------------------
-##?
+##determine la hauteur maximale du joueur lors d'un saut
 const HAUTEUR_MAXIMALE_SAUT : int = 5000
-##?
-const TEMPS_HAUTEUR_MAXIMALE_SAUT : int = 5
+##?inversee pour quelconque raison : plus c'est petit, plus c'est long
+const TEMPS_HAUTEUR_MAXIMALE_SAUT : int = 7
 ##?
 const TEMPS_DESCENTE_SAUT : int = 2
-##force gravitationnelle lorsque le joueur est en saut
-const GRAVITE_SAUT_JOUEUR : int = -2*HAUTEUR_MAXIMALE_SAUT / (TEMPS_HAUTEUR_MAXIMALE_SAUT**2)
+##force gravitationnelle lorsque le joueur est en saut et se dirige vers le haut
+const GRAVITE_SAUT_JOUEUR : int = -60
 ##force l'impulsion du saut du joueur
 const IMPULSION_SAUT_JOUEUR : int = 2 * HAUTEUR_MAXIMALE_SAUT / TEMPS_HAUTEUR_MAXIMALE_SAUT
 
@@ -85,15 +85,12 @@ signal esquive_
 signal interaction_joueur_
 
 
-##raycast3D pointant vers le sol? ne fonctionne pas lorsqu'il est initialise en code
-#var raycastJoueurSol : RayCast3D = RayCast3D.new()
 #temporaire pour les connexions
 var stfu
 
 
 func _ready():
 	chronometreEsquive.set_one_shot(true)
-	#raycastJoueurSol.target_position = Vector3(0,-2,0)?
 
 
 func _physics_process(delta):
@@ -104,9 +101,9 @@ func _physics_process(delta):
 	emettreInteractionJoueur()
 
 
-##Permet d'appliquer la gravite sur le personnage du joueur?
+##Permet d'appliquer la gravite sur le personnage du joueur
 func appliquerGravite(delta) -> void:
-	if (evaluerJoueurAuSol):
+	if (velocity.y <= 0):
 		velocity.y += GRAVITE_SOL_JOUEUR * delta
 	else:
 		velocity.y += GRAVITE_SAUT_JOUEUR * delta
@@ -283,7 +280,7 @@ func relancerChronoEsquive() -> void:
 	chronometreEsquive.start(INTERVALLE_ESQUIVE_JOUEUR)
 	emit_signal("esquive_")
 
-##permet d'evaluer si le joueur est au sol?
+##permet d'evaluer si le joueur est au sol
 func evaluerJoueurAuSol() -> bool:
 	return raycastJoueurSol.is_colliding()
 
