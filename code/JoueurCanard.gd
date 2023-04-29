@@ -12,6 +12,8 @@ const DIRECTION_HAUT : int = 1
 const DIRECTION_BAS : int = -1
 ##vitesse d'esquive initiale
 const VITESSE_ESQUIVE_JOUEUR_INITIALE : int = 1
+##vitesse d'esquive lors de l'entree utilisateur
+const VITESSE_ESQUIVE_JOUEUR_FINALE : int = 50
 ##force gravitationnelle lorsque le joueur est au sol
 const GRAVITE_SOL_JOUEUR : int = -100
 
@@ -21,7 +23,7 @@ const GRAVITE_SOL_JOUEUR : int = -100
 #------------------------
 ##determine la hauteur maximale du joueur lors d'un saut
 const HAUTEUR_MAXIMALE_SAUT : int = 5000
-##?inversee pour quelconque raison : plus c'est petit, plus c'est long
+##?inversee pour quelconque raison : plus c'est petit, plus c'est long?ajustement necessaire
 const TEMPS_HAUTEUR_MAXIMALE_SAUT : int = 7
 ##?
 const TEMPS_DESCENTE_SAUT : int = 2
@@ -131,7 +133,7 @@ func mouvementJoueur(delta):
 	vecteurDirectionJoueur = normaliserMouvementDiagonal(vecteurDirectionJoueur)
 
 	#fonction qui saisie l'entree de l'esquive du joueur
-	#vitesseEsquiveJoueur = saisirEntreeEsquive()
+	vitesseEsquiveJoueur = saisirEntreeEsquive()
 	
 	#fonction appliquant les animations de mouvement
 	appliquerAnimationMouvement()
@@ -220,8 +222,10 @@ func saisirEntreeEsquive() -> int:
 	if Input.is_action_just_pressed("esquive") && chronometreEsquive.is_stopped():
 		#fonction reinitialisant le chronometre d'esquive et emettant le signal esquive
 		relancerChronoEsquive()
+		vitesseEsquiveJoueur = VITESSE_ESQUIVE_JOUEUR_FINALE
+		print("ici")
 		#fonction affichant la ligne d'esquive se trouvant derriere le joueur
-		afficherLigneEsquive()
+		#afficherLigneEsquive()
 
 	return vitesseEsquiveJoueur
 		
