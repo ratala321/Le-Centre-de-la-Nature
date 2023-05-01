@@ -128,10 +128,8 @@ func _ready():
 
 
 func _physics_process(delta):
-	#relancement du mouvement lorsque des animations demandant l'arret du mouvement sont terminees
-	if !animationPlayerJoueur.is_playing():
-		permissionMouvement = true
-		ajusterVitesseAnimation(VITESSE_ANIMATION_INITIALE)
+	if !permissionMouvement:
+		relancerMouvement()
 
 	appliquerGravite(delta)
 	
@@ -335,6 +333,16 @@ func relancerChronoEsquive() -> void:
 ##permet d'evaluer si le joueur est au sol
 func evaluerJoueurAuSol() -> bool:
 	return raycastJoueurSol.is_colliding()
+
+
+##relancement du mouvement lorsque des animations demandant l'arret du mouvement sont terminees
+func relancerMouvement() -> void:
+	if !animationPlayerJoueur.is_playing():
+		#relance le mouvement
+		permissionMouvement = true
+		#reajuste la vitesse d'execution des animations du personnage
+		ajusterVitesseAnimation(VITESSE_ANIMATION_INITIALE)
+
 
 #################################
 #FIN FONCTIONS LIEES AU MOUVEMENT
