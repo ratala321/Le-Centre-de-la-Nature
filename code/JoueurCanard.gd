@@ -96,6 +96,10 @@ const ANIMATION_MARCHE : String = "Walk"
 const ANIMATION_IDLE : String = "Dance"
 ##nom de l'animation liee a l'interaction
 const ANIMATION_INTERACTION : String = "Interact"
+##vitesse d'execution des animations en general
+const VITESSE_ANIMATION_INITIALE : int = 1
+##vitesse d'execution de l'animation liee a l'interaction
+const VITESSE_ANIMATION_INTERACTION : float = 1.5
 
 
 #------------------
@@ -127,6 +131,7 @@ func _physics_process(delta):
 	#relancement du mouvement lorsque des animations demandant l'arret du mouvement sont terminees
 	if !animationPlayerJoueur.is_playing():
 		permissionMouvement = true
+		ajusterVitesseAnimation(VITESSE_ANIMATION_INITIALE)
 
 	appliquerGravite(delta)
 	
@@ -347,9 +352,10 @@ func emettreInteractionJoueur() -> void:
 		emit_signal("interaction_joueur_")
 
 		#application de l'animation liee a l'interaction du joueur
+		ajusterVitesseAnimation(VITESSE_ANIMATION_INTERACTION)
 		appliquerAnimation(ANIMATION_INTERACTION)
 
-		#?Timer pour arreter le mouvement temporairement
+		#arret du mouvement lors de l'interaction
 		permissionMouvement = false
 
 ##############################
@@ -374,9 +380,14 @@ func appliquerSon(son) -> void:
 #FONCTIONS LIEES A L'ANIMATION
 ##############################
 
-##?
+##permet d'appliquer une animation passee en parametre
 func appliquerAnimation(animation : String) -> void:
 	animationPlayerJoueur.play(animation)
+
+
+##permet d'ajuster la vitesse d'excution des animations liees au joueur
+func ajusterVitesseAnimation(vitesse) -> void:
+	animationPlayerJoueur.speed_scale = vitesse
 
 ##################################
 #FIN FONCTIONS LIEES A L'ANIMATION
