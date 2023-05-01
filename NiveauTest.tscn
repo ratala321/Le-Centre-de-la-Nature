@@ -9,6 +9,7 @@
 [node name="NiveauTest" type="Node"]
 
 [node name="JoueurCanard" parent="." instance=ExtResource("1_0iw8u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.93748, 0)
 floor_stop_on_slope = false
 floor_block_on_wall = false
 

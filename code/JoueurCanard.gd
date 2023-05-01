@@ -4,6 +4,8 @@ extends CharacterBody3D
 
 @onready var chronometreEsquive = get_node("ChronometreEsquive")
 @onready var raycastJoueurSol = get_node("RayEstAuSol")
+##contient la reference au node d'animationPlayer du joueur
+@onready var animationPlayerJoueur = get_node("KayKit_AnimatedCharacter_v12/AnimationPlayer")
 
 ##direction valeur en x et y du vecteur de direction
 const DIRECTION_DROITE : int = -1
@@ -79,6 +81,17 @@ const ROTATION_ARRIERE_DROITE_VECTEUR : Vector3 = Vector3(0,-3*PI/4,0)
 const ROTATION_ARRIERE_GAUCHE_VECTEUR : Vector3 = Vector3(0,3*PI/4,0)
 
 
+#----------------------
+#constantes d'animation
+#----------------------
+#nom de l'animation liee au saut
+const ANIMATION_SAUT : String = "Jump"
+#nom de l'animation liee a la marche
+const ANIMATION_MARCHE : String = "Walk"
+#nom de l'animation liee au idle
+const ANIMATION_IDLE : String = "Dance"
+
+
 ##signal lorsque quelque chose entre en contact avec le joueur
 signal player_hit_
 ##signal lorsque le joueur esquive
@@ -136,7 +149,7 @@ func mouvementJoueur(delta):
 	vitesseEsquiveJoueur = saisirEntreeEsquive()
 	
 	#fonction appliquant les animations de mouvement
-	appliquerAnimationMouvement()
+	appliquerAnimationMouvement(vecteurDirectionJoueur)
 	
 	#fonction appliquant le mouvement
 	appliquerMouvement(delta, vecteurDirectionJoueur, vitesseEsquiveJoueur)
@@ -261,10 +274,17 @@ func appliquerSaut(delta) -> void:
 
 
 ##permet d'appliquer les animations liees au mouvement
-func appliquerAnimationMouvement() -> void:
-	#application des animations
-	#appliquer en fonction de la direction du vecteurDirectionJoueur
-	pass
+func appliquerAnimationMouvement(vecteurDirectionJoueur : Vector3) -> void:
+	#application de l'animation de saut
+	if !evaluerJoueurAuSol() and animationPlayerJoueur.has_animation(ANIMATION_SAUT):
+		animationPlayerJoueur.play(ANIMATION_SAUT)
+
+	#application de l'animation de marche
+	elif vecteurDirectionJoueur != Vector3.ZERO and animationPlayerJoueur.has_animation(ANIMATION_MARCHE):
+		animationPlayerJoueur.play(ANIMATION_MARCHE)
+	else:
+	#application de l'animation lorsqu'il n'y a aucun mouvement
+		animationPlayerJoueur.play(ANIMATION_IDLE)
 
 
 ##permet de deplacer le joueur vers un position donnee en parametre
