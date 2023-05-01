@@ -8,6 +8,8 @@ extends CharacterBody3D
 @onready var raycastJoueurSol = get_node("RayEstAuSol")
 ##contient la reference au node d'AnimationPlayer du joueur
 @onready var animationPlayerJoueur = get_node("KayKit_AnimatedCharacter_v12/AnimationPlayer")
+##contient la reference au node d'AudioStreamPlayer du joueur
+@onready var audioStreamJoueur = get_node("AudioStreamPlayer")
 
 ##direction valeur en x et y du vecteur de direction
 const DIRECTION_DROITE : int = -1
@@ -92,6 +94,13 @@ const ANIMATION_SAUT : String = "Jump"
 const ANIMATION_MARCHE : String = "Walk"
 #nom de l'animation liee au idle
 const ANIMATION_IDLE : String = "Dance"
+
+
+#------------------
+#constantes de sons
+#------------------
+#effet sonore du saut du joueur
+var SON_SAUT : AudioStream = load("res://sons/jump_8bits.mp3")
 
 
 ##signal lorsque quelque chose entre en contact avec le joueur
@@ -238,7 +247,7 @@ func saisirEntreeEsquive() -> int:
 		#fonction reinitialisant le chronometre d'esquive et emettant le signal esquive
 		relancerChronoEsquive()
 		vitesseEsquiveJoueur = VITESSE_ESQUIVE_JOUEUR_FINALE
-		print("ici")
+		print("le joueur esquive")
 		#fonction affichant la ligne d'esquive se trouvant derriere le joueur
 		#afficherLigneEsquive()
 
@@ -270,9 +279,11 @@ func appliquerMouvement(delta, directionJoueur, vitesseEsquiveJoueur) -> void:
 
 #permet d'appliquer le saut au personnage du joueur
 func appliquerSaut(delta) -> void:
-	#methode avec force physique
+	#application du saut
 	velocity.y = IMPULSION_SAUT_JOUEUR * delta
-	pass
+
+	#application de l'effet sonore associe au saut
+	appliquerSon(SON_SAUT)
 
 
 ##permet d'appliquer les animations liees au mouvement
@@ -329,3 +340,17 @@ func emettreInteractionJoueur() -> void:
 ##############################
 #FIN INTERACTION PAR LE JOUEUR
 ##############################
+
+#######################
+#FONCTIONS LIEES AU SON
+#######################
+
+##permet de jouer un effet sonore specifie en parametre
+func appliquerSon(son) -> void:
+	audioStreamJoueur.stream = son
+	audioStreamJoueur.play()
+	pass
+
+###########################
+#FIN FONCTIONS LIEES AU SON
+###########################

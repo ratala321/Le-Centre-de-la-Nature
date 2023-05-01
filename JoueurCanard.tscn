@@ -272,4 +272,6 @@ shape = SubResource("CapsuleShape3D_6rmec")
 [node name="RayEstAuSol" type="RayCast3D" parent="."]
 target_position = Vector3(0, -0.05, 0)
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [editable path="KayKit_AnimatedCharacter_v12"]
