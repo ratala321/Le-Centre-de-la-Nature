@@ -205,17 +205,17 @@ script = ExtResource("1_fyvdd")
 [node name="KayKit_AnimatedCharacter_v12" parent="." instance=ExtResource("1_iggn7")]
 
 [node name="Skeleton3D" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character2" index="0"]
-bones/0/rotation = Quaternion(-0.0348663, -0.00152229, -0.0435928, 0.99844)
-bones/1/rotation = Quaternion(0.0435779, 0.00190264, 0.0435779, 0.998097)
+bones/0/rotation = Quaternion(0, 0, 0, 1)
+bones/1/rotation = Quaternion(0, 0, 0, 1)
 bones/2/position = Vector3(0.14, 0.691598, -1.3027e-15)
-bones/2/rotation = Quaternion(-0.702449, -0.260074, 0.657542, -0.0810277)
-bones/3/rotation = Quaternion(0.559559, -0.650179, 0.440204, 0.265294)
+bones/2/rotation = Quaternion(-0.685863, -0.172023, 0.685863, -0.172022)
+bones/3/rotation = Quaternion(0.606617, -0.606617, 0.36334, 0.36334)
 bones/4/position = Vector3(-0.14, 0.691598, 8.40813e-15)
-bones/4/rotation = Quaternion(-0.702449, 0.260074, 0.657542, 0.0810277)
+bones/4/rotation = Quaternion(-0.685863, 0.172023, 0.685863, 0.172023)
 bones/5/rotation = Quaternion(0.36334, -0.36334, 0.606617, 0.606617)
 
 [node name="Tete" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character2/Skeleton3D" index="0"]
-transform = Transform3D(1, -1.55711e-07, -5.85355e-09, 1.58395e-07, 0.999848, -0.0174525, 8.54724e-09, 0.0174525, 0.999848, 0.0620198, 0.707163, -0.0494497)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.711598, 0)
 
 [node name="character_duckHead" type="MeshInstance3D" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character2/Skeleton3D/Tete" index="0"]
 transform = Transform3D(1, 1.55585e-07, 8.5702e-09, -1.5852e-07, 0.999848, 0.0174525, -5.78155e-09, -0.0174525, 0.999848, -0.0620198, -0.00258875, 0.0495024)
@@ -223,7 +223,7 @@ mesh = SubResource("ArrayMesh_lhnlq")
 skeleton = NodePath("")
 
 [node name="Corps" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character2/Skeleton3D" index="1"]
-transform = Transform3D(0.996195, 0.0871557, 8.61473e-09, -0.0869434, 0.993768, 0.0697565, 0.00607966, -0.069491, 0.997564, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="character_duck2" type="MeshInstance3D" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character2/Skeleton3D/Corps" index="0"]
 transform = Transform3D(0.996195, -0.0869434, 0.00607966, 0.0871557, 0.993768, -0.069491, 7.45058e-09, 0.0697565, 0.997564, 0, 0, 0)
@@ -231,7 +231,7 @@ mesh = SubResource("ArrayMesh_cvwwt")
 skeleton = NodePath("")
 
 [node name="BrasGauche" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character2/Skeleton3D" index="2"]
-transform = Transform3D(0.0225578, 0.395919, -0.918008, 0.189827, -0.903234, -0.384882, -0.981558, -0.16558, -0.0955308, 0.199744, 0.675116, -0.0472087)
+transform = Transform3D(-3.57628e-07, 0.471936, -0.881633, 1.35601e-06, -0.881633, -0.471936, -1, -1.35601e-06, -3.57628e-07, 0.14, 0.691598, -1.3027e-15)
 
 [node name="character_duckArmLeft" type="MeshInstance3D" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character2/Skeleton3D/BrasGauche" index="0"]
 transform = Transform3D(0.0225577, 0.189827, -0.981558, 0.395919, -0.903234, -0.16558, -0.918008, -0.384882, -0.0955309, -0.0541302, 0.0314239, 0.00753742)
@@ -239,7 +239,7 @@ mesh = SubResource("ArrayMesh_p6xlp")
 skeleton = NodePath("")
 
 [node name="BrasDroit" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character2/Skeleton3D" index="3"]
-transform = Transform3D(-0.0225573, -0.544361, -0.838548, -0.324586, -0.789336, 0.521146, -0.945587, 0.283936, -0.158886, -0.0791906, 0.69946, -0.048911)
+transform = Transform3D(0, -0.471937, -0.881632, 0, -0.881632, 0.471937, -1, 0, 0, -0.14, 0.691598, 8.40813e-15)
 
 [node name="character_duckArmRight" type="MeshInstance3D" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character2/Skeleton3D/BrasDroit" index="0"]
 transform = Transform3D(-0.0225574, -0.324586, -0.945587, -0.544361, -0.789336, 0.283936, -0.838548, 0.521146, -0.158887, -0.0220418, 0.133874, 0.0625805)
@@ -247,14 +247,14 @@ mesh = SubResource("ArrayMesh_i1qdk")
 skeleton = NodePath("")
 
 [node name="MainEmplacementGauche" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character2/Skeleton3D" index="4"]
-transform = Transform3D(-0.969804, 0.225802, 0.0921566, 0.0796335, -0.0639752, 0.994769, 0.230516, 0.97207, 0.044062, 0.417864, 0.177505, -0.138431)
+transform = Transform3D(-1, 3.57628e-07, 7.7486e-07, 7.7486e-07, -1.35601e-06, 1, 3.24652e-07, 1, 1.36428e-06, 0.4, 0.205887, -7.47053e-07)
 
 [node name="bow_teamBluegltf" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character2/Skeleton3D/MainEmplacementGauche" index="0" instance=ExtResource("2_thlrn")]
 transform = Transform3D(1.90415e-15, 4.3562e-08, 0.996582, 0.996582, -4.3562e-08, 0, 4.3562e-08, 0.996582, -4.3562e-08, -0.089, 0.146, 0.084)
 visible = false
 
 [node name="MainEmplacementDroit" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character2/Skeleton3D" index="5"]
-transform = Transform3D(-0.996195, 0.0225573, 0.0841851, 0.0869425, 0.324586, 0.941852, -0.00607957, 0.945587, -0.325312, -0.379091, 0.264597, 0.107516)
+transform = Transform3D(-1, 0, 5.96046e-07, 5.96046e-07, 0, 1, 0, 1, 0, -0.4, 0.205887, 5.07587e-15)
 
 [node name="arrow_teamBluegltf" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character2/Skeleton3D/MainEmplacementDroit" index="0" instance=ExtResource("3_j6oia")]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)

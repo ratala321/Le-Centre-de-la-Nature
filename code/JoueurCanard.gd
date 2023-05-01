@@ -94,12 +94,14 @@ const ANIMATION_SAUT : String = "Jump"
 const ANIMATION_MARCHE : String = "Walk"
 #nom de l'animation liee au idle
 const ANIMATION_IDLE : String = "Dance"
+##nom de l'animation liee a l'interaction
+const ANIMATION_INTERACTION : String = "Interact"
 
 
 #------------------
 #constantes de sons
 #------------------
-#effet sonore du saut du joueur
+##effet sonore du saut du joueur
 var SON_SAUT : AudioStream = load("res://sons/jump_8bits.mp3")
 
 
@@ -111,7 +113,9 @@ signal esquive_
 signal interaction_joueur_
 
 
-#temporaire pour les connexions
+##permet au joueur de bouger si la valeur est vraie
+var permissionMouvement : bool = true
+##temporaire pour les connexions
 var stfu
 
 
@@ -120,9 +124,14 @@ func _ready():
 
 
 func _physics_process(delta):
+	#relancement du mouvement lorsque des animations demandant l'arret du mouvement sont terminees
+	if !animationPlayerJoueur.is_playing():
+		permissionMouvement = true
+
 	appliquerGravite(delta)
 	
-	mouvementJoueur(delta)
+	if permissionMouvement:
+		mouvementJoueur(delta)
 
 	emettreInteractionJoueur()
 
@@ -290,15 +299,15 @@ func appliquerSaut(delta) -> void:
 func appliquerAnimationMouvement(vecteurDirectionJoueur : Vector3) -> void:
 	#application de l'animation de saut
 	if !evaluerJoueurAuSol() and animationPlayerJoueur.has_animation(ANIMATION_SAUT):
-		animationPlayerJoueur.play(ANIMATION_SAUT)
+		appliquerAnimation(ANIMATION_SAUT)
 
 	#application de l'animation de marche
 	elif vecteurDirectionJoueur != Vector3.ZERO and animationPlayerJoueur.has_animation(ANIMATION_MARCHE):
-		animationPlayerJoueur.play(ANIMATION_MARCHE)
+		appliquerAnimation(ANIMATION_MARCHE)
 
 	#application de l'animation lorsqu'il n'y a aucun mouvement
 	else:
-		animationPlayerJoueur.play(ANIMATION_IDLE)
+		appliquerAnimation(ANIMATION_IDLE)
 
 
 ##permet de deplacer le joueur vers un position donnee en parametre
@@ -337,6 +346,12 @@ func emettreInteractionJoueur() -> void:
 	if Input.is_action_pressed("interaction_joueur"):
 		emit_signal("interaction_joueur_")
 
+		#application de l'animation liee a l'interaction du joueur
+		appliquerAnimation(ANIMATION_INTERACTION)
+
+		#?Timer pour arreter le mouvement temporairement
+		permissionMouvement = false
+
 ##############################
 #FIN INTERACTION PAR LE JOUEUR
 ##############################
@@ -354,3 +369,15 @@ func appliquerSon(son) -> void:
 ###########################
 #FIN FONCTIONS LIEES AU SON
 ###########################
+
+##############################
+#FONCTIONS LIEES A L'ANIMATION
+##############################
+
+##?
+func appliquerAnimation(animation : String) -> void:
+	animationPlayerJoueur.play(animation)
+
+##################################
+#FIN FONCTIONS LIEES A L'ANIMATION
+##################################
