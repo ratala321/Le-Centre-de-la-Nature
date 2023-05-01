@@ -14,8 +14,8 @@ extends CharacterBody3D
 ##direction valeur en x et y du vecteur de direction
 const DIRECTION_DROITE : int = -1
 const DIRECTION_GAUCHE : int = 1
-const DIRECTION_HAUT : int = 1
-const DIRECTION_BAS : int = -1
+const DIRECTION_AVANT : int = 1
+const DIRECTION_ARRIERE : int = -1
 ##vitesse d'esquive initiale
 const VITESSE_ESQUIVE_JOUEUR_INITIALE : int = 1
 ##vitesse d'esquive lors de l'entree utilisateur
@@ -43,25 +43,25 @@ const IMPULSION_SAUT_JOUEUR : int = 2 * HAUTEUR_MAXIMALE_SAUT / TEMPS_HAUTEUR_MA
 const INTERVALLE_ESQUIVE_JOUEUR : int = 3
 
 
-#-----------------------
-#constantes de direction
-#-----------------------
+#-----------------------------------
+#constantes de direction horizontale
+#-----------------------------------
 ##valeur du vecteur correspodant a la direction droite
-const DIRECTION_DROITE_VECTEUR : Vector3 = Vector3(-1, 0 ,0)
+const DIRECTION_DROITE_VECTEUR : Vector3 = Vector3(-1, 0, 0)
 ##valeur du vecteur correspodant a la direction gauche
-const DIRECTION_GAUCHE_VECTEUR : Vector3 = Vector3(1, 0 ,0)
+const DIRECTION_GAUCHE_VECTEUR : Vector3 = Vector3(1, 0, 0)
 ##valeur du vecteur correspodant a la direction avant
-const DIRECTION_AVANT_VECTEUR : Vector3 = Vector3(0, 0 ,1)
+const DIRECTION_AVANT_VECTEUR : Vector3 = Vector3(0, 0, 1)
 ##valeur du vecteur correspodant a la direction arriere
-const DIRECTION_ARRIERE_VECTEUR : Vector3 = Vector3(0, 0 ,-1)
+const DIRECTION_ARRIERE_VECTEUR : Vector3 = Vector3(0, 0, -1)
 ##valeur du vecteur correspodant a la direction diagonale avant et droite
-const DIRECTION_DIAGONALE_AVANT_DROITE_VECTEUR : Vector3 = Vector3(-1, 0 ,1)
+const DIRECTION_DIAGONALE_AVANT_DROITE_VECTEUR : Vector3 = Vector3(-1, 0, 1)
 ##valeur du vecteur correspodant a la direction diagonale avant et gauche
-const DIRECTION_DIAGONALE_AVANT_GAUCHE_VECTEUR : Vector3 = Vector3(1, 0 ,1)
+const DIRECTION_DIAGONALE_AVANT_GAUCHE_VECTEUR : Vector3 = Vector3(1, 0, 1)
 ##valeur du vecteur correspodant a la direction diagonale arriere et droite
-const DIRECTION_DIAGONALE_ARRIERE_DROITE_VECTEUR : Vector3 = Vector3(-1, 0 ,-1)
+const DIRECTION_DIAGONALE_ARRIERE_DROITE_VECTEUR : Vector3 = Vector3(-1, 0, -1)
 ##valeur du vecteur correspodant a la direction diagonale arriere et gauche
-const DIRECTION_DIAGONALE_ARRIERE_GAUCHE_VECTEUR : Vector3 = Vector3(1, 0 ,-1)
+const DIRECTION_DIAGONALE_ARRIERE_GAUCHE_VECTEUR : Vector3 = Vector3(1, 0, -1)
 
 
 #----------------------
@@ -194,9 +194,9 @@ func saisirEntreeMouvementHorizontal() -> Vector3:
 
 	#bloc de saisie d'input pour la direction du mouvement
 	if Input.is_action_pressed("mouvement_haut"):
-		directionHorizontaleJoueur.z = DIRECTION_HAUT 
+		directionHorizontaleJoueur.z = DIRECTION_AVANT 
 	if Input.is_action_pressed("mouvement_bas"):
-		directionHorizontaleJoueur.z = DIRECTION_BAS
+		directionHorizontaleJoueur.z = DIRECTION_ARRIERE
 	if Input.is_action_pressed("mouvement_droite"):
 		directionHorizontaleJoueur.x = DIRECTION_DROITE
 	if Input.is_action_pressed("mouvement_gauche"):
@@ -229,9 +229,13 @@ func evaluerSaisieSautJoueur(vecteurDirectionJoueur : Vector3) -> bool:
 
 
 
-##permet d'effectuer la rotation du joueur en fonction de la direction du mouvement
+##permet d'effectuer la rotation du joueur en fonction de la direction du mouvement horizontal
 ##c-a-d le joueur fera face a la direction de son mouvement
 func appliquerRotationJoueur(directionJoueur : Vector3) -> void:
+	#initialisation de la valeur y de la direction joueur a 0 afin de pouvoir tourner en saut ou en tombant
+	directionJoueur.y = 0
+
+	#effectue la rotation en fonction de la direction du mouvement horizontal
 	if directionJoueur == DIRECTION_ARRIERE_VECTEUR:
 		set_rotation(ROTATION_ARRIERE_VECTEUR)
 	elif directionJoueur == DIRECTION_AVANT_VECTEUR:
