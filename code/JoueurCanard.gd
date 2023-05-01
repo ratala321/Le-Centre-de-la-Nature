@@ -2,9 +2,11 @@ extends CharacterBody3D
 
 @export var vitesseJoueur = 450
 
+##contient la reference au node de Timer nommee ChronometreEsquive du joueur
 @onready var chronometreEsquive = get_node("ChronometreEsquive")
+##contient la reference au node de RayCast3D nommee RayEstAuSol du joueur
 @onready var raycastJoueurSol = get_node("RayEstAuSol")
-##contient la reference au node d'animationPlayer du joueur
+##contient la reference au node d'AnimationPlayer du joueur
 @onready var animationPlayerJoueur = get_node("KayKit_AnimatedCharacter_v12/AnimationPlayer")
 
 ##direction valeur en x et y du vecteur de direction
@@ -282,8 +284,9 @@ func appliquerAnimationMouvement(vecteurDirectionJoueur : Vector3) -> void:
 	#application de l'animation de marche
 	elif vecteurDirectionJoueur != Vector3.ZERO and animationPlayerJoueur.has_animation(ANIMATION_MARCHE):
 		animationPlayerJoueur.play(ANIMATION_MARCHE)
-	else:
+
 	#application de l'animation lorsqu'il n'y a aucun mouvement
+	else:
 		animationPlayerJoueur.play(ANIMATION_IDLE)
 
 
