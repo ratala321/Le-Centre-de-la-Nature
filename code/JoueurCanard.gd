@@ -115,6 +115,8 @@ signal player_hit_
 signal esquive_
 ##signal lorsque le joueur appuie sur la touche d'interaction generale
 signal interaction_joueur_
+##signal lorsque le joueur tourne, autrement dit effectue une rotation
+signal rotation_joueur_(directionJoueur)
 
 
 ##permet au joueur de bouger si la valeur est vraie
@@ -164,18 +166,19 @@ func mouvementJoueur(delta):
 
 	#tourne le joueur face a la direction de son mouvement
 	appliquerRotationJoueur(vecteurDirectionJoueur)
-	
+
 	#fonction normalisant le mouvement diagonal
 	vecteurDirectionJoueur = normaliserMouvementDiagonal(vecteurDirectionJoueur)
 
 	#fonction qui saisie l'entree de l'esquive du joueur
 	vitesseEsquiveJoueur = saisirEntreeEsquive()
-	
+
 	#fonction appliquant les animations de mouvement
 	appliquerAnimationMouvement(vecteurDirectionJoueur)
-	
+
 	#fonction appliquant le mouvement
 	appliquerMouvement(delta, vecteurDirectionJoueur, vitesseEsquiveJoueur)
+
 
 ##permet de saisir l'entree du joueur pour le mouvement
 func saisirEntreeMouvement() -> Vector3:
@@ -252,6 +255,9 @@ func appliquerRotationJoueur(directionJoueur : Vector3) -> void:
 		set_rotation(ROTATION_ARRIERE_DROITE_VECTEUR)
 	elif directionJoueur == DIRECTION_DIAGONALE_ARRIERE_GAUCHE_VECTEUR:
 		set_rotation(ROTATION_ARRIERE_GAUCHE_VECTEUR)
+
+	#emettre signal ajustement position camera?
+	emit_signal("rotation_joueur_", directionJoueur)
 
 
 ##permet de saisir l'entree du joueur pour l'esquive
