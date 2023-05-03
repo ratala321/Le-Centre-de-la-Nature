@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://3ekx0s8cgi7h"]
+[gd_scene load_steps=5 format=3 uid="uid://3ekx0s8cgi7h"]
 
 [ext_resource type="PackedScene" uid="uid://dq04vglibsi8r" path="res://JoueurCanard.tscn" id="1_0iw8u"]
+[ext_resource type="Script" path="res://code/Camera3DJoueur.gd" id="2_xy5su"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ckacd"]
 
@@ -9,9 +10,13 @@
 [node name="NiveauTest" type="Node"]
 
 [node name="JoueurCanard" parent="." instance=ExtResource("1_0iw8u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.93748, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0998025, 0)
 floor_stop_on_slope = false
 floor_block_on_wall = false
+
+[node name="Camera3DJoueur" type="Camera3D" parent="."]
+transform = Transform3D(-1, 8.28502e-08, 2.79031e-08, 8.74228e-08, 0.947696, 0.319174, 7.44182e-15, 0.319174, -0.947696, 0, 2.1008, -2.014)
+script = ExtResource("2_xy5su")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.845505, -0.0104825, -0.533864, 0.0122135, 0.999925, -0.000290603, 0.533827, -0.00627466, 0.84557, -0.696256, 1.58441, 3.09883)
@@ -24,9 +29,6 @@ directional_shadow_mode = 0
 directional_shadow_split_1 = 0.413
 directional_shadow_max_distance = 80.0
 sky_mode = 1
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 8.28502e-08, 2.79031e-08, 8.74228e-08, 0.947696, 0.319174, 7.44182e-15, 0.319174, -0.947696, -0.00795746, 2.10054, -2.01388)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.22329, 0)
