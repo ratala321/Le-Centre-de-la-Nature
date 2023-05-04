@@ -32,7 +32,7 @@ const GRAVITE_SOL_JOUEUR : int = -100
 const HAUTEUR_MAXIMALE_SAUT : int = 5000
 ##?inversee pour quelconque raison : plus c'est petit, plus c'est long?ajustement necessaire
 const TEMPS_HAUTEUR_MAXIMALE_SAUT : int = 7
-##?
+##?pas encore utilisee
 const TEMPS_DESCENTE_SAUT : int = 2
 ##force gravitationnelle lorsque le joueur est en saut et se dirige vers le haut
 const GRAVITE_SAUT_JOUEUR : int = -60
@@ -136,7 +136,7 @@ func _physics_process(delta):
 	if permissionMouvement:
 		mouvementJoueur(delta)
 
-	emettreInteractionJoueur()
+	effectuerInteractionJoueur()
 
 
 ##Permet d'appliquer la gravite sur le personnage du joueur
@@ -161,22 +161,22 @@ func mouvementJoueur(delta):
 	#reinitialisation du vecteur lie a la direction du mouvement
 	var vitesseEsquiveJoueur = VITESSE_ESQUIVE_JOUEUR_INITIALE
 	
-	#fonction qui saisie l'entree du mouvement du joueur
+	#saisie de l'entree du mouvement du joueur
 	vecteurDirectionJoueur = saisirEntreeMouvement()
+
+	#normalisation du mouvement diagonal
+	vecteurDirectionJoueur = normaliserMouvementDiagonal(vecteurDirectionJoueur)
+
+	#saisie l'entree de l'esquive du joueur
+	vitesseEsquiveJoueur = saisirEntreeEsquive()
 
 	#tourne le joueur face a la direction de son mouvement
 	appliquerRotationJoueur(vecteurDirectionJoueur)
 
-	#fonction normalisant le mouvement diagonal
-	vecteurDirectionJoueur = normaliserMouvementDiagonal(vecteurDirectionJoueur)
-
-	#fonction qui saisie l'entree de l'esquive du joueur
-	vitesseEsquiveJoueur = saisirEntreeEsquive()
-
-	#fonction appliquant les animations de mouvement
+	#application des animations en fonction de la direction du mouvement
 	appliquerAnimationMouvement(vecteurDirectionJoueur)
 
-	#fonction appliquant le mouvement
+	#application du mouvement
 	appliquerMouvement(delta, vecteurDirectionJoueur, vitesseEsquiveJoueur)
 
 
@@ -237,24 +237,39 @@ func evaluerSaisieSautJoueur(vecteurDirectionJoueur : Vector3) -> bool:
 func appliquerRotationJoueur(directionJoueur : Vector3) -> void:
 	#initialisation de la valeur y de la direction joueur a 0 afin de pouvoir tourner en saut ou en tombant
 	directionJoueur.y = 0
+	#arondissement des valeurs x et z de la direction vers 1
+	directionJoueur.x = int(round(directionJoueur.x))
+	directionJoueur.z = int(round(directionJoueur.z))
 
 	#effectue la rotation en fonction de la direction du mouvement horizontal
+	if directionJoueur != Vector3.ZERO:
+		set_rotation(determinerVecteurRotation(directionJoueur))
+
+
+##permet de determiner quel vecteur de rotation sera utilise par
+##la fonction appliquerRotationJoueur
+func determinerVecteurRotation(directionJoueur : Vector3) -> Vector3:
+	#vecteur de la rotation applique en fonction de la direction
+	var vecteurRotation : Vector3
+
 	if directionJoueur == DIRECTION_ARRIERE_VECTEUR:
-		set_rotation(ROTATION_ARRIERE_VECTEUR)
+		vecteurRotation = ROTATION_ARRIERE_VECTEUR
 	elif directionJoueur == DIRECTION_AVANT_VECTEUR:
-		set_rotation(ROTATION_AVANT_VECTEUR)
+		vecteurRotation = ROTATION_AVANT_VECTEUR
 	elif directionJoueur == DIRECTION_DROITE_VECTEUR:
-		set_rotation(ROTATION_DROITE_VECTEUR)
+		vecteurRotation = ROTATION_DROITE_VECTEUR
 	elif directionJoueur == DIRECTION_GAUCHE_VECTEUR:
-		set_rotation(ROTATION_GAUCHE_VECTEUR)
+		vecteurRotation = ROTATION_GAUCHE_VECTEUR
 	elif directionJoueur == DIRECTION_DIAGONALE_AVANT_DROITE_VECTEUR:
-		set_rotation(ROTATION_DIAGONALE_AVANT_DROITE_VECTEUR)
+		vecteurRotation = ROTATION_DIAGONALE_AVANT_DROITE_VECTEUR
 	elif directionJoueur == DIRECTION_DIAGONALE_AVANT_GAUCHE_VECTEUR:
-		set_rotation(ROTATION_DIAGONALE_AVANT_GAUCHE_VECTEUR)
+		vecteurRotation = ROTATION_DIAGONALE_AVANT_GAUCHE_VECTEUR
 	elif directionJoueur == DIRECTION_DIAGONALE_ARRIERE_DROITE_VECTEUR:
-		set_rotation(ROTATION_ARRIERE_DROITE_VECTEUR)
+		vecteurRotation = ROTATION_ARRIERE_DROITE_VECTEUR
 	elif directionJoueur == DIRECTION_DIAGONALE_ARRIERE_GAUCHE_VECTEUR:
-		set_rotation(ROTATION_ARRIERE_GAUCHE_VECTEUR)
+		vecteurRotation = ROTATION_ARRIERE_GAUCHE_VECTEUR
+	
+	return vecteurRotation
 
 
 ##permet de saisir l'entree du joueur pour l'esquive
@@ -366,16 +381,13 @@ func arreterMouvement() -> void:
 
 ##emet le signal [signal interaction_joueur_] lorsque le joueur appuie sur la touche
 ##correspondant a l'action [b]interaction_joueur[/b]
-func emettreInteractionJoueur() -> void:
+func effectuerInteractionJoueur() -> void:
 	if evaluerJoueurAuSol() and Input.is_action_pressed("interaction_joueur"):
 		emit_signal("interaction_joueur_")
 
 		#application de l'animation liee a l'interaction du joueur
 		ajusterVitesseAnimation(VITESSE_ANIMATION_INTERACTION)
 		appliquerAnimation(ANIMATION_INTERACTION)
-
-		#arret du mouvement lors de l'interaction
-		#permissionMouvement = false
 
 ##############################
 #FIN INTERACTION PAR LE JOUEUR
@@ -389,7 +401,6 @@ func emettreInteractionJoueur() -> void:
 func appliquerSon(son) -> void:
 	audioStreamJoueur.stream = son
 	audioStreamJoueur.play()
-	pass
 
 ###########################
 #FIN FONCTIONS LIEES AU SON
