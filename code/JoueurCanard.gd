@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name JoueurCanard
 
 @export var vitesseJoueur = 450
 
@@ -7,7 +8,7 @@ extends CharacterBody3D
 ##contient la reference au node de RayCast3D nommee RayEstAuSol du joueur
 @onready var raycastJoueurSol = get_node("RayEstAuSol")
 ##contient la reference au node d'AnimationPlayer du joueur
-@onready var animationPlayerJoueur = get_node("KayKit_AnimatedCharacter_v12/AnimationPlayer")
+@onready var animationPlayerJoueur = get_node("KayKit_AnimatedCharacter_v13/AnimationPlayer")
 ##contient la reference au node d'AudioStreamPlayer du joueur
 @onready var audioStreamJoueur = get_node("AudioStreamPlayer")
 
@@ -88,11 +89,11 @@ const ROTATION_ARRIERE_GAUCHE_VECTEUR : Vector3 = Vector3(0,3*PI/4,0)
 #----------------------
 #constantes d'animation
 #----------------------
-#nom de l'animation liee au saut
+##nom de l'animation liee au saut
 const ANIMATION_SAUT : String = "Jump"
-#nom de l'animation liee a la marche
+##nom de l'animation liee a la marche
 const ANIMATION_MARCHE : String = "Walk"
-#nom de l'animation liee au idle
+##nom de l'animation liee au idle
 const ANIMATION_IDLE : String = "Dance"
 ##nom de l'animation liee a l'interaction
 const ANIMATION_INTERACTION : String = "Interact"
@@ -116,11 +117,11 @@ signal esquive_
 ##signal lorsque le joueur appuie sur la touche d'interaction generale
 signal interaction_joueur_
 ##signal lorsque le joueur tourne, autrement dit effectue une rotation
-signal rotation_joueur_(directionJoueur)
+signal rotation_joueur_(directionJoueur)	
 
 
 ##permet au joueur de bouger si la valeur est vraie
-var permissionMouvement : bool = true
+var permissionMouvement : bool = true : set = setPermissionMouvement, get = getPermissionMouvement
 ##temporaire pour les connexions
 var stfu
 
@@ -130,8 +131,8 @@ func _ready():
 
 
 func _physics_process(delta):
-	if !permissionMouvement:
-		relancerMouvement()
+	#if !permissionMouvement:
+		#relancerMouvement()
 
 	appliquerGravite(delta)
 	
@@ -347,12 +348,12 @@ func evaluerJoueurAuSol() -> bool:
 
 ##relancement du mouvement lorsque des animations demandant l'arret du mouvement sont terminees
 func relancerMouvement() -> void:
-	if !animationPlayerJoueur.is_playing():
-		#relance le mouvement
-		permissionMouvement = true
-		#reajuste la vitesse d'execution des animations du personnage
-		ajusterVitesseAnimation(VITESSE_ANIMATION_INITIALE)
+	setPermissionMouvement(true)
+	ajusterVitesseAnimation(VITESSE_ANIMATION_INITIALE)
 
+##permet d'arreter le mouvement du joueur
+func arreterMouvement() -> void:
+	setPermissionMouvement(false)
 
 #################################
 #FIN FONCTIONS LIEES AU MOUVEMENT
@@ -374,7 +375,7 @@ func emettreInteractionJoueur() -> void:
 		appliquerAnimation(ANIMATION_INTERACTION)
 
 		#arret du mouvement lors de l'interaction
-		permissionMouvement = false
+		#permissionMouvement = false
 
 ##############################
 #FIN INTERACTION PAR LE JOUEUR
@@ -410,3 +411,25 @@ func ajusterVitesseAnimation(vitesse) -> void:
 ##################################
 #FIN FONCTIONS LIEES A L'ANIMATION
 ##################################
+
+###################
+#ACCESSEURS GETTERS
+###################
+
+func getPermissionMouvement() -> bool:
+	return permissionMouvement
+
+#######################
+#FIN ACCESSEURS GETTERS
+#######################
+
+######################
+#MODIFICATEURS SETTERS
+######################
+
+func setPermissionMouvement(nouvellePermission : bool) -> void:
+	permissionMouvement = nouvellePermission
+
+##########################
+#FIN MODIFICATEURS SETTERS
+##########################
