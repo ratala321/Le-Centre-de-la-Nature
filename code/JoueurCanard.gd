@@ -101,6 +101,8 @@ const ANIMATION_INTERACTION : String = "Interact"
 const VITESSE_ANIMATION_INITIALE : int = 1
 ##vitesse d'execution de l'animation liee a l'interaction
 const VITESSE_ANIMATION_INTERACTION : float = 1.5
+##vitesse d'execution de l'animation liee au saut
+const VITESSE_ANIMATION_SAUT : float = 1.9
 
 
 #------------------
@@ -308,13 +310,16 @@ func appliquerAnimationMouvement(vecteurDirectionJoueur : Vector3) -> void:
 	#application de l'animation de saut
 	if !evaluerJoueurAuSol() and animationPlayerJoueur.has_animation(ANIMATION_SAUT):
 		appliquerAnimation(ANIMATION_SAUT)
+		ajusterVitesseAnimation(VITESSE_ANIMATION_SAUT)
 
 	#application de l'animation de marche
 	elif vecteurDirectionJoueur != Vector3.ZERO and animationPlayerJoueur.has_animation(ANIMATION_MARCHE):
+		ajusterVitesseAnimation(VITESSE_ANIMATION_INITIALE)
 		appliquerAnimation(ANIMATION_MARCHE)
 
 	#application de l'animation lorsqu'il n'y a aucun mouvement
 	else:
+		ajusterVitesseAnimation(VITESSE_ANIMATION_INITIALE)
 		appliquerAnimation(ANIMATION_IDLE)
 
 
