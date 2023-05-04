@@ -116,8 +116,6 @@ signal player_hit_
 signal esquive_
 ##signal lorsque le joueur appuie sur la touche d'interaction generale
 signal interaction_joueur_
-##signal lorsque le joueur tourne, autrement dit effectue une rotation
-signal rotation_joueur_(directionJoueur)	
 
 
 ##permet au joueur de bouger si la valeur est vraie
@@ -131,9 +129,6 @@ func _ready():
 
 
 func _physics_process(delta):
-	#if !permissionMouvement:
-		#relancerMouvement()
-
 	appliquerGravite(delta)
 	
 	if permissionMouvement:
@@ -148,6 +143,8 @@ func appliquerGravite(delta) -> void:
 		velocity.y += GRAVITE_SOL_JOUEUR * delta
 	else:
 		velocity.y += GRAVITE_SAUT_JOUEUR * delta
+	
+	move_and_slide()
 
 
 #############################
@@ -257,9 +254,6 @@ func appliquerRotationJoueur(directionJoueur : Vector3) -> void:
 	elif directionJoueur == DIRECTION_DIAGONALE_ARRIERE_GAUCHE_VECTEUR:
 		set_rotation(ROTATION_ARRIERE_GAUCHE_VECTEUR)
 
-	#emettre signal ajustement position camera?
-	emit_signal("rotation_joueur_", directionJoueur)
-
 
 ##permet de saisir l'entree du joueur pour l'esquive
 func saisirEntreeEsquive() -> int:
@@ -354,6 +348,7 @@ func relancerMouvement() -> void:
 ##permet d'arreter le mouvement du joueur
 func arreterMouvement() -> void:
 	setPermissionMouvement(false)
+	velocity = Vector3.ZERO
 
 #################################
 #FIN FONCTIONS LIEES AU MOUVEMENT
@@ -367,7 +362,7 @@ func arreterMouvement() -> void:
 ##emet le signal [signal interaction_joueur_] lorsque le joueur appuie sur la touche
 ##correspondant a l'action [b]interaction_joueur[/b]
 func emettreInteractionJoueur() -> void:
-	if Input.is_action_pressed("interaction_joueur"):
+	if evaluerJoueurAuSol() and Input.is_action_pressed("interaction_joueur"):
 		emit_signal("interaction_joueur_")
 
 		#application de l'animation liee a l'interaction du joueur

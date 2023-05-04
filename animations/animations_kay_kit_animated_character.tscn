@@ -3541,21 +3541,21 @@ bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 bones/0/enabled = true
 bones/0/position = Vector3(0, 0, 0)
-bones/0/rotation = Quaternion(0, 0.0276761, 0, 0.999617)
+bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Head"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.711598, 0)
 bones/1/enabled = true
 bones/1/position = Vector3(0, 0.711598, 0)
-bones/1/rotation = Quaternion(0.00443053, -0.0195097, -0.000449388, 0.9998)
+bones/1/rotation = Quaternion(0, 0, 0, 1)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "armLeft"
 bones/2/parent = 0
 bones/2/rest = Transform3D(-1.19209e-07, 0.471936, -0.881633, 2.5332e-07, -0.881633, -0.471936, -1, -2.5332e-07, -1.19209e-07, 0.14, 0.691598, -1.3027e-15)
 bones/2/enabled = true
 bones/2/position = Vector3(0.14, 0.691598, -1.3027e-15)
-bones/2/rotation = Quaternion(-0.685118, -0.172948, 0.68592, -0.17383)
+bones/2/rotation = Quaternion(-0.685863, -0.172023, 0.685863, -0.172022)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "handSlotLeft"
 bones/3/parent = 2
@@ -3568,44 +3568,43 @@ bones/4/name = "armRight"
 bones/4/parent = 0
 bones/4/rest = Transform3D(-1.19209e-07, -0.471936, -0.881633, -2.23518e-07, -0.881633, 0.471936, -1, 2.23517e-07, -1.19209e-07, -0.14, 0.691598, 8.40813e-15)
 bones/4/enabled = true
-bones/4/position = Vector3(-0.140071, 0.690497, 0.00486301)
-bones/4/rotation = Quaternion(-0.664342, 0.186679, 0.702479, 0.174139)
+bones/4/position = Vector3(-0.14, 0.691598, 8.40813e-15)
+bones/4/rotation = Quaternion(-0.685863, 0.172023, 0.685863, 0.172023)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "handSlotRight"
 bones/5/parent = 4
 bones/5/rest = Transform3D(0, -1, -4.76837e-07, 0.471936, 3.57628e-07, -0.881633, 0.881633, -1.78814e-07, 0.471936, 3.33226e-15, 0.550922, -1.84059e-08)
 bones/5/enabled = true
 bones/5/position = Vector3(3.33226e-15, 0.550922, -1.84059e-08)
-bones/5/rotation = Quaternion(0.372877, -0.377078, 0.582074, 0.616413)
+bones/5/rotation = Quaternion(0.36334, -0.36334, 0.606617, 0.606617)
 bones/5/scale = Vector3(1, 1, 1)
 
 [node name="Tete" type="BoneAttachment3D" parent="KayKit Animated Character2/Skeleton3D"]
-transform = Transform3D(0.999866, 0.00121577, 0.0163309, -0.00107147, 0.99996, -0.00884175, -0.016341, 0.00882306, 0.999828, 0, 0.711598, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.711598, 0)
 bone_name = "Head"
 bone_idx = 1
 
 [node name="Corps" type="BoneAttachment3D" parent="KayKit Animated Character2/Skeleton3D"]
-transform = Transform3D(0.998468, 0, 0.055331, 0, 1, 0, -0.055331, 0, 0.998468, 0, 0, 0)
 bone_name = "Body"
 bone_idx = 0
 
 [node name="BrasGauche" type="BoneAttachment3D" parent="KayKit Animated Character2/Skeleton3D"]
-transform = Transform3D(-0.0561234, 0.474769, -0.878319, -0.00148736, -0.879744, -0.475445, -0.998423, -0.0253772, 0.0500805, 0.139786, 0.691598, -0.00774634)
+transform = Transform3D(-3.57628e-07, 0.471936, -0.881633, 1.35601e-06, -0.881633, -0.471936, -1, -1.35601e-06, -3.57628e-07, 0.14, 0.691598, -1.3027e-15)
 bone_name = "armLeft"
 bone_idx = 2
 
 [node name="BrasDroit" type="BoneAttachment3D" parent="KayKit Animated Character2/Skeleton3D"]
-transform = Transform3D(-0.111806, -0.490231, -0.864392, -0.00337943, -0.869653, 0.493652, -0.993724, 0.0581144, 0.0955759, -0.139587, 0.690497, 0.0126058)
+transform = Transform3D(0, -0.471937, -0.881632, 0, -0.881632, 0.471937, -1, 0, 0, -0.14, 0.691598, 8.40813e-15)
 bone_name = "armRight"
 bone_idx = 4
 
 [node name="MainEmplacementGauche" type="BoneAttachment3D" parent="KayKit Animated Character2/Skeleton3D"]
-transform = Transform3D(-0.998415, 0.0561234, -0.00406146, -0.00398424, 0.00148736, 0.999991, 0.056129, 0.998423, -0.00126143, 0.401346, 0.206928, -0.0217272)
+transform = Transform3D(-1, 3.57628e-07, 7.7486e-07, 7.7486e-07, -1.35601e-06, 1, 3.24652e-07, 1, 1.36428e-06, 0.4, 0.205887, -7.47053e-07)
 bone_name = "handSlotLeft"
 bone_idx = 3
 
 [node name="MainEmplacementDroit" type="BoneAttachment3D" parent="KayKit Animated Character2/Skeleton3D"]
-transform = Transform3D(-0.99523, 0.0720442, 0.0657816, 0.0641358, -0.0249275, 0.99763, 0.0735132, 0.99709, 0.020188, -0.409666, 0.211386, 0.0446223)
+transform = Transform3D(-1, 0, 5.96046e-07, 5.96046e-07, 0, 1, 0, 1, 0, -0.4, 0.205887, 5.07587e-15)
 bone_name = "handSlotRight"
 bone_idx = 5
 
