@@ -244,6 +244,8 @@ func appliquerRotationJoueur(directionJoueur : Vector3) -> void:
 	#effectue la rotation en fonction de la direction du mouvement horizontal
 	if directionJoueur != Vector3.ZERO:
 		set_rotation(determinerVecteurRotation(directionJoueur))
+		#?
+		get_node("AxeRotationCamera").set_rotation(-determinerVecteurRotation(directionJoueur))
 
 
 ##permet de determiner quel vecteur de rotation sera utilise par
