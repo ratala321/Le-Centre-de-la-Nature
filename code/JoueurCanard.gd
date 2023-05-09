@@ -239,6 +239,8 @@ func evaluerSaisieSautJoueur(vecteurDirectionJoueur : Vector3) -> bool:
 func appliquerRotationJoueur(directionJoueur : Vector3) -> void:
 	#vecteur de la rotation appliquee au joueur
 	var vecteurRotation : Vector3
+	#vecteur de la rotation avant que la rotation soit appliquee
+	var vecteurRotationInitial
 
 	#initialisation de la valeur y de la direction joueur a 0 afin de pouvoir tourner en saut ou en tombant
 	directionJoueur.y = 0
@@ -249,9 +251,11 @@ func appliquerRotationJoueur(directionJoueur : Vector3) -> void:
 	#effectue la rotation en fonction de la direction du mouvement horizontal
 	if directionJoueur != Vector3.ZERO:
 		vecteurRotation = determinerVecteurRotation(directionJoueur)
-		set_rotation(vecteurRotation)
 		#?
-		axeRotationCamera.tournerCameraMouvementJoueur(vecteurRotation)
+		vecteurRotationInitial = axeRotationCamera.get_global_rotation_degrees()
+		#?
+		set_rotation(vecteurRotation)
+		axeRotationCamera.tournerCameraMouvementJoueur(vecteurRotationInitial)
 
 
 ##permet de determiner quel vecteur de rotation sera utilise par
@@ -316,6 +320,9 @@ func appliquerMouvement(delta, directionJoueur, vitesseEsquiveJoueur) -> void:
 	velocity.x = directionJoueur.x * vitesseJoueur * delta * vitesseEsquiveJoueur
 	#application du mouvement horizontal sur l'axe z
 	velocity.z = directionJoueur.z * vitesseJoueur * delta * vitesseEsquiveJoueur
+	#?
+	#velocity.rotate() en utilisant les valeur en x et y de la rotation de la camera
+	#pour que la direction avant du joueur corresponde a la direction de la camera
 	move_and_slide()
 
 

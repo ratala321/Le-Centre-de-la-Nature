@@ -11,8 +11,6 @@ const ROTATION_HORIZONTALE_INITIALE = 180
 var rotationVerticaleCamera = 0
 ##valeur de la rotation horizontale de la camera
 var rotationHorizontaleCamera = 0
-#?
-var vecteurRotationCamera
 
 
 func _ready():
@@ -35,7 +33,6 @@ func tournerCamera() -> void:
 	#application de la rotation a la camera
 	rotation_degrees.x = rotationVerticaleCamera
 	rotation_degrees.y = rotationHorizontaleCamera
-	vecteurRotationCamera = get_global_rotation_degrees()
 
 
 ##permet d'actualiser la valeur de la rotation de la camera
@@ -48,8 +45,8 @@ func actualiserValeurRotationCamera(directionMouvementSouris : Vector2) -> void:
 
 
 ##permet de tourner la camera lorsque le joueur est en mouvement?
-func tournerCameraMouvementJoueur(vecteurRotation : Vector3) -> void:
-	set_global_rotation_degrees(vecteurRotationCamera)
+func tournerCameraMouvementJoueur(vecteurRotation) -> void:
+	set_global_rotation_degrees(vecteurRotation)
 	#set_rotation(-vecteurRotation)
 	#rotationVerticaleCamera = rotation_degrees.x
 	#rotationHorizontaleCamera = rotation_degrees.y
