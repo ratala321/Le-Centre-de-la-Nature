@@ -11,6 +11,8 @@ class_name JoueurCanard
 @onready var animationPlayerJoueur = get_node("KayKit_AnimatedCharacter_v13/AnimationPlayer")
 ##contient la reference au node d'AudioStreamPlayer du joueur
 @onready var audioStreamJoueur = get_node("AudioStreamPlayer")
+##contient la reference au node d'AxeRotationCamera du joueur
+@onready var axeRotationCamera = get_node("AxeRotationCamera")
 
 ##direction valeur en x et y du vecteur de direction
 const DIRECTION_DROITE : int = -1
@@ -235,6 +237,9 @@ func evaluerSaisieSautJoueur(vecteurDirectionJoueur : Vector3) -> bool:
 ##permet d'effectuer la rotation du joueur en fonction de la direction du mouvement horizontal
 ##c-a-d le joueur fera face a la direction de son mouvement
 func appliquerRotationJoueur(directionJoueur : Vector3) -> void:
+	#vecteur de la rotation appliquee au joueur
+	var vecteurRotation : Vector3
+
 	#initialisation de la valeur y de la direction joueur a 0 afin de pouvoir tourner en saut ou en tombant
 	directionJoueur.y = 0
 	#arondissement des valeurs x et z de la direction vers 1
@@ -243,9 +248,10 @@ func appliquerRotationJoueur(directionJoueur : Vector3) -> void:
 
 	#effectue la rotation en fonction de la direction du mouvement horizontal
 	if directionJoueur != Vector3.ZERO:
-		set_rotation(determinerVecteurRotation(directionJoueur))
+		vecteurRotation = determinerVecteurRotation(directionJoueur)
+		set_rotation(vecteurRotation)
 		#?
-		get_node("AxeRotationCamera").set_rotation(-determinerVecteurRotation(directionJoueur))
+		axeRotationCamera.tournerCameraMouvementJoueur(vecteurRotation)
 
 
 ##permet de determiner quel vecteur de rotation sera utilise par
