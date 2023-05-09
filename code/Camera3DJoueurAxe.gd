@@ -44,8 +44,8 @@ func actualiserValeurRotationCamera(directionMouvementSouris : Vector2) -> void:
 	print("rotationHorizontaleCamera = " + str(rotationHorizontaleCamera))
 
 
-##permet de tourner la camera lorsque le joueur est en mouvement?
-func tournerCameraMouvementJoueur(vecteurRotation) -> void:
+##permet de conserver la rotation de la camera malgre la rotation du joueur
+func conserverRotationCamera(vecteurRotation) -> void:
 	set_global_rotation_degrees(vecteurRotation)
 	#set_rotation(-vecteurRotation)
 	#rotationVerticaleCamera = rotation_degrees.x

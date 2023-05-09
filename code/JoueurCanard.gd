@@ -86,6 +86,22 @@ const ROTATION_DIAGONALE_AVANT_GAUCHE_VECTEUR : Vector3 = Vector3(0,PI/4,0)
 const ROTATION_ARRIERE_DROITE_VECTEUR : Vector3 = Vector3(0,-3*PI/4,0)
 ##valeur du vecteur de rotation du joueur lors d'un deplacement vers la diagonale arriere gauche
 const ROTATION_ARRIERE_GAUCHE_VECTEUR : Vector3 = Vector3(0,3*PI/4,0)
+##valeur d'une rotation vers la droite
+const FACTEUR_ROTATION_DROITE : float = -PI/2
+##valeur d'une rotation vers la gauche
+const FACTEUR_ROTATION_GAUCHE : float = PI/2
+##valeur d'une rotation vers l'avant
+const FACTEUR_ROTATION_AVANT : float = 2*PI
+##valeur d'une rotation vers l'arriere
+const FACTEUR_ROTATION_ARRIERE : float = PI
+##valeur d'une rotation vers la diagonale avant droite
+const FACTEUR_ROTATION_DIAGONALE_AVANT_DROITE : float = -PI/4
+##valeur d'une rotation vers la diagonale avant gauche
+const FACTEUR_ROTATION_DIAGONALE_AVANT_GAUCHE : float = PI/4
+##valeur d'une rotation vers la diagonale arriere droite
+const FACTEUR_ROTATION_DIAGONALE_ARRIERE_DROITE : float = -3*PI/4
+##valeur d'une rotation vers la diagonale arriere gauche
+const FACTEUR_ROTATION_DIAGONALE_ARRIERE_GAUCHE : float = 3*PI/4
 
 
 #----------------------
@@ -239,8 +255,8 @@ func evaluerSaisieSautJoueur(vecteurDirectionJoueur : Vector3) -> bool:
 func appliquerRotationJoueur(directionJoueur : Vector3) -> void:
 	#vecteur de la rotation appliquee au joueur
 	var vecteurRotation : Vector3
-	#vecteur de la rotation avant que la rotation soit appliquee
-	var vecteurRotationInitial
+	#vecteur de la rotation de la camera avant que la rotation soit appliquee
+	var vecteurRotationInitialCamera
 
 	#initialisation de la valeur y de la direction joueur a 0 afin de pouvoir tourner en saut ou en tombant
 	directionJoueur.y = 0
@@ -251,35 +267,42 @@ func appliquerRotationJoueur(directionJoueur : Vector3) -> void:
 	#effectue la rotation en fonction de la direction du mouvement horizontal
 	if directionJoueur != Vector3.ZERO:
 		vecteurRotation = determinerVecteurRotation(directionJoueur)
-		#?
-		vecteurRotationInitial = axeRotationCamera.get_global_rotation_degrees()
-		#?
+		vecteurRotationInitialCamera = axeRotationCamera.get_global_rotation_degrees()
+		#tourne le joueur
 		set_rotation(vecteurRotation)
-		axeRotationCamera.tournerCameraMouvementJoueur(vecteurRotationInitial)
+		#conserve la rotation de la camera
+		axeRotationCamera.conserverRotationCamera(vecteurRotationInitialCamera)
 
 
 ##permet de determiner quel vecteur de rotation sera utilise par
 ##la fonction appliquerRotationJoueur
 func determinerVecteurRotation(directionJoueur : Vector3) -> Vector3:
 	#vecteur de la rotation applique en fonction de la direction
-	var vecteurRotation : Vector3
+	var vecteurRotation : Vector3 = Vector3.ZERO
+	vecteurRotation.y = axeRotationCamera.get_global_rotation().y
+	#?fait
+	#etablir la direction avant a partir de la direction ou pointe la camera.
+	#ensuite, soustraire/additionner les valeurs en radians correspondant aux cotes
+	#de la direction de la camera.
+	#exemple : directionAvantCamera.y - PI/2 pour la direction droite par rapport
+	#a la direction de la camera
 
 	if directionJoueur == DIRECTION_ARRIERE_VECTEUR:
-		vecteurRotation = ROTATION_ARRIERE_VECTEUR
+		vecteurRotation.y += FACTEUR_ROTATION_ARRIERE
 	elif directionJoueur == DIRECTION_AVANT_VECTEUR:
-		vecteurRotation = ROTATION_AVANT_VECTEUR
+		vecteurRotation.y = vecteurRotation.y
 	elif directionJoueur == DIRECTION_DROITE_VECTEUR:
-		vecteurRotation = ROTATION_DROITE_VECTEUR
+		vecteurRotation.y += FACTEUR_ROTATION_DROITE
 	elif directionJoueur == DIRECTION_GAUCHE_VECTEUR:
-		vecteurRotation = ROTATION_GAUCHE_VECTEUR
+		vecteurRotation.y += FACTEUR_ROTATION_GAUCHE
 	elif directionJoueur == DIRECTION_DIAGONALE_AVANT_DROITE_VECTEUR:
-		vecteurRotation = ROTATION_DIAGONALE_AVANT_DROITE_VECTEUR
+		vecteurRotation.y += FACTEUR_ROTATION_DIAGONALE_AVANT_DROITE
 	elif directionJoueur == DIRECTION_DIAGONALE_AVANT_GAUCHE_VECTEUR:
-		vecteurRotation = ROTATION_DIAGONALE_AVANT_GAUCHE_VECTEUR
+		vecteurRotation.y += FACTEUR_ROTATION_DIAGONALE_AVANT_GAUCHE
 	elif directionJoueur == DIRECTION_DIAGONALE_ARRIERE_DROITE_VECTEUR:
-		vecteurRotation = ROTATION_ARRIERE_DROITE_VECTEUR
+		vecteurRotation.y += FACTEUR_ROTATION_DIAGONALE_ARRIERE_DROITE
 	elif directionJoueur == DIRECTION_DIAGONALE_ARRIERE_GAUCHE_VECTEUR:
-		vecteurRotation = ROTATION_ARRIERE_GAUCHE_VECTEUR
+		vecteurRotation.y += FACTEUR_ROTATION_DIAGONALE_ARRIERE_GAUCHE
 	
 	return vecteurRotation
 
