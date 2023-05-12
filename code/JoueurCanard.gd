@@ -174,13 +174,17 @@ func appliquerGravite(delta) -> void:
 ##permet de jouer le role de la methode main pour l'appel de fonctions
 ##liees au mouvement du joueur
 func mouvementJoueur(delta):
-	#vecteur de la direction du mouvement du joueur (declaration)
-	var vecteurDirectionJoueur = Vector3.ZERO
+	#vecteur de la direction du mouvement du joueur sans modifications
+	var vecteurDirectionJoueurBrut = Vector3.ZERO
+	#vecteur de la direction du mouvement destine a etre utilise pour le mouvement
+	var vecteurDirectionJoueur
 	#reinitialisation du vecteur lie a la direction du mouvement
 	var vitesseEsquiveJoueur = VITESSE_ESQUIVE_JOUEUR_INITIALE
 	
 	#saisie de l'entree du mouvement du joueur
-	vecteurDirectionJoueur = saisirEntreeMouvement()
+	vecteurDirectionJoueurBrut = saisirEntreeMouvement()
+
+	vecteurDirectionJoueur = ajusterRotationDirectionJoueur(vecteurDirectionJoueurBrut)
 
 	#normalisation du mouvement diagonal
 	vecteurDirectionJoueur = normaliserMouvementDiagonal(vecteurDirectionJoueur)
@@ -189,7 +193,7 @@ func mouvementJoueur(delta):
 	vitesseEsquiveJoueur = saisirEntreeEsquive()
 
 	#tourne le joueur face a la direction de son mouvement
-	appliquerRotationJoueur(vecteurDirectionJoueur)
+	appliquerRotationJoueur(vecteurDirectionJoueurBrut)
 
 	#application des animations en fonction de la direction du mouvement
 	appliquerAnimationMouvement(vecteurDirectionJoueur)
@@ -224,6 +228,21 @@ func saisirEntreeMouvementHorizontal() -> Vector3:
 		directionHorizontaleJoueur.x = DIRECTION_GAUCHE
 	
 	return directionHorizontaleJoueur
+
+
+##permet d'ajuster la rotation de la direction du joueur en fonction
+##de l'endroit ou la camera fait face
+func ajusterRotationDirectionJoueur(directionJoueur) -> Vector3:
+	#contient la direction vers laquelle la camera pointe
+	var directionAvant : Vector3 = determinerDirectionAvantMouvement()
+
+	return directionJoueur.rotated(Vector3(0,1,0), directionAvant.y)
+
+
+##permet de determiner la direction du mouvement vers l'avant en fonction
+##de la direction de la camera.
+func determinerDirectionAvantMouvement() -> Vector3:
+	return axeRotationCamera.get_global_rotation()
 
 
 ##permet de saisir l'entree du joueur pour le mouvement vertical
@@ -280,12 +299,8 @@ func determinerVecteurRotation(directionJoueur : Vector3) -> Vector3:
 	#vecteur de la rotation applique en fonction de la direction
 	var vecteurRotation : Vector3 = Vector3.ZERO
 	vecteurRotation.y = axeRotationCamera.get_global_rotation().y
-	#?fait
-	#etablir la direction avant a partir de la direction ou pointe la camera.
-	#ensuite, soustraire/additionner les valeurs en radians correspondant aux cotes
-	#de la direction de la camera.
-	#exemple : directionAvantCamera.y - PI/2 pour la direction droite par rapport
-	#a la direction de la camera
+	#contient la direction vers laquelle la camera pointe
+	var directionAvant : Vector3 = Vector3(0, 0, DIRECTION_AVANT).rotated(Vector3(0, 1 ,0), vecteurRotation.y)
 
 	if directionJoueur == DIRECTION_ARRIERE_VECTEUR:
 		vecteurRotation.y += FACTEUR_ROTATION_ARRIERE
@@ -343,9 +358,7 @@ func appliquerMouvement(delta, directionJoueur, vitesseEsquiveJoueur) -> void:
 	velocity.x = directionJoueur.x * vitesseJoueur * delta * vitesseEsquiveJoueur
 	#application du mouvement horizontal sur l'axe z
 	velocity.z = directionJoueur.z * vitesseJoueur * delta * vitesseEsquiveJoueur
-	#?
-	#velocity.rotate() en utilisant les valeur en x et y de la rotation de la camera
-	#pour que la direction avant du joueur corresponde a la direction de la camera
+
 	move_and_slide()
 
 
