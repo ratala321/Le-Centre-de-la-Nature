@@ -31,8 +31,8 @@ func _input(event):
 ##de la souris par le joueur
 func tournerCamera() -> void:
 	#application de la rotation a la camera
-	rotation_degrees.x = rotationVerticaleCamera
-	rotation_degrees.y = rotationHorizontaleCamera
+	global_rotation_degrees.x = rotationVerticaleCamera
+	global_rotation_degrees.y = rotationHorizontaleCamera
 
 
 ##permet d'actualiser la valeur de la rotation de la camera
@@ -47,6 +47,3 @@ func actualiserValeurRotationCamera(directionMouvementSouris : Vector2) -> void:
 ##permet de conserver la rotation de la camera malgre la rotation du joueur
 func conserverRotationCamera(vecteurRotation) -> void:
 	set_global_rotation_degrees(vecteurRotation)
-	#set_rotation(-vecteurRotation)
-	#rotationVerticaleCamera = rotation_degrees.x
-	#rotationHorizontaleCamera = rotation_degrees.y
