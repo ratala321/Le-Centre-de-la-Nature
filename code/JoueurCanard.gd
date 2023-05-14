@@ -288,7 +288,7 @@ func appliquerRotationJoueur(directionJoueur : Vector3) -> void:
 		vecteurRotation = determinerVecteurRotation(directionJoueur)
 		vecteurRotationInitialCamera = axeRotationCamera.get_global_rotation_degrees()
 		#tourne le joueur
-		set_rotation(vecteurRotation)
+		rotation.y = lerp_angle(rotation.y, vecteurRotation.y, 0.25)
 		#conserve la rotation de la camera
 		axeRotationCamera.conserverRotationCamera(vecteurRotationInitialCamera)
 

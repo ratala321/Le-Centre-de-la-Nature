@@ -9,6 +9,10 @@ const TOUR_HORIZONTAL_GAUCHE_COMPLET = 540
 const TOUR_HORIZONTAL_DROITE_COMPLET = -180
 ##valeur initiale de la rotation horizontale en degre pour la rotation de la camera
 const ROTATION_HORIZONTALE_INITIALE = 180
+
+#-------------------------------------------------------
+#constantes liees a la limitation du mouvement de camera
+#-------------------------------------------------------
 ##valeur maximale de la rotation verticale de la camera du joueur vers le haut
 const ROTATION_VERTICALE_MAXIMALE_HAUT : float = 26
 ##valeur maximale de la rotation verticale de la camera du joueur vers le bas
