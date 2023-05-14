@@ -1,13 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://3ekx0s8cgi7h"]
+[gd_scene load_steps=7 format=3 uid="uid://3ekx0s8cgi7h"]
 
 [ext_resource type="PackedScene" uid="uid://dq04vglibsi8r" path="res://JoueurCanard.tscn" id="1_0iw8u"]
 [ext_resource type="Script" path="res://code/Camera3DJoueurAxe.gd" id="2_28yfe"]
+[ext_resource type="PackedScene" uid="uid://q4uuutngl3k0" path="res://Coffre.tscn" id="3_ko3p6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ckacd"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4xsu1"]
 
-[sub_resource type="Curve3D" id="Curve3D_g02dy"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_4ev3r"]
 
 [node name="NiveauTest" type="Node"]
 
@@ -49,7 +50,15 @@ physics_material_override = SubResource("PhysicsMaterial_ckacd")
 [node name="CollisionSol" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_4xsu1")
 
-[node name="Path3D" type="Path3D" parent="."]
-curve = SubResource("Curve3D_g02dy")
+[node name="Coffre" parent="." node_paths=PackedStringArray("joueur", "aireInteraction") instance=ExtResource("3_ko3p6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.641154, 3.36739)
+joueur = NodePath("../JoueurCanard")
+aireInteraction = NodePath("AireInteractionCoffre")
 
-[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+[node name="AireInteractionCoffre" type="Area3D" parent="Coffre"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Coffre/AireInteractionCoffre"]
+shape = SubResource("BoxShape3D_4ev3r")
+
+[node name="AnimationPlayerCoffre" type="AnimationPlayer" parent="Coffre"]

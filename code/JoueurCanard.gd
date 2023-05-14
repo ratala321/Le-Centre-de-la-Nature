@@ -433,7 +433,7 @@ func arreterMouvement() -> void:
 ##emet le signal [signal interaction_joueur_] lorsque le joueur appuie sur la touche
 ##correspondant a l'action [b]interaction_joueur[/b]
 func effectuerInteractionJoueur() -> void:
-	if evaluerJoueurAuSol() and Input.is_action_pressed("interaction_joueur"):
+	if evaluerJoueurAuSol() and Input.is_action_just_pressed("interaction_joueur"):
 		emit_signal("interaction_joueur_")
 
 		#application de l'animation liee a l'interaction du joueur
