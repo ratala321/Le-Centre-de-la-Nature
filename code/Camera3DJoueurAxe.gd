@@ -1,5 +1,8 @@
 extends Node3D
 
+##valeur de la sensibilite de la camera
+@export var sensibiliteCamera : float = 1
+
 ##valeur d'un tour horizontal gauche complet en degre pour la rotation de la camera
 const TOUR_HORIZONTAL_GAUCHE_COMPLET = 540
 ##valeur d'un tour horizontal droite complet en degre pour la rotation de la camera
@@ -8,9 +11,9 @@ const TOUR_HORIZONTAL_DROITE_COMPLET = -180
 const ROTATION_HORIZONTALE_INITIALE = 180
 
 ##valeur de la rotation verticale de la camera
-var rotationVerticaleCamera = 0
+var rotationVerticaleCamera : float = 0
 ##valeur de la rotation horizontale de la camera
-var rotationHorizontaleCamera = 0
+var rotationHorizontaleCamera : float = 0
 
 
 func _ready():
@@ -19,8 +22,9 @@ func _ready():
 
 
 func _input(event):
+	#mouvement de la camera basee sur la direction de la souris
 	if event is InputEventMouseMotion:
-		var directionMouvementSouris = event.relative
+		var directionMouvementSouris = event.relative * sensibiliteCamera
 
 		actualiserValeurRotationCamera(directionMouvementSouris)
 
@@ -39,9 +43,9 @@ func tournerCamera() -> void:
 func actualiserValeurRotationCamera(directionMouvementSouris : Vector2) -> void:
 	#actualisation de la valeur de rotation de la camera
 	rotationVerticaleCamera += directionMouvementSouris.y
-	print("rotationVerticaleCamera = " + str(rotationVerticaleCamera))
+	#print("rotationVerticaleCamera = " + str(rotationVerticaleCamera))
 	rotationHorizontaleCamera -= directionMouvementSouris.x
-	print("rotationHorizontaleCamera = " + str(rotationHorizontaleCamera))
+	#print("rotationHorizontaleCamera = " + str(rotationHorizontaleCamera))
 
 
 ##permet de conserver la rotation de la camera malgre la rotation du joueur

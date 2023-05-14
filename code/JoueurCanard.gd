@@ -177,7 +177,7 @@ func mouvementJoueur(delta):
 	#vecteur de la direction du mouvement du joueur sans modifications
 	var vecteurDirectionJoueurBrut = Vector3.ZERO
 	#vecteur de la direction du mouvement destine a etre utilise pour le mouvement
-	var vecteurDirectionJoueur
+	var vecteurDirectionJoueur = Vector3.ZERO
 	#reinitialisation du vecteur lie a la direction du mouvement
 	var vitesseEsquiveJoueur = VITESSE_ESQUIVE_JOUEUR_INITIALE
 	

@@ -15,17 +15,19 @@
 transform = Transform3D(1, -3.55271e-15, 7.10543e-15, -3.55271e-15, 1, 0, -7.10543e-15, 0, 1, 2.84217e-14, 0.0998027, -2.38419e-07)
 floor_stop_on_slope = false
 floor_block_on_wall = false
+vitesseJoueur = 450
 
 [node name="AxeRotationCamera" type="Node3D" parent="JoueurCanard"]
 transform = Transform3D(1, 0, 0, 1.79366e-43, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("2_28yfe")
+sensibiliteCamera = 0.1
 
 [node name="Camera3DJoueur" type="Camera3D" parent="JoueurCanard/AxeRotationCamera"]
 transform = Transform3D(-1, 1.40442e-07, -1.43098e-07, 8.74228e-08, 0.947696, 0.319174, 1.80439e-07, 0.319174, -0.947696, -7.00242e-15, 2.001, -2.014)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.845505, -0.0104825, -0.533864, 0.0122135, 0.999925, -0.000290603, 0.533827, -0.00627466, 0.84557, -0.696256, 1.58441, 3.09883)
-light_energy = 4.962
+light_energy = 3.992
 light_indirect_energy = 1.072
 light_volumetric_fog_energy = 2.524
 shadow_enabled = true
