@@ -2,15 +2,16 @@ class_name ObjetInteractif extends AnimatableBody3D
 
 ##reference au joueur instancie dans la scene
 @export var joueur : CharacterBody3D
+
 ##reference l'aire d'interaction instanciee dans la scene
 @onready var aireInteraction : Area3D = get_node("AireInteractionCoffre")
+
+##reference a la classe enfant
 var objetInteractif
 
-##signal emis pour lancer l'interaction d'un objet interactif
-signal interaction_
 
-func _init(objetInteractifInstance):
-	objetInteractif = objetInteractifInstance
+func _init(objetInteractifInstancie):
+	objetInteractif = objetInteractifInstancie
 
 	
 func _ready():
@@ -24,5 +25,4 @@ func _lors_interaction_joueur() -> void:
 	#verifier que le joueur est dans l'aire d'interaction
 	if aireInteraction.overlaps_body(joueur):
 		print("interaction!")
-		#emit_signal("interaction_")
 		objetInteractif.interaction()

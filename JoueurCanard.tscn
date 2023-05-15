@@ -1,9 +1,10 @@
-[gd_scene load_steps=48 format=3 uid="uid://dq04vglibsi8r"]
+[gd_scene load_steps=49 format=3 uid="uid://dq04vglibsi8r"]
 
 [ext_resource type="Script" path="res://code/JoueurCanard.gd" id="1_fyvdd"]
 [ext_resource type="PackedScene" uid="uid://b0mm1k2dpaqho" path="res://importations/bow_teamBlue.gltf.glb" id="2_thlrn"]
 [ext_resource type="PackedScene" uid="uid://bgacblhfo0lc2" path="res://importations/arrow_teamBlue.gltf.glb" id="3_j6oia"]
 [ext_resource type="PackedScene" uid="uid://cq8rh5lsevyih" path="res://importations/sword_teamBlue.gltf.glb" id="4_hg4im"]
+[ext_resource type="Script" path="res://code/Camera3DJoueurAxe.gd" id="5_gyclr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iyr5p"]
 resource_name = "White"
@@ -2171,11 +2172,14 @@ tracks/16/path = NodePath("..")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
-"times": PackedFloat32Array(0, 1.4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 1, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": [],
 "method": &"arreterMouvement"
+}, {
+"args": [],
+"method": &"emettreSignalInteraction"
 }, {
 "args": [],
 "method": &"relancerMouvement"
@@ -3742,14 +3746,14 @@ bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 bones/0/enabled = true
 bones/0/position = Vector3(0, 0, 0)
-bones/0/rotation = Quaternion(0, 0, 0, 1)
+bones/0/rotation = Quaternion(0.0428414, 0.189281, 0.00825593, 0.980953)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Head"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.711598, 0)
 bones/1/enabled = true
 bones/1/position = Vector3(0, 0.711598, 0)
-bones/1/rotation = Quaternion(0, 0, 0, 1)
+bones/1/rotation = Quaternion(-0.0433405, -0.169869, -0.00080675, 0.984513)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "armLeft"
 bones/2/parent = 0
@@ -3770,18 +3774,18 @@ bones/4/parent = 0
 bones/4/rest = Transform3D(-1.19209e-07, -0.471936, -0.881633, -2.23518e-07, -0.881633, 0.471936, -1, 2.23517e-07, -1.19209e-07, -0.14, 0.691598, 8.40813e-15)
 bones/4/enabled = true
 bones/4/position = Vector3(-0.14, 0.691598, 8.40813e-15)
-bones/4/rotation = Quaternion(-0.685863, 0.172023, 0.685863, 0.172023)
+bones/4/rotation = Quaternion(-0.67441, 0.481219, 0.559521, 0.0231526)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "handSlotRight"
 bones/5/parent = 4
 bones/5/rest = Transform3D(0, -1, -4.76837e-07, 0.471936, 3.57628e-07, -0.881633, 0.881633, -1.78814e-07, 0.471936, 3.33226e-15, 0.550922, -1.84059e-08)
 bones/5/enabled = true
 bones/5/position = Vector3(3.33226e-15, 0.550922, -1.84059e-08)
-bones/5/rotation = Quaternion(0.36334, -0.36334, 0.606617, 0.606617)
+bones/5/rotation = Quaternion(0.330259, -0.252867, 0.569202, 0.709223)
 bones/5/scale = Vector3(1, 1, 1)
 
 [node name="Tete" type="BoneAttachment3D" parent="KayKit_AnimatedCharacter_v13/KayKit Animated Character2/Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.711598, 0)
+transform = Transform3D(0.999111, -0.0164865, 0.0387921, 0.0165573, 0.999862, -0.00150441, -0.038762, 0.00214536, 0.999246, 1.47801e-05, 0.708889, 0.0620344)
 bone_name = "Head"
 bone_idx = 1
 
@@ -3791,6 +3795,7 @@ mesh = SubResource("ArrayMesh_lhnlq")
 skeleton = NodePath("")
 
 [node name="Corps" type="BoneAttachment3D" parent="KayKit_AnimatedCharacter_v13/KayKit Animated Character2/Skeleton3D"]
+transform = Transform3D(0.928209, 2.07704e-05, 0.372059, 0.0324155, 0.996193, -0.0809254, -0.370644, 0.0871762, 0.924675, 0, 0, 0)
 bone_name = "Body"
 bone_idx = 0
 
@@ -3800,7 +3805,7 @@ mesh = SubResource("ArrayMesh_cvwwt")
 skeleton = NodePath("")
 
 [node name="BrasGauche" type="BoneAttachment3D" parent="KayKit_AnimatedCharacter_v13/KayKit Animated Character2/Skeleton3D"]
-transform = Transform3D(-3.57628e-07, 0.471936, -0.881633, 1.35601e-06, -0.881633, -0.471936, -1, -1.35601e-06, -3.57628e-07, 0.14, 0.691598, -1.3027e-15)
+transform = Transform3D(-0.372059, 0.438036, -0.81835, 0.0809268, -0.862978, -0.498717, -0.924674, -0.251779, 0.28563, 0.129964, 0.693503, 0.00840069)
 bone_name = "armLeft"
 bone_idx = 2
 
@@ -3810,7 +3815,7 @@ mesh = SubResource("ArrayMesh_p6xlp")
 skeleton = NodePath("")
 
 [node name="BrasDroit" type="BoneAttachment3D" parent="KayKit_AnimatedCharacter_v13/KayKit Animated Character2/Skeleton3D"]
-transform = Transform3D(0, -0.471937, -0.881632, 0, -0.881632, 0.471937, -1, 0, 0, -0.14, 0.691598, 8.40813e-15)
+transform = Transform3D(-0.371956, -0.437803, -0.818521, -0.560813, -0.596676, 0.573991, -0.739688, 0.672537, -0.0235886, -0.129935, 0.684427, 0.112181)
 bone_name = "armRight"
 bone_idx = 4
 
@@ -3820,7 +3825,7 @@ mesh = SubResource("ArrayMesh_i1qdk")
 skeleton = NodePath("")
 
 [node name="MainEmplacementGauche" type="BoneAttachment3D" parent="KayKit_AnimatedCharacter_v13/KayKit Animated Character2/Skeleton3D"]
-transform = Transform3D(-1, 3.57628e-07, 7.7486e-07, 7.7486e-07, -1.35601e-06, 1, 3.24652e-07, 1, 1.36428e-06, 0.4, 0.205887, -7.47053e-07)
+transform = Transform3D(-0.928209, 0.372059, 2.19941e-05, -0.0324148, -0.0809268, 0.996193, 0.370645, 0.924674, 0.0871772, 0.371287, 0.218069, -0.13031)
 bone_name = "handSlotLeft"
 bone_idx = 3
 
@@ -3829,7 +3834,7 @@ transform = Transform3D(0, 4.3562e-08, 0.996582, 0.996582, -4.3562e-08, -2.84217
 visible = false
 
 [node name="MainEmplacementDroit" type="BoneAttachment3D" parent="KayKit_AnimatedCharacter_v13/KayKit Animated Character2/Skeleton3D"]
-transform = Transform3D(-1, 0, 5.96046e-07, 5.96046e-07, 0, 1, 0, 1, 0, -0.4, 0.205887, 5.07587e-15)
+transform = Transform3D(-0.965043, 0.156007, -0.210605, -0.0861044, 0.570235, 0.816957, 0.247545, 0.806532, -0.536868, -0.37113, 0.355705, 0.482696)
 bone_name = "handSlotRight"
 bone_idx = 5
 
@@ -3855,3 +3860,11 @@ shape = SubResource("CapsuleShape3D_6rmec")
 target_position = Vector3(0, -0.05, 0)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="AxeRotationCamera" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 1.79366e-43, 1, 0, 0, 0, 1, 0.0106673, 0, -0.0277896)
+script = ExtResource("5_gyclr")
+sensibiliteCamera = 0.1
+
+[node name="Camera3DJoueur" type="Camera3D" parent="AxeRotationCamera"]
+transform = Transform3D(-1, 1.40442e-07, -1.43098e-07, 8.74228e-08, 0.947696, 0.319174, 1.80439e-07, 0.319174, -0.947696, 0, 2.194, -2.901)

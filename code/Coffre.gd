@@ -10,3 +10,4 @@ func _init():
 ##avec l'objet
 func interaction():
 	print("YOUPI coffre interaction")
+	$InventaireJoueur.montrerInterface()

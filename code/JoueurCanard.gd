@@ -436,11 +436,15 @@ func arreterMouvement() -> void:
 ##correspondant a l'action [b]interaction_joueur[/b]
 func effectuerInteractionJoueur() -> void:
 	if evaluerJoueurAuSol() and Input.is_action_just_pressed("interaction_joueur"):
-		emit_signal("interaction_joueur_")
-
 		#application de l'animation liee a l'interaction du joueur
 		ajusterVitesseAnimation(VITESSE_ANIMATION_INTERACTION)
 		appliquerAnimation(ANIMATION_INTERACTION)
+
+
+##emet le signal interaction_joueur_
+func emettreSignalInteraction() -> void:
+	emit_signal("interaction_joueur_")
+
 
 ##############################
 #FIN INTERACTION PAR LE JOUEUR

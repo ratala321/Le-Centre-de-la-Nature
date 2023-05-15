@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://d061wbwkn0h4w"]
+[gd_scene load_steps=9 format=3 uid="uid://d061wbwkn0h4w"]
 
 [ext_resource type="PackedScene" uid="uid://dq04vglibsi8r" path="res://JoueurCanard.tscn" id="1_0iw8u"]
-[ext_resource type="Script" path="res://code/Camera3DJoueurAxe.gd" id="2_28yfe"]
 [ext_resource type="PackedScene" uid="uid://q4uuutngl3k0" path="res://Coffre.tscn" id="3_ko3p6"]
+[ext_resource type="PackedScene" uid="uid://bmpbfwm655j1t" path="res://InventaireJoueur.tscn" id="3_y8sul"]
 [ext_resource type="Script" path="res://code/Coffre2.gd" id="4_sor1v"]
+[ext_resource type="Script" path="res://code/GestionnaireInterfaceUtilisateur.gd" id="5_jrac6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ckacd"]
 
@@ -17,14 +18,6 @@
 transform = Transform3D(1, -3.55271e-15, 7.10543e-15, -3.55271e-15, 1, 0, -7.10543e-15, 0, 1, 2.84217e-14, 0.0998027, -2.38419e-07)
 floor_stop_on_slope = false
 floor_block_on_wall = false
-
-[node name="AxeRotationCamera" type="Node3D" parent="JoueurCanard"]
-transform = Transform3D(1, 0, 0, 1.79366e-43, 1, 0, 0, 0, 1, 0.0106673, 0, -0.0277896)
-script = ExtResource("2_28yfe")
-sensibiliteCamera = 0.1
-
-[node name="Camera3DJoueur" type="Camera3D" parent="JoueurCanard/AxeRotationCamera"]
-transform = Transform3D(-1, 1.40442e-07, -1.43098e-07, 8.74228e-08, 0.947696, 0.319174, 1.80439e-07, 0.319174, -0.947696, 0, 2.194, -2.901)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.845505, -0.0104825, -0.533864, 0.0122135, 0.999925, -0.000290603, 0.533827, -0.00627466, 0.84557, -0.696256, 1.58441, 3.09883)
@@ -63,6 +56,9 @@ shape = SubResource("BoxShape3D_4ev3r")
 
 [node name="AnimationPlayerCoffre" type="AnimationPlayer" parent="Coffre"]
 
+[node name="InventaireJoueur" parent="Coffre" instance=ExtResource("3_y8sul")]
+visible = false
+
 [node name="Coffre2" parent="." node_paths=PackedStringArray("joueur") instance=ExtResource("3_ko3p6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.712906, -6.2517)
 script = ExtResource("4_sor1v")
@@ -77,5 +73,5 @@ shape = SubResource("BoxShape3D_4ev3r")
 [node name="AnimationPlayerCoffre" type="AnimationPlayer" parent="Coffre2"]
 root_node = NodePath("../../Coffre2")
 
-[connection signal="interaction_" from="Coffre" to="Coffre" method="interaction"]
-[connection signal="interaction_" from="Coffre2" to="Coffre2" method="interaction"]
+[node name="GestionnaireInterfaceUtilisateur" type="Node" parent="."]
+script = ExtResource("5_jrac6")
