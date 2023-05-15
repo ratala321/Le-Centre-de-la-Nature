@@ -51,10 +51,9 @@ physics_material_override = SubResource("PhysicsMaterial_ckacd")
 [node name="CollisionSol" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_4xsu1")
 
-[node name="Coffre" parent="." node_paths=PackedStringArray("joueur", "aireInteraction") instance=ExtResource("3_ko3p6")]
+[node name="Coffre" parent="." node_paths=PackedStringArray("joueur") instance=ExtResource("3_ko3p6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.641154, 3.36739)
 joueur = NodePath("../JoueurCanard")
-aireInteraction = NodePath("AireInteractionCoffre")
 
 [node name="AireInteractionCoffre" type="Area3D" parent="Coffre"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -64,11 +63,10 @@ shape = SubResource("BoxShape3D_4ev3r")
 
 [node name="AnimationPlayerCoffre" type="AnimationPlayer" parent="Coffre"]
 
-[node name="Coffre2" parent="." node_paths=PackedStringArray("joueur", "aireInteraction") instance=ExtResource("3_ko3p6")]
+[node name="Coffre2" parent="." node_paths=PackedStringArray("joueur") instance=ExtResource("3_ko3p6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.712906, -6.2517)
 script = ExtResource("4_sor1v")
 joueur = NodePath("../JoueurCanard")
-aireInteraction = NodePath("AireInteractionCoffre")
 
 [node name="AireInteractionCoffre" type="Area3D" parent="Coffre2"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
