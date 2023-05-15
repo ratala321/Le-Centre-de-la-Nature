@@ -70,6 +70,8 @@ const DIRECTION_DIAGONALE_ARRIERE_GAUCHE_VECTEUR : Vector3 = Vector3(1, 0, -1)
 #----------------------
 #constantes de rotation
 #----------------------
+##valeur du facteur d'interpolation de l'angle de rotation du joueur
+const INTERPOLATION_ROTATION_JOUEUR : float = 0.25
 ##valeur du vecteur de rotation du joueur lors d'un deplacement vers la droite
 const ROTATION_DROITE_VECTEUR : Vector3 = Vector3(0,-PI/2,0)
 ##valeur du vecteur de rotation du joueur lors d'un deplacement vers la gauche
@@ -288,7 +290,7 @@ func appliquerRotationJoueur(directionJoueur : Vector3) -> void:
 		vecteurRotation = determinerVecteurRotation(directionJoueur)
 		vecteurRotationInitialCamera = axeRotationCamera.get_global_rotation_degrees()
 		#tourne le joueur
-		rotation.y = lerp_angle(rotation.y, vecteurRotation.y, 0.25)
+		rotation.y = lerp_angle(rotation.y, vecteurRotation.y, INTERPOLATION_ROTATION_JOUEUR)
 		#conserve la rotation de la camera
 		axeRotationCamera.conserverRotationCamera(vecteurRotationInitialCamera)
 

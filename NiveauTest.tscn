@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://3ekx0s8cgi7h"]
+[gd_scene load_steps=8 format=3 uid="uid://d061wbwkn0h4w"]
 
 [ext_resource type="PackedScene" uid="uid://dq04vglibsi8r" path="res://JoueurCanard.tscn" id="1_0iw8u"]
 [ext_resource type="Script" path="res://code/Camera3DJoueurAxe.gd" id="2_28yfe"]
 [ext_resource type="PackedScene" uid="uid://q4uuutngl3k0" path="res://Coffre.tscn" id="3_ko3p6"]
+[ext_resource type="Script" path="res://code/Coffre2.gd" id="4_sor1v"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ckacd"]
 
@@ -23,7 +24,7 @@ script = ExtResource("2_28yfe")
 sensibiliteCamera = 0.1
 
 [node name="Camera3DJoueur" type="Camera3D" parent="JoueurCanard/AxeRotationCamera"]
-transform = Transform3D(-1, 1.40442e-07, -1.43098e-07, 8.74228e-08, 0.947696, 0.319174, 1.80439e-07, 0.319174, -0.947696, -7.00242e-15, 2.001, -2.014)
+transform = Transform3D(-1, 1.40442e-07, -1.43098e-07, 8.74228e-08, 0.947696, 0.319174, 1.80439e-07, 0.319174, -0.947696, 0, 2.194, -2.901)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.845505, -0.0104825, -0.533864, 0.0122135, 0.999925, -0.000290603, 0.533827, -0.00627466, 0.84557, -0.696256, 1.58441, 3.09883)
@@ -62,3 +63,21 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("BoxShape3D_4ev3r")
 
 [node name="AnimationPlayerCoffre" type="AnimationPlayer" parent="Coffre"]
+
+[node name="Coffre2" parent="." node_paths=PackedStringArray("joueur", "aireInteraction") instance=ExtResource("3_ko3p6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.712906, -6.2517)
+script = ExtResource("4_sor1v")
+joueur = NodePath("../JoueurCanard")
+aireInteraction = NodePath("AireInteractionCoffre")
+
+[node name="AireInteractionCoffre" type="Area3D" parent="Coffre2"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Coffre2/AireInteractionCoffre"]
+shape = SubResource("BoxShape3D_4ev3r")
+
+[node name="AnimationPlayerCoffre" type="AnimationPlayer" parent="Coffre2"]
+root_node = NodePath("../../Coffre2")
+
+[connection signal="interaction_" from="Coffre" to="Coffre" method="interaction"]
+[connection signal="interaction_" from="Coffre2" to="Coffre2" method="interaction"]
