@@ -3834,7 +3834,7 @@ transform = Transform3D(0, 4.3562e-08, 0.996582, 0.996582, -4.3562e-08, -2.84217
 visible = false
 
 [node name="MainEmplacementDroit" type="BoneAttachment3D" parent="KayKit_AnimatedCharacter_v13/KayKit Animated Character2/Skeleton3D"]
-transform = Transform3D(-0.965043, 0.156007, -0.210605, -0.0861044, 0.570235, 0.816957, 0.247545, 0.806532, -0.536868, -0.37113, 0.355705, 0.482696)
+transform = Transform3D(-0.965043, 0.156007, -0.210605, -0.0861046, 0.570235, 0.816957, 0.247545, 0.806533, -0.536868, -0.37113, 0.355705, 0.482696)
 bone_name = "handSlotRight"
 bone_idx = 5
 
