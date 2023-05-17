@@ -1,7 +1,11 @@
 # Godot 4+ specific ignores
 .godot/
+.import/
+export.cfg
 *.translation
 export_presets.cfg
 .mono/
+data_*/
+mon_crash.*.json
 *.blend*
 *.swp
