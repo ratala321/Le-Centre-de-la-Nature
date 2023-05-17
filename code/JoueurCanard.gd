@@ -220,9 +220,9 @@ func saisirEntreeMouvementHorizontal() -> Vector3:
 	var directionHorizontaleJoueur = Vector3.ZERO
 
 	#bloc de saisie d'input pour la direction du mouvement
-	if Input.is_action_pressed("mouvement_haut"):
+	if Input.is_action_pressed("mouvement_avant"):
 		directionHorizontaleJoueur.z = DIRECTION_AVANT 
-	if Input.is_action_pressed("mouvement_bas"):
+	if Input.is_action_pressed("mouvement_arriere"):
 		directionHorizontaleJoueur.z = DIRECTION_ARRIERE
 	if Input.is_action_pressed("mouvement_droite"):
 		directionHorizontaleJoueur.x = DIRECTION_DROITE
