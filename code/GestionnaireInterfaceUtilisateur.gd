@@ -29,3 +29,8 @@ func demanderAfficherInventaireJoueur() -> void:
 ##permet d'afficher l'inventaire du joueur
 func afficherInventaireJoueur() -> void:
 	pass
+
+func _lorsAffichageInventaireCoffre():
+	#demanderPermission?
+	#afficher inventaireJoueurAussi
+	pass

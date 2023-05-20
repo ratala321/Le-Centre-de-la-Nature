@@ -1,4 +1,4 @@
-extends Control
+class_name Inventaire extends Control
 
 @onready var listeInventaire = get_node("ItemList")
 

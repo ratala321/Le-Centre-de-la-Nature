@@ -31,7 +31,7 @@ const GRAVITE_SOL_JOUEUR : int = -100
 #constantes liees au saut
 #------------------------
 ##determine la hauteur maximale du joueur lors d'un saut
-const HAUTEUR_MAXIMALE_SAUT : int = 5000
+const HAUTEUR_MAXIMALE_SAUT : int = 4250
 ##?inversee pour quelconque raison : plus c'est petit, plus c'est long?ajustement necessaire
 const TEMPS_HAUTEUR_MAXIMALE_SAUT : int = 7
 ##?pas encore utilisee
