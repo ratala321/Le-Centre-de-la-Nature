@@ -26,3 +26,7 @@ func _lors_interaction_joueur() -> void:
 	if aireInteraction.overlaps_body(joueur):
 		print("interaction!")
 		objetInteractif.interaction()
+
+#------------------------------------------------------------------------------------------
+#Methode abstraite interaction() qui force les objets interactifs a definir une interaction
+#------------------------------------------------------------------------------------------

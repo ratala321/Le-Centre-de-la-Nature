@@ -13,6 +13,8 @@ class_name JoueurCanard
 @onready var audioStreamJoueur = get_node("AudioStreamPlayer")
 ##contient la reference au node d'AxeRotationCamera du joueur
 @onready var axeRotationCamera = get_node("AxeRotationCamera")
+##contient la reference au Gestionnaire d'interface utilisateur
+@onready var gestionnaireInterfaceUtilisateur = get_node("../GestionnaireInterfaceUtilisateur")
 
 ##direction valeur en x et y du vecteur de direction
 const DIRECTION_DROITE : int = -1
@@ -155,6 +157,7 @@ func _physics_process(delta):
 	
 	if permissionMouvement:
 		mouvementJoueur(delta)
+		afficherInventaireJoueur()
 
 	effectuerInteractionJoueur()
 
@@ -440,11 +443,40 @@ func effectuerInteractionJoueur() -> void:
 		ajusterVitesseAnimation(VITESSE_ANIMATION_INTERACTION)
 		appliquerAnimation(ANIMATION_INTERACTION)
 
-
 ##emet le signal interaction_joueur_
 func emettreSignalInteraction() -> void:
 	emit_signal("interaction_joueur_")
 
+
+##permet d'afficher l'inventaire du joueur inconditionnellement
+func afficherInventaireJoueurSansCondition() -> void:
+	print("afficher inventaire joueur sans condition")
+	$InventaireJoueur.montrerInterface()
+
+
+##permet d'afficher l'inventaire du joueur conditionnellement
+func afficherInventaireJoueur() -> void:
+	if Input.is_action_just_pressed("inventaire_joueur"):
+		if demanderAfficherInventaireJoueur():
+			print("permission pour afficher l'inventaire!")
+			$InventaireJoueur.montrerInterface()
+
+
+##permet d'evaluer si le joueur peut afficher son inventaire
+func demanderAfficherInventaireJoueur() -> bool:
+	return evaluerAfficherInventaireJeu() and evaluerAfficherInventaireJoueur()
+
+
+##permet d'evaluer si le joueur peut ouvrir son inventaire par rapport a
+##l'etat actuel du jeu
+func evaluerAfficherInventaireJoueur() -> bool:
+	return evaluerJoueurAuSol() and permissionMouvement
+
+
+##permet d'evaluer si le joueur peut ouvrir son inventaire par rapport a
+##l'etat actuel du joueur
+func evaluerAfficherInventaireJeu() -> bool:
+	return Input.is_action_just_pressed("inventaire_joueur") and !get_tree().paused
 
 ##############################
 #FIN INTERACTION PAR LE JOUEUR
