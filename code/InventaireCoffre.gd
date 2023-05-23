@@ -8,9 +8,4 @@ func _ready():
 ##permet d'effectuer le transfert d'un objet d'un coffre
 ##vers l'inventaire de destination
 func selectionnerObjet(indexObjet, positionClic, indexBouttonSouris) -> void:
-	var listeInventaireDestination : ItemList = inventaireDestination.get_node("ItemList")
-	print("CLIC! dans l'inventaire COFFRE")
-	print(listeInventaire.get_item_text(indexObjet))
-	listeInventaireDestination.add_item(listeInventaire.get_item_text(indexObjet))
-	listeInventaire.remove_item(indexObjet)
-	pass
+	transfererInventaire(indexObjet)

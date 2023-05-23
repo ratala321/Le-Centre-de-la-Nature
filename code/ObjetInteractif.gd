@@ -1,4 +1,4 @@
-class_name ObjetInteractif extends AnimatableBody3D
+class_name abstractObjetInteractif extends AnimatableBody3D
 
 ##reference au joueur instancie dans la scene
 @export var joueur : CharacterBody3D
