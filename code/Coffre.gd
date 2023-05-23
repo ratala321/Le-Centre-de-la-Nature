@@ -1,4 +1,4 @@
-class_name CoffreInteractif extends ObjetInteractif
+class_name CoffreInteractif extends abstractObjetInteractif
 ##note sur l'implementation
 ##On doit ajouter un area2D (AireInteractionCoffre) et un AnimationPlayer (AnimationPlayerCoffre)
 
@@ -18,4 +18,5 @@ func interaction():
 	print("YOUPI coffre interaction")
 	$InventaireCoffre.montrerInterface()
 	$InventaireCoffre.ajouterReferenceInventaireDestination(inventaireJoueur)
-	joueur.afficherInventaireJoueurEntreposage(inventaireCoffre)
+	inventaireJoueur.montrerInterface()
+	inventaireJoueur.ajouterReferenceInventaireDestination(inventaireCoffre)

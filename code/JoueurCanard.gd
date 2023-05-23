@@ -448,13 +448,6 @@ func emettreSignalInteraction() -> void:
 	emit_signal("interaction_joueur_")
 
 
-##permet d'afficher l'inventaire du joueur lors de l'entreposage d'objets
-func afficherInventaireJoueurEntreposage(inventaireDestination) -> void:
-	print("afficher inventaire joueur sans condition")
-	$InventaireJoueur.montrerInterface()
-	$InventaireJoueur.ajouterReferenceInventaireDestination(inventaireDestination)
-
-
 ##permet d'afficher l'inventaire du joueur conditionnellement
 func afficherInventaireJoueur() -> void:
 	if Input.is_action_just_pressed("inventaire_joueur"):

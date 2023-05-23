@@ -27,7 +27,17 @@ func ajouterReferenceInventaireDestination(referenceInventaireDestination):
 	inventaireDestination = referenceInventaireDestination
 	pass
 
-#METHODE ABSTRAITE pour que la selection d'un objet effectue les actions voulues.
-#Par exemple, lors de la selection d'un objet dans un coffre,
-#transferer cet objet vers l'inventaire.
-#func selectionnerObjet(indexObjet, positionClic, indexBouttonSouris) -> void:
+##permet d'effectuer le transfert d'un objet de l'inventaire joueur
+##vers l'inventaire de destination
+func transfererInventaire(indexObjet : int) -> void:
+	var listeInventaireDestination : ItemList = inventaireDestination.get_node("ItemList")
+	print("CLIC! dans " + self.name)
+	print(listeInventaire.get_item_text(indexObjet))
+	listeInventaireDestination.add_item(listeInventaire.get_item_text(indexObjet))
+	listeInventaire.remove_item(indexObjet)
+
+
+#-------------------------------------------------------------------------------------------
+#Methode abstraire selectionnerObjet() etant connecte au signal item_clicked de ItemList
+#permettant d'effectuer une ou des actions lorsqu'un objet dans l'inventaire est selectionne
+#-------------------------------------------------------------------------------------------
