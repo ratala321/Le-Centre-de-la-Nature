@@ -15,16 +15,6 @@ func selectionnerObjet(indexObjet, positionClic, indexBouttonSouris) -> void:
 			print(metadata.getDurabiliteOutils())
 			metadata.setDurabiliteOutils(metadata.getDurabiliteOutils() - 5)
 			get_parent().add_child(metadata)
-		elif typeof(metadata) == TYPE_DICTIONARY:
-			print(metadata.get("durabilite"))
-			var durabilite = metadata.get("durabilite")
-			metadata.clear()
-			durabilite = durabilite - 2
-			print(durabilite)
-			metadata = {
-				"durabilite" : durabilite
-				}
-			listeInventaire.set_item_metadata(indexObjet, metadata)
 
 
 ##Permet d'evaluer si les conditions sont remplies pour qu'un objet soit
