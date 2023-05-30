@@ -144,6 +144,8 @@ signal interaction_joueur_
 
 ##permet au joueur de bouger si la valeur est vraie
 var permissionMouvement : bool = true : set = setPermissionMouvement, get = getPermissionMouvement
+##vrai lorsque le joueur a un objet dans ses mains
+var objetDansMains
 ##temporaire pour les connexions
 var stfu
 

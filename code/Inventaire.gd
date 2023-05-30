@@ -1,6 +1,7 @@
 class_name abstractInventaire extends Control
 
 @onready var listeInventaire : ItemList = get_node("ItemList")
+##reference au node etant proprietaire de l'inventaire
 @onready var proprioInventaire = get_parent()
 @onready var nomFichierSauvegarde : String = proprioInventaire.name
 @onready var EMPLACEMENT_FICHIER_SAUVEGARDE : String = "user://" + nomFichierSauvegarde + ".txt"
@@ -105,6 +106,6 @@ func getListeContenuInventaire():
 
 
 #-------------------------------------------------------------------------------------------
-#Methode abstraire selectionnerObjet() etant connecte au signal item_clicked de ItemList
+#Methode abstraite selectionnerObjet() etant connecte au signal item_clicked de ItemList
 #Permettant d'effectuer une ou des actions lorsqu'un objet dans l'inventaire est selectionne
 #-------------------------------------------------------------------------------------------

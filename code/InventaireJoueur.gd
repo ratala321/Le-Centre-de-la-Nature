@@ -11,10 +11,8 @@ func selectionnerObjet(indexObjet, positionClic, indexBouttonSouris) -> void:
 		transfererInventaire(indexObjet)
 	else:
 		var metadata = listeInventaire.get_item_metadata(indexObjet)
-		if typeof(metadata) == TYPE_OBJECT:
-			print(metadata.getDurabiliteOutils())
-			metadata.setDurabiliteOutils(metadata.getDurabiliteOutils() - 5)
-			get_parent().add_child(metadata)
+		if metadata.has_method("effectuerProcedureSelection"):
+			metadata.effectuerProcedureSelection()
 
 
 ##Permet d'evaluer si les conditions sont remplies pour qu'un objet soit

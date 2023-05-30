@@ -1,39 +1,47 @@
 class_name abstractObjetInventaire extends Node3D
 
-var numeroIdentificationOutils : int
-var nomOutils : String : set = setNomOutils, get = getNomOutils
-var durabiliteOutils : int = 100
+var numeroIdentificationObjetInventaire : int : set = setNumeroIdentification, get = getNumeroIdentification
+var nomObjetInventaire : String : set = setNomObjetInventaire, get = getNomObjetInventaire
+var enCoursUtilisation : bool = false : set = setEnCoursUtilisation, get = getEnCoursUtilisation
+#exemple outils, nourriture, sorts, etc.
+var typeObjetInventaire : String
 
 
-func _init(numeroIdentification : int, nom : String, durabilite : int = 100):
-	numeroIdentificationOutils = numeroIdentification
-	nomOutils = nom
-	durabiliteOutils = durabilite
+func _init(numeroIdentification : int, nom : String, type : String):
+	numeroIdentificationObjetInventaire = numeroIdentification
+	nomObjetInventaire = nom
+	typeObjetInventaire = type
 
 
 #---------------------------
 #Accesseurs et Modificateurs
 #---------------------------
 
-func setNomOutils(nom : String) -> void:
-	nomOutils = nom
+func setNomObjetInventaire(nom : String) -> void:
+	nomObjetInventaire = nom
 
 
-func getNomOutils() -> String:
-	return nomOutils
+func getNomObjetInventaire() -> String:
+	return nomObjetInventaire
 	
 	
 func setNumeroIdentification(numeroIdentification : int) -> void:
-	numeroIdentificationOutils = numeroIdentification
+	numeroIdentificationObjetInventaire = numeroIdentification
 
 
 func getNumeroIdentification() -> int:
-	return numeroIdentificationOutils
+	return numeroIdentificationObjetInventaire
 
 
-func setDurabiliteOutils(durabilite) -> void:
-	durabiliteOutils = durabilite
+func setEnCoursUtilisation(etatUtilisation) -> void:
+	enCoursUtilisation = etatUtilisation
 
 
-func getDurabiliteOutils() -> int:
-	return durabiliteOutils
+func getEnCoursUtilisation() -> bool:
+	return enCoursUtilisation
+
+
+#-------------------------------------------------------------------------------------------
+#Methode abstraite effectuerProcedureSelection permettant d'effectuer une suite
+#d'instructions lorsqu'un objet est selectionne dans l'inventaire
+#-------------------------------------------------------------------------------------------
