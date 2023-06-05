@@ -73,7 +73,7 @@ func chargerContenuInventaire() -> void:
 
 ##Permet de sauvegarder le contenu d'un inventaire
 func sauvegarderContenuInventaire() -> void:
-	var donneesSauvegardees = creerDonneesSauvegardees()
+	var donneesSauvegardees : Dictionary = creerDonneesSauvegardees()
 	var fichierDeSauvegarde = FileAccess.open(EMPLACEMENT_FICHIER_SAUVEGARDE, FileAccess.WRITE)
 
 	var jsonSauvegarde = JSON.stringify(donneesSauvegardees)
@@ -94,15 +94,23 @@ func creerDonneesSauvegardees() -> Dictionary:
 
 ##Permet d'obtenir la liste d'objet contenu dans un inventaire
 func getListeContenuInventaire():
-	var longueurListe =  listeInventaire.item_count
+	var longueurListe : int =  listeInventaire.item_count
+
+	var listeContenu : Array
+	var nomObjet : String
+	var metadataObjet : Variant
 	var i = 0
 
-		#copier chaque objet de la liste et placer la copie dans une liste
+	#copier chaque objet de la liste de l'inventaire et placer la copie dans une nouvelle liste
 	while i < longueurListe:
+		nomObjet = listeInventaire.get_item_text(i)
+		metadataObjet = listeInventaire.get_item_metadata(i)
+		listeContenu.push_back(nomObjet)
+		listeContenu.push_back(metadataObjet)
 		i += 1
 	
 	#return la liste formee dans la boucle while
-	pass
+	return listeContenu
 
 
 #-------------------------------------------------------------------------------------------
