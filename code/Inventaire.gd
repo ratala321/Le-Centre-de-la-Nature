@@ -12,8 +12,13 @@ var inventaireDestination
 const nomNodeJoueur : String = "JoueurCanard"
 
 func _ready():
-	set_process_mode(PROCESS_MODE_WHEN_PAUSED)
 	chargerContenuInventaire()
+	set_process_mode(PROCESS_MODE_WHEN_PAUSED)
+
+
+func _notification(notif):
+	if notif == Node.NOTIFICATION_WM_CLOSE_REQUEST:
+		sauvegarderContenuInventaire()
 
 
 ##Permet de montrer l'interface	
@@ -68,6 +73,38 @@ func copierMetadataObjetInventaireDestination(listeInventaireDestination, indexO
 ##ou de creer son contenu dans le cas contraire
 func chargerContenuInventaire() -> void:
 	#Ajouter chacun des objets dans la listeContenu dans le ItemList.
+	if FileAccess.file_exists(EMPLACEMENT_FICHIER_SAUVEGARDE):
+		var fichierDeSauvegarde = FileAccess.open(EMPLACEMENT_FICHIER_SAUVEGARDE, FileAccess.READ)
+		var donneesSauvegardees
+
+		#lecture du fichier de sauvegarde
+		while fichierDeSauvegarde.get_position() < fichierDeSauvegarde.get_length():
+			donneesSauvegardees = JSON.parse_string(fichierDeSauvegarde.get_line())
+
+		fichierDeSauvegarde.close()
+
+		#distribution des objets dans l'inventaire
+		distribuerObjetsSauvegardes(donneesSauvegardees)
+	pass
+
+
+##Permet de distribuer les objets sauvegarder dans l'inventaire
+func distribuerObjetsSauvegardes(donneesSauvegardees) -> void:
+	var listeObjetsSauvegardes : Array = donneesSauvegardees.get("listeContenu")
+	var i : int = 0
+	var indexListeInventaire : int = 0
+	var nomObjet : String
+	var metadataObjet : Variant
+
+	while i < listeObjetsSauvegardes.size():
+		nomObjet = listeObjetsSauvegardes[i]
+		metadataObjet = listeObjetsSauvegardes[i+1]
+
+		listeInventaire.add_item(nomObjet)
+		listeInventaire.set_item_metadata(indexListeInventaire, metadataObjet)
+
+		indexListeInventaire += 1
+		i += 2
 	pass
 
 
@@ -99,7 +136,7 @@ func getListeContenuInventaire():
 	var listeContenu : Array
 	var nomObjet : String
 	var metadataObjet : Variant
-	var i = 0
+	var i : int = 0
 
 	#copier chaque objet de la liste de l'inventaire et placer la copie dans une nouvelle liste
 	while i < longueurListe:
