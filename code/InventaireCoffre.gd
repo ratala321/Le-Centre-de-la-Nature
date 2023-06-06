@@ -7,6 +7,7 @@ func _ready():
 	var epee = epeeClasse.instantiate()
 	listeInventaire.add_item("epee")
 	listeInventaire.set_item_metadata(listeInventaire.get_item_count()-1, epee)
+	#chargerContenuInventaire()
 	set_process_mode(PROCESS_MODE_WHEN_PAUSED)
 
 

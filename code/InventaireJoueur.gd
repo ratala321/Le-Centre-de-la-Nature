@@ -2,6 +2,7 @@ class_name InventaireJoueur extends abstractInventaire
 
 func _ready():
 	listeInventaire.connect("item_clicked", selectionnerObjet)
+	#chargerContenuInventaire()
 	set_process_mode(PROCESS_MODE_WHEN_PAUSED)
 
 
@@ -11,7 +12,7 @@ func selectionnerObjet(indexObjet, positionClic, indexBouttonSouris) -> void:
 		transfererInventaire(indexObjet)
 	else:
 		var metadata = listeInventaire.get_item_metadata(indexObjet)
-		if metadata.has_method("effectuerProcedureSelection"):
+		if metadata != null and metadata.has_method("effectuerProcedureSelection"):
 			metadata.effectuerProcedureSelection()
 
 

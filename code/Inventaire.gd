@@ -11,8 +11,8 @@ var inventaireDestination
 
 const nomNodeJoueur : String = "JoueurCanard"
 
+
 func _ready():
-	chargerContenuInventaire()
 	set_process_mode(PROCESS_MODE_WHEN_PAUSED)
 
 
@@ -71,8 +71,11 @@ func copierMetadataObjetInventaireDestination(listeInventaireDestination, indexO
 
 ##Permet de charger le contenu sauvegarde de l'inventaire
 ##ou de creer son contenu dans le cas contraire
-func chargerContenuInventaire() -> void:
+##NOTES : DOIT ETRE APPELE DANS LES CLASSES D'INVENTAIRE ENFANTS
+func chargerContenuInventaire():
 	#Ajouter chacun des objets dans la listeContenu dans le ItemList.
+	print(EMPLACEMENT_FICHIER_SAUVEGARDE)
+	print(FileAccess.file_exists(EMPLACEMENT_FICHIER_SAUVEGARDE))
 	if FileAccess.file_exists(EMPLACEMENT_FICHIER_SAUVEGARDE):
 		var fichierDeSauvegarde = FileAccess.open(EMPLACEMENT_FICHIER_SAUVEGARDE, FileAccess.READ)
 		var donneesSauvegardees
