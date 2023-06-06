@@ -1,7 +1,12 @@
-extends abstractObjetInventaire
+class_name EpeeJoueur extends abstractOutils
 
 const numeroIdentificationEpee : int = 0
-const nomEpee = "epee"
+const nomEpee : = "epee"
 
-func _init():
-	super(numeroIdentificationEpee, nomEpee)
+func _init(durabilite : int = 100):
+	super(numeroIdentificationEpee, nomEpee, durabilite) 
+
+
+##
+func effectuerProcedureSelection() -> void:
+	pass

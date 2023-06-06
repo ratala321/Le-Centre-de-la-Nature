@@ -1,25 +1,47 @@
 class_name abstractObjetInventaire extends Node3D
 
-var numeroIdentificationOutils : int
-var nomOutils : String : set = setNomOutils, get = getNomOutils
+var numeroIdentificationObjetInventaire : int : set = setNumeroIdentification, get = getNumeroIdentification
+var nomObjetInventaire : String : set = setNomObjetInventaire, get = getNomObjetInventaire
+var enCoursUtilisation : bool = false : set = setEnCoursUtilisation, get = getEnCoursUtilisation
+#exemple outils, nourriture, sorts, etc.
+var typeObjetInventaire : String
 
 
-func _init(numeroIdentification : int, nom : String):
-	numeroIdentificationOutils = numeroIdentification
-	nomOutils = nom
+func _init(numeroIdentification : int, nom : String, type : String):
+	numeroIdentificationObjetInventaire = numeroIdentification
+	nomObjetInventaire = nom
+	typeObjetInventaire = type
 
 
-func setNomOutils(nom : String) -> void:
-	nomOutils = nom
+#---------------------------
+#Accesseurs et Modificateurs
+#---------------------------
+
+func setNomObjetInventaire(nom : String) -> void:
+	nomObjetInventaire = nom
 
 
-func getNomOutils() -> String:
-	return nomOutils
+func getNomObjetInventaire() -> String:
+	return nomObjetInventaire
 	
 	
 func setNumeroIdentification(numeroIdentification : int) -> void:
-	numeroIdentificationOutils = numeroIdentification
+	numeroIdentificationObjetInventaire = numeroIdentification
 
 
 func getNumeroIdentification() -> int:
-	return numeroIdentificationOutils
+	return numeroIdentificationObjetInventaire
+
+
+func setEnCoursUtilisation(etatUtilisation) -> void:
+	enCoursUtilisation = etatUtilisation
+
+
+func getEnCoursUtilisation() -> bool:
+	return enCoursUtilisation
+
+
+#-------------------------------------------------------------------------------------------
+#Methode abstraite effectuerProcedureSelection permettant d'effectuer une suite
+#d'instructions lorsqu'un objet est selectionne dans l'inventaire
+#-------------------------------------------------------------------------------------------
