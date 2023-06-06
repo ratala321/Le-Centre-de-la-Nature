@@ -2,7 +2,7 @@ class_name InventaireJoueur extends abstractInventaire
 
 func _ready():
 	listeInventaire.connect("item_clicked", selectionnerObjet)
-	#chargerContenuInventaire()
+	chargerContenuInventaire()
 	set_process_mode(PROCESS_MODE_WHEN_PAUSED)
 
 

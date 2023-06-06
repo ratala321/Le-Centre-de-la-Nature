@@ -80,6 +80,9 @@ func chargerContenuInventaire():
 		var fichierDeSauvegarde = FileAccess.open(EMPLACEMENT_FICHIER_SAUVEGARDE, FileAccess.READ)
 		var donneesSauvegardees
 
+		#vidage de l'inventaire par defaut
+		listeInventaire.clear()
+
 		#lecture du fichier de sauvegarde
 		while fichierDeSauvegarde.get_position() < fichierDeSauvegarde.get_length():
 			donneesSauvegardees = JSON.parse_string(fichierDeSauvegarde.get_line())
