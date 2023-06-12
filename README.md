@@ -1,7 +1,7 @@
 # Test 3D Godot
 
 ## Description du projet
-Il s'agit de ma première fois en 3D dans un engin de jeu. Le projet contient essentiellement un personnage doté d'une caméra 3D et des coffres interactifs.
+Il s'agit de ma première fois en 3D dans un engin de jeu.
 
 ---
 
