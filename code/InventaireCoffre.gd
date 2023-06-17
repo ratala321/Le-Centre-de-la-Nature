@@ -14,4 +14,4 @@ func _ready():
 ##permet d'effectuer le transfert d'un objet d'un coffre
 ##vers l'inventaire de destination
 func selectionnerObjet(indexObjet, positionClic, indexBouttonSouris) -> void:
-	transfererInventaire(indexObjet)
+	transfererObjetVersInventaireDestination(indexObjet)
