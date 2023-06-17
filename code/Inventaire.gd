@@ -18,7 +18,8 @@ func _ready():
 
 func _notification(notif):
 	if notif == Node.NOTIFICATION_WM_CLOSE_REQUEST:
-		sauvegarderContenuInventaire()
+		var contenuInventaire : Array = getContenuInventaire()
+		sauvegarderContenuInventaire(contenuInventaire)
 
 
 ##Permet de montrer l'interface	
@@ -36,33 +37,35 @@ func cacherInterface() -> void:
 
 
 ##Permet de creer une reference a l'inventaire dans lequel les objets seront transferes
-func ajouterReferenceInventaireDestination(referenceInventaireDestination):
+func ajouterReferenceInventaireDestination(referenceInventaireDestination) -> void:
 	inventaireDestination = referenceInventaireDestination
-	pass
 
 ##Permet d'effectuer le transfert d'un objet de l'inventaire courant
 ##vers l'inventaire de destination
-func transfererInventaire(indexObjet : int) -> void:
-	var listeInventaireDestination : ItemList = inventaireDestination.get_node("ItemList")
+func transfererObjetVersInventaireDestination(indexObjet : int) -> void:
+	var listeInventaireDestination : ItemList = inventaireDestination.listeInventaire
 	print("CLIC! dans " + self.name)
 	print(listeInventaire.get_item_text(indexObjet))
 
-	copierObjetInventaireDestination(listeInventaireDestination, indexObjet)
-	copierMetadataObjetInventaireDestination(listeInventaireDestination, indexObjet)
+	copierObjetInventaireVersDestination(listeInventaireDestination, indexObjet)
+	copierMetadataObjetInventaireVersDestination(listeInventaireDestination, indexObjet)
+	retirerObjetDansInventaire(indexObjet)
+
+
+func retirerObjetDansInventaire(indexObjet : int) -> void:
 	listeInventaire.remove_item(indexObjet)
 
 
-##Permet de copier l'objet en cours de transfert vers l'inventaire de destination
-func copierObjetInventaireDestination(listeInventaireDestination, indexObjet) -> void:
+
+func copierObjetInventaireVersDestination(listeInventaireDestination, indexObjet) -> void:
 	var nomObjet : String = listeInventaire.get_item_text(indexObjet)
 
 	listeInventaireDestination.add_item(nomObjet)
 
 
-##Permet de copier le metadata de l'objet en cours de transfert vers l'inventaire de destination
-func copierMetadataObjetInventaireDestination(listeInventaireDestination, indexObjet) -> void:
+##copie les meta donnees dans le dernier index de l'inventaire de destination
+func copierMetadataObjetInventaireVersDestination(listeInventaireDestination, indexObjet) -> void:
 	var metadataObjet : Variant = listeInventaire.get_item_metadata(indexObjet)
-	#index de l'objet dans l'inventaire de destination
 	var indexObjetDestination : int = listeInventaireDestination.get_item_count() - 1
 
 	listeInventaireDestination.set_item_metadata(indexObjetDestination, metadataObjet)
@@ -76,84 +79,105 @@ func chargerContenuInventaire():
 	#Ajouter chacun des objets dans la listeContenu dans le ItemList.
 	print(EMPLACEMENT_FICHIER_SAUVEGARDE)
 	print(FileAccess.file_exists(EMPLACEMENT_FICHIER_SAUVEGARDE))
-	if FileAccess.file_exists(EMPLACEMENT_FICHIER_SAUVEGARDE):
-		var fichierDeSauvegarde = FileAccess.open(EMPLACEMENT_FICHIER_SAUVEGARDE, FileAccess.READ)
-		var donneesSauvegardees
 
+	if fichierSauvegardeInventaireEstExistant():
 		#vidage de l'inventaire par defaut
 		listeInventaire.clear()
 
-		#lecture du fichier de sauvegarde
-		while fichierDeSauvegarde.get_position() < fichierDeSauvegarde.get_length():
-			donneesSauvegardees = JSON.parse_string(fichierDeSauvegarde.get_line())
-
-		fichierDeSauvegarde.close()
+		var donneesSauvegardees : Array = lireFichierSauvegardeInventaire()
 
 		#distribution des objets dans l'inventaire
 		distribuerObjetsSauvegardes(donneesSauvegardees)
-	pass
 
 
-##Permet de distribuer les objets sauvegarder dans l'inventaire
+func fichierSauvegardeInventaireEstExistant() -> bool:
+	return FileAccess.file_exists(EMPLACEMENT_FICHIER_SAUVEGARDE)
+
+
+func lireFichierSauvegardeInventaire() -> Array:
+		var lecteurfichierDeSauvegarde = FileAccess.open(EMPLACEMENT_FICHIER_SAUVEGARDE, FileAccess.READ)
+		var donneesSauvegardees : Array
+
+		#lecture du fichier de sauvegarde
+		while lectureDuFichierEstIncomplete(lecteurfichierDeSauvegarde):
+			donneesSauvegardees.push_back(lecteurfichierDeSauvegarde.get_var())
+			donneesSauvegardees.push_back(lecteurfichierDeSauvegarde.get_var(true))
+
+		lecteurfichierDeSauvegarde.close()
+
+		return donneesSauvegardees
+
+
+func lectureDuFichierEstIncomplete(lecteurfichierDeSauvegarde) -> bool:
+	return lecteurfichierDeSauvegarde.get_position() < lecteurfichierDeSauvegarde.get_length()
+
+
+
+##Permet de distribuer les objets sauvegardes dans l'inventaire
 func distribuerObjetsSauvegardes(donneesSauvegardees) -> void:
-	var listeObjetsSauvegardes : Array = donneesSauvegardees.get("listeContenu")
-	var i : int = 0
-	var indexListeInventaire : int = 0
 	var nomObjet : String
 	var metadataObjet : Variant
 
-	while i < listeObjetsSauvegardes.size():
-		nomObjet = listeObjetsSauvegardes[i]
-		metadataObjet = listeObjetsSauvegardes[i+1]
+	var i : int = 0
+	while distributionEstIncomplete(i, donneesSauvegardees):
+		nomObjet = donneesSauvegardees[i]
+		metadataObjet = donneesSauvegardees[i+1]
 
-		listeInventaire.add_item(nomObjet)
-		listeInventaire.set_item_metadata(indexListeInventaire, metadataObjet)
+		ajouterObjetDansInventaire(nomObjet, metadataObjet)
 
-		indexListeInventaire += 1
 		i += 2
-	pass
+
+
+func ajouterObjetDansInventaire(nomObjet : String, metadataObjet : Variant):
+		listeInventaire.add_item(nomObjet)
+		listeInventaire.set_item_metadata(-1, metadataObjet)
+
+
+func distributionEstIncomplete(nombreObjetsDistribues : int, listeObjetsSauvegardes : Array) -> bool:
+	return nombreObjetsDistribues < listeObjetsSauvegardes.size()
 
 
 ##Permet de sauvegarder le contenu d'un inventaire
-func sauvegarderContenuInventaire() -> void:
-	var donneesSauvegardees : Dictionary = creerDonneesSauvegardees()
+func sauvegarderContenuInventaire(contenuInventaire : Array) -> void:
 	var fichierDeSauvegarde = FileAccess.open(EMPLACEMENT_FICHIER_SAUVEGARDE, FileAccess.WRITE)
-
-	var jsonSauvegarde = JSON.stringify(donneesSauvegardees)
-
-	fichierDeSauvegarde.store_string(jsonSauvegarde)
-
-	fichierDeSauvegarde.close()
-	pass
-
-
-##Permet de creer les donnees qui seront sauvegardees
-func creerDonneesSauvegardees() -> Dictionary:
-	var donneesSauvegardees = {
-		"listeContenu": getListeContenuInventaire(),
-		}
-	return donneesSauvegardees
-
-
-##Permet d'obtenir la liste d'objet contenu dans un inventaire
-func getListeContenuInventaire():
-	var longueurListe : int =  listeInventaire.item_count
-
-	var listeContenu : Array
 	var nomObjet : String
 	var metadataObjet : Variant
-	var i : int = 0
 
-	#copier chaque objet de la liste de l'inventaire et placer la copie dans une nouvelle liste
-	while i < longueurListe:
+	var i : int = 0
+	while sauvegardeContenuInventaireEstIncomplete(i, contenuInventaire):
+		nomObjet = contenuInventaire[i]
+		metadataObjet = contenuInventaire[i+1]
+
+		fichierDeSauvegarde.store_var(nomObjet)
+		fichierDeSauvegarde.store_var(metadataObjet, true)
+		i += 2
+
+	fichierDeSauvegarde.close()
+
+func sauvegardeContenuInventaireEstIncomplete(nombreObjetsSauvegardes : int, contenuInventaire : Array):
+	return nombreObjetsSauvegardes < contenuInventaire.size()
+
+
+
+func getContenuInventaire() -> Array:
+	var nomObjet : String
+	var metadataObjet : Variant
+	var contenuInventaire : Array
+
+	var i : int = 0
+	while parcoursContenuListeInventaireEstIncomplet(i):
 		nomObjet = listeInventaire.get_item_text(i)
 		metadataObjet = listeInventaire.get_item_metadata(i)
-		listeContenu.push_back(nomObjet)
-		listeContenu.push_back(metadataObjet)
+
+		contenuInventaire.push_back(nomObjet)
+		contenuInventaire.push_back(metadataObjet)
+
 		i += 1
 	
-	#return la liste formee dans la boucle while
-	return listeContenu
+	return contenuInventaire
+
+func parcoursContenuListeInventaireEstIncomplet(nombreObjetsParcourus : int) -> bool:
+	return nombreObjetsParcourus < listeInventaire.item_count
 
 
 #-------------------------------------------------------------------------------------------

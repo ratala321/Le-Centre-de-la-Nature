@@ -9,7 +9,7 @@ func _ready():
 
 func selectionnerObjet(indexObjet, positionClic, indexBouttonSouris) -> void:
 	if inventaireDestination != null and inventaireDestination.visible:
-		transfererInventaire(indexObjet)
+		transfererObjetVersInventaireDestination(indexObjet)
 	else:
 		var metadata = listeInventaire.get_item_metadata(indexObjet)
 		if metadata != null and metadata.has_method("effectuerProcedureSelection"):

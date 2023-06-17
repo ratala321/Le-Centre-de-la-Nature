@@ -1,4 +1,4 @@
-class_name EpeeJoueur extends abstractOutils
+extends abstractOutils
 
 const numeroIdentificationEpee : int = 0
 const nomEpee : = "epee"
@@ -9,4 +9,5 @@ func _init(durabilite : int = 100):
 
 ##
 func effectuerProcedureSelection() -> void:
+	print("PROCEDURE EPEE")
 	pass
