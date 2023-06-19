@@ -10,7 +10,7 @@ class_name JoueurCanard
 ##contient la reference au node d'AnimationPlayer du joueur
 @onready var animationJoueur = get_node("KayKit_AnimatedCharacter_v13/AnimationPlayer")
 ##contient la reference au node d'AudioStreamPlayer du joueur
-@onready var audioStreamJoueur = get_node("AudioStreamPlayer")
+@onready var audioJoueur = get_node("AudioStreamPlayer")
 ##contient la reference au node d'AxeRotationCamera du joueur
 @onready var axeRotationCamera = get_node("AxeRotationCamera")
 ##contient la reference au Gestionnaire d'interface utilisateur
@@ -145,7 +145,7 @@ signal interaction_joueur_
 ##permet au joueur de bouger si la valeur est vraie
 var permissionMouvement : bool = true : set = setPermissionMouvement, get = getPermissionMouvement
 ##vrai lorsque le joueur a un objet dans ses mains
-var objetDansMains
+var objetDansMains : bool
 ##temporaire pour les connexions
 var stfu
 
@@ -158,7 +158,7 @@ func _physics_process(delta):
 	appliquerGravite(delta)
 	
 	if permissionMouvement:
-		mouvementJoueur(delta)
+		effectuerProcedureMouvementJoueur(delta)
 		afficherInventaireJoueur()
 
 	effectuerInteractionJoueur()
@@ -180,7 +180,7 @@ func appliquerGravite(delta) -> void:
 
 ##permet de jouer le role de la methode main pour l'appel de fonctions
 ##liees au mouvement du joueur
-func mouvementJoueur(delta):
+func effectuerProcedureMouvementJoueur(delta):
 	#vecteur de la direction du mouvement du joueur sans modifications
 	var vecteurDirectionJoueurBrut = Vector3.ZERO
 	#vecteur de la direction du mouvement destine a etre utilise pour le mouvement
@@ -188,40 +188,29 @@ func mouvementJoueur(delta):
 	#reinitialisation du vecteur lie a la direction du mouvement
 	var vitesseEsquiveJoueur = VITESSE_ESQUIVE_JOUEUR_INITIALE
 	
-	#saisie de l'entree du mouvement du joueur
-	vecteurDirectionJoueurBrut = saisirEntreeMouvement()
+	vecteurDirectionJoueurBrut = saisirEntreeDirectionJoueur()
 
-	vecteurDirectionJoueur = ajusterRotationDirectionJoueur(vecteurDirectionJoueurBrut)
-
-	#normalisation du mouvement diagonal
-	vecteurDirectionJoueur = normaliserMouvementDiagonal(vecteurDirectionJoueur)
-
-	#saisie l'entree de l'esquive du joueur
 	vitesseEsquiveJoueur = saisirEntreeEsquive()
 
-	#tourne le joueur face a la direction de son mouvement
-	appliquerRotationJoueur(vecteurDirectionJoueurBrut)
+	vecteurDirectionJoueur = effectuerProcedureAjustementDirectionJoueur(vecteurDirectionJoueurBrut)
 
-	#application des animations en fonction de la direction du mouvement
-	appliquerAnimationMouvement(vecteurDirectionJoueur)
-
-	#application du mouvement
-	appliquerMouvement(delta, vecteurDirectionJoueur, vitesseEsquiveJoueur)
+	effectuerProcedureAppplicationMouvement	(delta, vecteurDirectionJoueurBrut,
+	vecteurDirectionJoueur, vitesseEsquiveJoueur)
 
 
 ##permet de saisir l'entree du joueur pour le mouvement
-func saisirEntreeMouvement() -> Vector3:
+func saisirEntreeDirectionJoueur() -> Vector3:
 	var directionJoueur = Vector3.ZERO
 
-	directionJoueur = saisirEntreeMouvementHorizontal()
+	directionJoueur = saisirEntreeDirectionJoueurHorizontal()
 
-	directionJoueur.y = saisirEntreeMouvementVertical()
+	directionJoueur.y = saisirEntreeDirectionJoueurVertical()
 	
 	return directionJoueur
 
 
 ##permet de saisir l'entree du joueur pour le mouvement horizontal
-func saisirEntreeMouvementHorizontal() -> Vector3:
+func saisirEntreeDirectionJoueurHorizontal() -> Vector3:
 	var directionHorizontaleJoueur = Vector3.ZERO
 
 	#bloc de saisie d'input pour la direction du mouvement
@@ -239,7 +228,7 @@ func saisirEntreeMouvementHorizontal() -> Vector3:
 
 ##permet d'ajuster la rotation de la direction du joueur en fonction
 ##de l'endroit ou la camera fait face
-func ajusterRotationDirectionJoueur(directionJoueur) -> Vector3:
+func ajusterDirectionAvantEnFonctionCamera(directionJoueur) -> Vector3:
 	#contient la direction vers laquelle la camera pointe
 	var directionAvant : Vector3 = determinerDirectionAvantMouvement()
 
@@ -256,7 +245,7 @@ func determinerDirectionAvantMouvement() -> Vector3:
 ##
 ##[b]notes sur l'implementation[/b] : renvoie un int destine a etre place en
 ##y dans la vecteur de la direction du mouvement
-func saisirEntreeMouvementVertical() -> int:
+func saisirEntreeDirectionJoueurVertical() -> int:
 	var directionVerticaleJoueur : int = 0
 
 	#saisie de l'input correspondant au saut du joueur
@@ -266,14 +255,42 @@ func saisirEntreeMouvementVertical() -> int:
 	return directionVerticaleJoueur
 
 
-##permet de determiner si le joueur a saisie une touche pour le saut
-##
-##[b]notes sur l'implementation[/b] : lorsque le joueur saisie la touche de saut,
-##la valeur en y du vecteurDirectionJoueur n'est pas egale a 0
-func evaluerSaisieSautJoueur(vecteurDirectionJoueur : Vector3) -> bool:
-	
-	return vecteurDirectionJoueur.y != 0
+##permet de saisir l'entree du joueur pour l'esquive
+func saisirEntreeEsquive() -> int:
+	var vitesseEsquiveJoueur = VITESSE_ESQUIVE_JOUEUR_INITIALE
 
+	#saisie de l'input pour l'esquive
+	if Input.is_action_just_pressed("esquive") && chronometreEsquive.is_stopped():
+		#fonction reinitialisant le chronometre d'esquive et emettant le signal esquive
+		relancerChronoEsquive()
+		vitesseEsquiveJoueur = VITESSE_ESQUIVE_JOUEUR_FINALE
+		print("le joueur esquive")
+		#fonction affichant la ligne d'esquive se trouvant derriere le joueur
+		#afficherLigneEsquive()
+
+	return vitesseEsquiveJoueur
+
+
+func effectuerProcedureAjustementDirectionJoueur(vecteurDirectionJoueurBrut):
+	var vecteurDirectionJoueur = Vector3.ZERO
+
+	vecteurDirectionJoueur = ajusterDirectionAvantEnFonctionCamera(vecteurDirectionJoueurBrut)
+
+	vecteurDirectionJoueur = normaliserMouvementDiagonal(vecteurDirectionJoueur)
+
+	return vecteurDirectionJoueur
+
+
+func effectuerProcedureAppplicationMouvement(delta, vecteurDirectionJoueurBrut,
+vecteurDirectionJoueur, vitesseEsquiveJoueur):
+	#tourne le joueur face a la direction de son mouvement
+	appliquerRotationJoueur(vecteurDirectionJoueurBrut)
+
+	#application des animations en fonction de la direction du mouvement
+	appliquerAnimationMouvement(vecteurDirectionJoueur)
+
+	#application du mouvement
+	appliquerMouvement(delta, vecteurDirectionJoueur, vitesseEsquiveJoueur)
 
 
 ##permet d'effectuer la rotation du joueur en fonction de la direction du mouvement horizontal
@@ -284,9 +301,9 @@ func appliquerRotationJoueur(directionJoueur : Vector3) -> void:
 	#vecteur de la rotation de la camera avant que la rotation soit appliquee
 	var vecteurRotationInitialCamera
 
-	#initialisation de la valeur y de la direction joueur a 0 afin de pouvoir tourner en saut ou en tombant
+	#afin de pouvoir tourner en saut ou en tombant
 	directionJoueur.y = 0
-	#arondissement des valeurs x et z de la direction vers 1
+	#necessaire pour appliquer correctement la rotation
 	directionJoueur.x = int(round(directionJoueur.x))
 	directionJoueur.z = int(round(directionJoueur.z))
 
@@ -327,23 +344,50 @@ func determinerVecteurRotation(directionJoueur : Vector3) -> Vector3:
 		vecteurRotation.y += FACTEUR_ROTATION_DIAGONALE_ARRIERE_GAUCHE
 	
 	return vecteurRotation
-
-
-##permet de saisir l'entree du joueur pour l'esquive
-func saisirEntreeEsquive() -> int:
-	var vitesseEsquiveJoueur = VITESSE_ESQUIVE_JOUEUR_INITIALE
-
-	#saisie de l'input pour l'esquive
-	if Input.is_action_just_pressed("esquive") && chronometreEsquive.is_stopped():
-		#fonction reinitialisant le chronometre d'esquive et emettant le signal esquive
-		relancerChronoEsquive()
-		vitesseEsquiveJoueur = VITESSE_ESQUIVE_JOUEUR_FINALE
-		print("le joueur esquive")
-		#fonction affichant la ligne d'esquive se trouvant derriere le joueur
-		#afficherLigneEsquive()
-
-	return vitesseEsquiveJoueur
 		
+
+##permet d'appliquer les animations liees au mouvement
+func appliquerAnimationMouvement(vecteurDirectionJoueur : Vector3) -> void:
+	#application de l'animation de saut
+	if mouvementJoueurEstSaut(): 
+		animationJoueur.appliquerAnimation(ANIMATION_SAUT)
+		animationJoueur.ajusterVitesseAnimation(VITESSE_ANIMATION_SAUT)
+
+	#application de l'animation de marche
+	elif mouvementJoueurEstMarche(vecteurDirectionJoueur):
+		animationJoueur.ajusterVitesseAnimation(VITESSE_ANIMATION_INITIALE)
+		animationJoueur.appliquerAnimation(ANIMATION_MARCHE)
+
+	#application de l'animation lorsqu'il n'y a aucun mouvement
+	else:
+		animationJoueur.ajusterVitesseAnimation(VITESSE_ANIMATION_INITIALE)
+		animationJoueur.appliquerAnimation(ANIMATION_IDLE)
+
+func mouvementJoueurEstSaut() -> bool:
+	return !joueurEstAuSol() and animationJoueur.has_animation(ANIMATION_SAUT)
+
+
+func mouvementJoueurEstMarche(vecteurDirectionJoueur) -> bool:
+	return vecteurDirectionJoueur != Vector3.ZERO and animationJoueur.has_animation(ANIMATION_MARCHE)
+
+
+##permet d'appliquer le mouvement au personnage du joueur
+func appliquerMouvement(delta, directionJoueur, vitesseEsquiveJoueur) -> void:
+	#application du saut
+	if (joueurAvaitSaisiBouttonSaut(directionJoueur) and joueurEstAuSol()):
+		appliquerSaut(delta)
+
+	#application du mouvement horizontal sur l'axe x
+	velocity.x = directionJoueur.x * vitesseJoueur * delta * vitesseEsquiveJoueur
+	#application du mouvement horizontal sur l'axe z
+	velocity.z = directionJoueur.z * vitesseJoueur * delta * vitesseEsquiveJoueur
+
+	move_and_slide()
+
+
+func joueurAvaitSaisiBouttonSaut(vecteurDirectionJoueur : Vector3) -> bool:
+	return vecteurDirectionJoueur.y != 0
+
 
 ##permet de faire en sorte que le mouvement diagonal soit equivalent
 ##aux autres mouvements en terme de vitesse
@@ -355,45 +399,13 @@ func normaliserMouvementDiagonal(directionJoueur) -> Vector3:
 	return directionJoueur
 
 
-##permet d'appliquer le mouvement au personnage du joueur
-func appliquerMouvement(delta, directionJoueur, vitesseEsquiveJoueur) -> void:
-	#application du saut
-	if (evaluerSaisieSautJoueur(directionJoueur) and evaluerJoueurAuSol()):
-		appliquerSaut(delta)
-
-	#application du mouvement horizontal sur l'axe x
-	velocity.x = directionJoueur.x * vitesseJoueur * delta * vitesseEsquiveJoueur
-	#application du mouvement horizontal sur l'axe z
-	velocity.z = directionJoueur.z * vitesseJoueur * delta * vitesseEsquiveJoueur
-
-	move_and_slide()
-
-
 #permet d'appliquer le saut au personnage du joueur
 func appliquerSaut(delta) -> void:
 	#application du saut
 	velocity.y = IMPULSION_SAUT_JOUEUR * delta
 
 	#application de l'effet sonore associe au saut
-	audioStreamJoueur.appliquerSon(SON_SAUT)
-
-
-##permet d'appliquer les animations liees au mouvement
-func appliquerAnimationMouvement(vecteurDirectionJoueur : Vector3) -> void:
-	#application de l'animation de saut
-	if !evaluerJoueurAuSol() and animationJoueur.has_animation(ANIMATION_SAUT):
-		animationJoueur.appliquerAnimation(ANIMATION_SAUT)
-		animationJoueur.ajusterVitesseAnimation(VITESSE_ANIMATION_SAUT)
-
-	#application de l'animation de marche
-	elif vecteurDirectionJoueur != Vector3.ZERO and animationJoueur.has_animation(ANIMATION_MARCHE):
-		animationJoueur.ajusterVitesseAnimation(VITESSE_ANIMATION_INITIALE)
-		animationJoueur.appliquerAnimation(ANIMATION_MARCHE)
-
-	#application de l'animation lorsqu'il n'y a aucun mouvement
-	else:
-		animationJoueur.ajusterVitesseAnimation(VITESSE_ANIMATION_INITIALE)
-		animationJoueur.appliquerAnimation(ANIMATION_IDLE)
+	audioJoueur.appliquerSon(SON_SAUT)
 
 
 ##permet de deplacer le joueur vers un position donnee en parametre
@@ -414,7 +426,7 @@ func relancerChronoEsquive() -> void:
 	emit_signal("esquive_")
 
 ##permet d'evaluer si le joueur est au sol
-func evaluerJoueurAuSol() -> bool:
+func joueurEstAuSol() -> bool:
 	return raycastJoueurSol.is_colliding()
 
 
@@ -440,7 +452,7 @@ func arreterMouvement() -> void:
 ##emet le signal [signal interaction_joueur_] lorsque le joueur appuie sur la touche
 ##correspondant a l'action [b]interaction_joueur[/b]
 func effectuerInteractionJoueur() -> void:
-	if evaluerJoueurAuSol() and Input.is_action_just_pressed("interaction_joueur"):
+	if joueurEstAuSol() and Input.is_action_just_pressed("interaction_joueur"):
 		#application de l'animation liee a l'interaction du joueur
 		animationJoueur.ajusterVitesseAnimation(VITESSE_ANIMATION_INTERACTION)
 		animationJoueur.appliquerAnimation(ANIMATION_INTERACTION)
@@ -466,7 +478,7 @@ func demanderAfficherInventaireJoueur() -> bool:
 ##permet d'evaluer si le joueur peut ouvrir son inventaire par rapport a
 ##l'etat actuel du jeu
 func evaluerAfficherInventaireJoueur() -> bool:
-	return evaluerJoueurAuSol() and permissionMouvement
+	return joueurEstAuSol() and permissionMouvement
 
 
 ##permet d'evaluer si le joueur peut ouvrir son inventaire par rapport a
