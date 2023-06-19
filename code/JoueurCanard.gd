@@ -8,7 +8,7 @@ class_name JoueurCanard
 ##contient la reference au node de RayCast3D nommee RayEstAuSol du joueur
 @onready var raycastJoueurSol = get_node("RayEstAuSol")
 ##contient la reference au node d'AnimationPlayer du joueur
-@onready var animationPlayerJoueur = get_node("KayKit_AnimatedCharacter_v13/AnimationPlayer")
+@onready var animationJoueur = get_node("KayKit_AnimatedCharacter_v13/AnimationPlayer")
 ##contient la reference au node d'AudioStreamPlayer du joueur
 @onready var audioStreamJoueur = get_node("AudioStreamPlayer")
 ##contient la reference au node d'AxeRotationCamera du joueur
@@ -375,25 +375,25 @@ func appliquerSaut(delta) -> void:
 	velocity.y = IMPULSION_SAUT_JOUEUR * delta
 
 	#application de l'effet sonore associe au saut
-	appliquerSon(SON_SAUT)
+	audioStreamJoueur.appliquerSon(SON_SAUT)
 
 
 ##permet d'appliquer les animations liees au mouvement
 func appliquerAnimationMouvement(vecteurDirectionJoueur : Vector3) -> void:
 	#application de l'animation de saut
-	if !evaluerJoueurAuSol() and animationPlayerJoueur.has_animation(ANIMATION_SAUT):
-		appliquerAnimation(ANIMATION_SAUT)
-		ajusterVitesseAnimation(VITESSE_ANIMATION_SAUT)
+	if !evaluerJoueurAuSol() and animationJoueur.has_animation(ANIMATION_SAUT):
+		animationJoueur.appliquerAnimation(ANIMATION_SAUT)
+		animationJoueur.ajusterVitesseAnimation(VITESSE_ANIMATION_SAUT)
 
 	#application de l'animation de marche
-	elif vecteurDirectionJoueur != Vector3.ZERO and animationPlayerJoueur.has_animation(ANIMATION_MARCHE):
-		ajusterVitesseAnimation(VITESSE_ANIMATION_INITIALE)
-		appliquerAnimation(ANIMATION_MARCHE)
+	elif vecteurDirectionJoueur != Vector3.ZERO and animationJoueur.has_animation(ANIMATION_MARCHE):
+		animationJoueur.ajusterVitesseAnimation(VITESSE_ANIMATION_INITIALE)
+		animationJoueur.appliquerAnimation(ANIMATION_MARCHE)
 
 	#application de l'animation lorsqu'il n'y a aucun mouvement
 	else:
-		ajusterVitesseAnimation(VITESSE_ANIMATION_INITIALE)
-		appliquerAnimation(ANIMATION_IDLE)
+		animationJoueur.ajusterVitesseAnimation(VITESSE_ANIMATION_INITIALE)
+		animationJoueur.appliquerAnimation(ANIMATION_IDLE)
 
 
 ##permet de deplacer le joueur vers un position donnee en parametre
@@ -421,7 +421,7 @@ func evaluerJoueurAuSol() -> bool:
 ##relancement du mouvement lorsque des animations demandant l'arret du mouvement sont terminees
 func relancerMouvement() -> void:
 	setPermissionMouvement(true)
-	ajusterVitesseAnimation(VITESSE_ANIMATION_INITIALE)
+	animationJoueur.ajusterVitesseAnimation(VITESSE_ANIMATION_INITIALE)
 
 ##permet d'arreter le mouvement du joueur
 func arreterMouvement() -> void:
@@ -442,8 +442,8 @@ func arreterMouvement() -> void:
 func effectuerInteractionJoueur() -> void:
 	if evaluerJoueurAuSol() and Input.is_action_just_pressed("interaction_joueur"):
 		#application de l'animation liee a l'interaction du joueur
-		ajusterVitesseAnimation(VITESSE_ANIMATION_INTERACTION)
-		appliquerAnimation(ANIMATION_INTERACTION)
+		animationJoueur.ajusterVitesseAnimation(VITESSE_ANIMATION_INTERACTION)
+		animationJoueur.appliquerAnimation(ANIMATION_INTERACTION)
 
 ##emet le signal interaction_joueur_
 func emettreSignalInteraction() -> void:
@@ -478,54 +478,11 @@ func evaluerAfficherInventaireJeu() -> bool:
 #FIN INTERACTION PAR LE JOUEUR
 ##############################
 
-#######################
-#FONCTIONS LIEES AU SON
-#######################
-
-##permet de jouer un effet sonore specifie en parametre
-func appliquerSon(son) -> void:
-	audioStreamJoueur.stream = son
-	audioStreamJoueur.play()
-
-###########################
-#FIN FONCTIONS LIEES AU SON
-###########################
-
-##############################
-#FONCTIONS LIEES A L'ANIMATION
-##############################
-
-##permet d'appliquer une animation passee en parametre
-func appliquerAnimation(animation : String) -> void:
-	animationPlayerJoueur.play(animation)
-
-
-##permet d'ajuster la vitesse d'excution des animations liees au joueur
-func ajusterVitesseAnimation(vitesse) -> void:
-	animationPlayerJoueur.speed_scale = vitesse
-
-##################################
-#FIN FONCTIONS LIEES A L'ANIMATION
-##################################
-
-###################
-#ACCESSEURS GETTERS
-###################
 
 func getPermissionMouvement() -> bool:
 	return permissionMouvement
 
-#######################
-#FIN ACCESSEURS GETTERS
-#######################
-
-######################
-#MODIFICATEURS SETTERS
-######################
 
 func setPermissionMouvement(nouvellePermission : bool) -> void:
 	permissionMouvement = nouvellePermission
 
-##########################
-#FIN MODIFICATEURS SETTERS
-##########################
