@@ -4,9 +4,7 @@ const epeeClasse = preload("res://scenes/EpeeJoueur.tscn")
 
 func _ready():
 	listeInventaire.connect("item_clicked", selectionnerObjet)
-	var epee = epeeClasse.instantiate()
-	listeInventaire.add_item("epee")
-	listeInventaire.set_item_metadata(listeInventaire.get_item_count()-1, epee)
+	ajouterEpeePourTest()
 	chargerContenuInventaire()
 	set_process_mode(PROCESS_MODE_WHEN_PAUSED)
 
@@ -15,3 +13,9 @@ func _ready():
 ##vers l'inventaire de destination
 func selectionnerObjet(indexObjet, positionClic, indexBouttonSouris) -> void:
 	transfererObjetVersInventaireDestination(indexObjet)
+
+
+func ajouterEpeePourTest() -> void:
+	var epee = epeeClasse.instantiate()
+	listeInventaire.add_item("epee")
+	listeInventaire.set_item_metadata(listeInventaire.get_item_count()-1, epee)

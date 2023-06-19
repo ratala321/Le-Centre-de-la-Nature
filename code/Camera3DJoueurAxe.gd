@@ -47,14 +47,15 @@ func tournerCamera() -> void:
 	global_rotation_degrees.y = rotationHorizontaleCamera
 
 
-##permet d'actualiser la valeur de la rotation de la camera
 func actualiserValeurRotationCamera(directionMouvementSouris : Vector2) -> void:
 	#actualisation de la valeur de rotation de la camera
 	rotationVerticaleCamera += directionMouvementSouris.y
 	rotationVerticaleCamera = clampf(rotationVerticaleCamera,
 	ROTATION_VERTICALE_MAXIMALE_BAS, ROTATION_VERTICALE_MAXIMALE_HAUT)
-	#print("rotationVerticaleCamera = " + str(rotationVerticaleCamera))
+
 	rotationHorizontaleCamera -= directionMouvementSouris.x
+
+	#print("rotationVerticaleCamera = " + str(rotationVerticaleCamera))
 	#print("rotationHorizontaleCamera = " + str(rotationHorizontaleCamera))
 
 

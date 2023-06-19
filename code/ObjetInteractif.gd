@@ -23,9 +23,13 @@ func _ready():
 ##de proceder a l'interaction correspondant à l'objet
 func _lors_interaction_joueur() -> void:
 	#verifier que le joueur est dans l'aire d'interaction
-	if aireInteraction.overlaps_body(joueur):
+	if joueurEstDansAireInteraction():
 		print("interaction!")
 		objetInteractif.interaction()
+
+
+func joueurEstDansAireInteraction() -> bool:
+	return aireInteraction.overlaps_body(joueur)
 
 #------------------------------------------------------------------------------------------
 #Methode abstraite interaction() qui force les objets interactifs a definir une interaction
