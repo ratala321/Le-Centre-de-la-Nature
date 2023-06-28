@@ -9,3 +9,4 @@ data_*/
 mon_crash.*.json
 *.blend*
 *.swp
+importations/*
