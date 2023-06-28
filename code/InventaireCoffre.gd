@@ -2,6 +2,8 @@ class_name InventaireCoffre extends abstractInventaire
 
 const epeeClasse = preload("res://scenes/EpeeJoueur.tscn")
 
+@export var inventaireParDefaut : Dictionary
+
 func _ready():
 	listeInventaire.connect("item_clicked", selectionnerObjet)
 	ajouterEpeePourTest()
