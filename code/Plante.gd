@@ -17,15 +17,20 @@ var referenceSolFertile
 func avancerCroissance(intervalleTemps) -> void:
 	dureeCroissance = dureeCroissance - intervalleTemps
 
-	if croissanceEstFinie():
+	if croissanceEstFinie() and resteDesEtapesDeCroissance():
 		print("croissance " + self.name + " est finie")
 		get_node(etapesCroissance[etapeCroissanceActuelle]).hide()
 		etapeCroissanceActuelle += 1
 		get_node(etapesCroissance[etapeCroissanceActuelle]).show()
+		dureeCroissance = dureeCroissanceInitiale
 
 
 func croissanceEstFinie() -> bool:
-	return dureeCroissance == 0
+	return dureeCroissance <= 0
+
+
+func resteDesEtapesDeCroissance() -> bool:
+	return etapeCroissanceActuelle < etapesCroissance.size() - 1
 
 
 func couperPlante() -> void:
