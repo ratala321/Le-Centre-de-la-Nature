@@ -1,4 +1,5 @@
 extends AnimatableBody3D
+#implements ObjetInventaire
 
 @export var etapesCroissance : Array
 
@@ -34,4 +35,8 @@ func resteDesEtapesDeCroissance() -> bool:
 
 
 func couperPlante() -> void:
+	pass
+
+
+func effectuerProcedureSelection():
 	pass
