@@ -1,5 +1,7 @@
 class_name abstractInventaire extends Control
 
+@export var inventaireParDefaut : Array
+
 @onready var listeInventaire : ItemList = get_node("ItemList")
 ##reference au node etant proprietaire de l'inventaire
 @onready var proprioInventaire = get_parent()
@@ -79,15 +81,17 @@ func chargerContenuInventaire():
 	#Ajouter chacun des objets dans la listeContenu dans le ItemList.
 	print(EMPLACEMENT_FICHIER_SAUVEGARDE)
 	print(FileAccess.file_exists(EMPLACEMENT_FICHIER_SAUVEGARDE))
+	#retrait d'objets laisses par megarde
+	listeInventaire.clear()
 
 	if fichierSauvegardeInventaireEstExistant():
-		#vidage de l'inventaire par defaut
-		listeInventaire.clear()
 
 		var donneesSauvegardees : Array = lireFichierSauvegardeInventaire()
 
 		#distribution des objets dans l'inventaire
 		distribuerObjetsSauvegardes(donneesSauvegardees)
+	else:
+		chargerInventaireParDefaut()
 
 
 func fichierSauvegardeInventaireEstExistant() -> bool:
@@ -112,7 +116,6 @@ func lectureDuFichierEstIncomplete(lecteurfichierDeSauvegarde) -> bool:
 	return lecteurfichierDeSauvegarde.get_position() < lecteurfichierDeSauvegarde.get_length()
 
 
-
 ##Permet de distribuer les objets sauvegardes dans l'inventaire
 func distribuerObjetsSauvegardes(donneesSauvegardees) -> void:
 	var nomObjet : String
@@ -128,13 +131,29 @@ func distribuerObjetsSauvegardes(donneesSauvegardees) -> void:
 		i += 2
 
 
+func distributionEstIncomplete(nombreObjetsDistribues : int, listeObjetsSauvegardes : Array) -> bool:
+	return nombreObjetsDistribues < listeObjetsSauvegardes.size()
+
+
+## L'inventaire par defaut contient le nom et les scenes des objets.
+## Les objets doivent etre instancies avant d'etre mis dans l'inventaire du coffre.
+func chargerInventaireParDefaut() -> void:
+	var nomObjet : String
+	var sceneObjet : PackedScene
+	var instanceObjet : Variant
+
+	var i : int = 0
+	while i < inventaireParDefaut.size():
+		nomObjet = inventaireParDefaut[i]
+		sceneObjet = inventaireParDefaut[i + 1]
+		instanceObjet = sceneObjet.instantiate()
+		ajouterObjetDansInventaire(nomObjet, instanceObjet)
+		i += 2
+
+
 func ajouterObjetDansInventaire(nomObjet : String, metadataObjet : Variant):
 		listeInventaire.add_item(nomObjet)
 		listeInventaire.set_item_metadata(-1, metadataObjet)
-
-
-func distributionEstIncomplete(nombreObjetsDistribues : int, listeObjetsSauvegardes : Array) -> bool:
-	return nombreObjetsDistribues < listeObjetsSauvegardes.size()
 
 
 ##Permet de sauvegarder le contenu d'un inventaire
