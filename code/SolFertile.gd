@@ -1,10 +1,15 @@
-extends Node3D
-
-const tempsAvancement : int = 1
+extends abstractObjetInteractif
 
 @export var plantesContenues : Array
 
+const tempsAvancement : int = 1
+
+func _init():
+	super(self)
+
+
 func _ready():
+	super._ready()
 	get_node("Timer").connect("timeout", avancerCroissancePlantes, 0)
 
 
@@ -17,3 +22,7 @@ func avancerCroissancePlantes():
 
 func ajouterPlanteAuSol(plante) -> void:
 	plantesContenues.push_back(plante)
+
+
+func interaction():
+	print("interaction sol fertile")

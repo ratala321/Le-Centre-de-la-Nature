@@ -4,7 +4,7 @@ class_name abstractObjetInteractif extends AnimatableBody3D
 @export var joueur : CharacterBody3D
 
 ##reference l'aire d'interaction instanciee dans la scene
-@onready var aireInteraction : Area3D = get_node("AireInteractionCoffre")
+@onready var aireInteraction : Area3D = get_node("AireInteraction")
 
 ##reference a la classe enfant
 var objetInteractif
