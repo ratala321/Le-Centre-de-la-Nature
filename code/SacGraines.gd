@@ -1,24 +1,27 @@
 extends RigidBody3D
 
-const espaceFertileGroupe : String = "EspacePlante"
+const espacePlanteGroupe : String = "EspacePlante"
 
+#load ajouté pour des tests temporaires
+var graineContenue : PackedScene = load("res://scenes/plantesScenes/BleScene.tscn")
 var aireDetectionSolFertile : Area3D
 
 func _ready():
-	aireDetectionSolFertile = $AireDetectetionSolFertile
-	$IntervalleReperageEspacesFertiles.connect("timeout", detecterEspaceFertile)
+	aireDetectionSolFertile = $AireDetectionEspacePlante
+	$IntervalleDetectionEspacesPlantes.connect("timeout", detecterEspacePlante)
 
 
-func detecterEspaceFertile():
+func detecterEspacePlante():
 	var airesEnCollision = aireDetectionSolFertile.get_overlapping_areas()
 	
 	var i : int = 0
-	var nEstPasDetecte = true
-	while detectionEstIncomplete(i, airesEnCollision.size(), nEstPasDetecte):
+	var espaceNEstPasDetecte = true
+	while detectionEstIncomplete(i, airesEnCollision.size(), espaceNEstPasDetecte):
 		if(estEspaceFertile(airesEnCollision[i])):
-			nEstPasDetecte = false
-			print("le sac peut planter")
+			espaceNEstPasDetecte = false
+			print("espace fertile detecte par le sac")
 			#procedure aireEnCollision[i].procedure
+			airesEnCollision[i].previsualiserPlante(graineContenue)
 		i += 1
 
 
@@ -28,4 +31,4 @@ func detectionEstIncomplete(compteurBoucle : int,
 
 
 func estEspaceFertile(aireEnCollision) -> bool:
-	return aireEnCollision.is_in_group(espaceFertileGroupe)
+	return aireEnCollision.is_in_group(espacePlanteGroupe)

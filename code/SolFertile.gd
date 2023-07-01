@@ -10,7 +10,7 @@ func _init():
 
 func _ready():
 	super._ready()
-	get_node("Timer").connect("timeout", avancerCroissancePlantes, 0)
+	$IntervalleAvancementCroissance.connect("timeout", avancerCroissancePlantes, 0)
 
 
 func avancerCroissancePlantes():
