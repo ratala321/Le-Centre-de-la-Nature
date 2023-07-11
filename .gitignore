@@ -11,3 +11,4 @@ mon_crash.*.json
 *.swp
 importations/*
 sons/*
+addons/*
