@@ -12,3 +12,4 @@ mon_crash.*.json
 importations/*
 sons/*
 addons/*
+.gut_editor_config.json
