@@ -1,7 +1,8 @@
-[gd_scene load_steps=27 format=3 uid="uid://cw0mho7tmkpw8"]
+[gd_scene load_steps=29 format=3 uid="uid://cw0mho7tmkpw8"]
 
 [ext_resource type="Script" path="res://code/Plante.gd" id="1_uoe0j"]
 [ext_resource type="Texture2D" uid="uid://bbkvo17uq35ng" path="res://importations/SourceFiles/Textures/PolygonFarm_Texture_01_A.png" id="3_mduor"]
+[ext_resource type="Shader" path="res://shaders/PrevisualisationPlante.gdshader" id="3_uu22l"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cu0ov"]
 
@@ -39,6 +40,10 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_1y21r")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lwamj"]
+render_priority = 0
+shader = ExtResource("3_uu22l")
 
 [sub_resource type="Animation" id="Animation_evji2"]
 resource_name = "Take 001"
@@ -211,6 +216,21 @@ etapesCroissance = [NodePath("Initial"), NodePath("BleEtape2"), NodePath("BleEta
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_cu0ov")
+
+[node name="Previsualisation" type="Node3D" parent="."]
+visible = false
+
+[node name="RootNode" type="Node3D" parent="Previsualisation"]
+
+[node name="Texture" type="MeshInstance3D" parent="Previsualisation/RootNode"]
+mesh = SubResource("ArrayMesh_qey7m")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_lwamj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Previsualisation"]
+libraries = {
+"": SubResource("AnimationLibrary_pmffb")
+}
 
 [node name="Initial" type="Node3D" parent="."]
 
