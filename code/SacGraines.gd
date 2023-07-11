@@ -20,7 +20,7 @@ func detecterEspacePlante():
 		if(estEspaceFertile(airesEnCollision[i])):
 			espaceNEstPasDetecte = false
 			print("espace fertile detecte par le sac")
-			#procedure aireEnCollision[i].procedure
+			#EspacePlante.gd
 			airesEnCollision[i].previsualiserPlante(graineContenue)
 		i += 1
 

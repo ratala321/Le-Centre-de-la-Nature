@@ -10,3 +10,4 @@ mon_crash.*.json
 *.blend*
 *.swp
 importations/*
+sons/*

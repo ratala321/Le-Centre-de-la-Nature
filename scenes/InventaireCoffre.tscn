@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd1s1kvlq40lm"]
+
+[ext_resource type="Script" path="res://code/InventaireCoffre.gd" id="1_pugw3"]
+
+[node name="InventaireCoffre" type="Control" groups=["InterfaceEnJeu"]]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_pugw3")
+
+[node name="Camera2DInventaireJoueur" type="Camera2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -598.0
+offset_top = -338.0
+offset_bottom = 342.0
+color = Color(0.584314, 0.423529, 0.458824, 0.639216)
+
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = -540.0
+offset_top = -306.0
+offset_right = -334.0
+offset_bottom = -245.0
+text = "Inventaire Coffre"
+
+[node name="ItemList" type="ItemList" parent="." groups=["InterfaceEnJeu"]]
+layout_mode = 0
+offset_left = -452.0
+offset_top = -181.0
+offset_right = -223.0
+offset_bottom = 86.0
+item_count = 2
+max_columns = 2
+item_0/text = "Outils"
+item_1/text = "Nourriture"
