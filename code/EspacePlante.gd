@@ -14,10 +14,10 @@ func previsualiserPlante(planteScene : PackedScene):
 	if not contientUnePrevisualisation:
 		contientUnePrevisualisation = true
 		var plante = planteScene.instantiate()
-		effectuerProcedurePrevisualisationPlante(plante)
+		_effectuerProcedurePrevisualisationPlante(plante)
 
 
-func effectuerProcedurePrevisualisationPlante(plante : Node):
+func _effectuerProcedurePrevisualisationPlante(plante : Node):
 	previsualisationEnCours = plante
 	_ajusterEmplacementPrevisualisation(plante)
 	_afficherNodePrevisualisation(plante)
