@@ -9,19 +9,19 @@ func _ready():
 ##fonction appelee lors du signal item_clicked
 func selectionnerObjet(indexObjet, positionClic, indexBouttonSouris) -> void:
 
-	if joueurTenteEffectuerTransfertObjet():
+	if _joueurTenteEffectuerTransfertObjet():
 		transfererObjetVersInventaireDestination(indexObjet)
 	else:
 		var referenceObjet : Variant = listeInventaire.get_item_metadata(indexObjet)
 
-		if objetPossedeUneProcedureDeSelection(referenceObjet):
+		if _objetPossedeUneProcedureDeSelection(referenceObjet):
 			referenceObjet.effectuerProcedureSelection()
 
 
-func joueurTenteEffectuerTransfertObjet() -> bool:
+func _joueurTenteEffectuerTransfertObjet() -> bool:
 	return inventaireDestination != null and inventaireDestination.visible
 
 
 
-func objetPossedeUneProcedureDeSelection(referenceObjet) -> bool:
+func _objetPossedeUneProcedureDeSelection(referenceObjet) -> bool:
 	return referenceObjet != null and referenceObjet.has_method("effectuerProcedureSelection")

@@ -24,12 +24,12 @@ func _ready():
 ##de proceder a l'interaction correspondant à l'objet
 func _lors_interaction_joueur() -> void:
 	#verifier que le joueur est dans l'aire d'interaction
-	if joueurEstDansAireInteraction():
+	if _joueurEstDansAireInteraction():
 		print("interaction!")
 		objetInteractif.interaction()
 
 
-func joueurEstDansAireInteraction() -> bool:
+func _joueurEstDansAireInteraction() -> bool:
 	return aireInteraction.overlaps_body(joueur)
 
 #------------------------------------------------------------------------------------------

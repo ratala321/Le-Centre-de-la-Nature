@@ -34,20 +34,20 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		var directionMouvementSouris = event.relative * sensibiliteCamera
 
-		actualiserValeurRotationCamera(directionMouvementSouris)
+		_actualiserValeurRotationCamera(directionMouvementSouris)
 
-		tournerCamera()
+		_tournerCamera()
 
 
 ##permet de tourner la camera en fonction de la direction du mouvement
 ##de la souris par le joueur
-func tournerCamera() -> void:
+func _tournerCamera() -> void:
 	#application de la rotation a la camera
 	global_rotation_degrees.x = rotationVerticaleCamera
 	global_rotation_degrees.y = rotationHorizontaleCamera
 
 
-func actualiserValeurRotationCamera(directionMouvementSouris : Vector2) -> void:
+func _actualiserValeurRotationCamera(directionMouvementSouris : Vector2) -> void:
 	#actualisation de la valeur de rotation de la camera
 	rotationVerticaleCamera += directionMouvementSouris.y
 	rotationVerticaleCamera = clampf(rotationVerticaleCamera,

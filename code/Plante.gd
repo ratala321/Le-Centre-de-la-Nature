@@ -1,5 +1,4 @@
 extends AnimatableBody3D
-#implements ObjetInventaire
 
 @export var etapesCroissance : Array
 
@@ -18,7 +17,7 @@ var referenceSolFertile
 func avancerCroissance(intervalleTemps) -> void:
 	dureeCroissance = dureeCroissance - intervalleTemps
 
-	if croissanceEstFinie() and resteDesEtapesDeCroissance():
+	if _croissanceEstFinie() and _resteDesEtapesDeCroissance():
 		print("croissance " + self.name + " est finie")
 		get_node(etapesCroissance[etapeCroissanceActuelle]).hide()
 		etapeCroissanceActuelle += 1
@@ -26,17 +25,13 @@ func avancerCroissance(intervalleTemps) -> void:
 		dureeCroissance = dureeCroissanceInitiale
 
 
-func croissanceEstFinie() -> bool:
+func _croissanceEstFinie() -> bool:
 	return dureeCroissance <= 0
 
 
-func resteDesEtapesDeCroissance() -> bool:
+func _resteDesEtapesDeCroissance() -> bool:
 	return etapeCroissanceActuelle < etapesCroissance.size() - 1
 
 
 func couperPlante() -> void:
-	pass
-
-
-func effectuerProcedureSelection():
 	pass
