@@ -6,9 +6,9 @@ var graineContenue : PackedScene = load("res://scenes/plantesScenes/BleScene.tsc
 var aireDetectionSolFertile : Area3D
 func _ready():
 	aireDetectionSolFertile = $AireDetectionEspacePlante
-	$IntervalleDetectionEspacesPlantes.connect("timeout", _detecterEspacePlante)
+	$IntervalleDetectionEspacesPlantes.connect("timeout", _effectuerProcedurePrevisualisationPlante)
 
 
-const DetectionEspacePlante = preload("res://code/DetectionEspacePlante.gd")
-func _detecterEspacePlante():
-	DetectionEspacePlante.previsualiserPlanteDansSacGraines(aireDetectionSolFertile, graineContenue)
+const PrevisualisationEspacePlante = preload("res://code/PrevisualisationEspacePlante.gd")
+func _effectuerProcedurePrevisualisationPlante():
+	PrevisualisationEspacePlante.previsualiserPlanteDansSacGraines(aireDetectionSolFertile, graineContenue)

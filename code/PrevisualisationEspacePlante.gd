@@ -1,7 +1,8 @@
 extends RigidBody3D
 
 
-static func previsualiserPlanteDansSacGraines(aireDetectionSolFertile : Area3D, graineContenue : PackedScene):
+static func previsualiserPlanteDansSacGraines(aireDetectionSolFertile : Area3D,
+graineContenue : PackedScene) -> void:
 	var airesEnCollision = aireDetectionSolFertile.get_overlapping_areas()
 	var resultatDetection : int = _detecterEspacePlante(airesEnCollision)
 	if _espacePlanteEstDetectee(resultatDetection):
@@ -9,7 +10,7 @@ static func previsualiserPlanteDansSacGraines(aireDetectionSolFertile : Area3D, 
 
 
 static func _espacePlanteEstDetectee(resultatDetection : int):
-	return resultatDetection != -1
+	return !resultatDetection < 0
 
 
 ##retourne l'index de l'espace plante detecte ou -1 lorsque l'espace plante n'est pas detecte
@@ -23,7 +24,7 @@ static func _detecterEspacePlante(airesEnCollision : Array) -> int:
 	if espaceNEstPasDetecte:
 		i = -1
 
-	return i
+	return i - 1
 
 
 static func _detectionEstIncomplete(compteurBoucle : int,
@@ -32,7 +33,7 @@ static func _detectionEstIncomplete(compteurBoucle : int,
 
 
 static func _effectuerProcedureDetection(aireEnCollision) -> bool:
-		return _estEspacePlante(aireEnCollision)
+		return not _estEspacePlante(aireEnCollision)
 
 
 const espacePlanteGroupe : String = "EspacePlante"
