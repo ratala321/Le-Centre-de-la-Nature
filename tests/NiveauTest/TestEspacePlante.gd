@@ -8,7 +8,7 @@ func _ready():
 	solTest = get_node("../../SolFertile")
 
 
-func main():
+func lancerTests():
 	var espaceTest = _miseEnPlaceTests()
 	
 	_testContientPrevisualisationInitial(espaceTest)

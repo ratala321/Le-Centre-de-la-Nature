@@ -1,6 +1,6 @@
 extends Node
 
-@export var testsSontActives : bool
+@export var testsSontActifs : bool
 
 
 @onready var timer = $Timer
@@ -10,7 +10,7 @@ func _ready():
 
 const TestEspacePlante = preload("res://tests/NiveauTest/TestEspacePlante.gd")
 func testEspacePlante():
-	if testsSontActives:
+	if testsSontActifs:
 		var testEspacePlanteInstance = TestEspacePlante.new()
 		add_child(testEspacePlanteInstance)
-		testEspacePlanteInstance.main()
+		testEspacePlanteInstance.lancerTests()
