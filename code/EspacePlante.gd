@@ -8,7 +8,7 @@ var contientUnePrevisualisation : bool = false
 var previsualisationEnCours : Node
 
 func _ready():
-	self.connect("area_exited", _retirerPrevisualisationPlante)
+	self.connect("area_exited", _retirerPrevisualisationApresSortieJoueur)
 
 func previsualiserPlante(planteScene : PackedScene):
 	if not contientUnePrevisualisation:
@@ -38,7 +38,7 @@ func _ajoutPrevisualisationDansScene(plante : Node):
 		add_child(plante)
 
 
-func _retirerPrevisualisationPlante(aireSortie : Area3D):
+func _retirerPrevisualisationApresSortieJoueur(aireSortie : Area3D):
 	if _peutRetirerPrevisulation(aireSortie):
 		previsualisationEnCours.queue_free()
 		contientUnePrevisualisation = false

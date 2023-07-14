@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://code/GestionnaireSauvegardeFichier.gd" id="6_n3wjg"]
 [ext_resource type="PackedScene" uid="uid://bhltammokhs6o" path="res://scenes/SolFertile.tscn" id="7_8q547"]
 [ext_resource type="PackedScene" uid="uid://cw0mho7tmkpw8" path="res://scenes/plantesScenes/BleScene.tscn" id="8_xfl4c"]
-[ext_resource type="Script" path="res://tests/Tests.gd" id="10_m3a08"]
+[ext_resource type="Script" path="res://tests/NiveauTest/AppelTests.gd" id="10_erv04"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ckacd"]
 
@@ -119,8 +119,7 @@ shape = SubResource("BoxShape3D_iqoo0")
 transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, -13.5128, 0, 0)
 
 [node name="Tests" type="Node" parent="."]
-script = ExtResource("10_m3a08")
-testsSontActives = true
+script = ExtResource("10_erv04")
 
 [node name="Timer" type="Timer" parent="Tests"]
 wait_time = 3.0
