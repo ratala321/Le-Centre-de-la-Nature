@@ -10,6 +10,5 @@ func _ready():
 
 
 const DetectionEspacePlante = preload("res://code/DetectionEspacePlante.gd")
-var detectionEspacePlante = DetectionEspacePlante.new()
 func _detecterEspacePlante():
-	detectionEspacePlante.previsualiserPlanteDansSacGraines(aireDetectionSolFertile, graineContenue)
+	DetectionEspacePlante.previsualiserPlanteDansSacGraines(aireDetectionSolFertile, graineContenue)
