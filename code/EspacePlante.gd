@@ -1,14 +1,28 @@
 extends Area3D
 
+@export var referenceSolFertile : Node
+
 const ETAPE_CROISSANCE_INITIALE : String = "Initial"
 const PREVISUALISATION_PLANTE : String = "Previsualisation"
 const AIRE_PERMETTANT_PREVISUALISATION : String = "AireDetectionEspacePlante"
 
+var contientUnePlante : bool = false
 var contientUnePrevisualisation : bool = false
 var previsualisationEnCours : Node
 
 func _ready():
 	self.connect("area_exited", _retirerPrevisualisationApresSortieJoueur)
+
+
+func ajouterPlanteDansEspace(planteScene : PackedScene) -> void:
+	if not contientUnePlante:
+		var plante = planteScene.instantiate()
+		plante.position = $PositionPlante.position
+		plante.ajouterReferenceSolFertile(referenceSolFertile)
+		plante.ajouterReferenceEspacePlante(self)
+		add_child(plante)
+		contientUnePlante = true
+
 
 func previsualiserPlante(planteScene : PackedScene):
 	if not contientUnePrevisualisation:

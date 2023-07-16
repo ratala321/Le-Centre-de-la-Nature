@@ -17,12 +17,13 @@ const DetectionEspacePlante = preload("res://code/DetectionEspacePlante.gd")
 func effectuerAction() -> void:
 	var airesDetectees : Array = aireDetectionSolFertile.get_overlapping_areas()
 	var resultatRecherche : int = DetectionEspacePlante.detecterEspacePlante(airesDetectees)
-	if resultatRecherche >= 0:
-		var plante = graineContenue.instantiate()
+	if _espacePlanteEstDetecte(resultatRecherche):
 		var espacePlante = airesDetectees[resultatRecherche]
-		var positionPlante = espacePlante.get_node("PositionPlante")
-		positionPlante.add_child(plante)
-	pass
+		espacePlante.ajouterPlanteDansEspace(graineContenue)
+
+
+func _espacePlanteEstDetecte(resultatRecherche : int):
+	return resultatRecherche >= 0
 
 
 const PrevisualisationEspacePlante = preload("res://code/PrevisualisationEspacePlante.gd")

@@ -82,6 +82,7 @@ libraries = {
 }
 
 [node name="IntervalleAvancementCroissance" type="Timer" parent="."]
+wait_time = 2.0
 autostart = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -93,9 +94,10 @@ transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 6.69651, 0.308385, 6.16
 [node name="ConteneurEspacePlante" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.53505)
 
-[node name="EspacePlante0" type="Area3D" parent="ConteneurEspacePlante" groups=["EspacePlante"]]
+[node name="EspacePlante0" type="Area3D" parent="ConteneurEspacePlante" node_paths=PackedStringArray("referenceSolFertile") groups=["EspacePlante"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3993, -0.0123339, 6.20833)
 script = ExtResource("4_g5ny0")
+referenceSolFertile = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ConteneurEspacePlante/EspacePlante0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.519439, 0, 0)
@@ -104,9 +106,10 @@ shape = SubResource("BoxShape3D_vd41u")
 [node name="PositionPlante" type="Marker3D" parent="ConteneurEspacePlante/EspacePlante0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61973, 0, -0.515337)
 
-[node name="EspacePlante1" type="Area3D" parent="ConteneurEspacePlante" groups=["EspacePlante"]]
+[node name="EspacePlante1" type="Area3D" parent="ConteneurEspacePlante" node_paths=PackedStringArray("referenceSolFertile") groups=["EspacePlante"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.361411, -0.0123339, 6.20833)
 script = ExtResource("4_g5ny0")
+referenceSolFertile = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ConteneurEspacePlante/EspacePlante1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.519439, 0, 0)
@@ -115,9 +118,10 @@ shape = SubResource("BoxShape3D_vd41u")
 [node name="PositionPlante" type="Marker3D" parent="ConteneurEspacePlante/EspacePlante1"]
 transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -0.342155, 0, -0.361127)
 
-[node name="EspacePlante2" type="Area3D" parent="ConteneurEspacePlante" groups=["EspacePlante"]]
+[node name="EspacePlante2" type="Area3D" parent="ConteneurEspacePlante" node_paths=PackedStringArray("referenceSolFertile") groups=["EspacePlante"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.67648, -0.0123339, 6.20833)
 script = ExtResource("4_g5ny0")
+referenceSolFertile = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ConteneurEspacePlante/EspacePlante2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.519439, 0, 0)
@@ -126,9 +130,10 @@ shape = SubResource("BoxShape3D_vd41u")
 [node name="PositionPlante" type="Marker3D" parent="ConteneurEspacePlante/EspacePlante2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.372783, 0, -0.515336)
 
-[node name="EspacePlante3" type="Area3D" parent="ConteneurEspacePlante" groups=["EspacePlante"]]
+[node name="EspacePlante3" type="Area3D" parent="ConteneurEspacePlante" node_paths=PackedStringArray("referenceSolFertile") groups=["EspacePlante"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.67648, -0.0123339, -0.70049)
 script = ExtResource("4_g5ny0")
+referenceSolFertile = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ConteneurEspacePlante/EspacePlante3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.519439, 0, 0)
@@ -137,9 +142,10 @@ shape = SubResource("BoxShape3D_vd41u")
 [node name="PositionPlante" type="Marker3D" parent="ConteneurEspacePlante/EspacePlante3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61973, 0, 0.102028)
 
-[node name="EspacePlante4" type="Area3D" parent="ConteneurEspacePlante" groups=["EspacePlante"]]
+[node name="EspacePlante4" type="Area3D" parent="ConteneurEspacePlante" node_paths=PackedStringArray("referenceSolFertile") groups=["EspacePlante"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.359769, -0.0123339, -0.70049)
 script = ExtResource("4_g5ny0")
+referenceSolFertile = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ConteneurEspacePlante/EspacePlante4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.519439, 0, 0)
@@ -148,9 +154,10 @@ shape = SubResource("BoxShape3D_vd41u")
 [node name="PositionPlante" type="Marker3D" parent="ConteneurEspacePlante/EspacePlante4"]
 transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -0.413941, 0, 0.102028)
 
-[node name="EspacePlante5" type="Area3D" parent="ConteneurEspacePlante" groups=["EspacePlante"]]
+[node name="EspacePlante5" type="Area3D" parent="ConteneurEspacePlante" node_paths=PackedStringArray("referenceSolFertile") groups=["EspacePlante"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.39602, -0.0123339, -0.70049)
 script = ExtResource("4_g5ny0")
+referenceSolFertile = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ConteneurEspacePlante/EspacePlante5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.519439, 0, 0)
@@ -159,9 +166,10 @@ shape = SubResource("BoxShape3D_vd41u")
 [node name="PositionPlante" type="Marker3D" parent="ConteneurEspacePlante/EspacePlante5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61973, 0, 0.143185)
 
-[node name="EspacePlante6" type="Area3D" parent="ConteneurEspacePlante" groups=["EspacePlante"]]
+[node name="EspacePlante6" type="Area3D" parent="ConteneurEspacePlante" node_paths=PackedStringArray("referenceSolFertile") groups=["EspacePlante"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.39602, -0.0123339, -7.59241)
 script = ExtResource("4_g5ny0")
+referenceSolFertile = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ConteneurEspacePlante/EspacePlante6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.519439, 0, 0)
@@ -170,9 +178,10 @@ shape = SubResource("BoxShape3D_vd41u")
 [node name="PositionPlante" type="Marker3D" parent="ConteneurEspacePlante/EspacePlante6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.358481, 0, 0.137783)
 
-[node name="EspacePlante7" type="Area3D" parent="ConteneurEspacePlante" groups=["EspacePlante"]]
+[node name="EspacePlante7" type="Area3D" parent="ConteneurEspacePlante" node_paths=PackedStringArray("referenceSolFertile") groups=["EspacePlante"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.359769, -0.0123339, -7.59241)
 script = ExtResource("4_g5ny0")
+referenceSolFertile = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ConteneurEspacePlante/EspacePlante7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.519439, 0, 0)
@@ -181,9 +190,10 @@ shape = SubResource("BoxShape3D_vd41u")
 [node name="PositionPlante" type="Marker3D" parent="ConteneurEspacePlante/EspacePlante7"]
 transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -0.423801, 0, 0.333728)
 
-[node name="EspacePlante8" type="Area3D" parent="ConteneurEspacePlante" groups=["EspacePlante"]]
+[node name="EspacePlante8" type="Area3D" parent="ConteneurEspacePlante" node_paths=PackedStringArray("referenceSolFertile") groups=["EspacePlante"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.67648, -0.0123339, -7.59241)
 script = ExtResource("4_g5ny0")
+referenceSolFertile = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ConteneurEspacePlante/EspacePlante8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.519439, 0, 0)

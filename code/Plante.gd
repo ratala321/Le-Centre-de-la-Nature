@@ -2,18 +2,21 @@ extends AnimatableBody3D
 
 @export var etapesCroissance : Array
 
-const dureeCroissanceInitiale : int = 10
 
-var etapeCroissanceActuelle = 0
-var dureeCroissance : int = dureeCroissanceInitiale
 var referenceSolFertile
+func ajouterReferenceSolFertile(referenceSolFertile):
+	self.referenceSolFertile = referenceSolFertile
+	self.referenceSolFertile.ajouterPlanteAuSol(self)
+
+var referenceEspacePlante
+func ajouterReferenceEspacePlante(referenceEspacePlante):
+	self.referenceSolFertile = referenceSolFertile
+	self.referenceSolFertile.ajouterPlanteAuSol(self)
 
 
-#func _init(dureeCroissance : int, referenceSolFertile):
-#	self.dureeCroissance = dureeCroissance
-#	self.referenceSolFertile = referenceSolFertile
-
-
+const dureeCroissanceInitiale : int = 10
+var dureeCroissance : int = dureeCroissanceInitiale
+var etapeCroissanceActuelle : int = 0
 func avancerCroissance(intervalleTemps) -> void:
 	dureeCroissance = dureeCroissance - intervalleTemps
 

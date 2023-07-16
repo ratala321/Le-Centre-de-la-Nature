@@ -15,9 +15,16 @@ func _ready():
 
 func avancerCroissancePlantes():
 	for planteRef in plantesContenues:
-		var plante = get_node(planteRef)
-		plante.avancerCroissance(tempsAvancement)
+		if _estUnObjet(planteRef):
+			planteRef.avancerCroissance(tempsAvancement)
+		else:
+			var plante = get_node(planteRef)
+			plante.avancerCroissance(tempsAvancement)
 	pass
+
+
+func _estUnObjet(planteRef):
+	return typeof(planteRef) != TYPE_NODE_PATH
 
 
 func ajouterPlanteAuSol(plante) -> void:
