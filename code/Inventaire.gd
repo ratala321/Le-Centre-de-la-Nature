@@ -1,5 +1,7 @@
 class_name abstractInventaire extends Control
 
+@export var inventaireParDefaut : Array
+
 @onready var listeInventaire : ItemList = get_node("ItemList")
 ##reference au node etant proprietaire de l'inventaire
 @onready var proprioInventaire = get_parent()
@@ -47,24 +49,24 @@ func transfererObjetVersInventaireDestination(indexObjet : int) -> void:
 	print("CLIC! dans " + self.name)
 	print(listeInventaire.get_item_text(indexObjet))
 
-	copierObjetInventaireVersDestination(listeInventaireDestination, indexObjet)
-	copierMetadataObjetInventaireVersDestination(listeInventaireDestination, indexObjet)
-	retirerObjetDansInventaire(indexObjet)
+	_copierObjetInventaireVersDestination(listeInventaireDestination, indexObjet)
+	_copierMetadataObjetInventaireVersDestination(listeInventaireDestination, indexObjet)
+	_retirerObjetDansInventaire(indexObjet)
 
 
-func retirerObjetDansInventaire(indexObjet : int) -> void:
+func _retirerObjetDansInventaire(indexObjet : int) -> void:
 	listeInventaire.remove_item(indexObjet)
 
 
 
-func copierObjetInventaireVersDestination(listeInventaireDestination, indexObjet) -> void:
+func _copierObjetInventaireVersDestination(listeInventaireDestination, indexObjet) -> void:
 	var nomObjet : String = listeInventaire.get_item_text(indexObjet)
 
 	listeInventaireDestination.add_item(nomObjet)
 
 
 ##copie les meta donnees dans le dernier index de l'inventaire de destination
-func copierMetadataObjetInventaireVersDestination(listeInventaireDestination, indexObjet) -> void:
+func _copierMetadataObjetInventaireVersDestination(listeInventaireDestination, indexObjet) -> void:
 	var metadataObjet : Variant = listeInventaire.get_item_metadata(indexObjet)
 	var indexObjetDestination : int = listeInventaireDestination.get_item_count() - 1
 
@@ -79,27 +81,29 @@ func chargerContenuInventaire():
 	#Ajouter chacun des objets dans la listeContenu dans le ItemList.
 	print(EMPLACEMENT_FICHIER_SAUVEGARDE)
 	print(FileAccess.file_exists(EMPLACEMENT_FICHIER_SAUVEGARDE))
+	#retrait d'objets laisses par megarde
+	listeInventaire.clear()
 
-	if fichierSauvegardeInventaireEstExistant():
-		#vidage de l'inventaire par defaut
-		listeInventaire.clear()
+	if _fichierSauvegardeInventaireEstExistant():
 
-		var donneesSauvegardees : Array = lireFichierSauvegardeInventaire()
+		var donneesSauvegardees : Array = _lireFichierSauvegardeInventaire()
 
 		#distribution des objets dans l'inventaire
-		distribuerObjetsSauvegardes(donneesSauvegardees)
+		_distribuerObjetsSauvegardes(donneesSauvegardees)
+	else:
+		_chargerInventaireParDefaut()
 
 
-func fichierSauvegardeInventaireEstExistant() -> bool:
+func _fichierSauvegardeInventaireEstExistant() -> bool:
 	return FileAccess.file_exists(EMPLACEMENT_FICHIER_SAUVEGARDE)
 
 
-func lireFichierSauvegardeInventaire() -> Array:
+func _lireFichierSauvegardeInventaire() -> Array:
 		var lecteurfichierDeSauvegarde = FileAccess.open(EMPLACEMENT_FICHIER_SAUVEGARDE, FileAccess.READ)
 		var donneesSauvegardees : Array
 
 		#lecture du fichier de sauvegarde
-		while lectureDuFichierEstIncomplete(lecteurfichierDeSauvegarde):
+		while _lectureDuFichierEstIncomplete(lecteurfichierDeSauvegarde):
 			donneesSauvegardees.push_back(lecteurfichierDeSauvegarde.get_var())
 			donneesSauvegardees.push_back(lecteurfichierDeSauvegarde.get_var(true))
 
@@ -108,33 +112,48 @@ func lireFichierSauvegardeInventaire() -> Array:
 		return donneesSauvegardees
 
 
-func lectureDuFichierEstIncomplete(lecteurfichierDeSauvegarde) -> bool:
+func _lectureDuFichierEstIncomplete(lecteurfichierDeSauvegarde) -> bool:
 	return lecteurfichierDeSauvegarde.get_position() < lecteurfichierDeSauvegarde.get_length()
 
 
-
 ##Permet de distribuer les objets sauvegardes dans l'inventaire
-func distribuerObjetsSauvegardes(donneesSauvegardees) -> void:
+func _distribuerObjetsSauvegardes(donneesSauvegardees) -> void:
 	var nomObjet : String
 	var metadataObjet : Variant
 
 	var i : int = 0
-	while distributionEstIncomplete(i, donneesSauvegardees):
+	while _distributionEstIncomplete(i, donneesSauvegardees):
 		nomObjet = donneesSauvegardees[i]
 		metadataObjet = donneesSauvegardees[i+1]
 
-		ajouterObjetDansInventaire(nomObjet, metadataObjet)
+		_ajouterObjetDansInventaire(nomObjet, metadataObjet)
 
 		i += 2
 
 
-func ajouterObjetDansInventaire(nomObjet : String, metadataObjet : Variant):
+func _distributionEstIncomplete(nombreObjetsDistribues : int, listeObjetsSauvegardes : Array) -> bool:
+	return nombreObjetsDistribues < listeObjetsSauvegardes.size()
+
+
+## L'inventaire par defaut contient le nom et les scenes des objets.
+## Les objets doivent etre instancies avant d'etre mis dans l'inventaire du coffre.
+func _chargerInventaireParDefaut() -> void:
+	var nomObjet : String
+	var sceneObjet : PackedScene
+	var instanceObjet : Variant
+
+	var i : int = 0
+	while i < inventaireParDefaut.size():
+		nomObjet = inventaireParDefaut[i]
+		sceneObjet = inventaireParDefaut[i + 1]
+		instanceObjet = sceneObjet.instantiate()
+		_ajouterObjetDansInventaire(nomObjet, instanceObjet)
+		i += 2
+
+
+func _ajouterObjetDansInventaire(nomObjet : String, metadataObjet : Variant):
 		listeInventaire.add_item(nomObjet)
 		listeInventaire.set_item_metadata(-1, metadataObjet)
-
-
-func distributionEstIncomplete(nombreObjetsDistribues : int, listeObjetsSauvegardes : Array) -> bool:
-	return nombreObjetsDistribues < listeObjetsSauvegardes.size()
 
 
 ##Permet de sauvegarder le contenu d'un inventaire
@@ -144,7 +163,7 @@ func sauvegarderContenuInventaire(contenuInventaire : Array) -> void:
 	var metadataObjet : Variant
 
 	var i : int = 0
-	while sauvegardeContenuInventaireEstIncomplete(i, contenuInventaire):
+	while _sauvegardeContenuInventaireEstIncomplete(i, contenuInventaire):
 		nomObjet = contenuInventaire[i]
 		metadataObjet = contenuInventaire[i+1]
 
@@ -154,7 +173,7 @@ func sauvegarderContenuInventaire(contenuInventaire : Array) -> void:
 
 	fichierDeSauvegarde.close()
 
-func sauvegardeContenuInventaireEstIncomplete(nombreObjetsSauvegardes : int, contenuInventaire : Array):
+func _sauvegardeContenuInventaireEstIncomplete(nombreObjetsSauvegardes : int, contenuInventaire : Array):
 	return nombreObjetsSauvegardes < contenuInventaire.size()
 
 
@@ -165,7 +184,7 @@ func getContenuInventaire() -> Array:
 	var contenuInventaire : Array
 
 	var i : int = 0
-	while parcoursContenuListeInventaireEstIncomplet(i):
+	while _parcoursContenuListeInventaireEstIncomplet(i):
 		nomObjet = listeInventaire.get_item_text(i)
 		metadataObjet = listeInventaire.get_item_metadata(i)
 
@@ -176,7 +195,7 @@ func getContenuInventaire() -> Array:
 	
 	return contenuInventaire
 
-func parcoursContenuListeInventaireEstIncomplet(nombreObjetsParcourus : int) -> bool:
+func _parcoursContenuListeInventaireEstIncomplet(nombreObjetsParcourus : int) -> bool:
 	return nombreObjetsParcourus < listeInventaire.item_count
 
 

@@ -9,3 +9,7 @@ data_*/
 mon_crash.*.json
 *.blend*
 *.swp
+importations/*
+sons/*
+addons/*
+.gut_editor_config.json

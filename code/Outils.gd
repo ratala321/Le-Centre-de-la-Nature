@@ -1,6 +1,6 @@
 class_name abstractOutils extends abstractObjetInventaire
 
-var durabiliteOutils : int = 100 : set = setDurabiliteOutils, get = getDurabiliteOutils
+var durabiliteOutils : int = 100
 const type : String = "outils"
 
 
@@ -8,17 +8,6 @@ func _init(numeroIdentification : int, nom : String, durabilite : int):
 	super(numeroIdentification, nom, type)
 	durabiliteOutils = durabilite
 	pass
-
-
-#---------------------------
-#Accesseurs et Modificateurs
-#---------------------------
-func setDurabiliteOutils(durabilite) -> void:
-	durabiliteOutils = durabilite
-
-
-func getDurabiliteOutils() -> int:
-	return durabiliteOutils
 
 
 #-------------------------------------------------------------------------------------------
