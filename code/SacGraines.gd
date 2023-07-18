@@ -8,6 +8,7 @@ func _ready():
 	aireDetectionSolFertile = $AireDetectionEspacePlante
 	$IntervalleDetectionEspacesPlantes.connect("timeout", _effectuerProcedurePrevisualisationPlante)
 
+
 func _physics_process(delta):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		effectuerAction()
