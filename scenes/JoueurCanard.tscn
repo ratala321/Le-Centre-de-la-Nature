@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://dq04vglibsi8r"]
+[gd_scene load_steps=54 format=3 uid="uid://dq04vglibsi8r"]
 
 [ext_resource type="Script" path="res://code/JoueurCanard.gd" id="1_fyvdd"]
 [ext_resource type="PackedScene" uid="uid://btsmjqc2w8pl3" path="res://scenes/vetementsScenes/ChapeauCowboy.tscn" id="2_jrist"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://code/Camera3DJoueurAxe.gd" id="5_gyclr"]
 [ext_resource type="Script" path="res://code/AnimationBasique.gd" id="6_l6fof"]
 [ext_resource type="Script" path="res://code/AudioBasique.gd" id="7_7cpyu"]
-[ext_resource type="Script" path="res://code/Interaction.gd" id="9_odu6k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mn2e7"]
 resource_name = "White"
@@ -2178,28 +2177,17 @@ tracks/16/path = NodePath("..")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
-"times": PackedFloat32Array(0, 1.4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.9, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": [],
 "method": &"arreterMouvement"
 }, {
 "args": [],
-"method": &"relancerMouvement"
-}]
-}
-tracks/17/type = "method"
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/path = NodePath("../ComposanteInteractionJoueur")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
 "method": &"emettreSignalInteraction"
+}, {
+"args": [],
+"method": &"relancerMouvement"
 }]
 }
 
@@ -3897,6 +3885,3 @@ sensibiliteCamera = 0.1
 
 [node name="Camera3DJoueur" type="Camera3D" parent="AxeRotationCamera"]
 transform = Transform3D(-1, 1.40442e-07, -1.43098e-07, 8.74228e-08, 0.947696, 0.319174, 1.80439e-07, 0.319174, -0.947696, 0, 2.194, -2.901)
-
-[node name="ComposanteInteractionJoueur" type="Node" parent="."]
-script = ExtResource("9_odu6k")

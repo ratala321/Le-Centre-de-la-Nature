@@ -14,3 +14,4 @@ func _process(delta):
 func cacherInterface() -> void:
 	if Input.is_key_pressed(KEY_Q):
 		get_tree().call_group("InterfaceEnJeu", "cacherInterface")
+

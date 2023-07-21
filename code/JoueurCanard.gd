@@ -140,6 +140,7 @@ func _ready():
 	chronometreEsquive.set_one_shot(true)
 
 
+var interactionJoueur : InteractionJoueur = InteractionJoueur.new(self)
 func _physics_process(delta):
 	appliquerGravite(delta)
 	
@@ -147,7 +148,7 @@ func _physics_process(delta):
 		effectuerProcedureMouvementJoueur(delta)
 		afficherInventaireJoueur()
 
-	effectuerInteractionJoueur()
+	interactionJoueur.effectuerInteractionJoueur()
 
 
 ##Permet d'appliquer la gravite sur le personnage du joueur
@@ -313,27 +314,6 @@ func arreterMouvement() -> void:
 	setPermissionMouvement(false)
 	velocity = Vector3.ZERO
 
-#################################
-#FIN FONCTIONS LIEES AU MOUVEMENT
-#################################
-
-
-##########################
-#INTERACTION PAR LE JOUEUR
-##########################
-
-##emet le signal [signal interaction_joueur_] lorsque le joueur appuie sur la touche
-##correspondant a l'action [b]interaction_joueur[/b]
-func effectuerInteractionJoueur() -> void:
-	if joueurEstAuSol() and Input.is_action_just_pressed("interaction_joueur"):
-		#application de l'animation liee a l'interaction du joueur
-		animationJoueur.ajusterVitesseAnimation(VITESSE_ANIMATION_INTERACTION)
-		animationJoueur.appliquerAnimation(ANIMATION_INTERACTION)
-
-##emet le signal interaction_joueur_
-func emettreSignalInteraction() -> void:
-	emit_signal("interaction_joueur_")
-
 
 ##permet d'afficher l'inventaire du joueur conditionnellement
 func afficherInventaireJoueur() -> void:
@@ -359,10 +339,11 @@ func evaluerAfficherInventaireJoueur() -> bool:
 func evaluerAfficherInventaireJeu() -> bool:
 	return Input.is_action_just_pressed("inventaire_joueur") and !get_tree().paused
 
-##############################
-#FIN INTERACTION PAR LE JOUEUR
-##############################
 
+##emet le signal interaction_joueur_
+func emettreSignalInteraction() -> void:
+	emit_signal("interaction_joueur_")
+	
 
 func getPermissionMouvement() -> bool:
 	return permissionMouvement

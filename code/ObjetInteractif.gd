@@ -15,8 +15,7 @@ func _init(objetInteractifInstancie):
 
 	
 func _ready():
-	var interactionJoueur : Node = joueur.get_node("ComposanteInteractionJoueur")
-	interactionJoueur.connect("interaction_joueur_", _lors_interaction_joueur, 0)
+	joueur.connect("interaction_joueur_", _lors_interaction_joueur, 0)
 
 
 
