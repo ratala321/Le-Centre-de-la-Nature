@@ -1,4 +1,9 @@
-extends Node
+class_name EntreeMouvementJoueur extends Node
+
+var joueur : JoueurCanard
+func _init(joueur : JoueurCanard):
+	self.joueur = joueur
+
 
 func saisirEntreeMouvementJoueur() -> FacteursMouvementJoueur:
 	#vecteur de la direction du mouvement du joueur sans modifications	
@@ -61,8 +66,6 @@ func _saisirEntreeDirectionJoueurVertical() -> int:
 	return directionVerticaleJoueur
 
 
-##contient la reference au node de Timer nommee ChronometreEsquive du joueur
-@onready var chronometreEsquive = get_node("ChronometreEsquive")
 ##vitesse d'esquive initiale
 const VITESSE_ESQUIVE_JOUEUR_INITIALE : int = 1
 ##vitesse d'esquive lors de l'entree utilisateur
@@ -72,7 +75,7 @@ func _saisirEntreeEsquive() -> int:
 	var vitesseEsquiveJoueur = VITESSE_ESQUIVE_JOUEUR_INITIALE
 
 	#saisie de l'input pour l'esquive
-	if Input.is_action_just_pressed("esquive") && chronometreEsquive.is_stopped():
+	if Input.is_action_just_pressed("esquive") && joueur.chronometreEsquive.is_stopped():
 		#fonction reinitialisant le chronometre d'esquive et emettant le signal esquive
 		_relancerChronoEsquive()
 		vitesseEsquiveJoueur = VITESSE_ESQUIVE_JOUEUR_FINALE
@@ -85,9 +88,10 @@ func _saisirEntreeEsquive() -> int:
 
 ##intervalle de temps entre deux esquives du joueur
 const INTERVALLE_ESQUIVE_JOUEUR : int = 3
+signal esquive_
 ##permet de relancer le chronometre limitant le nombre d'esquive
 func _relancerChronoEsquive() -> void:
-	chronometreEsquive.start(INTERVALLE_ESQUIVE_JOUEUR)
+	joueur.chronometreEsquive.start(INTERVALLE_ESQUIVE_JOUEUR)
 	emit_signal("esquive_")
 
 
@@ -110,12 +114,10 @@ func _ajusterDirectionAvantEnFonctionCamera(directionJoueur) -> Vector3:
 	return directionJoueur.rotated(Vector3(0,1,0), directionAvant.y)
 
 
-##contient la reference au node d'AxeRotationCamera du joueur
-@onready var axeRotationCamera = get_node("AxeRotationCamera")
 ##permet de determiner la direction du mouvement vers l'avant en fonction
 ##de la direction de la camera.
 func _determinerDirectionAvantMouvement() -> Vector3:
-	return axeRotationCamera.get_global_rotation()
+	return joueur.axeRotationCamera.get_global_rotation()
 
 
 ##permet de faire en sorte que le mouvement diagonal soit equivalent
