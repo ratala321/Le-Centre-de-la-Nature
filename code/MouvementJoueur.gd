@@ -1,4 +1,4 @@
-extends Node
+class_name MouvementJoueur extends Node
 
 
 var joueur : JoueurCanard
@@ -8,13 +8,13 @@ func _init(joueur : JoueurCanard):
 
 func effectuerProcedureAppplicationMouvement(delta, facteursMouvementJoueur : FacteursMouvementJoueur):
 	#tourne le joueur face a la direction de son mouvement
-	appliquerRotationJoueur(facteursMouvementJoueur.vecteurDirectionJoueurBrut)
+	_appliquerRotationJoueur(facteursMouvementJoueur.vecteurDirectionJoueurBrut)
 
 	#application des animations en fonction de la direction du mouvement
-	appliquerAnimationMouvement(facteursMouvementJoueur.vecteurDirectionJoueur)
+	_appliquerAnimationMouvement(facteursMouvementJoueur.vecteurDirectionJoueur)
 
 	#application du mouvement
-	appliquerMouvement(delta, facteursMouvementJoueur.vecteurDirectionJoueur,
+	_appliquerMouvement(delta, facteursMouvementJoueur.vecteurDirectionJoueur,
 	facteursMouvementJoueur.vitesseEsquiveJoueur)
 
 
@@ -22,7 +22,7 @@ func effectuerProcedureAppplicationMouvement(delta, facteursMouvementJoueur : Fa
 const INTERPOLATION_ROTATION_JOUEUR : float = 0.25
 ##permet d'effectuer la rotation du joueur en fonction de la direction du mouvement horizontal
 ##c-a-d le joueur fera face a la direction de son mouvement
-func appliquerRotationJoueur(directionJoueur : Vector3) -> void:
+func _appliquerRotationJoueur(directionJoueur : Vector3) -> void:
 	#vecteur de la rotation appliquee au joueur
 	var vecteurRotation : Vector3
 	#vecteur de la rotation de la camera avant que la rotation soit appliquee
@@ -36,7 +36,7 @@ func appliquerRotationJoueur(directionJoueur : Vector3) -> void:
 
 	#effectue la rotation en fonction de la direction du mouvement horizontal
 	if directionJoueur != Vector3.ZERO:
-		vecteurRotation = determinerVecteurRotation(directionJoueur)
+		vecteurRotation = _determinerVecteurRotation(directionJoueur)
 		vecteurRotationInitialCamera = joueur.axeRotationCamera.get_global_rotation_degrees()
 		#tourne le joueur
 		joueur.rotation.y = lerp_angle(joueur.rotation.y, vecteurRotation.y, INTERPOLATION_ROTATION_JOUEUR)
@@ -65,7 +65,7 @@ const FACTEUR_ROTATION_DIAGONALE_ARRIERE_DROITE : float = -3*PI/4
 const FACTEUR_ROTATION_DIAGONALE_ARRIERE_GAUCHE : float = 3*PI/4
 ##permet de determiner quel vecteur de rotation sera utilise par
 ##la fonction appliquerRotationJoueur
-func determinerVecteurRotation(directionJoueur : Vector3) -> Vector3:
+func _determinerVecteurRotation(directionJoueur : Vector3) -> Vector3:
 	#vecteur de la rotation applique en fonction de la direction
 	var vecteurRotation : Vector3 = Vector3.ZERO
 	vecteurRotation.y = joueur.axeRotationCamera.get_global_rotation().y
@@ -103,7 +103,7 @@ const VITESSE_ANIMATION_INTERACTION : float = 1.5
 ##vitesse d'execution de l'animation liee au saut
 const VITESSE_ANIMATION_SAUT : float = 1.9
 ##permet d'appliquer les animations liees au mouvement
-func appliquerAnimationMouvement(vecteurDirectionJoueur : Vector3) -> void:
+func _appliquerAnimationMouvement(vecteurDirectionJoueur : Vector3) -> void:
 	#application de l'animation de saut
 	if mouvementJoueurEstSaut(): 
 		joueur.animationJoueur.appliquerAnimation(ANIMATION_SAUT)
@@ -120,7 +120,7 @@ func appliquerAnimationMouvement(vecteurDirectionJoueur : Vector3) -> void:
 		joueur.animationJoueur.appliquerAnimation(ANIMATION_IDLE)
 
 func mouvementJoueurEstSaut() -> bool:
-	return !joueurEstAuSol() and joueur.animationJoueur.has_animation(ANIMATION_SAUT)
+	return !_joueurEstAuSol() and joueur.animationJoueur.has_animation(ANIMATION_SAUT)
 
 
 func mouvementJoueurEstMarche(vecteurDirectionJoueur) -> bool:
@@ -129,10 +129,10 @@ func mouvementJoueurEstMarche(vecteurDirectionJoueur) -> bool:
 
 @export var VITESSE_JOUEUR = 450
 ##permet d'appliquer le mouvement au personnage du joueur
-func appliquerMouvement(delta, directionJoueur, vitesseEsquiveJoueur) -> void:
+func _appliquerMouvement(delta, directionJoueur, vitesseEsquiveJoueur) -> void:
 	#application du saut
-	if (joueurAvaitSaisiBouttonSaut(directionJoueur) and joueurEstAuSol()):
-		appliquerSaut(delta)
+	if (_joueurAvaitSaisiBouttonSaut(directionJoueur) and _joueurEstAuSol()):
+		_appliquerSaut(delta)
 
 	#application du mouvement horizontal sur l'axe x
 	joueur.velocity.x = directionJoueur.x * VITESSE_JOUEUR * delta * vitesseEsquiveJoueur
@@ -142,7 +142,7 @@ func appliquerMouvement(delta, directionJoueur, vitesseEsquiveJoueur) -> void:
 	joueur.move_and_slide()
 
 
-func joueurAvaitSaisiBouttonSaut(vecteurDirectionJoueur : Vector3) -> bool:
+func _joueurAvaitSaisiBouttonSaut(vecteurDirectionJoueur : Vector3) -> bool:
 	return vecteurDirectionJoueur.y != 0
 
 
@@ -155,7 +155,7 @@ const IMPULSION_SAUT_JOUEUR : int = 2 * HAUTEUR_MAXIMALE_SAUT / TEMPS_HAUTEUR_MA
 ##effet sonore du saut du joueur
 var SON_SAUT : AudioStream = load("res://sons/jump_8bits.mp3")
 #permet d'appliquer le saut au personnage du joueur
-func appliquerSaut(delta) -> void:
+func _appliquerSaut(delta) -> void:
 	#application du saut
 	joueur.velocity.y = IMPULSION_SAUT_JOUEUR * delta
 
@@ -164,16 +164,6 @@ func appliquerSaut(delta) -> void:
 
 
 ##permet d'evaluer si le joueur est au sol
-func joueurEstAuSol() -> bool:
+func _joueurEstAuSol() -> bool:
 	return joueur.raycastJoueurSol.is_colliding()
 
-
-##relancement du mouvement lorsque des animations demandant l'arret du mouvement sont terminees
-func relancerMouvement() -> void:
-	joueur.setPermissionMouvement(true)
-	joueur.animationJoueur.ajusterVitesseAnimation(VITESSE_ANIMATION_INITIALE)
-
-##permet d'arreter le mouvement du joueur
-func arreterMouvement() -> void:
-	joueur.setPermissionMouvement(false)
-	joueur.velocity = Vector3.ZERO
