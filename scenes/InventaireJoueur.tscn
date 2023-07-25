@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cckcrlxvfyuku"]
 
-[ext_resource type="Script" path="res://code/InventaireJoueur.gd" id="1_a04y8"]
+[ext_resource type="Script" path="res://code/paquetCodeJoueur/InventaireJoueur.gd" id="1_a04y8"]
 
 [node name="InventaireJoueur" type="Control" groups=["InterfaceEnJeu"]]
 layout_mode = 3
