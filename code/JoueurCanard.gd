@@ -21,13 +21,10 @@ signal player_hit_
 ##signal lorsque le joueur appuie sur la touche d'interaction generale
 signal interaction_joueur_
 
-
 ##permet au joueur de bouger si la valeur est vraie
 var permissionMouvement : bool = true : set = setPermissionMouvement, get = getPermissionMouvement
 ##vrai lorsque le joueur a un objet dans ses mains
 var objetDansMains : bool
-##temporaire pour les connexions
-var stfu
 
 
 func _ready():
@@ -35,12 +32,13 @@ func _ready():
 
 
 var interactionJoueur : InteractionJoueur = InteractionJoueur.new(self)
+var affichageInventaireJoueur : AffichageInventaireJoueur = AffichageInventaireJoueur.new(self)
 func _physics_process(delta):
 	appliquerGravite(delta)
 	
 	if permissionMouvement:
 		effectuerProcedureMouvementJoueur(delta)
-		afficherInventaireJoueur()
+		affichageInventaireJoueur.afficherInventaireJoueur()
 
 	interactionJoueur.effectuerInteractionJoueur()
 
@@ -57,6 +55,7 @@ func appliquerGravite(delta) -> void:
 		velocity.y += GRAVITE_SAUT_JOUEUR * delta
 	
 	move_and_slide()
+
 
 var entreeMouvementJoueur : EntreeMouvementJoueur = EntreeMouvementJoueur.new(self)
 var mouvementJoueur : MouvementJoueur = MouvementJoueur.new(self)
@@ -85,31 +84,6 @@ func relancerMouvement() -> void:
 func arreterMouvement() -> void:
 	setPermissionMouvement(false)
 	velocity = Vector3.ZERO
-
-
-##permet d'afficher l'inventaire du joueur conditionnellement
-func afficherInventaireJoueur() -> void:
-	if Input.is_action_just_pressed("inventaire_joueur"):
-		if demanderAfficherInventaireJoueur():
-			print("permission pour afficher l'inventaire!")
-			$InventaireJoueur.montrerInterface()
-
-
-##permet d'evaluer si le joueur peut afficher son inventaire
-func demanderAfficherInventaireJoueur() -> bool:
-	return evaluerAfficherInventaireJeu() and evaluerAfficherInventaireJoueur()
-
-
-##permet d'evaluer si le joueur peut ouvrir son inventaire par rapport a
-##l'etat actuel du jeu
-func evaluerAfficherInventaireJoueur() -> bool:
-	return joueurEstAuSol() and permissionMouvement
-
-
-##permet d'evaluer si le joueur peut ouvrir son inventaire par rapport a
-##l'etat actuel du joueur
-func evaluerAfficherInventaireJeu() -> bool:
-	return Input.is_action_just_pressed("inventaire_joueur") and !get_tree().paused
 
 
 ##emet le signal interaction_joueur_
