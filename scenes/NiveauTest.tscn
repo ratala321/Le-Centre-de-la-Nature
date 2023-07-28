@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://qf6ag5p6ts08"]
+[gd_scene load_steps=15 format=3 uid="uid://qf6ag5p6ts08"]
 
 [ext_resource type="PackedScene" uid="uid://dq04vglibsi8r" path="res://scenes/JoueurCanard.tscn" id="1_0iw8u"]
 [ext_resource type="PackedScene" uid="uid://cckcrlxvfyuku" path="res://scenes/InventaireJoueur.tscn" id="2_c0odx"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://bhltammokhs6o" path="res://scenes/SolFertile.tscn" id="7_8q547"]
 [ext_resource type="PackedScene" uid="uid://cw0mho7tmkpw8" path="res://scenes/plantesScenes/BleScene.tscn" id="8_xfl4c"]
 [ext_resource type="Script" path="res://tests/NiveauTest/AppelTests.gd" id="10_erv04"]
-[ext_resource type="Script" path="res://code/csharpTest.cs" id="11_m8exu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ckacd"]
 
@@ -126,7 +125,3 @@ script = ExtResource("10_erv04")
 wait_time = 3.0
 one_shot = true
 autostart = true
-
-[node name="c#rando" type="Node" parent="."]
-script = ExtResource("11_m8exu")
-MESSAGE_STATIQUE = "SEB A RAISON"
