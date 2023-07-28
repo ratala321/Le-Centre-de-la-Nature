@@ -13,3 +13,9 @@ importations/*
 sons/*
 addons/*
 .gut_editor_config.json
+
+# IDEA
+.idea/
+PremierTest3d.csproj
+PremierTest3d.sln
+PremierTest3d.sln.DotSettings.user
