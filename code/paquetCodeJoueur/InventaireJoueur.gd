@@ -1,5 +1,7 @@
 class_name InventaireJoueur extends abstractInventaire 
 
+@onready var joueur : JoueurCanard = get_parent()
+
 func _ready():
 	listeInventaire.connect("item_clicked", selectionnerObjet)
 	chargerContenuInventaire()
@@ -24,17 +26,22 @@ func _joueurTenteEffectuerTransfertObjet() -> bool:
 
 func _effectuerProcedureSelectionObjet(referenceObjet : Variant) -> void:
 	if _objetPossedeUneProcedureDeSelection(referenceObjet):
-		# referenceMain = _obtenirReferenceMainJoueur(referenceObjet)
-		if _joueurPossedeObjetDansMain():
+		var referenceMain : BoneAttachment3D = _obtenirReferenceMainJoueur(referenceObjet)
+		if _joueurPossedeObjetDansMain(referenceMain):
 			_retirerObjetDansMain(referenceObjet, null)
 		else:
 			_ajouterObjetDansMain(referenceObjet, null)
 
 
 func _objetPossedeUneProcedureDeSelection(referenceObjet) -> bool:
-	return referenceObjet != null and referenceObjet.has_method("effectuerProcedureSelection")
+	#return referenceObjet != null and referenceObjet.has_method("effectuerProcedureSelection")
+	return referenceObjet != null and ObjetEquipable.implementeInterface(referenceObjet)
 
 
+@onready var referenceMainDroite : BoneAttachment3D = (joueur.
+	get_node("KayKit_AnimatedCharacter_v13/KayKit Animated Character2/Skeleton3D/MainEmplacementDroit"))
+@onready var referenceMainGauche : BoneAttachment3D = (joueur.
+	get_node("KayKit_AnimatedCharacter_v13/KayKit Animated Character2/Skeleton3D/MainEmplacementGauche"))
 func _obtenirReferenceMainJoueur(referenceObjet : Variant):
 	#methode dans objet pour savoir si main gauche ou droite
 	#if (methode) get main droite
@@ -42,8 +49,8 @@ func _obtenirReferenceMainJoueur(referenceObjet : Variant):
 	pass
 
 
-func _joueurPossedeObjetDansMain() -> bool:
-	return get_parent().objetDansMain
+func _joueurPossedeObjetDansMain(referenceMain : BoneAttachment3D) -> bool:
+	return referenceMain.get_child_count() != 0
 
 
 func _retirerObjetDansMain(referenceObjet : Variant, referenceMain) -> void:

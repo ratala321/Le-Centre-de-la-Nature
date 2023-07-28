@@ -23,8 +23,8 @@ signal interaction_joueur_
 
 ##permet au joueur de bouger si la valeur est vraie
 var permissionMouvement : bool = true : set = setPermissionMouvement, get = getPermissionMouvement
-##vrai lorsque le joueur a un objet dans ses mains
-var objetDansMains : bool
+var objetDansMainDroite : bool = false
+var objetDansMainGauche : bool = false
 
 
 func _ready():
