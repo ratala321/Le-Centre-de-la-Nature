@@ -5,8 +5,8 @@ namespace PremierTest3d.code.CsharpTemporaire;
 
 public class InteractionJoueur
 {
-    private readonly JoueurCanard _joueur;
-    public InteractionJoueur(JoueurCanard joueur)
+    private readonly IAccesJoueurDepuisInteraction _joueur;
+    public InteractionJoueur(IAccesJoueurDepuisInteraction joueur)
     {
         _joueur = joueur;
     }
@@ -44,27 +44,27 @@ public class InteractionJoueur
 
     public void EffectuerInteractionJoueur()
     {
-        if (JoueurPeutInteragir(_joueur))
+        if (JoueurPeutInteragir())
         {
-            JouerAnimationInteraction(_joueur);
+            JouerAnimationInteraction();
         }
     }
 
-    private static bool JoueurPeutInteragir(JoueurCanard joueur)
+    private bool JoueurPeutInteragir()
     {
-        return JoueurEstAuSol(joueur) && Input.IsActionPressed("interaction_joueur");
+        return JoueurEstAuSol() && Input.IsActionPressed("interaction_joueur");
     }
 
     private const float VitesseAnimationInteraction = 1.5f;
     private const string NomAnimationInteraction = "Interact";
-    private static void JouerAnimationInteraction(JoueurCanard joueur)
+    private void JouerAnimationInteraction()
     {
-        joueur.AnimationJoueur.SpeedScale = VitesseAnimationInteraction;
-        joueur.AnimationJoueur.Play(NomAnimationInteraction);
+        _joueur.AnimationJoueur.SpeedScale = VitesseAnimationInteraction;
+        _joueur.AnimationJoueur.Play(NomAnimationInteraction);
     }
 
-    private static bool JoueurEstAuSol(JoueurCanard joueur)
+    private bool JoueurEstAuSol()
     {
-        return joueur.RaycastJoueurSol.IsColliding();
+        return _joueur.EstAuSol();
     }
 }
