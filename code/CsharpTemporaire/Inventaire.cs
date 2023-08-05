@@ -36,22 +36,27 @@ public abstract class Inventaire : Control
         return notification == NotificationWMCloseRequest;
     }
 
-    public void montrerInterface()
+    public void MontrerInterface()
     {
         Show();
         Input.MouseMode = Input.MouseModeEnum.Confined;
         GetTree().Paused = true;
     }
 
-    public void cacherInterface()
+    public void CacherInterface()
     {
         Hide();
         Input.MouseMode = Input.MouseModeEnum.Captured;
         GetTree().Paused = false;
     }
 
+    protected ItemList ListeInventaire => _listeInventaire;
+
     /// <summary>
     /// Permet d'effectuer la procedure de selection d'un objet dans un inventaire.
     /// </summary>
-    public abstract void EffectuerProcedureSelectionObjet();
+    /// <param name="index"></param>
+    /// <param name="atPosition"></param>
+    /// <param name="mouseButtonIndex"></param>
+    public abstract void EffectuerProcedureSelectionObjet(long index, Vector2 atPosition, long mouseButtonIndex);
 }

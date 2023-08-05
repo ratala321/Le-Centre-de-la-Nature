@@ -1,6 +1,6 @@
 using Godot;
 
-namespace PremierTest3d.code.CsharpTemporaire;
+namespace PremierTest3d.code.CsharpTemporaire.paquetCodeJoueur;
 
 public class AffichageInventaireJoueur
 {
