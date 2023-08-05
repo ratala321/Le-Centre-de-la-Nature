@@ -1,9 +1,9 @@
 namespace PremierTest3d.code.CsharpTemporaire;
 
 /// <summary>
-/// Interface limitant l'acces aux methodes pour un inventaire joueur.
+/// Interface specifiant les pre-requis pour utiliser la composante d'inventaire joueur.
 /// </summary>
-public interface IAccesJoueurDepuisInventaire
+public interface IUsageInventaireJoueur
 {
     bool EstAuSol();
     bool PeutSeMouvoir();

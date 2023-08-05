@@ -4,9 +4,9 @@ namespace PremierTest3d.code.CsharpTemporaire;
 
 public class AffichageInventaireJoueur
 {
-    private readonly IAccesJoueurDepuisInventaire _joueur;
+    private readonly IUsageInventaireJoueur _joueur;
 
-    public AffichageInventaireJoueur(IAccesJoueurDepuisInventaire joueur)
+    public AffichageInventaireJoueur(IUsageInventaireJoueur joueur)
     {
         _joueur = joueur;
     }

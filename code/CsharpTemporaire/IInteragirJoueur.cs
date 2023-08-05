@@ -3,9 +3,9 @@ using Godot;
 namespace PremierTest3d.code.CsharpTemporaire;
 
 /// <summary>
-/// Interface limitant l'acces aux methodes pour une composante d'interaction joueur.
+/// Interface specifiant les pre-requis pour utiliser la composante d'interaction joueur.
 /// </summary>
-public interface IAccesJoueurDepuisInteraction
+public interface IInteragirJoueur
 {
     bool EstAuSol();
     AnimationPlayer AnimationJoueur { get; }

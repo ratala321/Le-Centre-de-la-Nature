@@ -5,8 +5,8 @@ namespace PremierTest3d.code.CsharpTemporaire;
 
 public class InteractionJoueur
 {
-    private readonly IAccesJoueurDepuisInteraction _joueur;
-    public InteractionJoueur(IAccesJoueurDepuisInteraction joueur)
+    private readonly IInteragirJoueur _joueur;
+    public InteractionJoueur(IInteragirJoueur joueur)
     {
         _joueur = joueur;
     }
