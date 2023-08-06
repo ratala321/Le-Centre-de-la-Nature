@@ -50,7 +50,18 @@ public abstract class Inventaire : Control
         GetTree().Paused = false;
     }
 
-    protected ItemList ListeInventaire => _listeInventaire;
+    private Inventaire _inventaireDestination;
+
+    public void TransfererObjetVersInventaireDestination(int indexObjet)
+    {
+        //TODO transfert
+    }
+    
+    public Inventaire InventaireDestination
+    {
+        set => this._inventaireDestination = value;
+    }
+    public ItemList ListeInventaire => _listeInventaire;
 
     /// <summary>
     /// Permet d'effectuer la procedure de selection d'un objet dans un inventaire.
