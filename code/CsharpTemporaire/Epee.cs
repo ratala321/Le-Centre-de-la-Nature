@@ -11,9 +11,9 @@ public class Epee : Outils
         GD.Print("PROCEDURE EPEE");
     }
 
-    public override int estObjetDeMain()
+    public override int EstObjetDeMain()
     {
         GD.Print("temporaire");
-        return VALEUR_OBJET_MAIN_DROITE;
+        return ValeurObjetMainDroite;
     }
 }

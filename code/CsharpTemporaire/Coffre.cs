@@ -9,7 +9,25 @@ public class Coffre : ObjetInteractif
     {
         if (interacteur is IProprietaireInventaire interacteurProprietaire)
         {
-            //TODO interaction
+            Inventaire inventaireCoffre = (Inventaire)GetNode("InventaireCoffre");
+            
+            AfficherInterfaces(inventaireCoffre, interacteurProprietaire.Inventaire);
+
+            AjouterReferencesInventaireDestination(inventaireCoffre, interacteurProprietaire.Inventaire);
         }
     }
+
+    private static void AfficherInterfaces(Inventaire inventaireCoffre, Inventaire inventaireInteracteur)
+    {
+        inventaireCoffre.AfficherInterface();
+        inventaireInteracteur.AfficherInterface();
+    }
+
+    private static void AjouterReferencesInventaireDestination(Inventaire inventaireCoffre,
+        Inventaire inventaireInteracteur)
+    {
+        inventaireCoffre.InventaireDestination = inventaireInteracteur;
+        inventaireInteracteur.InventaireDestination = inventaireCoffre;
+    }
+        
 }

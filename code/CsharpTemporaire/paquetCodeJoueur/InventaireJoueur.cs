@@ -13,12 +13,26 @@ public class InventaireJoueur : Inventaire
 
     public override void EffectuerProcedureSelectionObjet(long index, Vector2 atPosition, long mouseButtonIndex)
     {
-        
+        if (JoueurTenteTransfererObjet())
+        {
+            TransfererObjetVersInventaireDestination((int)index);
+        }
+        else
+        {
+            Variant metaDataObjet = ListeInventaire.GetItemMetadata((int)index);
+            
+            if (metaDataObjet.Obj is ISelectionnableDepuisInventaire allo)
+            {
+                //pour essayer
+                GD.Print("La condition fonctionne!");
+                allo.EffectuerProcedureSelectionDepuisInventaire();
+            }
+        }
     }
 
     private bool JoueurTenteTransfererObjet()
     {
-        return false;
+        return InventaireDestination is { Visible: true };
     }
 
 }

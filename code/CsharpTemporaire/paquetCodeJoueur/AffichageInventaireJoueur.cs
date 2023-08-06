@@ -17,7 +17,7 @@ public class AffichageInventaireJoueur
         {
             if (AffichageInventaireEstPermis())
             {
-                _joueur.InventaireJoueur.MontrerInterface();
+                _joueur.InventaireJoueur.AfficherInterface();
             }
         }
     }

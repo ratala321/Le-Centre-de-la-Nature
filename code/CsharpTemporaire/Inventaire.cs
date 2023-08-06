@@ -36,7 +36,7 @@ public abstract class Inventaire : Control
         return notification == NotificationWMCloseRequest;
     }
 
-    public void MontrerInterface()
+    public void AfficherInterface()
     {
         Show();
         Input.MouseMode = Input.MouseModeEnum.Confined;
@@ -54,20 +54,41 @@ public abstract class Inventaire : Control
 
     public void TransfererObjetVersInventaireDestination(int indexObjet)
     {
-        //TODO transfert
+        CopierObjetVersDestination(_inventaireDestination.ListeInventaire, indexObjet);
+        CopierMetaDataVersDestination(_inventaireDestination.ListeInventaire, indexObjet);
+        RetirerObjetTransfereInventaire(indexObjet);
+    }
+
+    private void CopierObjetVersDestination(ItemList destination, int indexObjet)
+    {
+        string nomObjet = _listeInventaire.GetItemText(indexObjet);
+
+        destination.AddItem(nomObjet);
+    }
+
+    private void CopierMetaDataVersDestination(ItemList destination, int indexObjet)
+    {
+        Variant metaDataObjet = _listeInventaire.GetItemMetadata(indexObjet);
+        int indexObjetDestination = destination.ItemCount - 1;
+        
+        destination.SetItemMetadata(indexObjetDestination, metaDataObjet);
+    }
+
+    private void RetirerObjetTransfereInventaire(int indexObjet)
+    {
+        _listeInventaire.RemoveItem(indexObjet);
     }
     
     public Inventaire InventaireDestination
     {
+        get => this._inventaireDestination;
         set => this._inventaireDestination = value;
     }
     public ItemList ListeInventaire => _listeInventaire;
 
     /// <summary>
     /// Permet d'effectuer la procedure de selection d'un objet dans un inventaire.
+    /// Doit etre connectee au signal ItemClicked d'un ItemList.
     /// </summary>
-    /// <param name="index"></param>
-    /// <param name="atPosition"></param>
-    /// <param name="mouseButtonIndex"></param>
     public abstract void EffectuerProcedureSelectionObjet(long index, Vector2 atPosition, long mouseButtonIndex);
 }

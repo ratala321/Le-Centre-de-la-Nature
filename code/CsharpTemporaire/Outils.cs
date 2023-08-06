@@ -1,6 +1,6 @@
 namespace PremierTest3d.code.CsharpTemporaire;
 
-public abstract class Outils
+public abstract class Outils : ISelectionnableDepuisInventaire
 {
         
     /// <summary>
@@ -8,13 +8,13 @@ public abstract class Outils
     /// </summary>
     public abstract void EffectuerProcedureSelectionDepuisInventaire();
 
-    protected const int VALEUR_OBJET_MAIN_DROITE = 1;
-    protected const int VALEUR_OBJET_MAIN_GAUCHE = 2;
+    protected const int ValeurObjetMainDroite = 1;
+    protected const int ValeurObjetMainGauche = 2;
     /// <summary>
     /// Permet de determiner dans quelle main, gauche ou droite, un objet s'utilise.
     /// </summary>
     /// <returns>
     /// 1 si l'objet est de main droite, ou 2 si l'objet est de main gauche.
     /// </returns>
-    public abstract int estObjetDeMain();
+    public abstract int EstObjetDeMain();
 }
