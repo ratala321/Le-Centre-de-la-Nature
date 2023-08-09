@@ -11,6 +11,12 @@ public class InventaireJoueur : Inventaire
         ProcessMode = ProcessModeEnum.WhenPaused;
     }
 
+    private  JoueurCanard _joueur;
+    public InventaireJoueur(JoueurCanard joueur)
+    {
+        _joueur = joueur;
+    }
+
     public override void EffectuerProcedureSelectionObjet(long index, Vector2 atPosition, long mouseButtonIndex)
     {
         if (JoueurTenteTransfererObjet())
@@ -20,12 +26,12 @@ public class InventaireJoueur : Inventaire
         else
         {
             Variant metaDataObjet = ListeInventaire.GetItemMetadata((int)index);
-            
-            if (metaDataObjet.Obj is ISelectionnableDepuisInventaire allo)
+
+            if (metaDataObjet.Obj is ISelectionnableDepuisInventaire objetSelectionnable)
             {
                 //pour essayer
-                GD.Print("La condition fonctionne!");
-                allo.EffectuerProcedureSelectionDepuisInventaire();
+                GD.Print("La condition fonctionne! InventaireJoueur.cs");
+                objetSelectionnable.EffectuerProcedureSelectionDepuisInventaire(_joueur);
             }
         }
     }

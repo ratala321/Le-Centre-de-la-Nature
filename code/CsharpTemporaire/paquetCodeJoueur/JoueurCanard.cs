@@ -10,7 +10,6 @@ public class JoueurCanard : CharacterBody3D, IUsageInventaireJoueur, IInteragirJ
     private RayCast3D _raycastJoueurSol;
     private AnimationPlayer _animationJoueur;
     private Area3D _aireInteraction;
-    private InventaireJoueur _inventaireJoueur;
     private Node3D _axeRotationCamera;
     private AudioStreamPlayer _audioJoueur;
     private Timer _chronometreEsquive;
@@ -19,7 +18,6 @@ public class JoueurCanard : CharacterBody3D, IUsageInventaireJoueur, IInteragirJ
         _raycastJoueurSol = (RayCast3D)GetNode("RayEstAuSol");
         _animationJoueur = (AnimationPlayer)GetNode("KayKit_AnimatedCharacter_v13/AnimationPlayer");
         _aireInteraction = (Area3D)GetNode("AireInteraction");
-        _inventaireJoueur = (InventaireJoueur)GetNode("InventaireJoueur;");
         _axeRotationCamera = (Node3D)GetNode("AxeRotationCamera");
         _audioJoueur = (AudioStreamPlayer)GetNode("AudioStreamPlayer");
         _chronometreEsquive = (Timer)GetNode("ChronometreEsquive");
@@ -29,12 +27,14 @@ public class JoueurCanard : CharacterBody3D, IUsageInventaireJoueur, IInteragirJ
     private readonly AffichageInventaireJoueur _affichageInventaireJoueur;
     private readonly MouvementJoueur _mouvementJoueur;
     private readonly EntreeMouvementJoueur _entreeMouvementJoueur;
+    private readonly InventaireJoueur _inventaireJoueur;
     public JoueurCanard()
     {
         _interactionJoueur = new InteractionJoueur(this);
         _affichageInventaireJoueur = new AffichageInventaireJoueur(this);
         _mouvementJoueur = new MouvementJoueur(this);
         _entreeMouvementJoueur = new EntreeMouvementJoueur(this);
+        _inventaireJoueur = new InventaireJoueur(this);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -86,7 +86,11 @@ public class JoueurCanard : CharacterBody3D, IUsageInventaireJoueur, IInteragirJ
 
         return moveAndSlide;
     }
-    
+
+    private bool _objetMainDroiteEnMain = false;
+    public bool ObjetMainDroiteEnMain => _objetMainDroiteEnMain;
+    private bool _objetMainGaucheEnMain = false;
+    public bool ObjetMainGaucheEnMain => _objetMainGaucheEnMain;
     public InventaireJoueur InventaireJoueur => _inventaireJoueur;
     public Inventaire Inventaire => _inventaireJoueur;
     public AnimationPlayer AnimationJoueur => _animationJoueur;
