@@ -7,7 +7,7 @@ public class InventaireJoueur : Inventaire
     public override void _Ready()
     {
         ListeInventaire.ItemClicked += EffectuerProcedureSelectionObjet;
-        //TODO chargement contenu inventaire
+        ChargerContenuInventaireSurReady();
         ProcessMode = ProcessModeEnum.WhenPaused;
     }
 
@@ -34,6 +34,11 @@ public class InventaireJoueur : Inventaire
                 objetSelectionnable.EffectuerProcedureSelectionDepuisInventaire(_joueur);
             }
         }
+    }
+
+    public override void ChargerContenuInventaireSurReady()
+    {
+        ChargerContenuInventaire();
     }
 
     private bool JoueurTenteTransfererObjet()

@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
 
@@ -5,7 +7,9 @@ namespace PremierTest3d.code.CsharpTemporaire;
 
 public abstract class Inventaire : Control
 {
-    [Export] private readonly Array<GodotObject> _inventaireParDefaut;
+    //duo nomObjet et sceneObjet, exemple :
+    //index = 0 -> nomObjet1, index = 1 -> sceneObjet1, index = 2 -> nomObjet2 ...
+    [Export] private readonly Array<Variant> _inventaireParDefaut;
     
     private ItemList _listeInventaire;
     private Node _proprietaireInventaire;
@@ -26,14 +30,29 @@ public abstract class Inventaire : Control
     {
         if (FermetureJeuEstDemandee(notification))
         {
-            //obtenir contenu inventaire
-            //sauvegarder contenu
+            List<DonneesObjetInventaire> donneesASauvegarder = ObtenirDonneesContenuInventaire();
+            SauvegardeInventaire.SauvegarderDonneesContenuInventaire(donneesASauvegarder, _cheminFichierSauvegarde);
         }
     }
 
     private static bool FermetureJeuEstDemandee(int notification)
     {
         return notification == NotificationWMCloseRequest;
+    }
+    
+    private List<DonneesObjetInventaire> ObtenirDonneesContenuInventaire()
+    {
+        List<DonneesObjetInventaire> donnees = new List<DonneesObjetInventaire>();
+        
+        for (int i = 0; i < _listeInventaire.ItemCount; i++)
+        {
+            string nomObjet = _listeInventaire.GetItemText(i);
+            Variant metaDataObjet = _listeInventaire.GetItemMetadata(i);
+            
+            donnees.Add(new DonneesObjetInventaire(nomObjet, metaDataObjet));
+        }
+
+        return donnees;
     }
 
     public void AfficherInterface()
@@ -78,6 +97,11 @@ public abstract class Inventaire : Control
     {
         _listeInventaire.RemoveItem(indexObjet);
     }
+
+    protected void ChargerContenuInventaire()
+    {
+        ChargementInventaire.ChargerDonneesContenuInventaire(this);
+    }
     
     public Inventaire InventaireDestination
     {
@@ -85,10 +109,18 @@ public abstract class Inventaire : Control
         set => this._inventaireDestination = value;
     }
     public ItemList ListeInventaire => _listeInventaire;
+    public string CheminFichierInventaire => _cheminFichierSauvegarde;
+    public Array<Variant> InventaireParDefaut => _inventaireParDefaut;
 
     /// <summary>
     /// Permet d'effectuer la procedure de selection d'un objet dans un inventaire.
     /// Doit etre connectee au signal ItemClicked d'un ItemList.
     /// </summary>
     public abstract void EffectuerProcedureSelectionObjet(long index, Vector2 atPosition, long mouseButtonIndex);
+    
+    /// <summary>
+    /// Doit etre appelee par tous les inventaires dans _Ready pour charger leur contenu sauvegarde ou par defaut.
+    /// N'entre pas en conflit avec des inventaires crees proceduralement.
+    /// </summary>
+    public abstract void ChargerContenuInventaireSurReady();
 }
