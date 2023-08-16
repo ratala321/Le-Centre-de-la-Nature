@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using Godot.Collections;
 
@@ -14,8 +15,15 @@ public class EspacePlante : Area3D
     {
         if (NeContientPasUnePlante())
         {
-            Node3D instance = (Node3D)scenePlante.Instantiate();
-            EffectuerProcessusAjoutPlante(instance);
+            try
+            {
+                Plante instance = (Plante)scenePlante.Instantiate();
+                EffectuerProcessusAjoutPlante(instance);
+            }
+            catch (InvalidCastException e)
+            {
+                Console.WriteLine("erreur cast EspacePlante.cs" + e);
+            }
         }
     }
 
@@ -24,13 +32,13 @@ public class EspacePlante : Area3D
         return !ContientUnePlante();
     }
 
-    private void EffectuerProcessusAjoutPlante(Node3D plante)
+    [Export] private SolFertile _referenceSolFertile;
+    private void EffectuerProcessusAjoutPlante(Plante plante)
     {
         AjusterEmplacementPlante(plante);
-            
-        //TODO REFERENCE SOL FERTILE
-        //TODO REFERENCE ESPACE PLANTE
-            
+
+        plante.ReferenceSolFertile = _referenceSolFertile;
+        
         AddChild(plante);
     }
 

@@ -68,13 +68,7 @@ public class Plante : AnimatableBody3D
         set
         {
             _referenceSolFertile = value;
-            //TODO AJOUTER REFERENCE
+            _referenceSolFertile.AjouterPlanteContenue(this);
         } 
-    }
-
-    private EspacePlante _referenceEspacePlante;
-    public EspacePlante ReferenceEspacePlante
-    {
-        set => _referenceEspacePlante = value;
     }
 }
