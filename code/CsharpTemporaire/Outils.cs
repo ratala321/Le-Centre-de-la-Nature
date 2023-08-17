@@ -2,7 +2,7 @@ using PremierTest3d.code.CsharpTemporaire.paquetCodeJoueur;
 
 namespace PremierTest3d.code.CsharpTemporaire;
 
-public abstract class Outils : ISelectionnableDepuisInventaire
+public abstract class Outils : ISelectionnableDepuisInventaire, IPossesseurActionPrincipale
 {
     /// <summary>
     /// Permet d'effectuer une suite d'instructions lorsqu'un objet est selectionne dans l'inventaire.
@@ -37,5 +37,10 @@ public abstract class Outils : ISelectionnableDepuisInventaire
         get => _outilsEstEnMain;
         set => _outilsEstEnMain = value;
     }
-    
+
+    /// <summary>
+    /// Permet d'effectuer l'action principale associee a un outils.
+    /// Par exemple, une pelle dont son action est de creuser.
+    /// </summary>
+    public abstract void EffectuerActionPrincipale();
 }

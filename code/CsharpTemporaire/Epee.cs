@@ -26,6 +26,11 @@ public class Epee : Outils
         return ValeurObjetMainDroite;
     }
 
+    public override void EffectuerActionPrincipale()
+    {
+        //TODO
+    }
+
     private void RetirerObjetDansMain(JoueurCanard joueur)
     {
         //TODO
