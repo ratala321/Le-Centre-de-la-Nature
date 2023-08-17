@@ -13,11 +13,11 @@ public class AffichageInventaireJoueur
 
     public void EffectuerAffichageInventaireJoueur()
     {
-        if (Input.IsActionPressed("inventaire_joueur"))
+        if (Input.IsActionPressed("inventaire_joueur") && AffichageInventaireEstPermis())
         {
-            if (AffichageInventaireEstPermis())
+            if (_joueur is Node nodeEnScene)
             {
-                _joueur.InventaireJoueur.AfficherInterface();
+                _joueur.InventaireJoueur.AfficherInterface(nodeEnScene.GetTree());
             }
         }
     }

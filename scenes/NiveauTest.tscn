@@ -1,11 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://qf6ag5p6ts08"]
+[gd_scene load_steps=13 format=3 uid="uid://qf6ag5p6ts08"]
 
 [ext_resource type="PackedScene" uid="uid://dq04vglibsi8r" path="res://scenes/JoueurCanard.tscn" id="1_0iw8u"]
-[ext_resource type="PackedScene" uid="uid://cckcrlxvfyuku" path="res://scenes/InventaireJoueur.tscn" id="2_c0odx"]
 [ext_resource type="PackedScene" uid="uid://q4uuutngl3k0" path="res://scenes/Coffre.tscn" id="3_ko3p6"]
 [ext_resource type="PackedScene" uid="uid://bd1s1kvlq40lm" path="res://scenes/InventaireCoffre.tscn" id="4_mwksg"]
 [ext_resource type="Script" path="res://code/GestionnaireInterfaceUtilisateur.gd" id="5_jrac6"]
-[ext_resource type="PackedScene" uid="uid://dypmi4t4f0ua4" path="res://scenes/EpeeJoueur.tscn" id="5_wfwxw"]
 [ext_resource type="Script" path="res://code/GestionnaireSauvegardeFichier.gd" id="6_n3wjg"]
 [ext_resource type="PackedScene" uid="uid://bhltammokhs6o" path="res://scenes/SolFertile.tscn" id="7_8q547"]
 [ext_resource type="PackedScene" uid="uid://cw0mho7tmkpw8" path="res://scenes/plantesScenes/BleScene.tscn" id="8_xfl4c"]
@@ -31,9 +29,6 @@ script = ExtResource("6_n3wjg")
 [node name="JoueurCanard" parent="." instance=ExtResource("1_0iw8u")]
 transform = Transform3D(1, -3.55271e-15, 7.10543e-15, -3.55271e-15, 1, 0, -7.10543e-15, 0, 1, 2.84217e-14, 0.0998027, -2.38419e-07)
 
-[node name="InventaireJoueur" parent="JoueurCanard" instance=ExtResource("2_c0odx")]
-visible = false
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.845505, -0.0104825, -0.533864, 0.0122135, 0.999925, -0.000290603, 0.533827, -0.00627466, 0.84557, -0.696256, 1.58441, 3.09883)
 light_energy = 3.992
@@ -58,9 +53,8 @@ physics_material_override = SubResource("PhysicsMaterial_ckacd")
 [node name="CollisionSol" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_4xsu1")
 
-[node name="Coffre" parent="." node_paths=PackedStringArray("joueur") instance=ExtResource("3_ko3p6")]
+[node name="Coffre" parent="." instance=ExtResource("3_ko3p6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.367)
-joueur = NodePath("../JoueurCanard")
 
 [node name="AireInteraction" type="Area3D" parent="Coffre"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -72,11 +66,9 @@ shape = SubResource("BoxShape3D_4ev3r")
 
 [node name="InventaireCoffre" parent="Coffre" instance=ExtResource("4_mwksg")]
 visible = false
-inventaireParDefaut = [&"Epee", ExtResource("5_wfwxw")]
 
-[node name="Coffre3" parent="." node_paths=PackedStringArray("joueur") instance=ExtResource("3_ko3p6")]
+[node name="Coffre3" parent="." instance=ExtResource("3_ko3p6")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.9817, 0, -2.27212)
-joueur = NodePath("../JoueurCanard")
 
 [node name="AireInteraction" type="Area3D" parent="Coffre3"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)

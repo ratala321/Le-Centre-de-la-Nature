@@ -42,5 +42,5 @@ public abstract class Outils : ISelectionnableDepuisInventaire, IPossesseurActio
     /// Permet d'effectuer l'action principale associee a un outils.
     /// Par exemple, une pelle dont son action est de creuser.
     /// </summary>
-    public abstract void EffectuerActionPrincipale();
+    public abstract void EffectuerActionPrincipale(double delta);
 }

@@ -1,15 +1,15 @@
-[gd_scene load_steps=54 format=3 uid="uid://dq04vglibsi8r"]
+[gd_scene load_steps=55 format=3 uid="uid://dq04vglibsi8r"]
 
-[ext_resource type="Script" path="res://code/paquetCodeJoueur/JoueurCanard.gd" id="1_5r5m6"]
+[ext_resource type="Script" path="res://code/CsharpTemporaire/paquetCodeJoueur/JoueurCanard.cs" id="1_0pvty"]
 [ext_resource type="PackedScene" uid="uid://btsmjqc2w8pl3" path="res://scenes/vetementsScenes/ChapeauCowboy.tscn" id="2_jrist"]
 [ext_resource type="PackedScene" uid="uid://b0mm1k2dpaqho" path="res://importations/bow_teamBlue.gltf.glb" id="2_thlrn"]
 [ext_resource type="PackedScene" uid="uid://bgacblhfo0lc2" path="res://importations/arrow_teamBlue.gltf.glb" id="3_j6oia"]
 [ext_resource type="PackedScene" uid="uid://cq8rh5lsevyih" path="res://importations/sword_teamBlue.gltf.glb" id="4_hg4im"]
 [ext_resource type="PackedScene" uid="uid://dypmi4t4f0ua4" path="res://scenes/EpeeJoueur.tscn" id="4_jtt62"]
 [ext_resource type="PackedScene" uid="uid://dcqnxh0sklqav" path="res://scenes/SacGraines.tscn" id="4_s24bb"]
-[ext_resource type="Script" path="res://code/AnimationBasique.gd" id="6_l6fof"]
 [ext_resource type="Script" path="res://code/AudioBasique.gd" id="7_7cpyu"]
 [ext_resource type="Script" path="res://code/paquetCodeJoueur/Camera3DJoueurAxe.gd" id="10_i3bk5"]
+[ext_resource type="PackedScene" uid="uid://cckcrlxvfyuku" path="res://scenes/InventaireJoueur.tscn" id="10_owos5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mn2e7"]
 resource_name = "White"
@@ -2172,7 +2172,7 @@ tracks/15/loop_wrap = true
 tracks/15/keys = PackedFloat32Array(0, 1, 1, 1, 1)
 tracks/16/type = "method"
 tracks/16/imported = false
-tracks/16/enabled = true
+tracks/16/enabled = false
 tracks/16/path = NodePath("..")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
@@ -2188,6 +2188,26 @@ tracks/16/keys = {
 }, {
 "args": [],
 "method": &"relancerMouvement"
+}]
+}
+tracks/17/type = "method"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("..")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"ArreterMouvement"
+}, {
+"args": [],
+"method": &"LancerProcedureInteraction"
+}, {
+"args": [],
+"method": &"RelancerMouvement"
 }]
 }
 
@@ -3738,8 +3758,10 @@ _data = {
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6rmec"]
 height = 1.93666
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ypn58"]
+
 [node name="JoueurCanard" type="CharacterBody3D"]
-script = ExtResource("1_5r5m6")
+script = ExtResource("1_0pvty")
 
 [node name="KayKit_AnimatedCharacter_v13" type="Node3D" parent="."]
 
@@ -3864,7 +3886,6 @@ visible = false
 libraries = {
 "": SubResource("AnimationLibrary_770lj")
 }
-script = ExtResource("6_l6fof")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0572429, 0.922335, 0)
@@ -3881,7 +3902,14 @@ target_position = Vector3(0, -0.05, 0)
 [node name="AxeRotationCamera" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106673, 0, -0.0277896)
 script = ExtResource("10_i3bk5")
-sensibiliteCamera = 0.1
 
 [node name="Camera3DJoueur" type="Camera3D" parent="AxeRotationCamera"]
 transform = Transform3D(-1, 1.40442e-07, -1.43098e-07, 8.74228e-08, 0.947696, 0.319174, 1.80439e-07, 0.319174, -0.947696, 0, 2.194, -2.901)
+
+[node name="InventaireJoueur" parent="." instance=ExtResource("10_owos5")]
+visible = false
+
+[node name="AireInteraction" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AireInteraction"]
+shape = SubResource("BoxShape3D_ypn58")

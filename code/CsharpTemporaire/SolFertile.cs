@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Transactions;
 using Godot;
+using Godot.Collections;
 
 namespace PremierTest3d.code.CsharpTemporaire;
 
-public class SolFertile : ObjetInteractif
+public partial class SolFertile : ObjetInteractif
 {
-    [Export] private List<NodePath> _plantesAjouteesEditeurDepart;
+    [Export] private Array<NodePath> _plantesAjouteesEditeurDepart;
     
     public override void _Ready()
     {

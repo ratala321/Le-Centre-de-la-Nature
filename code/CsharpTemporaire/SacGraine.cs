@@ -3,7 +3,7 @@ using Godot.Collections;
 
 namespace PremierTest3d.code.CsharpTemporaire;
 
-public class SacGraine : RigidBody3D, IPossesseurActionPrincipale
+public partial class SacGraine : RigidBody3D, IPossesseurActionPrincipale
 {
     //Load temporaire, destine a fonctionner autrement.
     private PackedScene _graineContenue =

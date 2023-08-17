@@ -2,7 +2,7 @@ using Godot;
 
 namespace PremierTest3d.code.CsharpTemporaire;
 
-public class Plante : AnimatableBody3D
+public partial class Plante : AnimatableBody3D
 {
     [Export] private NodePath[] _etapesCroissances;
 

@@ -37,7 +37,7 @@ func _physics_process(delta):
 	appliquerGravite(delta)
 	
 	if permissionMouvement:
-		effectuerProcedureMouvementJoueur(delta)
+		#effectuerProcedureMouvementJoueur(delta)
 		affichageInventaireJoueur.afficherInventaireJoueur()
 
 	interactionJoueur.effectuerInteractionJoueur()
@@ -57,15 +57,15 @@ func appliquerGravite(delta) -> void:
 	move_and_slide()
 
 
-var entreeMouvementJoueur : EntreeMouvementJoueur = EntreeMouvementJoueur.new(self)
-var mouvementJoueur : MouvementJoueur = MouvementJoueur.new(self)
+#var entreeMouvementJoueur : EntreeMouvementJoueur = EntreeMouvementJoueur.new(self)
+#var mouvementJoueur : MouvementJoueur = MouvementJoueur.new(self)
 ##permet de jouer le role de la methode main pour l'appel de fonctions
 ##liees au mouvement du joueur
-func effectuerProcedureMouvementJoueur(delta):
-	var facteursMouvementJoueur : FacteursMouvementJoueur = (entreeMouvementJoueur
-																.saisirEntreeMouvementJoueur())
+#func effectuerProcedureMouvementJoueur(delta):
+	#var facteursMouvementJoueur : FacteursMouvementJoueur = (entreeMouvementJoueur
+																#.saisirEntreeMouvementJoueur())
 
-	mouvementJoueur.effectuerProcedureAppplicationMouvement(delta, facteursMouvementJoueur)
+	#mouvementJoueur.effectuerProcedureAppplicationMouvement(delta, facteursMouvementJoueur)
 
 
 ##permet d'evaluer si le joueur est au sol

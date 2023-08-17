@@ -3,31 +3,31 @@ using Godot;
 
 namespace PremierTest3d.code.CsharpTemporaire;
 
-public class Coffre : ObjetInteractif
+public partial class Coffre : ObjetInteractif
 {
-    public override void EffectuerInteraction(Object interacteur)
-    {
-        if (interacteur is IProprietaireInventaire interacteurProprietaire)
-        {
-            Inventaire inventaireCoffre = (Inventaire)GetNode("InventaireCoffre");
-            
-            AfficherInterfaces(inventaireCoffre, interacteurProprietaire.Inventaire);
+	public override void EffectuerInteraction(Object interacteur)
+	{
+		if (interacteur is IProprietaireInventaire interacteurProprietaire)
+		{
+			Inventaire inventaireCoffre = (Inventaire)GetNode("InventaireCoffre");
+			
+			AfficherInterfaces(inventaireCoffre, interacteurProprietaire.Inventaire);
 
-            AjouterReferencesInventaireDestination(inventaireCoffre, interacteurProprietaire.Inventaire);
-        }
-    }
+			AjouterReferencesInventaireDestination(inventaireCoffre, interacteurProprietaire.Inventaire);
+		}
+	}
 
-    private static void AfficherInterfaces(Inventaire inventaireCoffre, Inventaire inventaireInteracteur)
-    {
-        inventaireCoffre.AfficherInterface();
-        inventaireInteracteur.AfficherInterface();
-    }
+	private void AfficherInterfaces(Inventaire inventaireCoffre, Inventaire inventaireInteracteur)
+	{
+		inventaireCoffre.AfficherInterface(this.GetTree());
+		inventaireInteracteur.AfficherInterface(this.GetTree());
+	}
 
-    private static void AjouterReferencesInventaireDestination(Inventaire inventaireCoffre,
-        Inventaire inventaireInteracteur)
-    {
-        inventaireCoffre.InventaireDestination = inventaireInteracteur;
-        inventaireInteracteur.InventaireDestination = inventaireCoffre;
-    }
-        
+	private void AjouterReferencesInventaireDestination(Inventaire inventaireCoffre,
+		Inventaire inventaireInteracteur)
+	{
+		inventaireCoffre.InventaireDestination = inventaireInteracteur;
+		inventaireInteracteur.InventaireDestination = inventaireCoffre;
+	}
+		
 }
