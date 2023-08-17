@@ -28,39 +28,13 @@ public class SacGraine : RigidBody3D, IPossesseurActionPrincipale
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
             Array<Area3D> airesDetectees = _aireDetectionEspacePlante.GetOverlappingAreas();
-            int resultatRecherche = DetecterEspacePlante(airesDetectees);
+            int resultatRecherche = DetectionEspacePlante.DetecterEspacePlante(airesDetectees);
 
             if (EspacePlanteEstDetectee(resultatRecherche))
             {
                 AjouterPlanteDansEspace(airesDetectees, resultatRecherche);
             }
         }
-    }
-
-    /// <returns>Retourne l'index de l'espace plante detecte, autrement retourne -1.</returns>
-    private int DetecterEspacePlante(Array<Area3D> airesDetectees)
-    {
-        int i = 0;
-        while (i < airesDetectees.Count && AireNEstPasEspacePlante(airesDetectees[i]))
-        {
-            i++;
-        }
-
-        if (i >= airesDetectees.Count)
-        {
-            i = -1;
-        }
-
-        return i;
-    }
-
-    private bool AireNEstPasEspacePlante(Area3D espacePotentiel)
-    {
-        return !AireEstEspacePlante(espacePotentiel);
-    }
-    private bool AireEstEspacePlante(Area3D espacePotentiel)
-    {
-        return espacePotentiel is EspacePlante;
     }
     
     private bool EspacePlanteEstDetectee(int resultatRecherche)
