@@ -59,8 +59,27 @@ public class MouvementJoueur
     }
     
     //TODO animation tree?
+    private const string AnimationSaut = "Jump";
+    private const string AnimationMarche = "Walk";
+    private const string AnimationIdle = "Idle";
+    private const int VitesseAnimationInitiale = 1;
+    private const float VitesseAnimationSaut = 1.9f;
     private void AppliquerAnimationMouvement(Vector3 directionJoueur)
     {
+        if (AnimationSautPeutEtreJouee())
+        {
+            _joueur.AnimationJoueur.Play(AnimationSaut);
+            _joueur.AnimationJoueur.SpeedScale = VitesseAnimationSaut;
+        } else if (AnimationMarchePeutEtreJouee(directionJoueur))
+        {
+            _joueur.AnimationJoueur.SpeedScale = VitesseAnimationInitiale;
+            _joueur.AnimationJoueur.Play(AnimationMarche);
+        }
+        else
+        {
+            _joueur.AnimationJoueur.SpeedScale = VitesseAnimationInitiale;
+            _joueur.AnimationJoueur.Play(AnimationIdle);
+        }
         
     }
 
@@ -161,7 +180,7 @@ public class MouvementJoueur
             CalculerVelociteEnX(delta, directionJoueur, vitesseEsquiveJoueur),
             _joueur.VelociteJoueur.Y,
             CalculerVelociteEnZ(delta, directionJoueur, vitesseEsquiveJoueur)
-            );
+        );
             
         _joueur.VelociteJoueur = velocite;
         
@@ -178,5 +197,16 @@ public class MouvementJoueur
     private static float CalculerVelociteEnZ(double delta, Vector3 directionJoueur, int vitesseEsquiveJoueur)
     {
         return (float)(directionJoueur.Z * VitesseJoueurBase * delta * vitesseEsquiveJoueur);
+    }
+
+    private bool AnimationSautPeutEtreJouee()
+    {
+        return !_joueur.EstAuSol() && _joueur.AnimationJoueur.HasAnimation(AnimationSaut);
+    }
+
+    private bool AnimationMarchePeutEtreJouee(Vector3 directionJoueur)
+    {
+        return !directionJoueur.Equals(Vector3.Zero) &&
+               _joueur.AnimationJoueur.HasAnimation(AnimationMarche);
     }
 }

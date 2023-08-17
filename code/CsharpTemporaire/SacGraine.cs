@@ -47,7 +47,6 @@ public class SacGraine : RigidBody3D, IPossesseurActionPrincipale
 
     private void EffectuerProcedurePrevisualisationPlante()
     {
-        //TODO 
         Array<Area3D> airesDetectees = _aireDetectionEspacePlante.GetOverlappingAreas();
         int resultatRecherche = DetectionEspacePlante.DetecterEspacePlante(airesDetectees);
 
