@@ -36,11 +36,6 @@ public class SacGraine : RigidBody3D, IPossesseurActionPrincipale
             }
         }
     }
-    
-    private bool EspacePlanteEstDetectee(int resultatRecherche)
-    {
-        return resultatRecherche >= 0;
-    }
 
     private void AjouterPlanteDansEspace(Array<Area3D> airesDetectees, int resultatRecherche)
     {
@@ -53,6 +48,27 @@ public class SacGraine : RigidBody3D, IPossesseurActionPrincipale
     private void EffectuerProcedurePrevisualisationPlante()
     {
         //TODO 
+        Array<Area3D> airesDetectees = _aireDetectionEspacePlante.GetOverlappingAreas();
+        int resultatRecherche = DetectionEspacePlante.DetecterEspacePlante(airesDetectees);
+
+        if (EspacePlanteEstDetectee(resultatRecherche))
+        {
+            PrevisualiserPlante(airesDetectees[resultatRecherche]);
+        }
     }
 
+    private void PrevisualiserPlante(Area3D espacePlantePotentiel)
+    {
+        if (espacePlantePotentiel is EspacePlante espacePlante)
+        {
+            espacePlante.PrevisualiserPlante(_graineContenue);
+        }
+    }
+
+    private bool EspacePlanteEstDetectee(int resultatRecherche)
+    {
+        return resultatRecherche >= 0;
+    }
+    
+    
 }
