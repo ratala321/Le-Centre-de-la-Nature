@@ -6,5 +6,5 @@ namespace PremierTest3d.code.CsharpTemporaire;
 /// </summary>
 public interface IPossesseurActionPrincipale
 {
-    void EffectuerActionPrincipale();
+    void EffectuerActionPrincipale(double delta);
 }
