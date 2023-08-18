@@ -27,11 +27,11 @@ public class EntreeMouvementJoueur
     {
         Vector3 directionJoueurBrut = SaisirEntreeDirection();
         
+        int indexFacteursRotation = CalculerIndexFacteursRotation(directionJoueurBrut);
+        
         int vitesseEsquiveJoueur = SaisirEntreeEsquive();
         
         Vector3 directionJoueur = EffectuerProcedureAjustementDirectionJoueur(directionJoueurBrut);
-        
-        int indexFacteursRotation = CalculerIndexFacteursRotation(directionJoueur);
         
         return new FacteursMouvementJoueur(indexFacteursRotation, vitesseEsquiveJoueur, directionJoueur);
     }

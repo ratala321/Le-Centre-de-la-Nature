@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://qf6ag5p6ts08"]
+[gd_scene load_steps=14 format=3 uid="uid://qf6ag5p6ts08"]
 
 [ext_resource type="PackedScene" uid="uid://dq04vglibsi8r" path="res://scenes/JoueurCanard.tscn" id="1_0iw8u"]
 [ext_resource type="PackedScene" uid="uid://q4uuutngl3k0" path="res://scenes/Coffre.tscn" id="3_ko3p6"]
 [ext_resource type="PackedScene" uid="uid://bd1s1kvlq40lm" path="res://scenes/InventaireCoffre.tscn" id="4_mwksg"]
 [ext_resource type="Script" path="res://code/GestionnaireInterfaceUtilisateur.gd" id="5_jrac6"]
 [ext_resource type="Script" path="res://code/GestionnaireSauvegardeFichier.gd" id="6_n3wjg"]
+[ext_resource type="PackedScene" uid="uid://dypmi4t4f0ua4" path="res://scenes/EpeeJoueur.tscn" id="6_p7hku"]
 [ext_resource type="PackedScene" uid="uid://bhltammokhs6o" path="res://scenes/SolFertile.tscn" id="7_8q547"]
 [ext_resource type="PackedScene" uid="uid://cw0mho7tmkpw8" path="res://scenes/plantesScenes/BleScene.tscn" id="8_xfl4c"]
 [ext_resource type="Script" path="res://tests/NiveauTest/AppelTests.gd" id="10_erv04"]
@@ -66,6 +67,7 @@ shape = SubResource("BoxShape3D_4ev3r")
 
 [node name="InventaireCoffre" parent="Coffre" instance=ExtResource("4_mwksg")]
 visible = false
+_inventaireParDefaut = [&"Epee", ExtResource("6_p7hku")]
 
 [node name="Coffre3" parent="." instance=ExtResource("3_ko3p6")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.9817, 0, -2.27212)

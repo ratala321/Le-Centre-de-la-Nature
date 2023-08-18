@@ -13,6 +13,7 @@ public partial class JoueurCanard : CharacterBody3D, IUsageInventaireJoueur, IIn
 	private Node3D _axeRotationCamera;
 	private AudioStreamPlayer _audioJoueur;
 	private Timer _chronometreEsquive;
+	private InventaireJoueur _inventaireJoueur;
 	public override void _Ready()
 	{
 		_raycastJoueurSol = (RayCast3D)GetNode("RayEstAuSol");
@@ -21,20 +22,19 @@ public partial class JoueurCanard : CharacterBody3D, IUsageInventaireJoueur, IIn
 		_axeRotationCamera = (Node3D)GetNode("AxeRotationCamera");
 		_audioJoueur = (AudioStreamPlayer)GetNode("AudioStreamPlayer");
 		_chronometreEsquive = (Timer)GetNode("ChronometreEsquive");
+		_inventaireJoueur = GetNode<InventaireJoueur>("InventaireJoueur");
 	}
 
 	private readonly InteractionJoueur _interactionJoueur;
 	private readonly AffichageInventaireJoueur _affichageInventaireJoueur;
 	private readonly MouvementJoueur _mouvementJoueur;
 	private readonly EntreeMouvementJoueur _entreeMouvementJoueur;
-	private readonly InventaireJoueur _inventaireJoueur;
 	public JoueurCanard()
 	{
 		_interactionJoueur = new InteractionJoueur(this);
 		_affichageInventaireJoueur = new AffichageInventaireJoueur(this);
 		_mouvementJoueur = new MouvementJoueur(this);
 		_entreeMouvementJoueur = new EntreeMouvementJoueur(this);
-		_inventaireJoueur = new InventaireJoueur(this);
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -106,8 +106,7 @@ public partial class JoueurCanard : CharacterBody3D, IUsageInventaireJoueur, IIn
 	public bool ObjetMainDroiteEnMain => _objetMainDroiteEnMain;
 	private bool _objetMainGaucheEnMain = false;
 	public bool ObjetMainGaucheEnMain => _objetMainGaucheEnMain;
-	public InventaireJoueur InventaireJoueur => _inventaireJoueur;
-	public Inventaire Inventaire => _inventaireJoueur;
+	public Inventaire InventaireJoueur => _inventaireJoueur;
 	public AnimationPlayer AnimationJoueur => _animationJoueur;
 	public Area3D AireInteraction => _aireInteraction;
 	public Node3D AxeRotationCamera => _axeRotationCamera;

@@ -19,7 +19,7 @@ public abstract partial class Inventaire : Control
 	{
 		ProcessMode = ProcessModeEnum.WhenPaused;
 		
-		_listeInventaire = (ItemList) GetNode("ItemList");
+		_listeInventaire = GetNode<ItemList>("ItemList");
 		
 		_proprietaireInventaire = GetParent();
 		

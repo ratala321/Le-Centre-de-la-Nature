@@ -11,9 +11,9 @@ public partial class Coffre : ObjetInteractif
 		{
 			Inventaire inventaireCoffre = (Inventaire)GetNode("InventaireCoffre");
 			
-			AfficherInterfaces(inventaireCoffre, interacteurProprietaire.Inventaire);
+			AfficherInterfaces(inventaireCoffre, interacteurProprietaire.InventaireJoueur);
 
-			AjouterReferencesInventaireDestination(inventaireCoffre, interacteurProprietaire.Inventaire);
+			AjouterReferencesInventaireDestination(inventaireCoffre, interacteurProprietaire.InventaireJoueur);
 		}
 	}
 

@@ -8,5 +8,5 @@ public interface IUsageInventaireJoueur
     bool EstAuSol();
     bool PeutSeMouvoir();
     bool NiveauDuJoueurEstEnPause();
-    InventaireJoueur InventaireJoueur { get; }
+    Inventaire InventaireJoueur { get; }
 }

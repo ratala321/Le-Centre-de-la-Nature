@@ -35,7 +35,4 @@ offset_left = 36.0
 offset_top = -181.0
 offset_right = 265.0
 offset_bottom = 86.0
-item_count = 2
 max_columns = 2
-item_0/text = "Outils"
-item_1/text = "Nourriture"
