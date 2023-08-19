@@ -77,6 +77,7 @@ public partial class JoueurCanard : CharacterBody3D, IUsageInventaireJoueur, IIn
 	public void ArreterMouvement()
 	{
 		_permissionMouvement = false;
+		this.Velocity = Vector3.Zero;
 	}
 
 	public void RelancerMouvement()

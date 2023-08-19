@@ -22,20 +22,22 @@ public partial class InventaireJoueur : Inventaire
 		}
 		else
 		{
-			//TODO section ne fonctionne pas, metaData / Variant ne permettent pas de verifier la classe/interface,
-			//on veut pouvoir utiliser ISelectionnableDepuisInventaire
-			Variant metaDataObjet = ListeInventaire.GetItemMetadata((int)index);
-
-			if (metaDataObjet.Obj is PackedScene objetInventaire)
-			{
-				ISelectionnableDepuisInventaire instanceObjet = objetInventaire.Instantiate<ISelectionnableDepuisInventaire>();
-				//pour essayer
-				GD.Print("La condition fonctionne! InventaireJoueur.cs");
-				instanceObjet.EffectuerProcedureSelectionDepuisInventaire(_joueur);
-			}
+			Variant metaDataObjetSelectionne = ListeInventaire.GetItemMetadata((int)index);
+			LancerProcedurePourObjetSelectionnable(metaDataObjetSelectionne);
 		}
 	}
 
+	private void LancerProcedurePourObjetSelectionnable(Variant metaDataObjetSelectionne)
+	{
+		if (metaDataObjetSelectionne.AsGodotObject() is PackedScene sceneObjetInventaire)
+		{
+			Node objetSelectionne = sceneObjetInventaire.Instantiate();
+			ISelectionnableDepuisInventaire objetInventaire = objetSelectionne as ISelectionnableDepuisInventaire;
+			
+			objetInventaire?.EffectuerProcedureSelectionDepuisInventaire(_joueur);
+		}
+	}
+	
 	public override void ChargerContenuInventaireSurReady()
 	{
 		ChargerContenuInventaire();
