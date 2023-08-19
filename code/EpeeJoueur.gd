@@ -11,3 +11,8 @@ func _init(durabilite : int = 100):
 func effectuerProcedureSelection() -> void:
 	print("PROCEDURE EPEE")
 	pass
+
+##
+func estObjetDeMain() -> void:
+	print("temporaire")
+	pass

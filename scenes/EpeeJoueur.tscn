@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dypmi4t4f0ua4"]
 
-[ext_resource type="Script" path="res://code/EpeeJoueur.gd" id="1_l5afq"]
+[ext_resource type="Script" path="res://code/CsharpTemporaire/Epee.cs" id="1_7fjh8"]
 [ext_resource type="PackedScene" uid="uid://cq8rh5lsevyih" path="res://importations/sword_teamBlue.gltf.glb" id="2_cf527"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mcqei"]
@@ -11,7 +11,7 @@ collision_layer = 2
 collision_mask = 2
 mass = 0.01
 gravity_scale = 0.0
-script = ExtResource("1_l5afq")
+script = ExtResource("1_7fjh8")
 
 [node name="sword_teamBluegltf" parent="." instance=ExtResource("2_cf527")]
 

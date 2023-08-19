@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://q4uuutngl3k0"]
 
-[ext_resource type="Script" path="res://code/Coffre.gd" id="1_esgii"]
+[ext_resource type="Script" path="res://code/CsharpTemporaire/Coffre.cs" id="1_t1lsg"]
 [ext_resource type="Texture2D" uid="uid://bqpiqgpb7sl00" path="res://importations/SourceFiles/Textures/PolygonFarm_Texture_02_A.png" id="3_iljtk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x48ri"]
@@ -57,7 +57,7 @@ _data = {
 
 [node name="Coffre" type="AnimatableBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.501518, 0)
-script = ExtResource("1_esgii")
+script = ExtResource("1_t1lsg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_x48ri")

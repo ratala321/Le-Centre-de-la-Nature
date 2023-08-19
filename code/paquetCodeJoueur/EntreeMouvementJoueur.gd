@@ -12,7 +12,18 @@ func saisirEntreeMouvementJoueur() -> FacteursMouvementJoueur:
 	var vitesseEsquiveJoueur : int = _saisirEntreeEsquive()
 	#reinitialisation du vecteur lie a la direction du mouvement
 	var vecteurDirectionJoueur = _effectuerProcedureAjustementDirectionJoueur(vecteurDirectionJoueurBrut)
-
+	
+	#AJUSTEMENTS POUR DIRECTION BRUT FACTEURS ROTATION
+	#afin de pouvoir tourner en saut ou en tombant
+	vecteurDirectionJoueurBrut.y = 0
+	#necessaire pour appliquer correctement la rotation
+	vecteurDirectionJoueurBrut.x = int(round(directionJoueur.x))
+	vecteurDirectionJoueurBrut.z = int(round(directionJoueur.z))
+	
+        // creation d'une valeur d'index unique pour chaque direction de rotation
+        // exemple direction droite = Vecteur(-1,0,0) -> resultat = -1 + 3 * 0 + 4 = 3
+    #float  indexFacteurRotation = (directionJoueurBrut.X + directionJoueurBrut.Z * 3) + 4;
+    
 	var facteurs : FacteursMouvementJoueur = _assemblerElementsMouvementJoueur(vecteurDirectionJoueurBrut,
 	vitesseEsquiveJoueur, vecteurDirectionJoueur)
 

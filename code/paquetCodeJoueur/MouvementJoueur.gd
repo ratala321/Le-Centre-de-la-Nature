@@ -28,12 +28,6 @@ func _appliquerRotationJoueur(directionJoueur : Vector3) -> void:
 	#vecteur de la rotation de la camera avant que la rotation soit appliquee
 	var vecteurRotationInitialCamera
 
-	#afin de pouvoir tourner en saut ou en tombant
-	directionJoueur.y = 0
-	#necessaire pour appliquer correctement la rotation
-	directionJoueur.x = int(round(directionJoueur.x))
-	directionJoueur.z = int(round(directionJoueur.z))
-
 	#effectue la rotation en fonction de la direction du mouvement horizontal
 	if directionJoueur != Vector3.ZERO:
 		vecteurRotation = _determinerVecteurRotation(directionJoueur)
