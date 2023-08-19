@@ -3759,6 +3759,7 @@ _data = {
 height = 1.93666
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ypn58"]
+size = Vector3(1.47799, 2.39154, 1.81609)
 
 [node name="JoueurCanard" type="CharacterBody3D"]
 script = ExtResource("1_0pvty")
@@ -3912,4 +3913,5 @@ visible = false
 [node name="AireInteraction" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AireInteraction"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.929078, 1.24325)
 shape = SubResource("BoxShape3D_ypn58")
