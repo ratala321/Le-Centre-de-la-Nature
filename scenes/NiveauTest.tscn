@@ -98,10 +98,8 @@ root_node = NodePath("../../Coffre2")
 [node name="InventaireCoffre" parent="Coffre2" instance=ExtResource("4_mwksg")]
 visible = false
 
-[node name="SolFertile" parent="." node_paths=PackedStringArray("joueur") instance=ExtResource("7_8q547")]
+[node name="SolFertile" parent="." instance=ExtResource("7_8q547")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.4139, 0, 0)
-plantesContenues = [NodePath("../BleScene")]
-joueur = NodePath("../JoueurCanard")
 
 [node name="AireInteraction" type="Area3D" parent="SolFertile"]
 

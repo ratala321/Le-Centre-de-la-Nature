@@ -7,7 +7,7 @@ namespace PremierTest3d.code.CsharpTemporaire;
 
 public partial class SolFertile : ObjetInteractif
 {
-	[Export] private Array<NodePath> _plantesAjouteesEditeurDepart;
+	[Export] private Array<string> _plantesAjouteesEditeurDepart;
 	
 	public override void _Ready()
 	{
@@ -21,10 +21,13 @@ public partial class SolFertile : ObjetInteractif
 
 	private void AjouterPlantesProvenantEditeur()
 	{
-		foreach (NodePath cheminPlante in _plantesAjouteesEditeurDepart)
+		if (_plantesAjouteesEditeurDepart != null)
 		{
-			Plante instancePlante = (Plante)GetNode(cheminPlante);
-			_plantesContenues.Add(instancePlante);
+			foreach (string cheminPlante in _plantesAjouteesEditeurDepart)
+			{
+				Plante instancePlante = (Plante)GetNode(cheminPlante);
+				_plantesContenues.Add(instancePlante);
+			}
 		}
 	}
 
