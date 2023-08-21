@@ -26,7 +26,7 @@ public partial class SacGraine : Outils
     
     public override void EffectuerActionPrincipale(double delta)
     {
-        if (Input.IsMouseButtonPressed(MouseButton.Left))
+        if (Input.IsMouseButtonPressed(MouseButton.Right))
         {
             Array<Area3D> airesDetectees = _aireDetectionEspacePlante.GetOverlappingAreas();
             int resultatRecherche = DetectionEspacePlante.DetecterEspacePlante(airesDetectees);

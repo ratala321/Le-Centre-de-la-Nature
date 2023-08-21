@@ -6,6 +6,8 @@ namespace PremierTest3d.code.CsharpTemporaire;
 
 public partial class EspacePlante : Area3D
 {
+	private bool _contientUnePrevisualisation = false;
+	
 	public override void _Ready()
 	{
 		this.AreaExited += RetirerPrevisualisationApresSortieJoueur;
@@ -71,7 +73,7 @@ public partial class EspacePlante : Area3D
 
 	public void PrevisualiserPlante(PackedScene scenePlante)
 	{
-		if (NeContientPasPrevisualisation())
+		if (!_contientUnePrevisualisation)
 		{
 			Node3D instancePlante = (Node3D)scenePlante.Instantiate();
 			EffectuerProcessusPrevisualisation(instancePlante);
@@ -79,7 +81,6 @@ public partial class EspacePlante : Area3D
 	}
 
 	private Node _planteEnPrevisualisation;
-
 	private void EffectuerProcessusPrevisualisation(Node3D plante)
 	{
 		SauvegarderReferencePrevisualisation(plante);
@@ -118,31 +119,24 @@ public partial class EspacePlante : Area3D
 	private void AjouterPrevisualisationDansScene(Node3D plante)
 	{
 		AddChild(plante);
+		_contientUnePrevisualisation = true;
 	}
 
 	private void RetirerPrevisualisationApresSortieJoueur(Area3D aireSortie)
 	{
 		if (PeutRetirerPrevisualation(aireSortie))
 		{
-			_planteEnPrevisualisation.QueueFree();
+			_planteEnPrevisualisation.Free();
 			_planteEnPrevisualisation = null;
+			_contientUnePrevisualisation = false;
 		}
 	}
 
 	private const string AirePermettantPrevisualisation = "AireDetectionEspacePlante";
 	private bool PeutRetirerPrevisualation(Area3D aireSortie)
 	{
-		return ContientPrevisualisation() &&
+		return _contientUnePrevisualisation &&
 			   aireSortie.Name.Equals(AirePermettantPrevisualisation);
 	}
 
-	private bool NeContientPasPrevisualisation()
-	{
-		return !ContientPrevisualisation();
-	}
-	private bool ContientPrevisualisation()
-	{
-		return _planteEnPrevisualisation != null &&
-			   this.FindChild(_planteEnPrevisualisation.Name) != null;
-	}
 }
