@@ -61,8 +61,8 @@ size = Vector3(0.849005, 0.278853, 0.575234)
 height = 0.830626
 
 [node name="SacGraines" type="RigidBody3D"]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 0
+collision_mask = 0
 mass = 0.01
 gravity_scale = 0.0
 script = ExtResource("1_pgtsu")

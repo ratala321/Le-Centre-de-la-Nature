@@ -14,6 +14,8 @@ public partial class JoueurCanard : CharacterBody3D, IUsageInventaireJoueur, IIn
 	private AudioStreamPlayer _audioJoueur;
 	private Timer _chronometreEsquive;
 	private InventaireJoueur _inventaireJoueur;
+	private BoneAttachment3D _mainDroiteJoueur;
+	private BoneAttachment3D _mainGaucheJoueur;
 	public override void _Ready()
 	{
 		_raycastJoueurSol = (RayCast3D)GetNode("RayEstAuSol");
@@ -23,6 +25,10 @@ public partial class JoueurCanard : CharacterBody3D, IUsageInventaireJoueur, IIn
 		_audioJoueur = (AudioStreamPlayer)GetNode("AudioStreamPlayer");
 		_chronometreEsquive = (Timer)GetNode("ChronometreEsquive");
 		_inventaireJoueur = GetNode<InventaireJoueur>("InventaireJoueur");
+		_mainDroiteJoueur = GetNode<BoneAttachment3D>("KayKit_AnimatedCharacter_v13/KayKit Animated " +
+													  "Character2/Skeleton3D/MainEmplacementDroit");
+		_mainGaucheJoueur = GetNode<BoneAttachment3D>("KayKit_AnimatedCharacter_v13/KayKit Animated " +
+													  "Character2/Skeleton3D/MainEmplacementGauche");
 	}
 
 	private readonly InteractionJoueur _interactionJoueur;
@@ -104,15 +110,17 @@ public partial class JoueurCanard : CharacterBody3D, IUsageInventaireJoueur, IIn
 	}
 
 	private bool _objetMainDroiteEnMain = false;
-	public bool ObjetMainDroiteEnMain => _objetMainDroiteEnMain;
+	public bool ObjetMainDroiteEnMain { set; get; }
 	private bool _objetMainGaucheEnMain = false;
-	public bool ObjetMainGaucheEnMain => _objetMainGaucheEnMain;
+	public bool ObjetMainGaucheEnMain { set; get; }
 	public Inventaire InventaireJoueur => _inventaireJoueur;
 	public AnimationPlayer AnimationJoueur => _animationJoueur;
 	public Area3D AireInteraction => _aireInteraction;
 	public Node3D AxeRotationCamera => _axeRotationCamera;
 	public Timer ChronometreEsquive => _chronometreEsquive;
 	public AudioStreamPlayer AudioJoueur => _audioJoueur;
+	public BoneAttachment3D MainDroiteJoueur => _mainDroiteJoueur;
+	public BoneAttachment3D MainGaucheJoueur => _mainGaucheJoueur;
 
 	public Vector3 RotationJoueur
 	{
