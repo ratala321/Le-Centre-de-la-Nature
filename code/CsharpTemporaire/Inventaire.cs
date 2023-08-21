@@ -9,7 +9,7 @@ namespace PremierTest3d.code.CsharpTemporaire;
 public abstract partial class Inventaire : Control
 {
 	//duo nomObjet et sceneObjet, exemple :
-	//index = 0 -> nomObjet1, index = 1 -> sceneObjet1, index = 2 -> nomObjet2 ...
+	//index = 0 -> nomObjet1, index = 1 -> pathSceneObjet1, index = 2 -> nomObjet2 ...
 	[Export] private Array<Variant> _inventaireParDefaut;
 	
 	private ItemList _listeInventaire;
@@ -48,12 +48,29 @@ public abstract partial class Inventaire : Control
 		for (int i = 0; i < _listeInventaire.ItemCount; i++)
 		{
 			string nomObjet = _listeInventaire.GetItemText(i);
-			Variant metaDataObjet = _listeInventaire.GetItemMetadata(i);
 			
-			donnees.Add(new DonneesObjetInventaire(nomObjet, metaDataObjet));
+			string cheminSceneObjet = ObtenirCheminSceneObjet(i);
+			
+			donnees.Add(new DonneesObjetInventaire(nomObjet, cheminSceneObjet));
 		}
 
 		return donnees;
+	}
+
+	private const string MessageErreurChargementChemin =
+		"Erreur lors du chargement du chemin de la scene de l'objet a sauvegarder";
+	private string ObtenirCheminSceneObjet(int index)
+	{
+		string cheminSceneObjet = MessageErreurChargementChemin;
+		
+		Node instanceObjet = (Node)_listeInventaire.GetItemMetadata(index).Obj;
+		
+		if (instanceObjet != null)
+		{
+			cheminSceneObjet = instanceObjet.SceneFilePath;
+		}
+
+		return cheminSceneObjet;
 	}
 
 	public void AfficherInterface(SceneTree sceneEnCours)
@@ -88,7 +105,7 @@ public abstract partial class Inventaire : Control
 
 	private void CopierMetaDataVersDestination(ItemList destination, int indexObjet)
 	{
-		Variant metaDataObjet = _listeInventaire.GetItemMetadata(indexObjet);
+		Node metaDataObjet = (Node)_listeInventaire.GetItemMetadata(indexObjet).Obj;
 		int indexObjetDestination = destination.ItemCount - 1;
 		
 		destination.SetItemMetadata(indexObjetDestination, metaDataObjet);

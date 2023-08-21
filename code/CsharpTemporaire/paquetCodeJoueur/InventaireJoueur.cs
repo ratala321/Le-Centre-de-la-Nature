@@ -29,12 +29,9 @@ public partial class InventaireJoueur : Inventaire
 
 	private void LancerProcedurePourObjetSelectionnable(Variant metaDataObjetSelectionne)
 	{
-		if (metaDataObjetSelectionne.AsGodotObject() is PackedScene sceneObjetInventaire)
+		if (metaDataObjetSelectionne.AsGodotObject() is ISelectionnableDepuisInventaire instanceObjet)
 		{
-			Node objetSelectionne = sceneObjetInventaire.Instantiate();
-			ISelectionnableDepuisInventaire objetInventaire = objetSelectionne as ISelectionnableDepuisInventaire;
-			
-			objetInventaire?.EffectuerProcedureSelectionDepuisInventaire(_joueur);
+			instanceObjet.EffectuerProcedureSelectionDepuisInventaire(_joueur);
 		}
 	}
 	

@@ -33,7 +33,7 @@ public abstract partial class Outils : Node3D, ISelectionnableDepuisInventaire, 
 
 	private bool _outilsEstEnMain = false;
 
-	protected bool OutilsEstEnMain
+	protected bool EstEnMain
 	{
 		get => _outilsEstEnMain;
 		set => _outilsEstEnMain = value;

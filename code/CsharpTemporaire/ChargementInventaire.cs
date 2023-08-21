@@ -92,14 +92,22 @@ public class ChargementInventaire
         foreach (DonneesObjetInventaire donneesObjet in donneesObjets)
         {
             listeInventaire.AddItem(donneesObjet.NomObjet);
-            listeInventaire.SetItemMetadata(-1, donneesObjet.MetaDataObjet);
+
+            Variant instanceObjet = ObtenirMetadataObjetInventaire(donneesObjet.CheminSceneObjet);
+            listeInventaire.SetItemMetadata(-1, instanceObjet);
         }
+    }
+
+    private static Variant ObtenirMetadataObjetInventaire(string cheminSceneObjet)
+    {
+        PackedScene sceneObjet = ResourceLoader.Load<PackedScene>(cheminSceneObjet);
+        return sceneObjet.Instantiate();
     }
 
     private static DonneesObjetInventaire LireDonneesObjetSauvegarde(FileAccess lecteurFichier)
     {
-        string nomObjet = lecteurFichier.GetVar().AsString();
-        Variant metaDataObjet = lecteurFichier.GetVar(true);
+        string nomObjet = lecteurFichier.GetLine();
+        string metaDataObjet = lecteurFichier.GetLine();
 
         return new DonneesObjetInventaire(nomObjet, metaDataObjet);
     }
@@ -112,8 +120,8 @@ public class ChargementInventaire
     private static DonneesObjetInventaire LireDonneesObjetParDefaut(int index, Inventaire inventaire)
     {
         string nomObjet = inventaire.InventaireParDefaut[index].AsString();
-        Variant metaDataObjet = inventaire.InventaireParDefaut[index + 1];
+        string cheminSceneObjet = inventaire.InventaireParDefaut[index + 1].AsString();
         
-        return new DonneesObjetInventaire(nomObjet, metaDataObjet);
+        return new DonneesObjetInventaire(nomObjet, cheminSceneObjet);
     }
 }

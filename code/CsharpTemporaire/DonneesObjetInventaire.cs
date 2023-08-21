@@ -4,12 +4,12 @@ namespace PremierTest3d.code.CsharpTemporaire;
 
 public struct DonneesObjetInventaire
 {
-    public DonneesObjetInventaire(string nomObjet, Variant metaDataObjet)
+    public DonneesObjetInventaire(string nomObjet, string cheminSceneObjet)
     {
         NomObjet = nomObjet;
-        MetaDataObjet = metaDataObjet;
+        CheminSceneObjet = cheminSceneObjet;
     }
 
     public string NomObjet { get; }
-    public Variant MetaDataObjet { get; }
+    public string CheminSceneObjet { get; }
 }
