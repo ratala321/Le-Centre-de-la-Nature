@@ -1,9 +1,10 @@
 using Godot;
 using Godot.Collections;
+using PremierTest3d.code.CsharpTemporaire.paquetCodeJoueur;
 
 namespace PremierTest3d.code.CsharpTemporaire;
 
-public partial class SacGraine : RigidBody3D, IPossesseurActionPrincipale
+public partial class SacGraine : Outils
 {
     //Load temporaire, destine a fonctionner autrement.
     private PackedScene _graineContenue =
@@ -23,7 +24,7 @@ public partial class SacGraine : RigidBody3D, IPossesseurActionPrincipale
         EffectuerActionPrincipale(delta);
     }
     
-    public void EffectuerActionPrincipale(double delta)
+    public override void EffectuerActionPrincipale(double delta)
     {
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
@@ -69,5 +70,9 @@ public partial class SacGraine : RigidBody3D, IPossesseurActionPrincipale
         return resultatRecherche >= 0;
     }
     
+    public override int EstObjetDeMain()
+    {
+        return ValeurObjetMainGauche;
+    }
     
 }

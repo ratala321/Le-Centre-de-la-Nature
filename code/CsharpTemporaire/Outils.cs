@@ -6,8 +6,55 @@ namespace PremierTest3d.code.CsharpTemporaire;
 public abstract partial class Outils : Node3D, ISelectionnableDepuisInventaire, IPossesseurActionPrincipale,
 	IAjoutableEnMain
 {
+	public void EffectuerProcedureSelectionDepuisInventaire(JoueurCanard joueur)
+	{
+		GD.Print("PROCEDURE SELECTION OBJET");
+		if (EstEnMain)
+		{
+			RetirerObjetDansMain(joueur);
+		}
+		else
+		{
+			AjouterObjetDansMain(joueur);
+		}
+	}
+
+	private void RetirerObjetDansMain(JoueurCanard joueur)
+	{
+		if (EstObjetDeMainDroite()) {
+			RetirerObjetDansMainDroite(joueur);
+		}
+
+		if (EstObjetDeMainGauche())
+		{
+			RetirerObjetDansMainGauche(joueur);
+		}
+	}
+
+	private void AjouterObjetDansMain(JoueurCanard joueur)
+	{
+		if (EstObjetDeMainDroite()) {
+			AjouterObjetDansMainDroite(joueur);
+		}
+
+		if (EstObjetDeMainGauche())
+		{
+			AjouterObjetDansMainGauche(joueur);
+		}
+	}
+
 	protected const int ValeurObjetMainDroite = 1;
+	private bool EstObjetDeMainDroite()
+	{
+		return this.EstObjetDeMain() == ValeurObjetMainDroite;
+	}
+	
 	protected const int ValeurObjetMainGauche = 2;
+	private bool EstObjetDeMainGauche()
+	{
+		return this.EstObjetDeMain() == ValeurObjetMainGauche;
+	}
+	
 	
 	public void AjouterObjetDansMainDroite(JoueurCanard joueur)
 	{
@@ -77,12 +124,6 @@ public abstract partial class Outils : Node3D, ISelectionnableDepuisInventaire, 
 	/// Par exemple, une pelle dont son action est de creuser.
 	/// </summary>
 	public abstract void EffectuerActionPrincipale(double delta);
-	
-	/// <summary>
-	/// Permet d'effectuer une suite d'instructions lorsqu'un objet est selectionne dans l'inventaire.
-	/// </summary>
-	/// <param name="joueur"></param>
-	public abstract void EffectuerProcedureSelectionDepuisInventaire(JoueurCanard joueur);
 	
 	/// <summary>
 	/// Permet de determiner dans quelle main, gauche ou droite, un objet s'utilise.
