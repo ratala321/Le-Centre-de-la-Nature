@@ -1,6 +1,6 @@
 [gd_scene load_steps=29 format=3 uid="uid://cw0mho7tmkpw8"]
 
-[ext_resource type="Script" path="res://code/Plante.gd" id="1_uoe0j"]
+[ext_resource type="Script" path="res://code/CsharpTemporaire/Plante.cs" id="1_vfgo2"]
 [ext_resource type="Texture2D" uid="uid://bbkvo17uq35ng" path="res://importations/SourceFiles/Textures/PolygonFarm_Texture_01_A.png" id="3_mduor"]
 [ext_resource type="Shader" path="res://shaders/PrevisualisationPlante.gdshader" id="3_uu22l"]
 
@@ -211,8 +211,8 @@ _data = {
 transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 0, 0, 0)
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("1_uoe0j")
-etapesCroissance = [NodePath("Initial"), NodePath("BleEtape2"), NodePath("BleEtape3"), NodePath("BleFinal")]
+script = ExtResource("1_vfgo2")
+_etapesCroissances = PackedStringArray("Initial", "BleEtape2", "BleEtape3", "BleFinal")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_cu0ov")

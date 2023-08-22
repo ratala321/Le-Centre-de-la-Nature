@@ -20,7 +20,9 @@ public class SauvegardeInventaire
 
     private static void SauvegarderDonnee(FileAccess redacteurFichier, DonneesObjetInventaire donneeASauvegarder)
     {
-        redacteurFichier.StoreVar(donneeASauvegarder.NomObjet);
-        redacteurFichier.StoreVar(donneeASauvegarder.MetaDataObjet);
+        redacteurFichier.StoreString(donneeASauvegarder.NomObjet);
+        redacteurFichier.StoreString("\n");
+        redacteurFichier.StoreString(donneeASauvegarder.CheminSceneObjet);
+        redacteurFichier.StoreString("\n");
     }
 }

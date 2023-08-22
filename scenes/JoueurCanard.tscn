@@ -3874,6 +3874,7 @@ bone_name = "handSlotRight"
 bone_idx = 5
 
 [node name="EpeeJoueur" parent="KayKit_AnimatedCharacter_v13/KayKit Animated Character2/Skeleton3D/MainEmplacementDroit" instance=ExtResource("4_jtt62")]
+visible = false
 
 [node name="sword_teamBluegltf" parent="KayKit_AnimatedCharacter_v13/KayKit Animated Character2/Skeleton3D/MainEmplacementDroit" instance=ExtResource("4_hg4im")]
 transform = Transform3D(0.070505, 0, 0.997511, 0, 1, 0, -0.997511, 0, 0.070505, 0.0238449, -0.047028, -1.49012e-08)
