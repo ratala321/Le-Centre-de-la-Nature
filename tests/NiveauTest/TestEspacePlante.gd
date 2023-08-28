@@ -1,4 +1,4 @@
-extends Test
+extends GutTest
 
 const planteTest = preload("res://scenes/plantesScenes/BleScene.tscn")
 
@@ -26,14 +26,14 @@ func _miseEnPlaceTests():
 
 
 func _testContientPrevisualisationInitial(espaceTest) -> void:
-	assertEquals(false, espaceTest.contientUnePrevisualisation,
+	assert_eq(false, espaceTest.contientUnePrevisualisation,
 	"ERREUR, _testContientPrevisualisationInitial:TestEspacePlante.gd " +
 	"contientUnePrevisualisation devrait etre faux intialement")
 
 
 func _testContientPrevisualisationApresAjout(espaceTest) -> void:
 	espaceTest.previsualiserPlante(planteTest)
-	assertEquals(true, espaceTest.contientUnePrevisualisation,
+	assert_eq(true, espaceTest.contientUnePrevisualisation,
 	"ERREUR, _testContientPrevisualisationApresAjout:TestEspacePlante.gd " +
 	"contientUnePrevisualisation devrait etre vrai apres l'ajout d'une previsualisation")
 
@@ -41,7 +41,7 @@ func _testContientPrevisualisationApresAjout(espaceTest) -> void:
 func _testRetirerPrevisualisationNonFonctionnel(espaceTest) -> void:
 	var aire = Area3D.new()
 	espaceTest._retirerPrevisualisationApresSortieJoueur(aire)
-	assertEquals(true, espaceTest.contientUnePrevisualisation,
+	assert_eq(true, espaceTest.contientUnePrevisualisation,
 	"ERREUR, _testRetirerPrevisualisationNonFonctionnel:TestEspacePlante.gd " +
 	"contientUnePrevisualisation devrait rester inchangee lors de la sortie d'une AREA3D quelconque")
 
@@ -50,7 +50,7 @@ func _testRetirerPrevisualisationFonctionnel(espaceTest) -> void:
 	var aire : Area3D = _preparerTestRetirerPrevisualisationFonctionnel()
 	
 	espaceTest._retirerPrevisualisationApresSortieJoueur(aire)
-	assertEquals(false, espaceTest.contientUnePrevisualisation,
+	assert_eq(false, espaceTest.contientUnePrevisualisation,
 	"ERREUR, _testRetirerPrevisualisation:TestEspacePlante.gd " +
 	"contientUnePrevisualisation devrait etre faux apres avoir retire previsualisation")
 
