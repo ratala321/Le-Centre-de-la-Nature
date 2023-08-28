@@ -16,6 +16,10 @@ pipeline {
         }
 
         stage('Tests') {
+          agent any
+          environment {
+            godotMono = '/home/ec2-user/Godot_v4.1.1-stable_mono_linux_x86_64/Godot_v4.1.1-stable_mono_linux.x86_64'
+          }
           steps {
             sh '''godotMono -s --path "$PWD" addons/gut/gut_cmdln.gd -gtest=res://tests/test_Basique.gd -glog=1 -gexit
 '''
@@ -25,5 +29,8 @@ pipeline {
       }
     }
 
+  }
+  environment {
+    godotMono = '/home/ec2-user/Godot_v4.1.1-stable_mono_linux_x86_64/Godot_v4.1.1-stable_mono_linux.x86_64'
   }
 }
