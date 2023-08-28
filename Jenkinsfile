@@ -21,7 +21,8 @@ pipeline {
             godotMono = '/usr/local/bin/Godot_v4.1.1-stable_mono_linux_x86_64/executable_Godot_v4.1.1'
           }
           steps {
-            sh '''"$godotMono" -s --path "$PWD" addons/gut/gut_cmdln.gd -gtest=res://tests/test_Basique.gd -glog=1 -gexit
+            sh '''"$godotMono" -s --path "$PWD" --rendering-driver opengl3
+  addons/gut/gut_cmdln.gd -gtest=res://tests/test_Basique.gd -glog=1 -gexit
 '''
           }
         }
