@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Checkout Code') {
       steps {
-        git(url: 'https://github.com/ratala321/premier_test3d_godot', branch: 'develop')
+        git(url: 'https://github.com/ratala321/premier_test_3d_privee', branch: 'develop')
       }
     }
 
