@@ -4,7 +4,7 @@ extends AbstractInventaire
 
 func _ready():
 	super._ready()
-	listeInventaire.connect("item_clicked", effectuer_procedure_selection_objet)
+	liste_inventaire.connect("item_clicked", effectuer_procedure_selection_objet)
 	set_process_mode(PROCESS_MODE_WHEN_PAUSED)
 
 

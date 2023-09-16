@@ -94,8 +94,3 @@ func charger_contenu_inventaire() -> void:
 # Permet d'effectuer la procedure de selection d'un objet dans un inventaire.
 # Doit etre connectee au signal ItemClicked d'un ItemList.
 # abstract effecuter_procedure_selection_objet(index, at_position, mouse_button_index) -> void:
-
-# Doit etre appelee par tous les inventaires dans _Ready pour charger leur contenu sauvegarde ou par defaut.
-# abstract charger_contenu_inventaire_sur_ready() -> void:
-
-
