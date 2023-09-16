@@ -12,6 +12,7 @@ var liste_inventaire : ItemList
 
 func _ready():
 	set_process_mode(PROCESS_MODE_WHEN_PAUSED)
+	charger_contenu_inventaire()
 
 
 func _determiner_chemin_fichier_sauvegarde() -> String:
@@ -66,7 +67,7 @@ func cacher_interface() -> void:
 
 
 var inventaire_destination : AbstractInventaire
-func transferer_objet_versinventaire_destination(index_objet : int) -> void:
+func transferer_objet_vers_inventaire_destination(index_objet : int) -> void:
 	_copier_objet_vers_destination(inventaire_destination.liste_inventaire, index_objet)
 	_copier_metadata_vers_destination(inventaire_destination.liste_inventaire, index_objet)
 	_retirer_objet_transfere_inventaire(index_objet)
