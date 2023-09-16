@@ -35,7 +35,7 @@ func _obtenir_donnees_contenu_inventaire() -> Array:
 	for i in range(0, liste_inventaire.item_count):
 		var nomObjet : String = liste_inventaire.get_item_text(i)
 		var cheminSceneObjet : String = _obtenir_chemin_scene_objet(i)
-		donnees.push_front(DonneesObjetInventaire.new(nomObjet, cheminSceneObjet))
+		donnees.push_back(DonneesObjetInventaire.new(nomObjet, cheminSceneObjet))
 	
 	return donnees
 
