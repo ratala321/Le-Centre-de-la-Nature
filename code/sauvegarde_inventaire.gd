@@ -1,3 +1,4 @@
+@static_unload
 class_name SauvegardeInventaire
 extends Object
 

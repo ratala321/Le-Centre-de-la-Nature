@@ -20,7 +20,7 @@ func _physics_process(delta):
 
 
 func effectuer_action_principale(delta) -> void:
-	if Input.is_mouse_button_pressed(MouseButton.Right):
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		_effecuter_fonction_sur_espace_plante(Callable(self, "_ajouter_plante_dans_espace"))
 
 
@@ -30,12 +30,11 @@ func _effectuer_procedure_previsualisation_plante() -> void:
 
 ## Cherche un EspacePlante a portee du sac et applique la fonction sur cet EspacePlante
 ## Effectuer la fonction sur le premier EspacePlante trouve
-func _effecuter_fonction_sur_espace_plante(fonction_a_appliquer : Callable)
-		var aires_detectees : Array[Area3D] =
-			_aire_detection_espace_plante.get_overlapping_areas()
-		)
-
-		var resultat_recherche : int = DetectionEspacePlante.detecter_espace_plante(aires_detectees)
+func _effecuter_fonction_sur_espace_plante(fonction_a_appliquer : Callable):
+	var aires_detectees : Array[Area3D] =(
+		_aire_detection_espace_plante.get_overlapping_areas()
+	)
+	var resultat_recherche : int = DetectionEspacePlante.detecter_espace_plante(aires_detectees)
 
 	if _espace_plante_est_detecte(resultat_recherche):
 		fonction_a_appliquer.call(aires_detectees[resultat_recherche])

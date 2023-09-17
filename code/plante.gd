@@ -55,6 +55,6 @@ func couper_plante() -> void:
 
 
 var _sol_fertile : SolFertile
-func ajouter_reference_sol_fertile(reference_sol_fertile : Solfertile) -> void:
+func ajouter_reference_sol_fertile(reference_sol_fertile : SolFertile) -> void:
 	_sol_fertile = reference_sol_fertile
 	reference_sol_fertile.ajouter_plante_contenue(self)

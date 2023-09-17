@@ -1,3 +1,4 @@
+@static_unload
 class_name ChargementInventaire
 extends Object
 

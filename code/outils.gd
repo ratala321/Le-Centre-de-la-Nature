@@ -4,13 +4,17 @@ extends Node3D
 
 var _est_en_main : bool = false
 
+var _instance_outils
+func _init(instance_outils):
+	self._instance_outils = instance_outils
 
-func effectuer_procedure_selection_depuis_inventaire(JoueurCanard joueur) -> void:
+
+func effectuer_procedure_selection_depuis_inventaire(joueur : JoueurCanard) -> void:
 	print("PROCEDURE SELECTION OUTILS")
-	if est_en_main:
+	if _est_en_main:
 		_retirer_outils_dans_main(joueur)
 	else:
-		-ajouter_outils_dans_main(joueur)
+		_ajouter_outils_dans_main(joueur)
 
 
 func _retirer_outils_dans_main(joueur : JoueurCanard) -> void:
@@ -31,12 +35,12 @@ func _ajouter_outils_dans_main(joueur) -> void:
 
 const VALEUR_OUTILS_MAIN_DROITE : int = 1
 func _est_outils_de_main_droite() -> bool:
-	return self.est_outils_de_main() == VALEUR_OUTILS_MAIN_DROITE
+	return _instance_outils.est_outils_de_main() == VALEUR_OUTILS_MAIN_DROITE
 
 
 const VALEUR_OUTILS_MAIN_GAUCHE : int = 2
 func _est_outils_de_main_gauche() -> bool:
-	return self.est_outils_de_main() == VALEUR_OUTILS_MAIN_GAUCHE
+	return _instance_outils.est_outils_de_main() == VALEUR_OUTILS_MAIN_GAUCHE
 
 
 func _ajouter_outils_dans_main_droite(joueur : JoueurCanard) -> void:

@@ -1,5 +1,5 @@
 class_name EntreeMouvementJoueur
-extends Reference
+extends RefCounted
 
 
 var _joueur : JoueurCanard

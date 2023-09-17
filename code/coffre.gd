@@ -8,10 +8,10 @@ func _ready():
 
 func effecuter_interaction(interacteur : Node) -> void:
 	if interacteur.has_node("Inventaire"):
-		inventaire_coffre : AbstractInventaire = get_node("InventaireCoffre") as AbstractInventaire
+		var inventaire_coffre : AbstractInventaire = get_node("InventaireCoffre") as AbstractInventaire
 
 		_afficher_interfaces(inventaire_coffre, interacteur.inventaire_joueur)
-		_ajouter_references_inventaire_destination(inventaire_coffre, interacteur_proprietaire)
+		_ajouter_references_inventaire_destination(inventaire_coffre, interacteur)
 
 
 func _afficher_interfaces(inventaire_coffre : AbstractInventaire,

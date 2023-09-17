@@ -1,6 +1,5 @@
 class_name DonneesObjetInventaire
-extends Reference
-
+extends RefCounted
 
 var nom_objet : String
 var chemin_scene_objet : String
