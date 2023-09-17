@@ -6,5 +6,4 @@ extends AnimatableBody3D
 
 #------------------------------------
 # Permet d'effectuer une serie d'instructions liee a l'interaction associee a l'objet interactif.
-# l'interacteur doit posseder un node "Inventaire"
 # abstract effectuer_interaction(interacteur : Node) -> void:
