@@ -8,7 +8,7 @@ func _init(joueur : JoueurCanard):
 
 
 ## Destinee a etre lancee depuis le systeme d'animation
-func effectuer_procedure_interaction() -> void:
+func effectuer_procedure_interaction_finale() -> void:
 	var objets_en_collision : Array = _joueur.aire_interaction.get_overlapping_bodies()
 	var i : int = 0
 
@@ -39,7 +39,8 @@ func _lancer_interaction_avec_objet_interactif(objet_interactif) -> void:
 	objet_interactif.effectuer_interaction(_joueur)
 
 
-func effectuer_interaction_joueur() -> void:
+## Destinee a etre lancee par le joueur
+func effectuer_procedure_interaction_initiale() -> void:
 	if _joueur_peut_interagir():
 		_jouer_animation_interaction()
 
