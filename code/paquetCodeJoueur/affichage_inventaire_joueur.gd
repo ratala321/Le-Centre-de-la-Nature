@@ -28,6 +28,6 @@ func _etat_joueur_permet_affichage_inventaire() -> bool:
 
 
 func _afficher_inventaire_joueur() -> void:
-	inventaire_joueur : AbstractInventaire = _joueur.inventaire_joueur
-	scene_en_cours : SceneTree = _joueur.get_tree()
+	var inventaire_joueur : AbstractInventaire = _joueur.inventaire_joueur
+	var scene_en_cours : SceneTree = _joueur.get_tree()
 	inventaire_joueur.afficher_interface(scene_en_cours)

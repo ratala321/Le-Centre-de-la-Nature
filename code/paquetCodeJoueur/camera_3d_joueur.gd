@@ -26,8 +26,8 @@ func _input(event):
 
 
 func _tourner_camera_souris_joueur() -> void:
-	global_rotation_degrees.x = rotationVerticaleCamera
-	global_rotation_degrees.y = rotationHorizontaleCamera
+	global_rotation_degrees.x = rotation_verticale_camera
+	global_rotation_degrees.y = rotation_horizontale_camera
 
 
 const ROTATION_VERTICALE_MAXIMALE_HAUT : float = 26
@@ -37,7 +37,8 @@ const TOUR_HORIZONTAL_GAUCHE_COMPLET : float = 540
 const TOUR_HORIZONTAL_DROITE_COMPLET : float = -180
 func _actualiser_valeur_rotation_camera(direction_mouvement_souris : Vector2) -> void:
 	rotation_verticale_camera += direction_mouvement_souris.y
-	rotation_verticale_camera = clampf(rotationVerticaleCamera,
+	
+	rotation_verticale_camera = clampf(rotation_verticale_camera,
 		ROTATION_VERTICALE_MAXIMALE_BAS, ROTATION_VERTICALE_MAXIMALE_HAUT)
 
 	rotation_horizontale_camera -= direction_mouvement_souris.x
