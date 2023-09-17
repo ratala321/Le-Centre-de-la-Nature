@@ -1,5 +1,5 @@
 class_name EntreeMouvementJoueur
-extends Object
+extends Reference
 
 
 var _joueur : JoueurCanard
@@ -122,5 +122,5 @@ func _normaliser_direction_diagonale(direction_joueur : Vector3) -> Vector3:
 	return direction_joueur
 
 
-static func _normalisation_est_necessaire(vecteur_non_normalise) -> bool:
+func _normalisation_est_necessaire(vecteur_non_normalise) -> bool:
 	return vecteur_non_normalise != Vector3.ZERO

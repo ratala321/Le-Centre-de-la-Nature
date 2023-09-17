@@ -1,5 +1,5 @@
 class_name MouvementJoueur
-extends Object
+extends Reference
 
 
 var _joueur : JoueurCanard
@@ -76,7 +76,7 @@ func _appliquer_gravite(constante_gravite : int, delta) -> void:
 
 
 const VALEUR_INDEX_AUCUN_MOUVEMENT : int = 4
-static func _joueur_est_en_mouvement(index_facteurs_rotation : int) -> bool:
+func _joueur_est_en_mouvement(index_facteurs_rotation : int) -> bool:
 	return index_facteurs_rotation != VALEUR_INDEX_AUCUN_MOUVEMENT
 
 

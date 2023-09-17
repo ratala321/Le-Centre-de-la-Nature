@@ -1,5 +1,5 @@
 class_name FacteursMouvementJoueur
-extends Object
+extends Reference
 
 
 ## Utilise pour la rotation du joueur et de la camera.

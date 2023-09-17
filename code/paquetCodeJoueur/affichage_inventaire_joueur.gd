@@ -1,5 +1,5 @@
 class_name AffichageInventaireJoueur
-extends Object
+extends Reference
 
 
 var _joueur : JoueurCanard

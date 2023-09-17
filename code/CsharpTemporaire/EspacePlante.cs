@@ -124,7 +124,7 @@ public partial class EspacePlante : Area3D
 
 	private void RetirerPrevisualisationApresSortieJoueur(Area3D aireSortie)
 	{
-		if (PeutRetirerPrevisualation(aireSortie))
+		if (PeutRetirerPrevisualisation(aireSortie))
 		{
 			_planteEnPrevisualisation.Free();
 			_planteEnPrevisualisation = null;
@@ -133,7 +133,7 @@ public partial class EspacePlante : Area3D
 	}
 
 	private const string AirePermettantPrevisualisation = "AireDetectionEspacePlante";
-	private bool PeutRetirerPrevisualation(Area3D aireSortie)
+	private bool PeutRetirerPrevisualisation(Area3D aireSortie)
 	{
 		return _contientUnePrevisualisation &&
 			   aireSortie.Name.Equals(AirePermettantPrevisualisation);

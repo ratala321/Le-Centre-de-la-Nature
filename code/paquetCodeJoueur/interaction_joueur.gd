@@ -1,5 +1,5 @@
 class_name InteractionJoueur
-extends Object
+extends Reference
 
 
 var _joueur : JoueurCanard
@@ -22,12 +22,12 @@ func effectuer_procedure_interaction_finale() -> void:
 		_lancer_interaction_avec_objet_interactif(objets_en_collision[i])
 
 
-static func _recherche_objet_interactif_est_en_cours(compteur : int,
+func _recherche_objet_interactif_est_en_cours(compteur : int,
 		nombre_objets_interactifs_potentiels : int) -> bool:
 	return compteur < nombre_objets_interactifs_potentiels
 
 
-static func _n_est_pas_objet_interactif(objet_en_collision) -> bool:
+func _n_est_pas_objet_interactif(objet_en_collision) -> bool:
 	return not objet_en_collision.has_method("effectuer_interaction")
 
 

@@ -1,5 +1,5 @@
 class_name DonneesObjetInventaire
-extends Object
+extends Reference
 
 
 var nom_objet : String
