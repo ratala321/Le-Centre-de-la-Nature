@@ -17,6 +17,11 @@ func effectuer_procedure_selection_depuis_inventaire(joueur : JoueurCanard) -> v
 		_ajouter_outils_dans_main(joueur)
 
 
+func effectuer_procedure_retrait_main_joueur(joueur : JoueurCanard) -> void:
+	if _est_en_main:
+		_retirer_outils_dans_main(joueur)
+
+
 func _retirer_outils_dans_main(joueur : JoueurCanard) -> void:
 	if _est_outils_de_main_droite():
 		_retirer_outils_dans_main_droite(joueur)

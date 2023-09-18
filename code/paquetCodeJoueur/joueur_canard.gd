@@ -80,3 +80,30 @@ func relancer_mouvement() -> void:
 
 func niveau_du_joueur_est_en_pause() -> bool:
 	return get_tree().paused
+
+
+func liberer_main_droite(objet_exception : Variant) -> void:
+	var objets_main_droite : Array[Node] = main_droite_joueur.get_children()
+
+	for objet_main_droite in objets_main_droite:
+		if(
+			objet_main_droite.has_method("effectuer_procedure_retrait_main_joueur") and 
+			objet_main_droite != objet_exception
+		):
+			objet_main_droite.effectuer_procedure_retrait_main_joueur(self)
+
+
+func liberer_main_gauche(objet_exception : Variant) -> void:
+	var objets_main_gauche : Array[Node] = main_gauche_joueur.get_children()
+
+	for objet_main_gauche in objets_main_gauche:
+		if(
+			objet_main_gauche.has_method("effectuer_procedure_retrait_main_joueur") and 
+			objet_main_gauche != objet_exception
+		):
+			objet_main_gauche.effectuer_procedure_retrait_main_joueur(self)
+
+
+## non implementee pour le moment, car aucun objet a deux mains dans le jeu pour l'instant
+func liberer_deux_mains(objet_exception : Variant) -> void:
+	pass
