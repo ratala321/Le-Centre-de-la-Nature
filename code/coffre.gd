@@ -2,16 +2,12 @@ class_name Coffre
 extends AbstractObjetInteractif
 
 
-func _ready():
-	super._ready()
-
-
-func effecuter_interaction(interacteur : Node) -> void:
-	if interacteur.has_node("Inventaire"):
+func effectuer_interaction(interacteur : Node) -> void:
+	if interacteur.has_node("InventaireJoueur"):
 		var inventaire_coffre : AbstractInventaire = get_node("InventaireCoffre") as AbstractInventaire
 
 		_afficher_interfaces(inventaire_coffre, interacteur.inventaire_joueur)
-		_ajouter_references_inventaire_destination(inventaire_coffre, interacteur)
+		_ajouter_references_inventaire_destination(inventaire_coffre, interacteur.inventaire_joueur)
 
 
 func _afficher_interfaces(inventaire_coffre : AbstractInventaire,

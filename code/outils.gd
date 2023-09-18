@@ -48,14 +48,14 @@ func _ajouter_outils_dans_main_droite(joueur : JoueurCanard) -> void:
 	_retirer_outils_deja_present_main_droite(joueur)
 
 	joueur.main_droite_joueur.add_child(self)
-	joueur.objet_main_droite_en_main = true
+	joueur.detient_objet_en_main_droite = true
 	_est_en_main = true
 
 
 func _retirer_outils_dans_main_droite(joueur : JoueurCanard) -> void:
 	print("retirer outils main droite")
 	joueur.main_droite_joueur.remove_child(self)
-	joueur.objet_main_droite_en_main = false
+	joueur.detient_objet_en_main_droite = false
 	_est_en_main = false
 
 
@@ -64,25 +64,25 @@ func _ajouter_outils_dans_main_gauche(joueur : JoueurCanard) -> void:
 	_retirer_outils_deja_present_main_gauche(joueur)
 
 	joueur.main_gauche_joueur.add_child(self)
-	joueur.objet_main_gauche_en_main = true
+	joueur.detient_objet_en_main_gauche = true
 	_est_en_main = true
 
 
 func _retirer_outils_dans_main_gauche(joueur : JoueurCanard) -> void:
 	print("retirer outils main gauche")
 	joueur.main_gauche_joueur.remove_child(self)
-	joueur.objet_main_gauche_en_main = false
+	joueur.detient_objet_en_main_gauche = false
 	_est_en_main = false
 
 
 func _retirer_outils_deja_present_main_droite(joueur : JoueurCanard) -> void:
-	if joueur.objet_main_droite_en_main:
+	if joueur.detient_objet_en_main_droite:
 		# TODO le faire directement dans joueur ?
 		_retirer_outils_dans_main_droite(joueur)
 
 
 func _retirer_outils_deja_present_main_gauche(joueur : JoueurCanard) -> void:
-	if joueur.objet_main_gauche_en_main:
+	if joueur.detient_objet_en_main_gauche:
 		# TODO le faire directement dans joueur ?
 		_retirer_outils_dans_main_gauche(joueur)
 

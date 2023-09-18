@@ -1,6 +1,6 @@
 [gd_scene load_steps=54 format=3 uid="uid://dq04vglibsi8r"]
 
-[ext_resource type="Script" path="res://code/CsharpTemporaire/paquetCodeJoueur/JoueurCanard.cs" id="1_0pvty"]
+[ext_resource type="Script" path="res://code/paquetCodeJoueur/joueur_canard.gd" id="1_nea2h"]
 [ext_resource type="PackedScene" uid="uid://btsmjqc2w8pl3" path="res://scenes/vetementsScenes/ChapeauCowboy.tscn" id="2_jrist"]
 [ext_resource type="PackedScene" uid="uid://b0mm1k2dpaqho" path="res://importations/bow_teamBlue.gltf.glb" id="2_thlrn"]
 [ext_resource type="PackedScene" uid="uid://bgacblhfo0lc2" path="res://importations/arrow_teamBlue.gltf.glb" id="3_j6oia"]
@@ -2191,7 +2191,7 @@ tracks/16/keys = {
 }
 tracks/17/type = "method"
 tracks/17/imported = false
-tracks/17/enabled = true
+tracks/17/enabled = false
 tracks/17/path = NodePath("..")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
@@ -2207,6 +2207,26 @@ tracks/17/keys = {
 }, {
 "args": [],
 "method": &"RelancerMouvement"
+}]
+}
+tracks/18/type = "method"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("..")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"arreter_mouvement"
+}, {
+"args": [],
+"method": &"lancer_procedure_interaction_finale"
+}, {
+"args": [],
+"method": &"relancer_mouvement"
 }]
 }
 
@@ -3761,7 +3781,7 @@ height = 1.93666
 size = Vector3(1.47799, 2.39154, 1.81609)
 
 [node name="JoueurCanard" type="CharacterBody3D"]
-script = ExtResource("1_0pvty")
+script = ExtResource("1_nea2h")
 
 [node name="KayKit_AnimatedCharacter_v13" type="Node3D" parent="."]
 

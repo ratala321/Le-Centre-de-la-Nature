@@ -37,7 +37,7 @@ func _appliquer_rotation_joueur(index_facteurs_rotation : int) -> void:
 		
 		var angle_rotation : float = _calculer_angle_rotation(index_facteurs_rotation)
 
-		_joueur.rotation = Vector3(_joueur.rotation.x, angle_rotation, _joueur.rotaiton.z)
+		_joueur.rotation = Vector3(_joueur.rotation.x, angle_rotation, _joueur.rotation.z)
 
 		_conserver_rotation_initiale_camera(rotation_initiale_camera)
 
@@ -129,6 +129,7 @@ func _joueur_avait_saisi_boutton_saut(direction_joueur : Vector3) -> bool:
 
 const HAUTEUR_MAXIMALE_SAUT : int = 4250
 const TEMPS_HAUTEUR_MAXIMALE_SAUT : int = 7
+@warning_ignore("integer_division")
 const IMPULSION_SAUT_JOUEUR : int = 2 * HAUTEUR_MAXIMALE_SAUT / TEMPS_HAUTEUR_MAXIMALE_SAUT
 const SON_SAUT : AudioStream = preload("res://sons/jump_8bits.mp3")
 func _appliquer_saut(delta) -> void:

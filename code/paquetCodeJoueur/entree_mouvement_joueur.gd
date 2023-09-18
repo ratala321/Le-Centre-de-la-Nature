@@ -62,6 +62,7 @@ func _effectuer_procedure_ajustement_direction_joueur(direction_joueur_brut : Ve
 ## Creation d'une valeur d'index unique pour chaque direction de rotation
 ## Exemple direction droite = Vecteur(-1,0,0) -> resultat = -1 + 3 * 0 + 4 = 3
 func _calculer_index_facteurs_rotation(direction_joueur_brut : Vector3) -> int:
+	@warning_ignore("narrowing_conversion")
 	return direction_joueur_brut.x + 3 * direction_joueur_brut.z + 4
 
 

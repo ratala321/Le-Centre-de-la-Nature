@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cckcrlxvfyuku"]
 
-[ext_resource type="Script" path="res://code/CsharpTemporaire/paquetCodeJoueur/InventaireJoueur.cs" id="1_fy7u2"]
+[ext_resource type="Script" path="res://code/paquetCodeJoueur/inventaire_joueur.gd" id="1_gt6oj"]
 
 [node name="InventaireJoueur" type="Control" groups=["InterfaceEnJeu"]]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_fy7u2")
+script = ExtResource("1_gt6oj")
 
 [node name="Camera2DInventaireJoueur" type="Camera2D" parent="."]
 

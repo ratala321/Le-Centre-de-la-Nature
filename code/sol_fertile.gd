@@ -11,8 +11,6 @@ var _plantes_contenues : Array[Plante]
 
 
 func _ready():
-	super._ready()
-
 	chrono_intervalle_croissance.connect("timeout", _avancer_croissance_plantes)
 
 	_ajouter_plantes_provenant_editeur()
@@ -31,7 +29,7 @@ func _avancer_croissance_plantes() -> void:
 		plante_contenue.avancer_croissance(TEMPS_AVANCEMENT)
 
 
-func effectuer_interaction(interacteur) -> void:
+func effectuer_interaction(_interacteur) -> void:
 	#TODO
 	print("Interaction avec sol fertile")
 

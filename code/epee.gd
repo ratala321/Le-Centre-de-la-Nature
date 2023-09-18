@@ -13,7 +13,6 @@ func est_outils_de_main() -> int:
 	return VALEUR_OUTILS_MAIN_DROITE
 
 
-func effecter_action_principale(delta) -> void:
+func effecter_action_principale(_delta) -> void:
 	#TODO
 	print("PROCEDURE EPEE")
-	pass

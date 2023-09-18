@@ -2,7 +2,8 @@ class_name Plante
 extends AnimatableBody3D
 
 
-@export var _etapes_croissance : Array
+## Contient les chemins, bases sur le Root Node de la plante, vers chacune des etapes de croissance
+@export var _etapes_croissance : Array[NodePath]
 
 
 const DUREE_CROISSANCE_INITALE : int =  10

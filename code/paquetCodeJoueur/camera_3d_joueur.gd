@@ -12,7 +12,7 @@ var rotation_horizontale_camera : float = 0
 
 func _ready():
 	## Isole la souris dans la fenetre
-	Input.set_mouse_mode(2)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 func _input(event):

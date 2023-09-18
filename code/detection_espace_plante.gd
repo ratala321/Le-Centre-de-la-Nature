@@ -1,4 +1,3 @@
-@static_unload
 class_name DetectionEspacePlante
 extends Node
 
@@ -9,10 +8,10 @@ static func detecter_espace_plante(aires_detectees : Array) -> int:
 	while i < aires_detectees.size() and _n_est_pas_espace_plante(aires_detectees[i]):
 		i += 1
 
-	if _aucune_aire_est_espace_plante:
+	if _aucune_aire_est_espace_plante(aires_detectees.size(), i):
 		i = -1
 
-	return i - 1
+	return i
 
 
 static func _n_est_pas_espace_plante(aire_detectee) -> bool:

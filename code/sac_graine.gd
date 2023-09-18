@@ -15,11 +15,15 @@ func _ready():
 		_effectuer_procedure_previsualisation_plante)
 
 
-func _physics_process(delta):
-	effectuer_action_principale(delta)
+func _init():
+	super._init(self)
 
 
-func effectuer_action_principale(delta) -> void:
+func _physics_process(_delta):
+	effectuer_action_principale()
+
+
+func effectuer_action_principale() -> void:
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		_effecuter_fonction_sur_espace_plante(Callable(self, "_ajouter_plante_dans_espace"))
 

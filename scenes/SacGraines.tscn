@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://dcqnxh0sklqav"]
 
-[ext_resource type="Script" path="res://code/CsharpTemporaire/SacGraine.cs" id="1_5mffq"]
+[ext_resource type="Script" path="res://code/sac_graine.gd" id="1_d2lr3"]
 [ext_resource type="Texture2D" uid="uid://bbkvo17uq35ng" path="res://importations/SourceFiles/Textures/PolygonFarm_Texture_01_A.png" id="2_3p1x1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ge5q"]
@@ -65,7 +65,7 @@ collision_layer = 0
 collision_mask = 0
 mass = 0.01
 gravity_scale = 0.0
-script = ExtResource("1_5mffq")
+script = ExtResource("1_d2lr3")
 
 [node name="SM_Prop_GrainBag_01" type="Node3D" parent="."]
 

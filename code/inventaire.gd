@@ -7,7 +7,7 @@ extends Control
 @export var inventaire_par_defaut : Array
 
 var liste_inventaire : ItemList
-@onready var _chemin_fichier_sauvegarde : String = _determiner_chemin_fichier_sauvegarde()
+@onready var chemin_fichier_sauvegarde : String = _determiner_chemin_fichier_sauvegarde()
 
 
 func _ready():
@@ -21,18 +21,18 @@ func _determiner_chemin_fichier_sauvegarde() -> String:
 	return "user://" + _proprietaire_inventaire.name + ".txt"
 
 
-func _notification(notification):
-	if _fermeture_jeu_est_demandee(notification):
+func _notification(what):
+	if _fermeture_jeu_est_demandee(what):
 		var donnees_a_sauvegarder : Array = _obtenir_donnees_contenu_inventaire()
-		SauvegardeInventaire.sauvegarder_donnees_contenu_inventaire(donnees_a_sauvegarder, _chemin_fichier_sauvegarde)
+		SauvegardeInventaire.sauvegarder_donnees_contenu_inventaire(donnees_a_sauvegarder, chemin_fichier_sauvegarde)
 
 
-func _fermeture_jeu_est_demandee(notification) -> bool:
-	return notification == NOTIFICATION_WM_CLOSE_REQUEST
+func _fermeture_jeu_est_demandee(what) -> bool:
+	return what == NOTIFICATION_WM_CLOSE_REQUEST
 
 
 func _obtenir_donnees_contenu_inventaire() -> Array:
-	var donnees : Array
+	var donnees : Array = []
 	for i in range(0, liste_inventaire.item_count):
 		var nomObjet : String = liste_inventaire.get_item_text(i)
 		var cheminSceneObjet : String = _obtenir_chemin_scene_objet(i)
@@ -56,13 +56,13 @@ func _obtenir_chemin_scene_objet(index : int) -> String:
 
 func afficher_interface(scene_en_cours : SceneTree) -> void:
 	show()
-	Input.MOUSE_MODE_CONFINED
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 	scene_en_cours.paused = true
 
 
 func cacher_interface() -> void:
 	hide()
-	Input.MOUSE_MODE_CAPTURED
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	get_tree().paused = false
 
 

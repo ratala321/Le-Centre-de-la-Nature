@@ -1,4 +1,3 @@
-@static_unload
 class_name ChargementInventaire
 extends Object
 
@@ -22,7 +21,7 @@ static func _effecuter_procedure_chargement_contenu_inventaire(inventaire : Abst
 static func _lire_donnees_contenu_inventaire(inventaire : AbstractInventaire) -> Array:
 	var donnees_contenu_inventaire : Array
 
-	if _fichier_sauvegarde_est_existant(inventaire.chemin_fichier_inventaire):
+	if _fichier_sauvegarde_est_existant(inventaire.chemin_fichier_sauvegarde):
 		donnees_contenu_inventaire = _lire_inventaire_sauvegarde(inventaire)
 	elif _inventaire_par_defaut_est_existant(inventaire):
 		donnees_contenu_inventaire = _lire_inventaire_par_defaut(inventaire)
@@ -44,9 +43,9 @@ static func _inventaire_par_defaut_n_est_pas_vide(inventaire : AbstractInventair
 
 static func _lire_inventaire_sauvegarde(inventaire : AbstractInventaire) -> Array:
 	var lecteur_fichier_sauvegarde : FileAccess =(
-		FileAccess.open(inventaire.chemin_fichier_inventaire, FileAccess.READ))
+		FileAccess.open(inventaire.chemin_fichier_sauvegarde, FileAccess.READ))
 	
-	var donnees_objets_sauvegardes : Array
+	var donnees_objets_sauvegardes : Array = []
 	while _lecture_fichier_est_incomplete(lecteur_fichier_sauvegarde):
 		var donnees_objet_sauvegarde : DonneesObjetInventaire =(
 			_lire_donnees_objet_sauvegarde(lecteur_fichier_sauvegarde))
@@ -57,7 +56,7 @@ static func _lire_inventaire_sauvegarde(inventaire : AbstractInventaire) -> Arra
 
 
 static func _lire_inventaire_par_defaut(inventaire : AbstractInventaire) -> Array:
-	var donnees_objets_par_defaut : Array
+	var donnees_objets_par_defaut : Array = []
 
 	for i in range(0, inventaire.inventaire_par_defaut.size(), 2):
 		var donnees_objet_par_defaut : DonneesObjetInventaire =(

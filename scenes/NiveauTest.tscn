@@ -66,7 +66,6 @@ shape = SubResource("BoxShape3D_4ev3r")
 
 [node name="InventaireCoffre" parent="Coffre" instance=ExtResource("4_mwksg")]
 visible = false
-_inventaireParDefaut = [&"Epee", &"res://scenes/EpeeJoueur.tscn"]
 
 [node name="Coffre3" parent="." instance=ExtResource("3_ko3p6")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.9817, 0, -2.27212)
