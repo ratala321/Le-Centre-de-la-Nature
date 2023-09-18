@@ -1,37 +1,45 @@
 pipeline {
-  agent any
-  stages {
-    stage('Checkout Code') {
-      steps {
-        git(url: 'https://github.com/ratala321/premier_test_3d_privee', branch: 'develop', credentialsId: 'jenkinsDeployKey')
-      }
-    }
+	agent {
+		docker {
+			image 'ratala/godot-ci-dotnet:godot-4.1.1'
+			args '-u root:sudo' 
+		}
+	}
+	stages {
+		stage('Configuration') {
+			steps {
+				sh '''
+					useradd -m jenkins
+					cd /home/jenkins
+					chmod +rwx ~
+					'''
+			}
+		}
 
-    stage('Log') {
-      parallel {
-        stage('Log') {
-          steps {
-            sh 'ls -la'
-          }
-        }
+		stage('Checkout Code') {
+			steps {
+				git(url: 'git@github.com:ratala321/premier_test_3d_privee.git', branch: 'master', credentialsId: 'github-premier-jenkins')
+			}
+		}
 
-        stage('Tests') {
-          agent any
-          environment {
-            godotMono = '/usr/local/bin/Godot_v4.1.1-stable_mono_linux_x86_64/executable_Godot_v4.1.1'
-          }
-          steps {
-            sh '''"$godotMono" -s --headless --path "$PWD"
-  addons/gut/gut_cmdln.gd -gtest=res://tests/test_Basique.gd -glog=1 -gexit
-'''
-          }
-        }
+		stage('Log') {
+			steps {
+				sh 'ls -la'
+			}
+		}
 
-      }
-    }
+		stage('Editeur') {
+			steps {
+				sh 'godot -e --headless --quit project.godot'
+			}
+		}
 
-  }
-  environment {
-    godotMono = '/home/ec2-user/Godot_v4.1.1-stable_mono_linux_x86_64/Godot_v4.1.1-stable_mono_linux.x86_64'
-  }
+		stage('Tests') {
+			steps {
+				sh 'godot -s --headless --path .  addons/gut/gut_cmdln.gd -gtest=res://tests/test_basique.gd -glog=1 -gexit'
+			}
+		}
+
+
+	}
 }
