@@ -70,6 +70,7 @@ var inventaire_destination : AbstractInventaire
 func transferer_objet_vers_inventaire_destination(index_objet : int) -> void:
 	_copier_objet_vers_destination(inventaire_destination.liste_inventaire, index_objet)
 	_copier_metadata_vers_destination(inventaire_destination.liste_inventaire, index_objet)
+	_ajuster_proprietaire_objet_transfere(index_objet)
 	_retirer_objet_transfere_inventaire(index_objet)
 
 
@@ -81,7 +82,16 @@ func _copier_objet_vers_destination(destination : ItemList, index_objet : int) -
 func _copier_metadata_vers_destination(destination : ItemList, index_objet : int) -> void:
 	var metadata_objet : Node = liste_inventaire.get_item_metadata(index_objet)
 	var index_objet_destination : int = destination.item_count - 1
+
 	destination.set_item_metadata(index_objet_destination, metadata_objet)
+
+
+func _ajuster_proprietaire_objet_transfere(index_objet : int):
+	var nouveau_proprietaire = inventaire_destination.get_parent()
+	var metadata_objet : Node = liste_inventaire.get_item_metadata(index_objet)
+
+	metadata_objet.proprietaire = nouveau_proprietaire
+
 
 func _retirer_objet_transfere_inventaire(index_objet : int) -> void:
 	liste_inventaire.remove_item(index_objet)

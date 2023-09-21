@@ -2,7 +2,12 @@ class_name AbstractOutils
 extends Node3D
 
 
+## Reference au proprietaire de l'outils
+var proprietaire
+
+
 var _est_en_main : bool = false
+
 
 var _instance_outils
 func _init(instance_outils):
