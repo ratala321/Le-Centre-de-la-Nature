@@ -105,5 +105,5 @@ func liberer_main_gauche(objet_exception : Variant) -> void:
 
 
 ## non implementee pour le moment, car aucun objet a deux mains dans le jeu pour l'instant
-func liberer_deux_mains(objet_exception : Variant) -> void:
+func liberer_deux_mains(_objet_exception : Variant) -> void:
 	pass

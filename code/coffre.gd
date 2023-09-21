@@ -3,10 +3,11 @@ extends AbstractObjetInteractif
 
 
 func effectuer_interaction(interacteur : Node) -> void:
-	if interacteur.has_node("InventaireJoueur"):
-		var inventaire_coffre : AbstractInventaire = get_node("InventaireCoffre") as AbstractInventaire
+	var inventaire_coffre : AbstractInventaire = $InventaireCoffre as AbstractInventaire
 
+	if interacteur.has_node("InventaireJoueur"):
 		_afficher_interfaces(inventaire_coffre, interacteur.inventaire_joueur)
+
 		_ajouter_references_inventaire_destination(inventaire_coffre, interacteur.inventaire_joueur)
 
 
