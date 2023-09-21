@@ -82,13 +82,11 @@ func _retirer_outils_dans_main_gauche(joueur : JoueurCanard) -> void:
 
 func _retirer_outils_deja_present_main_droite(joueur : JoueurCanard) -> void:
 	if joueur.detient_objet_en_main_droite:
-		# TODO le faire directement dans joueur ?
 		_retirer_outils_dans_main_droite(joueur)
 
 
 func _retirer_outils_deja_present_main_gauche(joueur : JoueurCanard) -> void:
 	if joueur.detient_objet_en_main_gauche:
-		# TODO le faire directement dans joueur ?
 		_retirer_outils_dans_main_gauche(joueur)
 
 

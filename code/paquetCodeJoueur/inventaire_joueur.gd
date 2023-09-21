@@ -53,7 +53,6 @@ var fonctions_liberer_main_joueur : Array[Callable] =(
 ]
 )
 func _liberer_main_joueur(metadata_objet_selectionne : Variant) -> void:
-	#TODO
 	var fonction_liberer_main : Callable =(
 		fonctions_liberer_main_joueur[metadata_objet_selectionne.est_outils_de_main()]
 	)
