@@ -10,7 +10,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gt6oj")
-inventaire_par_defaut = null
 
 [node name="Camera2DInventaireJoueur" type="Camera2D" parent="."]
 

@@ -15,7 +15,11 @@ func _init(instance_outils):
 
 
 func effectuer_procedure_selection_depuis_inventaire(joueur : JoueurCanard) -> void:
+	# ligne importante, permet d'avoir une reference au proprietaire meme apres sauvegarde/chargement
+	proprietaire = joueur
+
 	print("PROCEDURE SELECTION OUTILS")
+
 	if _est_en_main:
 		_retirer_outils_dans_main(joueur)
 	else:

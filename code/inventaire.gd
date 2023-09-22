@@ -34,9 +34,11 @@ func _fermeture_jeu_est_demandee(what) -> bool:
 func _obtenir_donnees_contenu_inventaire() -> Array:
 	var donnees : Array = []
 	for i in range(0, liste_inventaire.item_count):
-		var nomObjet : String = liste_inventaire.get_item_text(i)
-		var cheminSceneObjet : String = _obtenir_chemin_scene_objet(i)
-		donnees.push_back(DonneesObjetInventaire.new(nomObjet, cheminSceneObjet))
+		var nom_objet : String = liste_inventaire.get_item_text(i)
+
+		var chemin_scene_objet : String = _obtenir_chemin_scene_objet(i)
+
+		donnees.push_back(DonneesObjetInventaire.new(nom_objet, chemin_scene_objet))
 	
 	return donnees
 
@@ -70,7 +72,6 @@ var inventaire_destination : AbstractInventaire
 func transferer_objet_vers_inventaire_destination(index_objet : int) -> void:
 	_copier_objet_vers_destination(inventaire_destination.liste_inventaire, index_objet)
 	_copier_metadata_vers_destination(inventaire_destination.liste_inventaire, index_objet)
-	_ajuster_proprietaire_objet_transfere(index_objet)
 	_retirer_objet_transfere_inventaire(index_objet)
 
 
@@ -84,13 +85,6 @@ func _copier_metadata_vers_destination(destination : ItemList, index_objet : int
 	var index_objet_destination : int = destination.item_count - 1
 
 	destination.set_item_metadata(index_objet_destination, metadata_objet)
-
-
-func _ajuster_proprietaire_objet_transfere(index_objet : int):
-	var nouveau_proprietaire = inventaire_destination.get_parent()
-	var metadata_objet : Node = liste_inventaire.get_item_metadata(index_objet)
-
-	metadata_objet.proprietaire = nouveau_proprietaire
 
 
 func _retirer_objet_transfere_inventaire(index_objet : int) -> void:
