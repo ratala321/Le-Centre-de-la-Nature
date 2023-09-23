@@ -7,6 +7,7 @@ Il s'agit de ma première fois en 3D dans un engin de jeu.
 
 ## Systèmes
 Le jeu contient : 
+- Une intégration de Jenkins et des tests unitaires
 - Un système de sauvegarde.
 - Un système de gestion d'inventaire.
 - Un système de déplacement de joueur et de caméra en 3D.
