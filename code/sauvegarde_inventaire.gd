@@ -2,7 +2,7 @@ class_name SauvegardeInventaire
 extends Object
 
 
-static func sauvegarder_donnees_contenu_inventaire(donnees_a_sauvegarder : Array,
+static func sauvegarder_donnees_contenu_inventaire(donnees_a_sauvegarder : Array[DonneesObjetInventaire],
 		chemin_fichier_sauvegarde : String) -> void:
 	var redacteur_fichier : FileAccess = FileAccess.open(chemin_fichier_sauvegarde, FileAccess.WRITE)
 

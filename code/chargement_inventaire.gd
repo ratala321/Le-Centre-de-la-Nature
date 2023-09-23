@@ -12,14 +12,16 @@ static func _inventaire_n_est_pas_cree_proceduralement(inventaire : AbstractInve
 
 
 static func _effecuter_procedure_chargement_contenu_inventaire(inventaire : AbstractInventaire) -> void:
-	var donnees_contenu_inventaire : Array = _lire_donnees_contenu_inventaire(inventaire)
+	var donnees_contenu_inventaire : Array[DonneesObjetInventaire] =(
+			_lire_donnees_contenu_inventaire(inventaire)
+	)
 
 	_distribuer_objets_dans_inventaire(inventaire.liste_inventaire, donnees_contenu_inventaire)
 
 
 
-static func _lire_donnees_contenu_inventaire(inventaire : AbstractInventaire) -> Array:
-	var donnees_contenu_inventaire : Array
+static func _lire_donnees_contenu_inventaire(inventaire : AbstractInventaire) -> Array[DonneesObjetInventaire]:
+	var donnees_contenu_inventaire : Array[DonneesObjetInventaire]
 
 	if _fichier_sauvegarde_est_existant(inventaire.chemin_fichier_sauvegarde):
 		donnees_contenu_inventaire = _lire_inventaire_sauvegarde(inventaire)
@@ -41,11 +43,12 @@ static func _inventaire_par_defaut_n_est_pas_vide(inventaire : AbstractInventair
 	return inventaire.inventaire_par_defaut.size() != 0
 
 
-static func _lire_inventaire_sauvegarde(inventaire : AbstractInventaire) -> Array:
+static func _lire_inventaire_sauvegarde(inventaire : AbstractInventaire) -> Array[DonneesObjetInventaire]:
 	var lecteur_fichier_sauvegarde : FileAccess =(
 		FileAccess.open(inventaire.chemin_fichier_sauvegarde, FileAccess.READ))
 	
-	var donnees_objets_sauvegardes : Array = []
+	var donnees_objets_sauvegardes : Array[DonneesObjetInventaire] = []
+	
 	while _lecture_fichier_est_incomplete(lecteur_fichier_sauvegarde):
 		var donnees_objet_sauvegarde : DonneesObjetInventaire =(
 			_lire_donnees_objet_sauvegarde(lecteur_fichier_sauvegarde))
@@ -67,7 +70,7 @@ static func _lire_inventaire_par_defaut(inventaire : AbstractInventaire) -> Arra
 
 
 static func _distribuer_objets_dans_inventaire(liste_inventaire : ItemList,
-		donnees_objets : Array) -> void:
+		donnees_objets : Array[DonneesObjetInventaire]) -> void:
 	for donnees_objet in donnees_objets:
 		liste_inventaire.add_item(donnees_objet.nom_objet)
 

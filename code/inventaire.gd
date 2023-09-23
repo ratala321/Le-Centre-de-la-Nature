@@ -23,7 +23,7 @@ func _determiner_chemin_fichier_sauvegarde() -> String:
 
 func _notification(what):
 	if _fermeture_jeu_est_demandee(what):
-		var donnees_a_sauvegarder : Array = _obtenir_donnees_contenu_inventaire()
+		var donnees_a_sauvegarder : Array[DonneesObjetInventaire] = _obtenir_donnees_contenu_inventaire()
 		SauvegardeInventaire.sauvegarder_donnees_contenu_inventaire(donnees_a_sauvegarder, chemin_fichier_sauvegarde)
 
 
