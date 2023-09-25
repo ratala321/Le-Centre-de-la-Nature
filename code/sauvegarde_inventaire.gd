@@ -6,10 +6,11 @@ static func sauvegarder_donnees_contenu_inventaire(donnees_a_sauvegarder : Array
 		chemin_fichier_sauvegarde : String) -> void:
 	var redacteur_fichier : FileAccess = FileAccess.open(chemin_fichier_sauvegarde, FileAccess.WRITE)
 
-	for i in range(0, donnees_a_sauvegarder.size()):
-		_sauvegarder_donnee(redacteur_fichier, donnees_a_sauvegarder[i])
+	if _ouverture_fichier_est_reussie(redacteur_fichier):
+		for i in range(0, donnees_a_sauvegarder.size()):
+			_sauvegarder_donnee(redacteur_fichier, donnees_a_sauvegarder[i])
 
-	redacteur_fichier.close()
+		redacteur_fichier.close()
 
 
 static func _sauvegarder_donnee(redacteur_fichier : FileAccess,
@@ -18,3 +19,7 @@ static func _sauvegarder_donnee(redacteur_fichier : FileAccess,
 	redacteur_fichier.store_string("\n")
 	redacteur_fichier.store_string(donnee_a_sauvegarder.chemin_scene_objet)
 	redacteur_fichier.store_string("\n")
+
+
+static func _ouverture_fichier_est_reussie(redacteur_fichier : FileAccess) -> bool:
+	return redacteur_fichier != null
