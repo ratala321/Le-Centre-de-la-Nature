@@ -7,7 +7,7 @@ extends Control
 @export var inventaire_par_defaut : Array
 
 var liste_inventaire : ItemList
-@onready var chemin_fichier_sauvegarde : String = _determiner_chemin_fichier_sauvegarde()
+@onready var chemin_fichier_sauvegarde_partiel : String = _determiner_chemin_fichier_sauvegarde_partiel()
 
 
 func _ready():
@@ -15,16 +15,16 @@ func _ready():
 	charger_contenu_inventaire()
 
 
-func _determiner_chemin_fichier_sauvegarde() -> String:
+func _determiner_chemin_fichier_sauvegarde_partiel() -> String:
 	liste_inventaire = get_node("ItemList")
-	var _proprietaire_inventaire : Node = get_parent()
-	return "user://" + _proprietaire_inventaire.name + ".txt"
+	var proprietaire_inventaire : Node = get_parent()
+	return proprietaire_inventaire.name
 
 
 func _notification(what):
 	if _fermeture_jeu_est_demandee(what):
 		var donnees_a_sauvegarder : Array[DonneesObjetInventaire] = _obtenir_donnees_contenu_inventaire()
-		SauvegardeInventaire.sauvegarder_donnees_contenu_inventaire(donnees_a_sauvegarder, chemin_fichier_sauvegarde)
+		SauvegardeInventaire.sauvegarder_donnees_contenu_inventaire(donnees_a_sauvegarder, chemin_fichier_sauvegarde_partiel)
 
 
 func _fermeture_jeu_est_demandee(what) -> bool:
