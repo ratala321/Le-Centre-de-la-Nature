@@ -23,7 +23,7 @@ static func _effecuter_procedure_chargement_contenu_inventaire(inventaire : Abst
 static func _lire_donnees_contenu_inventaire(inventaire : AbstractInventaire) -> Array[DonneesObjetInventaire]:
 	var donnees_contenu_inventaire : Array[DonneesObjetInventaire]
 
-	if _fichier_sauvegarde_est_existant(inventaire.chemin_fichier_sauvegarde):
+	if _fichier_sauvegarde_est_existant(inventaire.chemin_fichier_sauvegarde_partiel):
 		donnees_contenu_inventaire = _lire_inventaire_sauvegarde(inventaire)
 	elif _inventaire_par_defaut_est_existant(inventaire):
 		donnees_contenu_inventaire = _lire_inventaire_par_defaut(inventaire)
@@ -31,8 +31,12 @@ static func _lire_donnees_contenu_inventaire(inventaire : AbstractInventaire) ->
 	return donnees_contenu_inventaire
 
 
-static func _fichier_sauvegarde_est_existant(chemin_fichier_sauvegarde : String) -> bool:
-	return FileAccess.file_exists(chemin_fichier_sauvegarde)
+static func _fichier_sauvegarde_est_existant(chemin_fichier_sauvegarde_partiel : String) -> bool:
+	var chemin_sauvegarde_complet =(
+		SauvegardeInventaire.PREFIXE_USER_DIR + chemin_fichier_sauvegarde_partiel + SauvegardeInventaire.SUFFIXE_SAUVEGARDE
+	)
+
+	return FileAccess.file_exists(chemin_sauvegarde_complet)
 
 
 static func _inventaire_par_defaut_est_existant(inventaire : AbstractInventaire) -> bool:
@@ -45,13 +49,15 @@ static func _inventaire_par_defaut_n_est_pas_vide(inventaire : AbstractInventair
 
 static func _lire_inventaire_sauvegarde(inventaire : AbstractInventaire) -> Array[DonneesObjetInventaire]:
 	var lecteur_fichier_sauvegarde : FileAccess =(
-		FileAccess.open(inventaire.chemin_fichier_sauvegarde, FileAccess.READ))
+		_initialiser_lecteur_fichier_sauvegarde(inventaire.chemin_fichier_sauvegarde_partiel)
+	)
 	
 	var donnees_objets_sauvegardes : Array[DonneesObjetInventaire] = []
 	
 	while _lecture_fichier_est_incomplete(lecteur_fichier_sauvegarde):
 		var donnees_objet_sauvegarde : DonneesObjetInventaire =(
-			_lire_donnees_objet_sauvegarde(lecteur_fichier_sauvegarde))
+			_lire_donnees_objet_sauvegarde(lecteur_fichier_sauvegarde)
+		)
 		donnees_objets_sauvegardes.push_back(donnees_objet_sauvegarde)
 	
 	lecteur_fichier_sauvegarde.close()
@@ -79,10 +85,14 @@ static func _distribuer_objets_dans_inventaire(liste_inventaire : ItemList,
 		liste_inventaire.set_item_metadata(-1, instance_objet)
 
 
+## Retourne null si le chemin_scene_objet est invalide
 static func _obtenir_metadata_objet_inventaire(chemin_scene_objet : String) -> Variant:
 	var scene_objet : PackedScene = load(chemin_scene_objet) as PackedScene
-
-	return scene_objet.instantiate()
+	
+	if scene_objet != null:
+		return scene_objet.instantiate()
+	else:
+		return null
 
 
 static func _lire_donnees_objet_sauvegarde(lecteur_fichier : FileAccess) -> DonneesObjetInventaire:
@@ -102,3 +112,12 @@ static func _lire_donnees_objet_par_defaut(index : int,
 	var chemin_scene_objet : String = inventaire.inventaire_par_defaut[index + 1].as_string()
 
 	return DonneesObjetInventaire.new(nom_objet, chemin_scene_objet)
+
+
+static func _initialiser_lecteur_fichier_sauvegarde(chemin_fichier_sauvegarde_partiel) -> FileAccess:
+	var chemin_fichier_sauvegarde_complet : String =(
+		SauvegardeInventaire.PREFIXE_USER_DIR + chemin_fichier_sauvegarde_partiel +
+		SauvegardeInventaire.SUFFIXE_SAUVEGARDE
+	)
+
+	return FileAccess.open(chemin_fichier_sauvegarde_complet, FileAccess.READ)
