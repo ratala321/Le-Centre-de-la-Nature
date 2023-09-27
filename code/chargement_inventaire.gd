@@ -114,7 +114,7 @@ static func _lire_donnees_objet_par_defaut(index : int,
 	return DonneesObjetInventaire.new(nom_objet, chemin_scene_objet)
 
 
-static func _initialiser_lecteur_fichier_sauvegarde(chemin_fichier_sauvegarde_partiel) -> FileAccess:
+static func _initialiser_lecteur_fichier_sauvegarde(chemin_fichier_sauvegarde_partiel : String) -> FileAccess:
 	var chemin_fichier_sauvegarde_complet : String =(
 		SauvegardeInventaire.PREFIXE_USER_DIR + chemin_fichier_sauvegarde_partiel +
 		SauvegardeInventaire.SUFFIXE_SAUVEGARDE
