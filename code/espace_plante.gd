@@ -62,6 +62,8 @@ func _effecuter_processus_previsualisation(plante : Node3D) -> void:
 	_ajuster_emplacement_previsualisation(plante)
 	
 	_afficher_previsualisation(plante)
+	
+	_desactiver_collision_physique(plante)
 
 	_ajouter_previsualisation_dans_scene(plante)
 
@@ -84,6 +86,11 @@ func _afficher_previsualisation(plante : Node3D) -> void:
 
 	var previsualisation_plante : Node3D = plante.get_node(PREVISUALISATION_PLANTE) as Node3D
 	previsualisation_plante.show()
+
+
+func _desactiver_collision_physique(plante : Node3D) -> void:
+	var collision_shape_plante : CollisionShape3D = plante.get_node("CollisionShape3D")
+	collision_shape_plante.disabled = true
 
 
 func _ajouter_previsualisation_dans_scene(plante : Node3D) -> void:
