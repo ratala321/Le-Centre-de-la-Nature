@@ -5,10 +5,17 @@ extends CharacterBody3D
 var detient_objet_en_main_droite : bool = false
 var detient_objet_en_main_gauche : bool = false
 
+var vitesse_animation_actuelle : float = VITESSE_ANIMATION_INITIALE
+
+
+@export var controleur_animation_joueur : AnimationTree
 
 @onready var _raycast_joueur_sol : RayCast3D = get_node("RayEstAuSol") as RayCast3D
 @onready var animation_joueur : AnimationPlayer =(
 	get_node("KayKit_AnimatedCharacter_v13/AnimationPlayer") as AnimationPlayer
+)
+@onready var machine_etat_animation : AnimationNodeStateMachinePlayback =(
+	controleur_animation_joueur["parameters/playback"]
 )
 @onready var aire_interaction : Area3D = get_node("AireInteraction") as Area3D
 @onready var axe_rotation_camera : Node3D = get_node("AxeRotationCamera") as Node3D
@@ -35,6 +42,8 @@ func _init():
 
 
 func _physics_process(delta):
+	controleur_animation_joueur.advance(delta * vitesse_animation_actuelle)
+	
 	_effectuer_procedure_mouvement_joueur(delta)
 
 	_affichage_inventaire_joueur.effectuer_procedure_affichage_inventaire()
@@ -52,7 +61,7 @@ func _effectuer_procedure_mouvement_joueur(delta) -> void:
 
 const VITESSE_ANIMATION_INITIALE : int = 1
 func reinitialiser_vitesse_animation() -> void:
-	animation_joueur.speed_scale = VITESSE_ANIMATION_INITIALE
+	vitesse_animation_actuelle = VITESSE_ANIMATION_INITIALE
 
 
 func est_au_sol() -> bool:
@@ -107,3 +116,12 @@ func liberer_main_gauche(objet_exception : Variant) -> void:
 ## non implementee pour le moment, car aucun objet a deux mains dans le jeu pour l'instant
 func liberer_deux_mains(_objet_exception : Variant) -> void:
 	pass
+
+
+## Permet de travel vers un etat appartenant a l'animation du joueur
+func changer_etat_animation(nom_animation : String, vitesse_animation : float = 1 ) -> void:
+	if animation_joueur.has_animation(nom_animation):
+		vitesse_animation_actuelle = vitesse_animation
+		
+		machine_etat_animation.travel(nom_animation)
+		machine_etat_animation.next()

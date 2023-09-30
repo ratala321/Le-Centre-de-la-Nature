@@ -13,8 +13,6 @@ func effectuer_procedure_appplication_mouvement(delta, facteurs_mouvement_joueur
 	if _joueur.peut_se_mouvoir():
 		_appliquer_rotation_joueur(facteurs_mouvement_joueur.index_facteurs_rotation)
 
-		_appliquer_animation_mouvement(facteurs_mouvement_joueur.direction_joueur)
-
 		_appliquer_mouvement(delta, facteurs_mouvement_joueur.direction_joueur, facteurs_mouvement_joueur.vitesse_esquive_joueur)
 
 
@@ -40,23 +38,6 @@ func _appliquer_rotation_joueur(index_facteurs_rotation : int) -> void:
 		_joueur.rotation = Vector3(_joueur.rotation.x, angle_rotation, _joueur.rotation.z)
 
 		_conserver_rotation_initiale_camera(rotation_initiale_camera)
-
-
-const ANIMATION_SAUT : String = "Jump"
-const ANIMATION_MARCHE : String = "Walk"
-const ANIMATION_IDLE : String = "Idle"
-const VITESSE_ANIMATION_INITIALE : int = 1
-const VITESSE_ANIMATION_SAUT : float = 1.9
-func _appliquer_animation_mouvement(direction_joueur : Vector3) -> void:
-	if _animation_saut_peut_etre_jouee():
-		_joueur.animation_joueur.play(ANIMATION_SAUT)
-		_joueur.animation_joueur.speed_scale = VITESSE_ANIMATION_SAUT
-	elif _animation_marche_peut_etre_jouee(direction_joueur):
-		_joueur.animation_joueur.speed_scale = VITESSE_ANIMATION_INITIALE
-		_joueur.animation_joueur.play(ANIMATION_MARCHE)
-	else:
-		_joueur.animation_joueur.speed_scale = VITESSE_ANIMATION_INITIALE
-		_joueur.animation_joueur.play(ANIMATION_IDLE)
 
 
 func _appliquer_mouvement(delta, direction_joueur : Vector3, vitesse_esquive_joueur : int) -> void:
@@ -163,14 +144,3 @@ func _calculer_velocite_x(delta, direction_joueur : Vector3,
 func _calculer_velocite_z(delta, direction_joueur : Vector3,
 		vitesse_esquive_joueur : int) -> float:
 	return direction_joueur.z * vitesse_joueur_base * delta * vitesse_esquive_joueur
-
-
-func _animation_saut_peut_etre_jouee() -> bool:
-	return not _joueur.est_au_sol() and _joueur.animation_joueur.has_animation(ANIMATION_SAUT)
-
-
-func _animation_marche_peut_etre_jouee(direction_joueur : Vector3) -> bool:
-	return (
-		direction_joueur != Vector3.ZERO and 
-			_joueur.animation_joueur.has_animation(ANIMATION_MARCHE)
-	)

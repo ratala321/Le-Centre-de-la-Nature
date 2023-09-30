@@ -1,12 +1,10 @@
-[gd_scene load_steps=54 format=3 uid="uid://dq04vglibsi8r"]
+[gd_scene load_steps=70 format=3 uid="uid://dq04vglibsi8r"]
 
 [ext_resource type="Script" path="res://code/paquetCodeJoueur/joueur_canard.gd" id="1_nea2h"]
 [ext_resource type="PackedScene" uid="uid://btsmjqc2w8pl3" path="res://scenes/vetementsScenes/ChapeauCowboy.tscn" id="2_jrist"]
 [ext_resource type="PackedScene" uid="uid://b0mm1k2dpaqho" path="res://importations/bow_teamBlue.gltf.glb" id="2_thlrn"]
-[ext_resource type="PackedScene" uid="uid://bgacblhfo0lc2" path="res://importations/arrow_teamBlue.gltf.glb" id="3_j6oia"]
-[ext_resource type="PackedScene" uid="uid://cq8rh5lsevyih" path="res://importations/sword_teamBlue.gltf.glb" id="4_hg4im"]
-[ext_resource type="PackedScene" uid="uid://dypmi4t4f0ua4" path="res://scenes/EpeeJoueur.tscn" id="4_jtt62"]
 [ext_resource type="PackedScene" uid="uid://dcqnxh0sklqav" path="res://scenes/SacGraines.tscn" id="4_s24bb"]
+[ext_resource type="Script" path="res://code/animation_joueur_canard.gd" id="5_q5jv5"]
 [ext_resource type="Script" path="res://code/paquetCodeJoueur/camera_3d_joueur.gd" id="10_i3bk5"]
 [ext_resource type="PackedScene" uid="uid://cckcrlxvfyuku" path="res://scenes/InventaireJoueur.tscn" id="10_owos5"]
 
@@ -1941,6 +1939,7 @@ tracks/15/keys = PackedFloat32Array(0, 1, 1, 1, 1)
 [sub_resource type="Animation" id="Animation_d7iof"]
 resource_name = "Idle"
 length = 1.33333
+loop_mode = 1
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -2171,42 +2170,33 @@ tracks/15/loop_wrap = true
 tracks/15/keys = PackedFloat32Array(0, 1, 1, 1, 1)
 tracks/16/type = "method"
 tracks/16/imported = false
-tracks/16/enabled = false
+tracks/16/enabled = true
 tracks/16/path = NodePath("..")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
-"times": PackedFloat32Array(0, 0.9, 1.4),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
-"method": &"arreterMouvement"
+"method": &"arreter_mouvement"
 }, {
 "args": [],
-"method": &"emettreSignalInteraction"
-}, {
-"args": [],
-"method": &"relancerMouvement"
+"method": &"relancer_mouvement"
 }]
 }
 tracks/17/type = "method"
 tracks/17/imported = false
-tracks/17/enabled = false
+tracks/17/enabled = true
 tracks/17/path = NodePath("..")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
-"times": PackedFloat32Array(0, 0.9, 1.4),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(1.4),
+"transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"ArreterMouvement"
-}, {
-"args": [],
-"method": &"LancerProcedureInteraction"
-}, {
-"args": [],
-"method": &"RelancerMouvement"
+"method": &"reinitialiser_vitesse_animation"
 }]
 }
 tracks/18/type = "method"
@@ -2216,17 +2206,11 @@ tracks/18/path = NodePath("..")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
-"times": PackedFloat32Array(0, 0.9, 1.4),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"arreter_mouvement"
-}, {
-"args": [],
 "method": &"lancer_procedure_interaction_finale"
-}, {
-"args": [],
-"method": &"relancer_mouvement"
 }]
 }
 
@@ -3774,14 +3758,89 @@ _data = {
 "Wave": SubResource("Animation_fhq8d")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wyihp"]
+animation = &"Attack(1h)"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dujs3"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d5ua3"]
+animation = &"Interact"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x8dlc"]
+animation = &"Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xn5u0"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_das8a"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ro83o"]
+advance_mode = 2
+advance_expression = "transition_vers_jump()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pwc1u"]
+advance_mode = 2
+advance_expression = "transition_vers_jump()"
+
+[sub_resource type="Curve" id="Curve_445bn"]
+_data = [Vector2(0.0887097, 0.642105), 0.0, 0.0, 0, 0, Vector2(0.157258, 0.842105), 0.0, 0.0, 0, 0, Vector2(0.379032, 0.484211), 0.0, 0.0, 0, 0, Vector2(0.580645, 0.305263), 1.76842, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2btl6"]
+xfade_time = 0.35
+xfade_curve = SubResource("Curve_445bn")
+advance_mode = 2
+advance_expression = "not transition_vers_jump()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qaa4v"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nhma8"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_55klo"]
+advance_mode = 2
+advance_expression = "transition_idle_walk()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2kuw8"]
+advance_mode = 2
+advance_expression = "not transition_idle_walk()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y35w4"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_34mtn"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_okptv"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_27r12"]
+states/Attack(1h)/node = SubResource("AnimationNodeAnimation_wyihp")
+states/Attack(1h)/position = Vector2(527, -154)
+states/Idle/node = SubResource("AnimationNodeAnimation_dujs3")
+states/Idle/position = Vector2(353, 100)
+states/Interact/node = SubResource("AnimationNodeAnimation_d5ua3")
+states/Interact/position = Vector2(353, -154)
+states/Jump/node = SubResource("AnimationNodeAnimation_x8dlc")
+states/Jump/position = Vector2(441, 191)
+states/Start/position = Vector2(202, 100)
+states/Walk/node = SubResource("AnimationNodeAnimation_xn5u0")
+states/Walk/position = Vector2(527, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_das8a"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_ro83o"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_pwc1u"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_2btl6"), "Idle", "Interact", SubResource("AnimationNodeStateMachineTransition_qaa4v"), "Walk", "Attack(1h)", SubResource("AnimationNodeStateMachineTransition_nhma8"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_55klo"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_2kuw8"), "Attack(1h)", "Walk", SubResource("AnimationNodeStateMachineTransition_y35w4"), "Idle", "Attack(1h)", SubResource("AnimationNodeStateMachineTransition_34mtn"), "Interact", "Idle", SubResource("AnimationNodeStateMachineTransition_okptv")]
+graph_offset = Vector2(0, -177.31)
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6rmec"]
 height = 1.93666
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ypn58"]
 size = Vector3(1.47799, 2.39154, 1.81609)
 
-[node name="JoueurCanard" type="CharacterBody3D"]
+[node name="JoueurCanard" type="CharacterBody3D" node_paths=PackedStringArray("controleur_animation_joueur")]
 script = ExtResource("1_nea2h")
+controleur_animation_joueur = NodePath("KayKit_AnimatedCharacter_v13/AnimationTree")
 
 [node name="KayKit_AnimatedCharacter_v13" type="Node3D" parent="."]
 
@@ -3892,21 +3951,19 @@ transform = Transform3D(-1, 0, 5.96046e-07, 5.96046e-07, 0, 1, 0, 1, 0, -0.4, 0.
 bone_name = "handSlotRight"
 bone_idx = 5
 
-[node name="EpeeJoueur" parent="KayKit_AnimatedCharacter_v13/KayKit Animated Character2/Skeleton3D/MainEmplacementDroit" instance=ExtResource("4_jtt62")]
-visible = false
-
-[node name="sword_teamBluegltf" parent="KayKit_AnimatedCharacter_v13/KayKit Animated Character2/Skeleton3D/MainEmplacementDroit" instance=ExtResource("4_hg4im")]
-transform = Transform3D(0.070505, 0, 0.997511, 0, 1, 0, -0.997511, 0, 0.070505, 0.0238449, -0.047028, -1.49012e-08)
-visible = false
-
-[node name="arrow_teamBluegltf" parent="KayKit_AnimatedCharacter_v13/KayKit Animated Character2/Skeleton3D/MainEmplacementDroit" instance=ExtResource("3_j6oia")]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
-visible = false
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="KayKit_AnimatedCharacter_v13"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="KayKit_AnimatedCharacter_v13" node_paths=PackedStringArray("_joueur")]
 libraries = {
 "": SubResource("AnimationLibrary_770lj")
 }
+script = ExtResource("5_q5jv5")
+_joueur = NodePath("../..")
+
+[node name="AnimationTree" type="AnimationTree" parent="KayKit_AnimatedCharacter_v13"]
+tree_root = SubResource("AnimationNodeStateMachine_27r12")
+anim_player = NodePath("../AnimationPlayer")
+advance_expression_base_node = NodePath("../AnimationPlayer")
+active = true
+process_callback = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0572429, 0.922335, 0)
