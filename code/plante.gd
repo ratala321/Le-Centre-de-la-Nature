@@ -51,8 +51,9 @@ func _afficher_etape_croissance_suivante() -> void:
 
 
 func couper_plante() -> void:
-	#TODO
-	pass
+	#TODO condition selon etape croissance plante
+	_sol_fertile.retirer_plante_contenue(self)
+	self.queue_free()
 
 
 var _sol_fertile : SolFertile

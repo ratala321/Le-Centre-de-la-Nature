@@ -1,5 +1,5 @@
 class_name AbstractOutils
-extends Node3D
+extends RigidBody3D
 
 
 ## Reference au proprietaire de l'outils

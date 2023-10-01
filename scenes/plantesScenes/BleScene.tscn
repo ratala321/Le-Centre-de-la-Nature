@@ -5,6 +5,7 @@
 [ext_resource type="Shader" path="res://shaders/PrevisualisationPlante.gdshader" id="3_uu22l"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cu0ov"]
+size = Vector3(0.5, 1, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xwccw"]
 albedo_texture = ExtResource("3_mduor")

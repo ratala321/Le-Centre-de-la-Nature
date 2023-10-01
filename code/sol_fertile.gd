@@ -36,3 +36,14 @@ func effectuer_interaction(_interacteur) -> void:
 
 func ajouter_plante_contenue(plante : Plante) -> void:
 	_plantes_contenues.push_back(plante)
+
+
+func retirer_plante_contenue(plante : Plante) -> void:
+	var index_plante : int = _plantes_contenues.find(plante)
+	
+	if _plante_est_trouvee(index_plante):
+		_plantes_contenues.remove_at(index_plante)
+
+
+func _plante_est_trouvee(index_plante : int) -> bool:
+	return not index_plante == -1
