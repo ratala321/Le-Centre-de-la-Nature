@@ -24,6 +24,7 @@ func _effectuer_processus_ajout_plante(plante : Plante) -> void:
 	_ajuster_emplacement_plante(plante)
 
 	plante.ajouter_reference_sol_fertile(_reference_sol_fertile)
+	_reference_sol_fertile.ajouter_plante_contenue(plante)
 
 	add_child(plante)
 

@@ -65,6 +65,7 @@ size = Vector3(6.9539, 1, 6.7837)
 [node name="SolFertile" type="AnimatableBody3D"]
 transform = Transform3D(0.501513, 0, 0, 0, 0.501513, 0, 0, 0, 0.501513, 0, 0, -0.90864)
 script = ExtResource("1_3qncb")
+_plantes_ajoutee_editeur_depart = [NodePath("BleScene")]
 
 [node name="SM_Generic_Ground_Flat_01" type="Node3D" parent="."]
 transform = Transform3D(1.123, 0, 0, 0, 1.123, 0, 0, 0, 1.123, 0, 0, 0)

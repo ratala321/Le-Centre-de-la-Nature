@@ -52,6 +52,7 @@ func _afficher_etape_croissance_suivante() -> void:
 
 func couper_plante() -> void:
 	#TODO condition selon etape croissance plante
+	# TODO add_child(ble_collectionnable) | doit contenir reference scene ble_collectionnable.tscn
 	_sol_fertile.retirer_plante_contenue(self)
 	self.queue_free()
 
@@ -59,4 +60,3 @@ func couper_plante() -> void:
 var _sol_fertile : SolFertile
 func ajouter_reference_sol_fertile(reference_sol_fertile : SolFertile) -> void:
 	_sol_fertile = reference_sol_fertile
-	reference_sol_fertile.ajouter_plante_contenue(self)
