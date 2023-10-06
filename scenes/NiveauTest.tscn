@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://qf6ag5p6ts08"]
+[gd_scene load_steps=14 format=3 uid="uid://qf6ag5p6ts08"]
 
 [ext_resource type="PackedScene" uid="uid://dq04vglibsi8r" path="res://scenes/JoueurCanard.tscn" id="1_0iw8u"]
 [ext_resource type="PackedScene" uid="uid://q4uuutngl3k0" path="res://scenes/Coffre.tscn" id="3_ko3p6"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://code/GestionnaireSauvegardeFichier.gd" id="6_n3wjg"]
 [ext_resource type="PackedScene" uid="uid://bhltammokhs6o" path="res://scenes/SolFertile.tscn" id="7_8q547"]
 [ext_resource type="PackedScene" uid="uid://cw0mho7tmkpw8" path="res://scenes/plantesScenes/BleScene.tscn" id="8_xfl4c"]
+[ext_resource type="PackedScene" uid="uid://degvlci6vffve" path="res://scenes/BleCollectionnable.tscn" id="9_gjil4"]
 [ext_resource type="Script" path="res://tests/NiveauTest/AppelTests.gd" id="10_erv04"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ckacd"]
@@ -116,3 +117,6 @@ script = ExtResource("10_erv04")
 wait_time = 3.0
 one_shot = true
 autostart = true
+
+[node name="BleCollectionnable" parent="." instance=ExtResource("9_gjil4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 4)

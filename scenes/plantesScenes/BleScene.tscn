@@ -1,6 +1,7 @@
-[gd_scene load_steps=29 format=3 uid="uid://cw0mho7tmkpw8"]
+[gd_scene load_steps=30 format=3 uid="uid://cw0mho7tmkpw8"]
 
 [ext_resource type="Script" path="res://code/plante.gd" id="1_2f2xv"]
+[ext_resource type="PackedScene" uid="uid://degvlci6vffve" path="res://scenes/BleCollectionnable.tscn" id="2_6jqfx"]
 [ext_resource type="Texture2D" uid="uid://bbkvo17uq35ng" path="res://importations/SourceFiles/Textures/PolygonFarm_Texture_01_A.png" id="3_mduor"]
 [ext_resource type="Shader" path="res://shaders/PrevisualisationPlante.gdshader" id="3_uu22l"]
 
@@ -214,6 +215,7 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_2f2xv")
 _etapes_croissance = Array[NodePath]([NodePath("Initial"), NodePath("BleEtape2"), NodePath("BleEtape3"), NodePath("BleFinal")])
+_collectionnable_plante = ExtResource("2_6jqfx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_cu0ov")

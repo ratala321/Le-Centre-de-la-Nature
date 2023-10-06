@@ -2,8 +2,13 @@ class_name Plante
 extends AnimatableBody3D
 
 
+@export_category("etapes de croissance de la plante")
 ## Contient les chemins, bases sur le Root Node de la plante, vers chacune des etapes de croissance
 @export var _etapes_croissance : Array[NodePath]
+
+@export_category("ble collectionnable a loot par le joueur")
+## Collectionnable de la plante qui sera 'drop', ajouter, dans la scene suite a la coupe.
+@export var _collectionnable_plante : PackedScene
 
 
 const DUREE_CROISSANCE_INITALE : int =  10
@@ -51,10 +56,22 @@ func _afficher_etape_croissance_suivante() -> void:
 
 
 func couper_plante() -> void:
-	#TODO condition selon etape croissance plante
-	# TODO add_child(ble_collectionnable) | doit contenir reference scene ble_collectionnable.tscn
+	#TODO condition selon etape croissance plante -> couper au bon moment
 	_sol_fertile.retirer_plante_contenue(self)
+	
+	_ajouter_collectionnable_plante_dans_scene()
+	
 	self.queue_free()
+
+
+func _ajouter_collectionnable_plante_dans_scene() -> void:
+	var instance_collectionnable = _collectionnable_plante.instantiate()
+	
+	self.add_sibling(instance_collectionnable)
+	
+	instance_collectionnable.position = self.position
+	# Pour que le collectionnable ne clip pas au sol
+	instance_collectionnable.position.y += 2
 
 
 var _sol_fertile : SolFertile

@@ -8,14 +8,13 @@ var detient_objet_en_main_gauche : bool = false
 var vitesse_animation_actuelle : float = VITESSE_ANIMATION_INITIALE
 
 
-@export var controleur_animation_joueur : AnimationTree
-
 @onready var _raycast_joueur_sol : RayCast3D = get_node("RayEstAuSol") as RayCast3D
 @onready var animation_joueur : AnimationPlayer =(
 	get_node("KayKit_AnimatedCharacter_v13/AnimationPlayer") as AnimationPlayer
 )
+@onready var controleur_animation_joueur : AnimationTree = %AnimationTree
 @onready var machine_etat_animation : AnimationNodeStateMachinePlayback =(
-	controleur_animation_joueur["parameters/playback"]
+	controleur_animation_joueur.get("parameters/playback")
 )
 @onready var aire_interaction : Area3D = get_node("AireInteraction") as Area3D
 @onready var axe_rotation_camera : Node3D = get_node("AxeRotationCamera") as Node3D
@@ -125,3 +124,10 @@ func changer_etat_animation(nom_animation : String, vitesse_animation : float = 
 		
 		machine_etat_animation.travel(nom_animation)
 		machine_etat_animation.next()
+
+
+## Destine a etre appele depuis un Collectionnable, permet de le collecter
+func collecter_objet(collectionnable : Collectionnable) -> void:
+	inventaire_joueur.ajouter_collectionnable_a_inventaire(collectionnable)
+	
+	collectionnable.lancer_processus_retrait_self_du_scene_tree()

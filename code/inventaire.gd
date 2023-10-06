@@ -94,6 +94,74 @@ func _retirer_objet_transfere_inventaire(index_objet : int) -> void:
 func charger_contenu_inventaire() -> void:
 	ChargementInventaire.charger_donnees_contenu_inventaire(self)
 
+
+func ajouter_collectionnable_a_inventaire(collectionnable : Collectionnable) -> void:
+	var resultat_recherche : int = _rechercher_collectionnables_doublons(collectionnable)
+	
+	if _aucun_collectionnables_doublons_sont_trouves(resultat_recherche):
+		_ajouter_nouveau_collectionnable(collectionnable)
+	else:
+		_mettre_a_jour_doublon_collectionnable(resultat_recherche)
+		collectionnable.queue_free()
+
+
+func _aucun_collectionnables_doublons_sont_trouves(resultat_recherche : int) -> bool:
+	return resultat_recherche < 0
+
+
+const RESULTAT_DOUBLON_NON_TROUVE : int = -1
+## Retourne l'index du doublon s'il est trouve. Dans le cas contraire, retourne un nombre negatif.
+func _rechercher_collectionnables_doublons(collectionnable : Collectionnable) -> int:
+	# Permet d'obtenir le nom du collectionnable dans l'inventaire sans le nombre
+	# de collectionnable. Sans ce regex, le recherche ne trouverait jamais d'equivalence
+	# etant donne qu'il faudrait que le nombre de collectionnable dans le nom soit le meme.
+	var patron_nom_objet_sans_chiffre : RegEx = RegEx.new()
+	patron_nom_objet_sans_chiffre.compile("[a-zA-z].*[a-zA-z]$")
+	
+	var index_resultat_recherche : int = RESULTAT_DOUBLON_NON_TROUVE
+	var i : int = 0
+	while _recherche_collectionnables_doublons_est_incomplete(i, index_resultat_recherche):
+		if _objet_inventaire_et_collectionnable_sont_doublons(collectionnable, i, patron_nom_objet_sans_chiffre):
+			index_resultat_recherche = i
+		i += 1
+			
+	return index_resultat_recherche
+
+
+func _recherche_collectionnables_doublons_est_incomplete(index_en_cours : int,
+		index_resultat_recherche : int) -> bool:
+	return index_resultat_recherche == RESULTAT_DOUBLON_NON_TROUVE and index_en_cours < liste_inventaire.item_count
+
+
+func _objet_inventaire_et_collectionnable_sont_doublons(collectionnable : Collectionnable,
+		index_objet_inventaire : int, patron_nom_objet_sans_chiffre : RegEx) -> bool:
+	var nom_objet_inventaire : String = liste_inventaire.get_item_text(index_objet_inventaire)
+	
+	var resultat_recherche : RegExMatch = patron_nom_objet_sans_chiffre.search(nom_objet_inventaire)
+	
+	return not resultat_recherche.strings.is_empty() and resultat_recherche.strings[0] == collectionnable.nom
+
+
+func _ajouter_nouveau_collectionnable(collectionnable : Collectionnable) -> void:
+	collectionnable.compteur_collectionnable += 1
+	liste_inventaire.add_item(collectionnable.nom)
+	liste_inventaire.set_item_metadata(-1, collectionnable)
+
+
+func _mettre_a_jour_doublon_collectionnable(resultat_recherche : int) -> void:
+	var doublon_collectionnable : Collectionnable =(
+				liste_inventaire.get_item_metadata(resultat_recherche) as Collectionnable
+	)
+	
+	if not doublon_collectionnable == null:
+		doublon_collectionnable.compteur_collectionnable += 1
+		
+		var nom_mis_a_jour : String =(
+			str(doublon_collectionnable.compteur_collectionnable) + " " + doublon_collectionnable.nom
+		)
+		liste_inventaire.set_item_text(resultat_recherche, nom_mis_a_jour)
+
+
 #----------------------------------
 # Permet d'effectuer la procedure de selection d'un objet dans un inventaire.
 # Doit etre connectee au signal ItemClicked d'un ItemList.
