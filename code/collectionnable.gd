@@ -57,3 +57,20 @@ func lancer_processus_retrait_self_du_scene_tree() -> void:
 
 func _retirer_self_du_scene_tree() -> void:
 	get_parent().remove_child(self)
+
+
+## Permet de construire un dictionnaire contenant les donnees a sauvegardees du collectionnable
+func construire_dictionnaire_donnees_a_sauvegarder() -> Dictionary:
+	return {
+		"nom" : nom,
+		"valeur_monetaire" : valeur_monetaire,
+		"compteur_collectionnable" : compteur_collectionnable,
+	}
+
+
+func charger_dictionnaire_donnees_sauvegardees(donnees_sauvegardees : Dictionary) -> void:
+	nom = donnees_sauvegardees.get("nom")
+
+	valeur_monetaire = donnees_sauvegardees.get("valeur_monetaire")
+
+	compteur_collectionnable = donnees_sauvegardees.get("compteur_collectionnable")

@@ -2,7 +2,7 @@ class_name Epee
 extends AbstractOutils
 
 
-const nomEpee : = "epee"
+const NOM_EPEE : = "epee"
 
 ## Indique si l'epee en cours d'utilisation, autrement dit si le joueur
 ## est en train de frapper avec (animation qui joue)
@@ -11,6 +11,7 @@ var _est_en_utilisation : bool = false
 
 func _init():
 	super._init(self)
+	nom_outils = NOM_EPEE
 
 
 func _ready():

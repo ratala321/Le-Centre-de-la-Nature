@@ -23,37 +23,45 @@ func _determiner_chemin_fichier_sauvegarde_partiel() -> String:
 
 func _notification(what):
 	if _fermeture_jeu_est_demandee(what):
-		var donnees_a_sauvegarder : Array[DonneesObjetInventaire] = _obtenir_donnees_contenu_inventaire()
-		SauvegardeInventaire.sauvegarder_donnees_contenu_inventaire(donnees_a_sauvegarder, chemin_fichier_sauvegarde_partiel)
+		# creer Array[Dictionary]
+		var donnees_contenu_inventaire : Array[Dictionary] = _obtenir_donnees_contenu_inventaire()
+		print("AVANT SAVE : " + str(donnees_contenu_inventaire))
+		
+		var objets_sauvegardes : Dictionary = { "objets_sauvegardes" : donnees_contenu_inventaire}
+
+		SauvegardeInventaire.sauvegarder_donnees_contenu_inventaire(objets_sauvegardes, chemin_fichier_sauvegarde_partiel)
 
 
 func _fermeture_jeu_est_demandee(what) -> bool:
 	return what == NOTIFICATION_WM_CLOSE_REQUEST
 
 
-func _obtenir_donnees_contenu_inventaire() -> Array:
-	var donnees : Array = []
+func _obtenir_donnees_contenu_inventaire() -> Array[Dictionary]:
+	var donnees : Array[Dictionary] = []
 	for i in range(0, liste_inventaire.item_count):
-		var nom_objet : String = liste_inventaire.get_item_text(i)
-
-		var chemin_scene_objet : String = _obtenir_chemin_scene_objet(i)
-
-		donnees.push_back(DonneesObjetInventaire.new(nom_objet, chemin_scene_objet))
+		var objet_sauvegarde : Dictionary = _creer_objet_sauvegarde(i)
+		
+		donnees.push_back(objet_sauvegarde)
 	
 	return donnees
 
 
-const MESSAGE_ERREUR_CHARGEMENT_CHEMIN : String =(
-"Erreur lors du chargement du chemin de la scene de l'objet a sauvegarder")
-func _obtenir_chemin_scene_objet(index : int) -> String:
-	var chemin_scene_objet : String = MESSAGE_ERREUR_CHARGEMENT_CHEMIN
+func _creer_objet_sauvegarde(index : int) -> Dictionary:
+	var instance_objet_inventaire : Node = liste_inventaire.get_item_metadata(index)
 
-	var instance_objet : Node = liste_inventaire.get_item_metadata(index)
-
-	if instance_objet != null:
-		chemin_scene_objet = instance_objet.scene_file_path
+	var nom_dans_inventaire : String = liste_inventaire.get_item_text(index)
+	var chemin_scene_objet : String = instance_objet_inventaire.scene_file_path
+	var donnees_objet_inventaire : Dictionary =(
+		instance_objet_inventaire.construire_dictionnaire_donnees_a_sauvegarder()
+	)
 	
-	return chemin_scene_objet
+	var objet_sauvegarde : Dictionary = {
+		"nom_dans_inventaire" : nom_dans_inventaire,
+		"chemin_scene_objet" : chemin_scene_objet,
+		"donnees_objet_inventaire" : donnees_objet_inventaire
+	}
+	
+	return objet_sauvegarde
 
 
 func afficher_interface(scene_en_cours : SceneTree) -> void:

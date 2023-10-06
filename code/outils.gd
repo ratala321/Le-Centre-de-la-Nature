@@ -5,6 +5,8 @@ extends RigidBody3D
 ## Reference au proprietaire de l'outils
 var proprietaire
 
+## Nom de l'instance de l'outils
+var nom_outils : String
 
 var _est_en_main : bool = false
 
@@ -97,6 +99,16 @@ func _retirer_outils_deja_present_main_droite(joueur : JoueurCanard) -> void:
 func _retirer_outils_deja_present_main_gauche(joueur : JoueurCanard) -> void:
 	if joueur.detient_objet_en_main_gauche:
 		_retirer_outils_dans_main_gauche(joueur)
+
+
+func construire_dictionnaire_donnees_a_sauvegarder() -> Dictionary:
+	# Aucune donnees a sauvegardees pour l'instant
+	return {}
+
+
+func charger_dictionnaire_donnees_sauvegardees(donnees_sauvegardees : Dictionary) -> void:
+	# Aucun chargement necessaire pour outils pour l'instant
+	print(donnees_sauvegardees)
 
 
 #---------------------------------------------------------------
