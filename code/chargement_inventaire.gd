@@ -26,8 +26,7 @@ static func _lire_donnees_contenu_inventaire(inventaire : AbstractInventaire) ->
 	if _fichier_sauvegarde_est_existant(inventaire.chemin_fichier_sauvegarde_partiel):
 		donnees_contenu_inventaire = _lire_inventaire_sauvegarde(inventaire)
 	elif _inventaire_par_defaut_est_existant(inventaire):
-		pass
-		#donnees_contenu_inventaire = _lire_inventaire_par_defaut(inventaire)
+		donnees_contenu_inventaire = _lire_inventaire_par_defaut(inventaire)
 	
 	return donnees_contenu_inventaire
 
@@ -65,15 +64,14 @@ static func _lire_inventaire_sauvegarde(inventaire : AbstractInventaire) -> Arra
 	return contenu_fichier_inventaire_parse.get("objets_sauvegardes")
 
 
-#static func _lire_inventaire_par_defaut(inventaire : AbstractInventaire) -> Array:
-#	var donnees_objets_par_defaut : Array = []
-#
-#	for i in range(0, inventaire.inventaire_par_defaut.size(), 2):
-#		var donnees_objet_par_defaut : DonneesObjetInventaire =(
-#			_lire_donnees_objet_par_defaut(i, inventaire))
-#		donnees_objets_par_defaut.push_back(donnees_objet_par_defaut)
-#	
-#	return donnees_objets_par_defaut
+static func _lire_inventaire_par_defaut(inventaire : AbstractInventaire) -> Array:
+	var donnees_objets_par_defaut : Array = []
+
+	for i in range(0, inventaire.inventaire_par_defaut.size()):
+		var donnees_objet_par_defaut : Dictionary = inventaire.inventaire_par_defaut[i]
+		donnees_objets_par_defaut.push_back(donnees_objet_par_defaut)
+	
+	return donnees_objets_par_defaut
 
 
 static func _distribuer_objets_dans_inventaire(liste_inventaire : ItemList,
@@ -92,14 +90,6 @@ static func _distribuer_objets_dans_inventaire(liste_inventaire : ItemList,
 
 static func _lecture_fichier_est_incomplete(lecteur_fichier : FileAccess) -> bool:
 	return lecteur_fichier.get_position() < lecteur_fichier.get_length()
-
-
-#static func _lire_donnees_objet_par_defaut(index : int,
-#		inventaire : AbstractInventaire) -> DonneesObjetInventaire:
-#	var nom_objet : String = inventaire.inventaire_par_defaut[index].as_string()
-#	var chemin_scene_objet : String = inventaire.inventaire_par_defaut[index + 1].as_string()
-#
-#	return DonneesObjetInventaire.new(nom_objet, chemin_scene_objet)
 
 
 static func _initialiser_lecteur_fichier_sauvegarde(chemin_fichier_sauvegarde_partiel : String) -> FileAccess:

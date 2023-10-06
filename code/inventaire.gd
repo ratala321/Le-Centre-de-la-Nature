@@ -2,9 +2,11 @@ class_name AbstractInventaire
 extends Control
 
 
-## duo nomObjet et sceneObjet, exemple :
-## index = 0 -> nomObjet1, index = 1 -> pathSceneObjet1, index = 2 -> nomObjet2 ...
-@export var inventaire_par_defaut : Array
+## Chaque dictionnaire doit contenir trois clefs :
+## nom_dans_inventaire : String
+## chemin_scene_objet : String
+## donnees_objet_inventaire : Dictionary["parametre_correspondant_dans_objet" : valeurParametre]
+@export var inventaire_par_defaut : Array[Dictionary]
 
 var liste_inventaire : ItemList
 @onready var chemin_fichier_sauvegarde_partiel : String = _determiner_chemin_fichier_sauvegarde_partiel()
@@ -23,9 +25,7 @@ func _determiner_chemin_fichier_sauvegarde_partiel() -> String:
 
 func _notification(what):
 	if _fermeture_jeu_est_demandee(what):
-		# creer Array[Dictionary]
 		var donnees_contenu_inventaire : Array[Dictionary] = _obtenir_donnees_contenu_inventaire()
-		print("AVANT SAVE : " + str(donnees_contenu_inventaire))
 		
 		var objets_sauvegardes : Dictionary = { "objets_sauvegardes" : donnees_contenu_inventaire}
 

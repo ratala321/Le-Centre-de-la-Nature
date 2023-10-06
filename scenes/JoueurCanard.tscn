@@ -3985,6 +3985,11 @@ transform = Transform3D(-1, 1.40442e-07, -1.43098e-07, 8.74228e-08, 0.947696, 0.
 
 [node name="InventaireJoueur" parent="." instance=ExtResource("10_owos5")]
 visible = false
+inventaire_par_defaut = Array[Dictionary]([{
+"chemin_scene_objet": "res://scenes/EpeeJoueur.tscn",
+"donnees_objet_inventaire": {},
+"nom_dans_inventaire": "epee"
+}])
 
 [node name="AireInteraction" type="Area3D" parent="."]
 
