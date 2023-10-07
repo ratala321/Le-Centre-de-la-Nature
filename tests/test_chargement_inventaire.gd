@@ -28,7 +28,7 @@ func after_each():
 
 const CHEMIN_FICHIER_TEST_PARTIEL : String = "tests/" + NOM_INSTANCE_COFFRE
 func test_charger_inventaire_sauvegarde():
-	var donnees_a_sauvegarder : Array[DonneesObjetInventaire] = _initialiser_contenu_inventaire_chemins_invalides()
+	var donnees_a_sauvegarder : Dictionary = _initialiser_contenu_inventaire_chemins_invalides()
 
 	SauvegardeInventaire.sauvegarder_donnees_contenu_inventaire(donnees_a_sauvegarder, CHEMIN_FICHIER_TEST_PARTIEL)
 
@@ -41,7 +41,7 @@ func test_charger_inventaire_sauvegarde():
 
 
 func test_noms_objets_charges():
-	var donnees_a_sauvegarder : Array[DonneesObjetInventaire] = _initialiser_contenu_inventaire_chemins_invalides()
+	var donnees_a_sauvegarder : Dictionary = _initialiser_contenu_inventaire_chemins_invalides()
 
 	SauvegardeInventaire.sauvegarder_donnees_contenu_inventaire(donnees_a_sauvegarder, CHEMIN_FICHIER_TEST_PARTIEL)
 
@@ -57,7 +57,7 @@ func test_noms_objets_charges():
 
 
 func test_metadata_chargee_invalide():
-	var donnees_a_sauvegarder : Array[DonneesObjetInventaire] = _initialiser_contenu_inventaire_chemins_invalides()
+	var donnees_a_sauvegarder : Dictionary = _initialiser_contenu_inventaire_chemins_invalides()
 
 	SauvegardeInventaire.sauvegarder_donnees_contenu_inventaire(donnees_a_sauvegarder, CHEMIN_FICHIER_TEST_PARTIEL)
 
@@ -73,7 +73,7 @@ func test_metadata_chargee_invalide():
 
 
 func test_metadata_chargee_valide():
-	var donnees_a_sauvegarder : Array[DonneesObjetInventaire] = _initialiser_contenu_inventaire_chemins_valides()
+	var donnees_a_sauvegarder : Dictionary = _initialiser_contenu_inventaire_chemins_valides()
 
 	SauvegardeInventaire.sauvegarder_donnees_contenu_inventaire(donnees_a_sauvegarder, CHEMIN_FICHIER_TEST_PARTIEL)
 
@@ -125,21 +125,45 @@ func _ajouter_instances_dans_scene(instance_coffre : Node, aire_interaction : No
 	add_child_autoqfree(instance_coffre)
 
 
-func _initialiser_contenu_inventaire_chemins_invalides() -> Array[DonneesObjetInventaire]:
-	var donnees_a_sauvegarder : Array[DonneesObjetInventaire] = []
+func _initialiser_contenu_inventaire_chemins_invalides() -> Dictionary:
+	var donnees_test_chemin_invalide_1 : Dictionary = {
+		"nom_dans_inventaire" : "nomObjetTest",
+		"chemin_scene_objet" : "faux_chemin_test",
+		"donnees_objet_inventaire" : {},
+	}
+	var donnees_test_chemin_invalide_2 : Dictionary = {
+		"nom_dans_inventaire" : "Jonh",
+		"chemin_scene_objet" : "vrai chemin test",
+		"donnees_objet_inventaire" : {},
+	}
 
-	donnees_a_sauvegarder.push_back(DonneesObjetInventaire.new("nomObjetTest", "nomCheminTest"))
-	donnees_a_sauvegarder.push_back(DonneesObjetInventaire.new("Jonh", "Road"))
+	var ensemble_donnees_test : Array = [donnees_test_chemin_invalide_1, donnees_test_chemin_invalide_2]
+
+	var donnees_a_sauvegarder : Dictionary = {
+		"objets_sauvegardes" : ensemble_donnees_test
+	}
 
 	return donnees_a_sauvegarder
 
 
 const CHEMIN_SCENE_TEST : String = "res://tests/scene_de_test.tscn"
-func _initialiser_contenu_inventaire_chemins_valides() -> Array[DonneesObjetInventaire]:
-	var donnees_a_sauvegarder : Array[DonneesObjetInventaire] = []
+func _initialiser_contenu_inventaire_chemins_valides() -> Dictionary:
+	var donnees_test_chemin_valide_1 : Dictionary = {
+		"nom_dans_inventaire" : "nom",
+		"chemin_scene_objet" : CHEMIN_SCENE_TEST,
+		"donnees_objet_inventaire" : {},
+	}
+	var donnees_test_chemin_valide_2 : Dictionary = {
+		"nom_dans_inventaire" : "nom alternatif",
+		"chemin_scene_objet" : CHEMIN_SCENE_TEST,
+		"donnees_objet_inventaire" : {},
+	}
 
-	donnees_a_sauvegarder.push_back(DonneesObjetInventaire.new("nom", CHEMIN_SCENE_TEST))
-	donnees_a_sauvegarder.push_back(DonneesObjetInventaire.new("allo", CHEMIN_SCENE_TEST))
+	var ensemble_donnees_test : Array = [donnees_test_chemin_valide_1, donnees_test_chemin_valide_2]
+
+	var donnees_a_sauvegarder : Dictionary = {
+		"objets_sauvegardes" : ensemble_donnees_test
+	}
 
 	return donnees_a_sauvegarder
 

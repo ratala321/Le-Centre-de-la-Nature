@@ -78,9 +78,11 @@ static func _distribuer_objets_dans_inventaire(liste_inventaire : ItemList,
 		donnees_objets : Array) -> void:
 	for donnees_objet in donnees_objets:
 		var chemin_scene_objet : String = donnees_objet.get("chemin_scene_objet")
-		var instance_objet : Node = load(chemin_scene_objet).instantiate()
+
+		var instance_objet : Node = _initialiser_instance_objet_inventaire(chemin_scene_objet)
 		
-		instance_objet.charger_dictionnaire_donnees_sauvegardees(donnees_objet.get("donnees_objet_inventaire"))
+		_charger_donnees_sauvegardees_dans_objet_inventaire(instance_objet,
+			donnees_objet.get("donnees_objet_inventaire"))
 		
 		var nom_dans_inventaire : String = donnees_objet.get("nom_dans_inventaire")
 		
@@ -99,3 +101,27 @@ static func _initialiser_lecteur_fichier_sauvegarde(chemin_fichier_sauvegarde_pa
 	)
 
 	return FileAccess.open(chemin_fichier_sauvegarde_complet, FileAccess.READ)
+
+
+## Retourne l'instance associee a la scene de l'objet. Dans le cas ou le
+## chemin de la scene est invalide, retourne null.
+static func _initialiser_instance_objet_inventaire(chemin_scene_objet) -> Node:
+	var scene_objet : PackedScene = load(chemin_scene_objet)
+
+	var instance_objet : Node 
+
+	if scene_objet != null:
+		instance_objet = scene_objet.instantiate()
+	else:
+		instance_objet = null
+
+	return instance_objet
+
+
+static func _charger_donnees_sauvegardees_dans_objet_inventaire(instance_objet : Node,
+		donnees_sauvegardees_instance : Dictionary) -> void:
+	if (
+			instance_objet != null and 
+			instance_objet.has_method("charger_dictionnaire_donnees_sauvegardees")
+	):
+		instance_objet.charger_dictionnaire_donnees_sauvegardees(donnees_sauvegardees_instance)

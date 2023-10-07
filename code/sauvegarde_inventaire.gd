@@ -9,8 +9,6 @@ const SUFFIXE_SAUVEGARDE : String = ".txt"
 ## Exemple : repertoire/fichier | repertoire/sousRepertoire/fichier
 static func sauvegarder_donnees_contenu_inventaire(donnees_a_sauvegarder : Dictionary,
 		chemin_fichier_sauvegarde_partiel : String) -> void:
-	var chemin_fichier_sauvegarde_complet : String = _initialiser_chemin_sauvegarde_complet(chemin_fichier_sauvegarde_partiel)
-	
 	var redacteur_fichier : FileAccess = _initialiser_redacteur_fichier(chemin_fichier_sauvegarde_partiel)
 	if _ouverture_fichier_est_reussie(redacteur_fichier):
 		_sauvegarder_donnees_a_sauvegarder(donnees_a_sauvegarder, redacteur_fichier)
