@@ -57,6 +57,14 @@ func lancer_processus_retrait_self_du_scene_tree() -> void:
 
 func _retirer_self_du_scene_tree() -> void:
 	get_parent().remove_child(self)
+	
+	_liberer_chrono_retirer_self()
+
+
+func _liberer_chrono_retirer_self() -> void:
+	for enfant in get_children():
+		if enfant is Timer:
+			enfant.queue_free()
 
 
 ## Permet de construire un dictionnaire contenant les donnees a sauvegardees du collectionnable

@@ -130,4 +130,5 @@ func changer_etat_animation(nom_animation : String, vitesse_animation : float = 
 func collecter_objet(collectionnable : Collectionnable) -> void:
 	inventaire_joueur.ajouter_collectionnable_a_inventaire(collectionnable)
 	
-	collectionnable.lancer_processus_retrait_self_du_scene_tree()
+	if not collectionnable.is_queued_for_deletion():
+		collectionnable.lancer_processus_retrait_self_du_scene_tree()
