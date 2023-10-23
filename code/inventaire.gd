@@ -160,8 +160,10 @@ func _objet_inventaire_et_collectionnable_sont_doublons(collectionnable : Collec
 
 func _ajouter_nouveau_collectionnable(collectionnable : Collectionnable) -> void:
 	collectionnable.compteur_collectionnable += 1
+	
 	liste_inventaire.add_item(collectionnable.nom)
 	liste_inventaire.set_item_metadata(-1, collectionnable)
+	liste_inventaire.set_item_icon(-1, collectionnable.icone_inventaire)
 
 
 func _mettre_a_jour_doublon_collectionnable(resultat_recherche : int) -> void:

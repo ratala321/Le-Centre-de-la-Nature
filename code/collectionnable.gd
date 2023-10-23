@@ -8,10 +8,13 @@ extends Area3D
 ## Valeur du collectionnable a la vente
 @export var valeur_monetaire : int
 
+@onready var icone_inventaire : Texture2D = (get_node("Sprite3D") as Sprite3D).texture
+
+
 ## Nombre de collectionnables correspondant contenu.
 ## Si le joueur ramasse cet objet alors qu'il possede deja un objet de ce type
 ## dans son inventaire, alors le compteur sera incremente.
-var compteur_collectionnable : int
+var compteur_collectionnable : int = 0
 
 
 func _ready():
