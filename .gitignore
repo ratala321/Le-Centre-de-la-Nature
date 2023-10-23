@@ -13,6 +13,7 @@ importations/
 sons/*
 addons/*
 .gut_editor_config.json
+themes/
 
 # IDEA
 .idea/

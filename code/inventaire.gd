@@ -1,5 +1,5 @@
 class_name AbstractInventaire
-extends Control
+extends CanvasLayer
 
 
 ## Chaque dictionnaire doit contenir trois clefs :
@@ -18,7 +18,7 @@ func _ready():
 
 
 func _determiner_chemin_fichier_sauvegarde_partiel() -> String:
-	liste_inventaire = get_node("ItemList")
+	liste_inventaire = %ListeInventaire
 	var proprietaire_inventaire : Node = get_parent()
 	return proprietaire_inventaire.name
 

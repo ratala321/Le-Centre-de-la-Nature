@@ -2,33 +2,41 @@
 
 [ext_resource type="Script" path="res://code/inventaire_coffre.gd" id="1_t4vgw"]
 
-[node name="InventaireCoffre" type="Control" groups=["InterfaceEnJeu"]]
-layout_mode = 3
-anchors_preset = 0
+[node name="InventaireCoffre" type="CanvasLayer" groups=["InterfaceEnJeu"]]
 script = ExtResource("1_t4vgw")
 
-[node name="Camera2DInventaireJoueur" type="Camera2D" parent="."]
+[node name="InterfaceUtilisateur" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -273.0
+offset_top = -50.0
+offset_right = -233.0
+offset_bottom = -10.0
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-layout_mode = 0
-offset_left = -598.0
-offset_top = -338.0
-offset_bottom = 342.0
-color = Color(0.584314, 0.423529, 0.458824, 0.639216)
+[node name="PanelEntete" type="PanelContainer" parent="InterfaceUtilisateur"]
+offset_left = 380.0
+offset_top = 176.0
+offset_right = 521.0
+offset_bottom = 216.0
 
-[node name="TextEdit" type="TextEdit" parent="."]
-layout_mode = 0
-offset_left = -540.0
-offset_top = -306.0
-offset_right = -334.0
-offset_bottom = -245.0
+[node name="MarginEntete" type="MarginContainer" parent="InterfaceUtilisateur/PanelEntete"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Entete" type="Label" parent="InterfaceUtilisateur/PanelEntete/MarginEntete"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Inventaire Coffre"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="ItemList" type="ItemList" parent="." groups=["InterfaceEnJeu"]]
-layout_mode = 0
-offset_left = -452.0
-offset_top = -181.0
-offset_right = -223.0
-offset_bottom = 86.0
+[node name="ListeInventaire" type="ItemList" parent="." groups=["InterfaceEnJeu"]]
+unique_name_in_owner = true
+offset_left = 95.0
+offset_top = 185.0
+offset_right = 324.0
+offset_bottom = 452.0
 max_columns = 2

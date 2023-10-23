@@ -2,37 +2,59 @@
 
 [ext_resource type="Script" path="res://code/paquetCodeJoueur/inventaire_joueur.gd" id="1_gt6oj"]
 
-[node name="InventaireJoueur" type="Control" groups=["InterfaceEnJeu"]]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="InventaireJoueur" type="CanvasLayer" groups=["InterfaceEnJeu"]]
 script = ExtResource("1_gt6oj")
 
-[node name="Camera2DInventaireJoueur" type="Camera2D" parent="."]
+[node name="InterfaceUtilisateur" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -314.0
+offset_top = -121.0
+offset_right = -314.0
+offset_bottom = -121.0
+grow_horizontal = 0
+grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = -598.0
-offset_top = -338.0
-offset_right = 623.0
-offset_bottom = 342.0
-color = Color(0.584314, 0.423529, 0.458824, 0.639216)
+[node name="PanelEntete" type="PanelContainer" parent="InterfaceUtilisateur"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 3.0
+offset_top = -56.0
+offset_right = 173.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 2
 
-[node name="TextEdit" type="TextEdit" parent="."]
-layout_mode = 0
-offset_left = 44.0
-offset_top = -306.0
-offset_right = 250.0
-offset_bottom = -245.0
+[node name="MargeEntete" type="MarginContainer" parent="InterfaceUtilisateur/PanelEntete"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Entete" type="Label" parent="InterfaceUtilisateur/PanelEntete/MargeEntete"]
+layout_mode = 2
 text = "Inventaire Joueur"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="ItemList" type="ItemList" parent="." groups=["InterfaceEnJeu"]]
+[node name="PanelListe" type="PanelContainer" parent="InterfaceUtilisateur"]
 layout_mode = 0
-offset_left = 36.0
-offset_top = -181.0
-offset_right = 265.0
-offset_bottom = 86.0
-max_columns = 2
+offset_left = -17.0
+offset_top = 10.0
+offset_right = 166.0
+offset_bottom = 204.0
+scale = Vector2(1.10394, 1.52673)
+
+[node name="ListeInventaire" type="ItemList" parent="InterfaceUtilisateur/PanelListe" groups=["InterfaceEnJeu"]]
+unique_name_in_owner = true
+layout_mode = 2
+icon_scale = 0.1
