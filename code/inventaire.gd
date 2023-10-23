@@ -17,6 +17,11 @@ func _ready():
 	charger_contenu_inventaire()
 
 
+func _physics_process(_delta):
+	if self.visible and Input.is_key_pressed(KEY_Q):
+		cacher_interface()
+
+
 func _determiner_chemin_fichier_sauvegarde_partiel() -> String:
 	liste_inventaire = %ListeInventaire
 	var proprietaire_inventaire : Node = get_parent()
@@ -66,6 +71,8 @@ func _creer_objet_sauvegarde(index : int) -> Dictionary:
 
 func afficher_interface(scene_en_cours : SceneTree) -> void:
 	show()
+	# Important pour pouvoir cacher l'interface après
+	set_process_mode(PROCESS_MODE_ALWAYS)
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 	scene_en_cours.paused = true
 
@@ -74,6 +81,7 @@ func cacher_interface() -> void:
 	hide()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	get_tree().paused = false
+	set_process_mode(PROCESS_MODE_WHEN_PAUSED)
 
 
 var inventaire_destination : AbstractInventaire
