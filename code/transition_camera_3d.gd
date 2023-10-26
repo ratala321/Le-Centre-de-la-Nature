@@ -1,5 +1,5 @@
 class_name TransitionCamera3d
-extends Node
+extends RefCounted
 
 
 static func effectuer_transition_basique_camera_3d(initiale : Camera3D,
@@ -27,7 +27,8 @@ static func initialiser_camera_de_transition(arbre_scene_en_cours : SceneTree) -
 	return camera_de_transition
 
 
-## Permet d'ajuster les parametres initiaux en se basant sur la camera initale de la transition
+## Permet d'ajuster les parametres initiaux de la camera de transition
+## en se basant sur la camera initale de la transition.
 static func ajuster_parametres_initiaux_camera_transition(camera_de_transition : Camera3D,
 		initiale : Camera3D) -> void:
 	camera_de_transition.fov = initiale.fov
