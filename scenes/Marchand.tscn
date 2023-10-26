@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://brnoks1cft68k"]
+
+[ext_resource type="Script" path="res://code/marchand.gd" id="1_lnmhk"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_52ebl"]
+size = Vector3(1, 1.9, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v20xc"]
+radius = 1.7
+
+[node name="Marchand" type="RigidBody3D"]
+script = ExtResource("1_lnmhk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_52ebl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_v20xc")
+
+[node name="DialoguesMarchand" type="CanvasLayer" parent="." groups=["InterfaceEnJeu"]]
+visible = false
+
+[node name="InterfaceUtilisateur" type="Control" parent="DialoguesMarchand"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 84.0
+offset_right = 20.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="PanelMarchander" type="PanelContainer" parent="DialoguesMarchand/InterfaceUtilisateur"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginMarchander" type="MarginContainer" parent="DialoguesMarchand/InterfaceUtilisateur/PanelMarchander"]
+layout_mode = 2
+
+[node name="ButtonMarchander" type="Button" parent="DialoguesMarchand/InterfaceUtilisateur/PanelMarchander/MarginMarchander"]
+layout_mode = 2
+text = "Marchander"
+
+[node name="PanelDiscuter" type="PanelContainer" parent="DialoguesMarchand/InterfaceUtilisateur"]
+layout_mode = 0
+offset_left = -148.0
+offset_right = -108.0
+offset_bottom = 40.0
+
+[node name="MarginDiscuter" type="MarginContainer" parent="DialoguesMarchand/InterfaceUtilisateur/PanelDiscuter"]
+layout_mode = 2
+
+[node name="ButtonDiscuter" type="Button" parent="DialoguesMarchand/InterfaceUtilisateur/PanelDiscuter/MarginDiscuter"]
+layout_mode = 2
+text = "Discuter"
+
+[node name="PanelQuitter" type="PanelContainer" parent="DialoguesMarchand/InterfaceUtilisateur"]
+layout_mode = 0
+offset_left = 180.0
+offset_right = 244.0
+offset_bottom = 40.0
+
+[node name="MarginQuitter" type="MarginContainer" parent="DialoguesMarchand/InterfaceUtilisateur/PanelQuitter"]
+layout_mode = 2
+
+[node name="ButtonQuitter" type="Button" parent="DialoguesMarchand/InterfaceUtilisateur/PanelQuitter/MarginQuitter"]
+layout_mode = 2
+text = "Quitter"
