@@ -13,6 +13,7 @@ var rotation_horizontale_camera : float = 0
 func _ready():
 	## Isole la souris dans la fenetre
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	$Camera3DJoueur.make_current()
 
 
 func _input(event):
