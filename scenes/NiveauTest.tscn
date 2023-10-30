@@ -24,6 +24,9 @@ size = Vector3(23.7962, 6.90827, 22.6012)
 [node name="GestionnaireSauvegardeFichier" type="Node" parent="."]
 script = ExtResource("6_n3wjg")
 
+[node name="Destination" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8, 2, 2)
+
 [node name="JoueurCanard" parent="." instance=ExtResource("1_0iw8u")]
 transform = Transform3D(1, -3.55271e-15, 7.10543e-15, -3.55271e-15, 1, 0, -7.10543e-15, 0, 1, 2.84217e-14, 0.0998027, -2.38419e-07)
 
