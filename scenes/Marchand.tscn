@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://brnoks1cft68k"]
+[gd_scene load_steps=5 format=3 uid="uid://brnoks1cft68k"]
 
 [ext_resource type="Script" path="res://code/marchand.gd" id="1_lnmhk"]
+[ext_resource type="Script" path="res://code/patron_relais.gd" id="2_7h8n8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_52ebl"]
 size = Vector3(1, 1.9, 1)
@@ -73,3 +74,7 @@ layout_mode = 2
 [node name="ButtonQuitter" type="Button" parent="DialoguesMarchand/InterfaceUtilisateur/PanelQuitter/MarginQuitter"]
 layout_mode = 2
 text = "Quitter"
+
+[node name="RelaisInteractionJoueur" type="Node" parent="."]
+script = ExtResource("2_7h8n8")
+nom_methode_relais = "effectuer_interaction_initiale_avec_client"

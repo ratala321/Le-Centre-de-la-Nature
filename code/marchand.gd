@@ -11,7 +11,9 @@ func _physics_process(_delta):
 		_effectuer_procedure_cacher_interface_dialogue()
 
 
-func effectuer_interaction(_interacteur : Node) -> void:
+func effectuer_interaction_initiale_avec_client(client : Node) -> void:
+	# TODO empecher_mouvement_client(client)
+
 	_effectuer_procedure_afficher_interface_dialogue()
 	
 
@@ -19,13 +21,9 @@ func _effectuer_procedure_afficher_interface_dialogue() -> void:
 	get_node("DialoguesMarchand").show()
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
-	
-	get_tree().paused = true
 
 
 func _effectuer_procedure_cacher_interface_dialogue() -> void:
 	get_node("DialoguesMarchand").hide()
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
-	get_tree().paused = false
