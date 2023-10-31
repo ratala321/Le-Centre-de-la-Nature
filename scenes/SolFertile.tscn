@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhltammokhs6o"]
+[gd_scene load_steps=14 format=3 uid="uid://bhltammokhs6o"]
 
 [ext_resource type="Script" path="res://code/sol_fertile.gd" id="1_3qncb"]
 [ext_resource type="Texture2D" uid="uid://clhtrf8picnvl" path="res://importations/SourceFiles/Textures/PolygonFarm_Texture_03_A.png" id="2_w1056"]
 [ext_resource type="Script" path="res://code/espace_plante.gd" id="4_ei2sf"]
 [ext_resource type="PackedScene" uid="uid://cw0mho7tmkpw8" path="res://scenes/plantesScenes/BleScene.tscn" id="4_hy0se"]
+[ext_resource type="Script" path="res://code/patron_relais.gd" id="5_nctuk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oogmw"]
 albedo_texture = ExtResource("2_w1056")
@@ -202,3 +203,7 @@ shape = SubResource("BoxShape3D_vd41u")
 
 [node name="PositionPlante" type="Marker3D" parent="ConteneurEspacePlante/EspacePlante8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.227857, 0, 0.137783)
+
+[node name="RelaisInteractionJoueur" type="Node" parent="."]
+script = ExtResource("5_nctuk")
+nom_methode_relais = "effectuer_interaction_avec_joueur"

@@ -77,4 +77,4 @@ text = "Quitter"
 
 [node name="RelaisInteractionJoueur" type="Node" parent="."]
 script = ExtResource("2_7h8n8")
-nom_methode_relais = "effectuer_interaction_initiale_avec_client"
+nom_methode_relais = "effectuer_interaction_initiale_avec_joueur"

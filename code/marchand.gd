@@ -2,6 +2,9 @@ class_name Marchand
 extends Node3D
 
 
+var client_en_cours : Node
+
+
 func _ready():
 	set_process_mode(PROCESS_MODE_WHEN_PAUSED)
 
@@ -11,7 +14,7 @@ func _physics_process(_delta):
 		_effectuer_procedure_cacher_interface_dialogue()
 
 
-func effectuer_interaction_initiale_avec_client(client : Node) -> void:
+func effectuer_interaction_initiale_avec_joueur(_joueur : JoueurCanard) -> void:
 	# TODO empecher_mouvement_client(client)
 
 	_effectuer_procedure_afficher_interface_dialogue()

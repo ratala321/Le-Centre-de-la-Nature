@@ -2,13 +2,13 @@ class_name Coffre
 extends AbstractObjetInteractif
 
 
-func effectuer_interaction(interacteur : Node) -> void:
+func effectuer_interaction_avec_joueur(joueur : JoueurCanard) -> void:
 	var inventaire_coffre : AbstractInventaire = $InventaireCoffre as AbstractInventaire
 
-	if interacteur.has_node("InventaireJoueur"):
-		_afficher_interfaces(inventaire_coffre, interacteur.inventaire_joueur)
+	if joueur.has_node("InventaireJoueur"):
+		_afficher_interfaces(inventaire_coffre, joueur.inventaire_joueur)
 
-		_ajouter_references_inventaire_destination(inventaire_coffre, interacteur.inventaire_joueur)
+		_ajouter_references_inventaire_destination(inventaire_coffre, joueur.inventaire_joueur)
 
 
 func _afficher_interfaces(inventaire_coffre : AbstractInventaire,

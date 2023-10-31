@@ -32,7 +32,7 @@ func _avancer_croissance_plantes() -> void:
 			plante_contenue.avancer_croissance(TEMPS_AVANCEMENT)
 
 
-func effectuer_interaction(_interacteur) -> void:
+func effectuer_interaction_avec_joueur(_joueur : JoueurCanard) -> void:
 	#TODO
 	print("Interaction avec sol fertile")
 

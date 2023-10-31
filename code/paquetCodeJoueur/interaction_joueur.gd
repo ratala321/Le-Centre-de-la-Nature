@@ -28,7 +28,6 @@ func _recherche_objet_interactif_est_en_cours(compteur : int,
 
 
 func _n_est_pas_objet_interactif(objet_en_collision : Node) -> bool:
-	#return not objet_en_collision.has_method("effectuer_interaction")
 	return not objet_en_collision.has_node("RelaisInteractionJoueur")
 
 
@@ -37,7 +36,6 @@ func _objet_interactif_a_ete_trouve(index : int, nombre_objets_interactifs_poten
 
 
 func _lancer_interaction_avec_objet_interactif(objet_interactif : Node) -> void:
-	#objet_interactif.effectuer_interaction(_joueur)
 	objet_interactif.get_node("RelaisInteractionJoueur").utiliser_relais(_joueur)
 
 
