@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://be0qvpru3w82e"]
+
+[ext_resource type="Script" path="res://code/patron_relais.gd" id="1_uwj5h"]
+
+[node name="PatronRelais" type="Node"]
+script = ExtResource("1_uwj5h")
