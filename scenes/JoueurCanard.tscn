@@ -3830,7 +3830,7 @@ states/Start/position = Vector2(202, 100)
 states/Walk/node = SubResource("AnimationNodeAnimation_xn5u0")
 states/Walk/position = Vector2(527, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_das8a"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_ro83o"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_pwc1u"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_2btl6"), "Idle", "Interact", SubResource("AnimationNodeStateMachineTransition_qaa4v"), "Walk", "Attack(1h)", SubResource("AnimationNodeStateMachineTransition_nhma8"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_55klo"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_2kuw8"), "Attack(1h)", "Walk", SubResource("AnimationNodeStateMachineTransition_y35w4"), "Idle", "Attack(1h)", SubResource("AnimationNodeStateMachineTransition_34mtn"), "Interact", "Idle", SubResource("AnimationNodeStateMachineTransition_okptv")]
-graph_offset = Vector2(-33, -196.628)
+graph_offset = Vector2(-33, -33.1344)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6rmec"]
 height = 1.93666

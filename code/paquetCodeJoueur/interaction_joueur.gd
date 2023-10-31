@@ -46,7 +46,7 @@ func effectuer_procedure_interaction_initiale() -> void:
 
 
 func _joueur_peut_interagir() -> bool:
-	return _joueur.est_au_sol() and _joueur_n_est_pas_deja_en_interaction()
+	return _joueur.est_au_sol() and _joueur.peut_se_mouvoir() and _joueur_n_est_pas_deja_en_interaction()
 
 
 func _joueur_n_est_pas_deja_en_interaction() -> bool:
