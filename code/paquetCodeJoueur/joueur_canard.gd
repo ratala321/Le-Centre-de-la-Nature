@@ -41,7 +41,7 @@ func _init():
 
 
 func _physics_process(delta):
-	controleur_animation_joueur.advance(delta * vitesse_animation_actuelle)
+	progresser_animation_joueur(delta)
 	
 	_effectuer_procedure_mouvement_joueur(delta)
 
@@ -50,11 +50,15 @@ func _physics_process(delta):
 	_interaction_joueur.effectuer_procedure_interaction_initiale()
 
 
+func progresser_animation_joueur(delta) -> void:
+		controleur_animation_joueur.advance(delta * vitesse_animation_actuelle)
+
+
 func _effectuer_procedure_mouvement_joueur(delta) -> void:
 	var facteurs_mouvement_joueur : FacteursMouvementJoueur =(
 		_entree_mouvement_joueur.saisir_entree_mouvement_joueur()
 	)
-
+	
 	_mouvement_joueur.effectuer_procedure_appplication_mouvement(delta, facteurs_mouvement_joueur)
 
 
