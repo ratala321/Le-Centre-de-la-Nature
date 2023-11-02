@@ -39,7 +39,7 @@ static func _ajuster_parametres_initiaux_camera_transition(camera_de_transition 
 
 static func _deplacer_camera_transition_vers_destination(camera_de_transition : Camera3D,
 		destination : Camera3D, duree_transition : float) -> void:
-	var tween : Tween = destination.create_tween()
+	var tween : Tween = destination.get_tree().current_scene.create_tween()
 	
 	tween.set_parallel(true)
 	tween.set_ease(Tween.EASE_IN_OUT)
