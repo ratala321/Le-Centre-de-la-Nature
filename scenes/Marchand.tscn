@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://brnoks1cft68k"]
+[gd_scene load_steps=6 format=3 uid="uid://brnoks1cft68k"]
 
 [ext_resource type="Script" path="res://code/marchand.gd" id="1_lnmhk"]
 [ext_resource type="Script" path="res://code/patron_relais.gd" id="2_7h8n8"]
+[ext_resource type="Script" path="res://code/dialogues_marchand.gd" id="2_7r2iq"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_52ebl"]
 size = Vector3(1, 1.9, 1)
@@ -10,6 +11,9 @@ size = Vector3(1, 1.9, 1)
 radius = 1.7
 
 [node name="Marchand" type="RigidBody3D"]
+sleeping = true
+lock_rotation = true
+freeze = true
 script = ExtResource("1_lnmhk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -20,6 +24,7 @@ shape = SubResource("SphereShape3D_v20xc")
 
 [node name="DialoguesMarchand" type="CanvasLayer" parent="." groups=["InterfaceEnJeu"]]
 visible = false
+script = ExtResource("2_7r2iq")
 
 [node name="InterfaceUtilisateur" type="Control" parent="DialoguesMarchand"]
 layout_mode = 3

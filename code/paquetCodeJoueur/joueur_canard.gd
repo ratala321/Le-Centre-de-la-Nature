@@ -2,6 +2,9 @@ class_name JoueurCanard
 extends CharacterBody3D
 
 
+@export var camera_joueur : Camera3D
+
+
 var detient_objet_en_main_droite : bool = false
 var detient_objet_en_main_gauche : bool = false
 

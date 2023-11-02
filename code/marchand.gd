@@ -2,7 +2,11 @@ class_name Marchand
 extends Node3D
 
 
-var client_en_cours : JoueurCanard
+## Angle de vue, lors du marchandage avec le joueur, etant placee dans la scene du niveau.
+@export var angle_vue_marchand : Camera3D
+
+## Temps de transition de la camera en cours vers l'angle de vue.
+@export var temps_transition_angle_vue : float = 1.5
 
 
 func _ready():
@@ -17,9 +21,19 @@ func _physics_process(delta):
 		client_en_cours.progresser_animation_joueur(delta)
 
 
-func effectuer_interaction_initiale_avec_joueur(joueur : JoueurCanard) -> void:
-	_immobiliser_joueur(joueur)
+var client_en_cours : JoueurCanard
 
+var camera_joueur : Camera3D
+
+func effectuer_interaction_initiale_avec_joueur(joueur : JoueurCanard) -> void:
+	client_en_cours = joueur
+	
+	_immobiliser_joueur(joueur)
+	
+	camera_joueur = _obtenir_camera_joueur(joueur)
+	
+	_lancer_transition_vers_angle_de_vue(camera_joueur)
+	
 	_effectuer_procedure_afficher_interface_dialogue()
 
 
@@ -28,6 +42,18 @@ func _immobiliser_joueur(joueur : JoueurCanard) -> void:
 	await joueur.controleur_animation_joueur.animation_finished
 	
 	joueur.arreter_mouvement()
+
+
+func _obtenir_camera_joueur(joueur : JoueurCanard) -> Camera3D:
+	return joueur.camera_joueur
+
+
+func _lancer_transition_vers_angle_de_vue(en_cours_utilisation : Camera3D) -> void:
+	TransitionCamera3d.effectuer_transition_basique_camera_3d(
+			en_cours_utilisation,
+			angle_vue_marchand,
+			temps_transition_angle_vue
+	)
 
 
 func _effectuer_procedure_afficher_interface_dialogue() -> void:

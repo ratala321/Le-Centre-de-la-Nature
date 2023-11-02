@@ -3838,8 +3838,9 @@ height = 1.93666
 [sub_resource type="BoxShape3D" id="BoxShape3D_ypn58"]
 size = Vector3(1.47799, 2.39154, 1.81609)
 
-[node name="JoueurCanard" type="CharacterBody3D"]
+[node name="JoueurCanard" type="CharacterBody3D" node_paths=PackedStringArray("camera_joueur")]
 script = ExtResource("1_nea2h")
+camera_joueur = NodePath("AxeRotationCamera/Camera3DJoueur")
 
 [node name="KayKit_AnimatedCharacter_v13" type="Node3D" parent="."]
 
