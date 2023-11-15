@@ -1,21 +1,15 @@
-# Test 3D Godot
+# Le Centre de la Nature
 
-## Description du projet
-Il s'agit de ma première fois en 3D dans un engin de jeu.
+## Jeu de ferme 3d centré autour des animaux
 
----
+Dans un monde délaissé par les humains, les animaux prennent le flambeau et occupent le rôle de "leur" humain dans la société.
 
-## Systèmes
-Le jeu contient : 
-- Une intégration de Jenkins et des tests unitaires
-- Un système de sauvegarde.
-- Un système de gestion d'inventaire.
-- Un système de déplacement de joueur et de caméra en 3D.
+## Développement
 
----
+Le jeu est conçu à "ciel ouvert". Cela veut dire que le **code** et la **documentation** seront affichés **publiquement**.
 
-## Ce qui pourrait être ajouté
-- Des tests unitaires par rapport au chargement et à la sauvegarde de données.
-- Un procédure abstraite de sélection d'objet à partir de l'inventaire du joueur.
-- La gestion des doublons dans l'inventaire.
-- Et bien d'autres choses!
+Le but est de partager publiquement le processus de création d'un jeu particulier.
+
+## Contact
+
+N'hésitez pas à contacter `ratala` pour quelconque question au sujet du jeu.
