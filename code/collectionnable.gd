@@ -42,8 +42,8 @@ func _effectuer_mouvement_haut_bas() -> void:
 
 
 func lancer_procedure_ramassage(objet_en_collision) -> void:
-	if objet_en_collision.has_method("collecter_objet"):
-		objet_en_collision.collecter_objet(self)
+	if objet_en_collision.has_node("RelaisCollection"):
+		objet_en_collision.get_node("RelaisCollection").utiliser_relais(self)
 
 
 func lancer_processus_retrait_self_du_scene_tree() -> void:
