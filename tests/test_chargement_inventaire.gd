@@ -1,7 +1,7 @@
 extends GutTest
 
 
-var instance_inventaire : Control
+var instance_inventaire : AbstractInventaire
 
 
 func before_all():
@@ -100,7 +100,7 @@ func _creer_aire_interaction() -> Area3D:
 	return aire_interaction
 
 
-func _creer_instance_inventaire() -> Control:
+func _creer_instance_inventaire() -> AbstractInventaire:
 	var scene_inventaire_coffre : PackedScene = load("res://scenes/InventaireCoffre.tscn")
 	
 	return autoqfree(scene_inventaire_coffre.instantiate())
