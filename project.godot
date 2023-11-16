@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="PremierTest3d"
+config/name="Le Centre de la Nature"
 run/main_scene="res://scenes/NiveauTest.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"

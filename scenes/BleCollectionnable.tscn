@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://degvlci6vffve"]
+[gd_scene load_steps=4 format=3 uid="uid://8wgqg76bo7ew"]
 
 [ext_resource type="Texture2D" uid="uid://b4n4itmbw88td" path="res://importations/2d_importations/pixel_2d/icones_2d_pixel/icone_ble_pixel.png" id="1_jcw0b"]
 [ext_resource type="Script" path="res://code/collectionnable.gd" id="1_tl2tp"]
