@@ -33,7 +33,7 @@ func _effectuer_procedure_previsualisation_plante() -> void:
 
 
 ## Cherche un EspacePlante a portee du sac et applique la fonction sur cet EspacePlante
-## Effectuer la fonction sur le premier EspacePlante trouve
+## Effectue la fonction sur le premier EspacePlante trouve
 func _effecuter_fonction_sur_espace_plante(fonction_a_appliquer : Callable):
 	var aires_detectees : Array[Area3D] =(
 		_aire_detection_espace_plante.get_overlapping_areas()

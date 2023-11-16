@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://8wgqg76bo7ew"]
 
-[ext_resource type="Texture2D" uid="uid://b4n4itmbw88td" path="res://importations/2d_importations/pixel_2d/icones_2d_pixel/icone_ble_pixel.png" id="1_jcw0b"]
-[ext_resource type="Script" path="res://code/collectionnable.gd" id="1_tl2tp"]
+[ext_resource type="Script" path="res://code/collectionnable.gd" id="1_dds6s"]
+[ext_resource type="Texture2D" uid="uid://b4n4itmbw88td" path="res://importations/2d_importations/pixel_2d/icones_2d_pixel/icone_ble_pixel.png" id="2_e46ka"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_773qd"]
 radius = 1.1
 
 [node name="BleCollectionnable" type="Area3D"]
-script = ExtResource("1_tl2tp")
+script = ExtResource("1_dds6s")
 nom = "ble recolte"
 valeur_monetaire = 2
 
@@ -16,4 +16,4 @@ shape = SubResource("SphereShape3D_773qd")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-texture = ExtResource("1_jcw0b")
+texture = ExtResource("2_e46ka")
