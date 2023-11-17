@@ -99,13 +99,20 @@ func cacher_interface() -> void:
 var inventaire_destination : AbstractInventaire
 func transferer_objet_vers_inventaire_destination(index_objet : int) -> void:
 	_copier_objet_vers_destination(inventaire_destination.liste_inventaire, index_objet)
+
 	_copier_metadata_vers_destination(inventaire_destination.liste_inventaire, index_objet)
+
 	_retirer_objet_transfere_inventaire(index_objet)
 
 
 func _copier_objet_vers_destination(destination : ItemList, index_objet : int) -> void:
 	var nom_objet : String = liste_inventaire.get_item_text(index_objet)
+
 	destination.add_item(nom_objet)
+
+	var image_objet : Texture2D = liste_inventaire.get_item_icon(index_objet)
+
+	destination.set_item_icon(-1, image_objet)
 
 
 func _copier_metadata_vers_destination(destination : ItemList, index_objet : int) -> void:
