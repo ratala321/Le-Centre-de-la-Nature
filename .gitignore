@@ -11,7 +11,6 @@ mon_crash.*.json
 *.swp
 importations/
 sons/*
-addons/*
 .gut_editor_config.json
 themes/
 
