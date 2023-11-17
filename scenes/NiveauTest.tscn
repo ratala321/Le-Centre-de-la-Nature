@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://code/GestionnaireSauvegardeFichier.gd" id="6_n3wjg"]
 [ext_resource type="PackedScene" uid="uid://bhltammokhs6o" path="res://scenes/SolFertile.tscn" id="7_8q547"]
 [ext_resource type="PackedScene" uid="uid://cw0mho7tmkpw8" path="res://scenes/plantesScenes/BleScene.tscn" id="8_xfl4c"]
-[ext_resource type="PackedScene" uid="uid://degvlci6vffve" path="res://scenes/BleCollectionnable.tscn" id="9_gjil4"]
+[ext_resource type="PackedScene" uid="uid://8wgqg76bo7ew" path="res://scenes/plantesScenes/BleCollectionnable.tscn" id="9_gjil4"]
 [ext_resource type="Script" path="res://tests/NiveauTest/AppelTests.gd" id="10_erv04"]
 [ext_resource type="PackedScene" uid="uid://brnoks1cft68k" path="res://scenes/Marchand.tscn" id="10_ybpt3"]
 
