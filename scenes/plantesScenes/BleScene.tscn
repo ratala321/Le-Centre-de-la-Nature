@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cw0mho7tmkpw8"]
+[gd_scene load_steps=22 format=3 uid="uid://cw0mho7tmkpw8"]
 
 [ext_resource type="Script" path="res://code/plante.gd" id="1_2f2xv"]
 [ext_resource type="PackedScene" uid="uid://8wgqg76bo7ew" path="res://scenes/plantesScenes/BleCollectionnable.tscn" id="2_67njc"]
@@ -47,15 +47,6 @@ shadow_mesh = SubResource("ArrayMesh_1y21r")
 render_priority = 0
 shader = ExtResource("3_uu22l")
 
-[sub_resource type="Animation" id="Animation_evji2"]
-resource_name = "Take 001"
-length = 0.001
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pmffb"]
-_data = {
-"Take 001": SubResource("Animation_evji2")
-}
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2m7i3"]
 resource_name = "Farm"
 vertex_color_use_as_albedo = true
@@ -97,15 +88,6 @@ shadow_mesh = SubResource("ArrayMesh_ia815")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_keu13"]
 albedo_texture = ExtResource("3_mduor")
-
-[sub_resource type="Animation" id="Animation_redvu"]
-resource_name = "Take 001"
-length = 0.001
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_130vo"]
-_data = {
-"Take 001": SubResource("Animation_redvu")
-}
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mkum5"]
 resource_name = "Farm"
@@ -149,15 +131,6 @@ shadow_mesh = SubResource("ArrayMesh_3pn14")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbgyd"]
 albedo_texture = ExtResource("3_mduor")
 
-[sub_resource type="Animation" id="Animation_urgwa"]
-resource_name = "Take 001"
-length = 0.001
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_q5dcv"]
-_data = {
-"Take 001": SubResource("Animation_urgwa")
-}
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d7et5"]
 resource_name = "Farm"
 vertex_color_use_as_albedo = true
@@ -200,15 +173,6 @@ shadow_mesh = SubResource("ArrayMesh_sk8rp")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_05igx"]
 albedo_texture = ExtResource("3_mduor")
 
-[sub_resource type="Animation" id="Animation_5htgm"]
-resource_name = "Take 001"
-length = 0.001
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ige4"]
-_data = {
-"Take 001": SubResource("Animation_5htgm")
-}
-
 [node name="BleScene" type="AnimatableBody3D"]
 transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 0, 0, 0)
 collision_layer = 2
@@ -230,11 +194,6 @@ mesh = SubResource("ArrayMesh_qey7m")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_lwamj")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Previsualisation"]
-libraries = {
-"": SubResource("AnimationLibrary_pmffb")
-}
-
 [node name="Initial" type="Node3D" parent="."]
 
 [node name="RootNode" type="Node3D" parent="Initial"]
@@ -242,11 +201,6 @@ libraries = {
 [node name="Texture" type="MeshInstance3D" parent="Initial/RootNode"]
 mesh = SubResource("ArrayMesh_qey7m")
 skeleton = NodePath("")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Initial"]
-libraries = {
-"": SubResource("AnimationLibrary_pmffb")
-}
 
 [node name="BleEtape2" type="Node3D" parent="."]
 visible = false
@@ -258,11 +212,6 @@ mesh = SubResource("ArrayMesh_0gn1b")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_keu13")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="BleEtape2"]
-libraries = {
-"": SubResource("AnimationLibrary_130vo")
-}
-
 [node name="BleEtape3" type="Node3D" parent="."]
 visible = false
 
@@ -272,11 +221,6 @@ visible = false
 mesh = SubResource("ArrayMesh_ufigg")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_wbgyd")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="BleEtape3"]
-libraries = {
-"": SubResource("AnimationLibrary_q5dcv")
-}
 
 [node name="BleFinal" type="Node3D" parent="."]
 visible = false
@@ -288,8 +232,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.142905, 0.0639955, 0.01889
 mesh = SubResource("ArrayMesh_u7dl1")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_05igx")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="BleFinal"]
-libraries = {
-"": SubResource("AnimationLibrary_4ige4")
-}
