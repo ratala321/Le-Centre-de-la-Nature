@@ -87,22 +87,6 @@ shape = SubResource("BoxShape3D_4ev3r")
 [node name="InventaireCoffre" parent="Coffre3" instance=ExtResource("4_mwksg")]
 visible = false
 
-[node name="Coffre2" parent="." instance=ExtResource("3_ko3p6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.2517)
-script = null
-
-[node name="AireInteraction" type="Area3D" parent="Coffre2"]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Coffre2/AireInteraction"]
-shape = SubResource("BoxShape3D_4ev3r")
-
-[node name="AnimationPlayerCoffre" type="AnimationPlayer" parent="Coffre2"]
-root_node = NodePath("../../Coffre2")
-
-[node name="InventaireCoffre" parent="Coffre2" instance=ExtResource("4_mwksg")]
-visible = false
-
 [node name="SolFertile" parent="." instance=ExtResource("7_8q547")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.4139, 0, 0)
 _plantes_ajoutee_editeur_depart = Array[NodePath]([NodePath("BleScene"), NodePath("../BleScene")])

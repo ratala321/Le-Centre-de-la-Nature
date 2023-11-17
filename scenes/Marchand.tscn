@@ -52,7 +52,7 @@ layout_mode = 2
 
 [node name="ButtonMarchander" type="Button" parent="DialoguesMarchand/InterfaceUtilisateur/PanelMarchander/MarginMarchander"]
 layout_mode = 2
-text = "Marchander"
+text = "MARCHANDER"
 
 [node name="PanelDiscuter" type="PanelContainer" parent="DialoguesMarchand/InterfaceUtilisateur"]
 layout_mode = 0
@@ -65,7 +65,7 @@ layout_mode = 2
 
 [node name="ButtonDiscuter" type="Button" parent="DialoguesMarchand/InterfaceUtilisateur/PanelDiscuter/MarginDiscuter"]
 layout_mode = 2
-text = "Discuter"
+text = "DISCUTER"
 
 [node name="PanelQuitter" type="PanelContainer" parent="DialoguesMarchand/InterfaceUtilisateur"]
 layout_mode = 0
@@ -79,7 +79,7 @@ layout_mode = 2
 [node name="ButtonQuitter" type="Button" parent="DialoguesMarchand/InterfaceUtilisateur/PanelQuitter/MarginQuitter"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Quitter"
+text = "QUITTER"
 
 [node name="RelaisInteractionJoueur" type="Node" parent="."]
 script = ExtResource("2_7h8n8")

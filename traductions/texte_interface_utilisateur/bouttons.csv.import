@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://biokpf7ltt7ig"
+
+[deps]
+
+files=["res://traductions/texte_interface_utilisateur/bouttons.fr.translation", "res://traductions/texte_interface_utilisateur/bouttons.en.translation"]
+
+source_file="res://traductions/texte_interface_utilisateur/bouttons.csv"
+dest_files=["res://traductions/texte_interface_utilisateur/bouttons.fr.translation", "res://traductions/texte_interface_utilisateur/bouttons.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0
