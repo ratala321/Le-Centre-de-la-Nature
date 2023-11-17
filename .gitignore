@@ -10,7 +10,6 @@ mon_crash.*.json
 *.blend*
 *.swp
 importations/
-sons/*
 .gut_editor_config.json
 themes/
 
