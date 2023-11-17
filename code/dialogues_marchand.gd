@@ -5,20 +5,20 @@ extends Node
 func afficher_dialogues_marchand() -> void:
 	$InterfaceUtilisateur.visible = true
 
-	_lancer_transition_affichage_IU()
+	_lancer_transition_affichage_ui()
 
 
 func cacher_dialogues_marchand() -> void:
 	$InterfaceUtilisateur.visible = false
 
-	_lancer_transition_cacher_IU()
+	_lancer_transition_cacher_ui()
 
 
 const OFFSET_BAS_ECRAN_Y : int = 400
 
 const OFFSET_MILIEU_ECRAN_Y : int = 0
 
-func _lancer_transition_affichage_IU() -> void:
+func _lancer_transition_affichage_ui() -> void:
 	var tween : Tween = get_tree().create_tween()
 
 	self.offset.y = OFFSET_BAS_ECRAN_Y
@@ -29,7 +29,7 @@ func _lancer_transition_affichage_IU() -> void:
 	await tween.finished
 
 
-func _lancer_transition_cacher_IU() -> void:
+func _lancer_transition_cacher_ui() -> void:
 	var tween : Tween = get_tree().create_tween()
 
 	self.offset.y = OFFSET_MILIEU_ECRAN_Y

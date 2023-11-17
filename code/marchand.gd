@@ -16,7 +16,7 @@ func _ready():
 func _physics_process(delta):
 	if Input.is_key_pressed(KEY_Q) and get_node("DialoguesMarchand").visible:
 		_effectuer_procedure_cacher_interface_dialogue()
-		
+
 	if client_en_cours:
 		client_en_cours.progresser_animation_joueur(delta)
 
@@ -27,20 +27,20 @@ var camera_joueur : Camera3D
 
 func effectuer_interaction_initiale_avec_joueur(joueur : JoueurCanard) -> void:
 	client_en_cours = joueur
-	
+
 	_immobiliser_joueur(joueur)
-	
+
 	camera_joueur = _obtenir_camera_joueur(joueur)
-	
+
 	_lancer_transition_vers_angle_de_vue(camera_joueur)
-	
+
 	_effectuer_procedure_afficher_interface_dialogue()
 
 
 func _immobiliser_joueur(joueur : JoueurCanard) -> void:
 	# Attendre la fin de l'animation d'interaction
 	await joueur.controleur_animation_joueur.animation_finished
-	
+
 	joueur.arreter_mouvement()
 
 
@@ -58,11 +58,11 @@ func _lancer_transition_vers_angle_de_vue(en_cours_utilisation : Camera3D) -> vo
 
 func _effectuer_procedure_afficher_interface_dialogue() -> void:
 	get_node("DialoguesMarchand").afficher_dialogues_marchand()
-	
+
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 
 
 func _effectuer_procedure_cacher_interface_dialogue() -> void:
 	get_node("DialoguesMarchand").cacher_dialogues_marchand()
-	
+
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
