@@ -1,17 +1,18 @@
 class_name InventaireJoueur
-extends AbstractInventaire 
+extends AbstractInventaire
 
 
 @onready var _joueur : JoueurCanard = get_parent() as JoueurCanard
 
 
-func _ready():
-	super._ready()
+## Methode redefinie. Appelee depuis le _ready du parent.
+func ready_instance_inventaire() -> void:
 	liste_inventaire.connect("item_clicked", effectuer_procedure_selection_objet)
 	set_process_mode(PROCESS_MODE_WHEN_PAUSED)
 
 
-func effectuer_procedure_selection_objet(index_objet, _position_clic, _index_boutton_souris) -> void:
+func effectuer_procedure_selection_objet(
+		index_objet, _position_clic, _index_boutton_souris) -> void:
 	if _joueur_tente_transferer_objet():
 		_retirer_objet_main_joueur(index_objet)
 		transferer_objet_vers_inventaire_destination(index_objet)
@@ -41,19 +42,19 @@ func _retirer_objet_main_joueur(index_objet : int) -> void:
 		metadata_objet_selectionne.effectuer_procedure_retrait_main_joueur(_joueur)
 
 
-var fonctions_liberer_main_joueur : Array[Callable] =(
+var _fonctions_liberer_main_joueur : Array[Callable] =(
 	[
 		func (): print("n'est pas objet equipable en main"),
-		func (instance_joueur : JoueurCanard, metadata_objet_selectionne : Variant): 
+		func (instance_joueur : JoueurCanard, metadata_objet_selectionne : Variant):
 			instance_joueur.liberer_main_droite(metadata_objet_selectionne),
-		func (instance_joueur : JoueurCanard, metadata_objet_selectionne : Variant): 
+		func (instance_joueur : JoueurCanard, metadata_objet_selectionne : Variant):
 			instance_joueur.liberer_main_gauche(metadata_objet_selectionne),
-		func (instance_joueur : JoueurCanard, metadata_objet_selectionne : Variant): 
+		func (instance_joueur : JoueurCanard, metadata_objet_selectionne : Variant):
 			instance_joueur.liberer_deux_mains(metadata_objet_selectionne)
 ]
 )
 func _liberer_main_joueur(metadata_objet_selectionne : Variant) -> void:
 	var fonction_liberer_main : Callable =(
-		fonctions_liberer_main_joueur[metadata_objet_selectionne.est_outils_de_main()]
+		_fonctions_liberer_main_joueur[metadata_objet_selectionne.est_outils_de_main()]
 	)
 	fonction_liberer_main.call(_joueur, metadata_objet_selectionne)
