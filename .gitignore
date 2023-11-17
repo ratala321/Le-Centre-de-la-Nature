@@ -11,7 +11,6 @@ mon_crash.*.json
 *.swp
 importations/
 .gut_editor_config.json
-themes/
 
 # IDEA
 .idea/
