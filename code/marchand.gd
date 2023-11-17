@@ -57,12 +57,12 @@ func _lancer_transition_vers_angle_de_vue(en_cours_utilisation : Camera3D) -> vo
 
 
 func _effectuer_procedure_afficher_interface_dialogue() -> void:
-	get_node("DialoguesMarchand").show()
+	get_node("DialoguesMarchand").afficher_dialogues_marchand()
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 
 
 func _effectuer_procedure_cacher_interface_dialogue() -> void:
-	get_node("DialoguesMarchand").hide()
+	get_node("DialoguesMarchand").cacher_dialogues_marchand()
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

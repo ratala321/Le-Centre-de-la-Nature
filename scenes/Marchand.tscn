@@ -23,10 +23,10 @@ mesh = SubResource("BoxMesh_52ebl")
 shape = SubResource("SphereShape3D_v20xc")
 
 [node name="DialoguesMarchand" type="CanvasLayer" parent="." groups=["InterfaceEnJeu"]]
-visible = false
 script = ExtResource("2_7r2iq")
 
 [node name="InterfaceUtilisateur" type="Control" parent="DialoguesMarchand"]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
