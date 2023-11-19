@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://code/plante.gd" id="1_2f2xv"]
 [ext_resource type="PackedScene" uid="uid://8wgqg76bo7ew" path="res://scenes/plantesScenes/BleCollectionnable.tscn" id="2_67njc"]
-[ext_resource type="PackedScene" uid="uid://c5fno50kfg0nn" path="res://importations/3d_importations/plantes_import_dir/ble/ble_initial.blend" id="3_tb2ju"]
+[ext_resource type="PackedScene" path="res://importations/3d_importations/plantes_import_dir/ble/ble_initial.blend" id="3_tb2ju"]
 [ext_resource type="Shader" path="res://shaders/PrevisualisationPlante.gdshader" id="3_uu22l"]
-[ext_resource type="PackedScene" uid="uid://bpb3f3jiyesc7" path="res://importations/3d_importations/plantes_import_dir/ble/ble_etape_2.blend" id="5_hujwu"]
-[ext_resource type="PackedScene" uid="uid://dyvsrgito86yu" path="res://importations/3d_importations/plantes_import_dir/ble/ble_etape_3.blend" id="6_psb8c"]
-[ext_resource type="PackedScene" uid="uid://vt1gy3cnvawc" path="res://importations/3d_importations/plantes_import_dir/ble/ble_etape_final.blend" id="7_78ljy"]
+[ext_resource type="PackedScene" path="res://importations/3d_importations/plantes_import_dir/ble/ble_etape_2.blend" id="5_hujwu"]
+[ext_resource type="PackedScene" path="res://importations/3d_importations/plantes_import_dir/ble/ble_etape_3.blend" id="6_psb8c"]
+[ext_resource type="PackedScene" path="res://importations/3d_importations/plantes_import_dir/ble/ble_etape_final.blend" id="7_78ljy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cu0ov"]
 size = Vector3(0.5, 1, 0.5)

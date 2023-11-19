@@ -25,7 +25,7 @@ shape = SubResource("SphereShape3D_v20xc")
 [node name="DialoguesMarchand" type="CanvasLayer" parent="." groups=["InterfaceEnJeu"]]
 script = ExtResource("2_7r2iq")
 
-[node name="InterfaceUtilisateur" type="Control" parent="DialoguesMarchand"]
+[node name="OptionsDialogue" type="Control" parent="DialoguesMarchand"]
 visible = false
 layout_mode = 3
 anchors_preset = 8
@@ -42,44 +42,83 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
-[node name="PanelMarchander" type="PanelContainer" parent="DialoguesMarchand/InterfaceUtilisateur"]
+[node name="PanelDiscuter" type="PanelContainer" parent="DialoguesMarchand/OptionsDialogue"]
+layout_mode = 0
+offset_left = -148.0
+offset_right = -54.0
+offset_bottom = 41.0
+
+[node name="MarginDiscuter" type="MarginContainer" parent="DialoguesMarchand/OptionsDialogue/PanelDiscuter"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ButtonDiscuter" type="Button" parent="DialoguesMarchand/OptionsDialogue/PanelDiscuter/MarginDiscuter"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "DISCUTER"
+
+[node name="PanelMarchander" type="PanelContainer" parent="DialoguesMarchand/OptionsDialogue"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="MarginMarchander" type="MarginContainer" parent="DialoguesMarchand/InterfaceUtilisateur/PanelMarchander"]
+[node name="MarginMarchander" type="MarginContainer" parent="DialoguesMarchand/OptionsDialogue/PanelMarchander"]
 layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
 
-[node name="ButtonMarchander" type="Button" parent="DialoguesMarchand/InterfaceUtilisateur/PanelMarchander/MarginMarchander"]
+[node name="ButtonMarchander" type="Button" parent="DialoguesMarchand/OptionsDialogue/PanelMarchander/MarginMarchander"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "MARCHANDER"
 
-[node name="PanelDiscuter" type="PanelContainer" parent="DialoguesMarchand/InterfaceUtilisateur"]
-layout_mode = 0
-offset_left = -148.0
-offset_right = -108.0
-offset_bottom = 40.0
-
-[node name="MarginDiscuter" type="MarginContainer" parent="DialoguesMarchand/InterfaceUtilisateur/PanelDiscuter"]
-layout_mode = 2
-
-[node name="ButtonDiscuter" type="Button" parent="DialoguesMarchand/InterfaceUtilisateur/PanelDiscuter/MarginDiscuter"]
-layout_mode = 2
-text = "DISCUTER"
-
-[node name="PanelQuitter" type="PanelContainer" parent="DialoguesMarchand/InterfaceUtilisateur"]
+[node name="PanelQuitter" type="PanelContainer" parent="DialoguesMarchand/OptionsDialogue"]
 layout_mode = 0
 offset_left = 180.0
 offset_right = 244.0
 offset_bottom = 40.0
 
-[node name="MarginQuitter" type="MarginContainer" parent="DialoguesMarchand/InterfaceUtilisateur/PanelQuitter"]
+[node name="MarginQuitter" type="MarginContainer" parent="DialoguesMarchand/OptionsDialogue/PanelQuitter"]
 layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
 
-[node name="ButtonQuitter" type="Button" parent="DialoguesMarchand/InterfaceUtilisateur/PanelQuitter/MarginQuitter"]
+[node name="ButtonQuitter" type="Button" parent="DialoguesMarchand/OptionsDialogue/PanelQuitter/MarginQuitter"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "QUITTER"
+
+[node name="Discussion" type="Control" parent="DialoguesMarchand"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelDialogue" type="PanelContainer" parent="DialoguesMarchand/Discussion"]
+layout_mode = 0
+offset_left = 556.0
+offset_top = 408.0
+offset_right = 596.0
+offset_bottom = 448.0
+
+[node name="MarginContainer" type="MarginContainer" parent="DialoguesMarchand/Discussion/PanelDialogue"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Dialogue" type="Label" parent="DialoguesMarchand/Discussion/PanelDialogue/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="RelaisInteractionJoueur" type="Node" parent="."]
 script = ExtResource("2_7h8n8")

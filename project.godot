@@ -73,4 +73,4 @@ action_principale_outils={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://traductions/texte_interface_utilisateur/bouttons.en.translation", "res://traductions/texte_interface_utilisateur/bouttons.fr.translation")
+locale/translations=PackedStringArray("res://traductions/texte_interface_utilisateur/bouttons.en.translation", "res://traductions/texte_interface_utilisateur/bouttons.fr.translation", "res://traductions/dialogues/marchand_dialogues/marchand.en.translation", "res://traductions/dialogues/marchand_dialogues/marchand.fr.translation")

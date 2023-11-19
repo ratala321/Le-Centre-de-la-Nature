@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://code/paquetCodeJoueur/joueur_canard.gd" id="1_nea2h"]
 [ext_resource type="PackedScene" uid="uid://btsmjqc2w8pl3" path="res://scenes/vetementsScenes/ChapeauCowboy.tscn" id="2_jrist"]
-[ext_resource type="PackedScene" uid="uid://b0mm1k2dpaqho" path="res://importations/bow_teamBlue.gltf.glb" id="2_thlrn"]
+[ext_resource type="PackedScene" path="res://importations/bow_teamBlue.gltf.glb" id="2_thlrn"]
 [ext_resource type="PackedScene" uid="uid://dcqnxh0sklqav" path="res://scenes/SacGraines.tscn" id="4_s24bb"]
 [ext_resource type="Script" path="res://code/animation_joueur_canard.gd" id="5_q5jv5"]
 [ext_resource type="Script" path="res://code/patron_relais.gd" id="8_impkf"]

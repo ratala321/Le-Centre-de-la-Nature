@@ -4,10 +4,11 @@ extends Node
 
 func _ready():
 	%ButtonQuitter.connect("pressed", _effectuer_procedure_cacher_interface_dialogue)
+	%ButtonDiscuter.connect("pressed", _effectuer_procedure_discussion)
 
 
-func afficher_dialogues_marchand() -> void:
-	$InterfaceUtilisateur.visible = true
+func afficher_options_dialogues_marchand() -> void:
+	$OptionsDialogue.visible = true
 
 	_lancer_transition_affichage_ui()
 
@@ -15,7 +16,7 @@ func afficher_dialogues_marchand() -> void:
 
 
 func cacher_dialogues_marchand() -> void:
-	$InterfaceUtilisateur.visible = false
+	$OptionsDialogue.visible = false
 
 	_lancer_transition_cacher_ui()
 
@@ -28,6 +29,40 @@ func _effectuer_procedure_cacher_interface_dialogue() -> void:
 	emit_signal("boutton_quitter_clique")
 
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+
+const PREFIXE_CLEF_DIALOGUE : String = "DIALOGUE_MARCHAND_"
+
+
+var _suffixe_clef_dialogue : int = 0
+
+func _effectuer_procedure_discussion() -> void:
+	_cacher_options_dialogue_marchand()
+
+	_traduire_dialogue()
+
+	_afficher_dialogue()
+
+	_passer_au_prochain_suffixe_dialogue()
+
+
+func _cacher_options_dialogue_marchand() -> void:
+	$OptionsDialogue.visible = false
+
+
+func _traduire_dialogue() -> void:
+	print(PREFIXE_CLEF_DIALOGUE + str(_suffixe_clef_dialogue))
+	var traduction = tr(PREFIXE_CLEF_DIALOGUE + str(_suffixe_clef_dialogue))
+	print(traduction)
+	%Dialogue.text = tr(PREFIXE_CLEF_DIALOGUE + str(_suffixe_clef_dialogue))
+
+
+func _afficher_dialogue() -> void:
+	$Discussion.visible = true
+
+
+func _passer_au_prochain_suffixe_dialogue() -> void:
+	_suffixe_clef_dialogue += 1
 
 
 const OFFSET_BAS_ECRAN_Y : int = 400

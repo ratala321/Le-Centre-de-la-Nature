@@ -29,7 +29,7 @@ func effectuer_interaction_initiale_avec_joueur(joueur : JoueurCanard) -> void:
 
 	_contraindre_joueur_pour_interaction(joueur)
 
-	get_node("DialoguesMarchand").afficher_dialogues_marchand()
+	get_node("DialoguesMarchand").afficher_options_dialogues_marchand()
 
 
 ## Libere le joueur des contraintes etablies pour permettre une interaction fluide avec le marchand.
