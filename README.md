@@ -13,3 +13,9 @@ Le but est de partager publiquement le processus de création d'un jeu particuli
 ## Contact
 
 N'hésitez pas à contacter `ratala` pour quelconque question au sujet du jeu.
+
+## Attributions
+
+[filippys](https://freesound.org/people/filippys/) pour le son du saut.
+
+[Kaykit](https://kaylousberg.itch.io/) pour des assets visuels, dont le personnage.
