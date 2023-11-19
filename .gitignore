@@ -10,6 +10,7 @@ mon_crash.*.json
 *.blend*
 *.swp
 importations/
+importations/ArianeAssets
 .gut_editor_config.json
 
 # IDEA
