@@ -51,7 +51,7 @@ func _enfant_est_une_plante(enfant : Node) -> bool:
 
 
 func previsualiser_plante(scene_plante : PackedScene) -> void:
-	if not _contient_une_previsualisation:
+	if not _contient_une_previsualisation and _ne_contient_pas_une_plante():
 		var instance_plante : Node3D = scene_plante.instantiate()
 		_effecuter_processus_previsualisation(instance_plante)
 

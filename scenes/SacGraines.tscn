@@ -92,5 +92,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.458586, 0)
 shape = SubResource("CylinderShape3D_xeob3")
 
 [node name="IntervalleDetectionEspacesPlantes" type="Timer" parent="."]
-wait_time = 0.3
+wait_time = 0.15
 autostart = true
