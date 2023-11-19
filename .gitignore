@@ -1,15 +1,16 @@
 # Godot 4+ specific ignores
 .godot/
 .import/
+*.import
+*.blend1
 export.cfg
 *.translation
 export_presets.cfg
 .mono/
 data_*/
 mon_crash.*.json
-*.blend*
 *.swp
-importations/
+importations/SourceFiles
 importations/ArianeAssets
 .gut_editor_config.json
 
