@@ -120,6 +120,21 @@ theme_override_constants/margin_bottom = 5
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="PanelQuitterDialogue" type="PanelContainer" parent="DialoguesMarchand/Discussion"]
+layout_mode = 0
+offset_left = 515.0
+offset_top = 532.0
+offset_right = 647.0
+offset_bottom = 572.0
+
+[node name="MarginContainer" type="MarginContainer" parent="DialoguesMarchand/Discussion/PanelQuitterDialogue"]
+layout_mode = 2
+
+[node name="ButtonQuitterDialogue" type="Button" parent="DialoguesMarchand/Discussion/PanelQuitterDialogue/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "quitter dialogue"
+
 [node name="RelaisInteractionJoueur" type="Node" parent="."]
 script = ExtResource("2_7h8n8")
 nom_methode_relais = "effectuer_interaction_initiale_avec_joueur"

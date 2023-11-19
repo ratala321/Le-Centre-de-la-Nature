@@ -4,7 +4,10 @@ extends Node
 
 func _ready():
 	%ButtonQuitter.connect("pressed", _effectuer_procedure_cacher_interface_dialogue)
+	
 	%ButtonDiscuter.connect("pressed", _effectuer_procedure_discussion)
+	
+	%ButtonQuitterDialogue.connect("pressed", _afficher_options_apres_dialogue)
 
 
 func afficher_options_dialogues_marchand() -> void:
@@ -31,13 +34,18 @@ func _effectuer_procedure_cacher_interface_dialogue() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
-const PREFIXE_CLEF_DIALOGUE : String = "DIALOGUE_MARCHAND_"
+func _afficher_options_apres_dialogue() -> void:
+	$Discussion.visible = false
+	
+	$OptionsDialogue.visible = true
 
+
+const PREFIXE_CLEF_DIALOGUE : String = "DIALOGUE_MARCHAND_"
 
 var _suffixe_clef_dialogue : int = 0
 
 func _effectuer_procedure_discussion() -> void:
-	_cacher_options_dialogue_marchand()
+	_cacher_options_dialogue_discussion()
 
 	_traduire_dialogue()
 
@@ -46,7 +54,7 @@ func _effectuer_procedure_discussion() -> void:
 	_passer_au_prochain_suffixe_dialogue()
 
 
-func _cacher_options_dialogue_marchand() -> void:
+func _cacher_options_dialogue_discussion() -> void:
 	$OptionsDialogue.visible = false
 
 
