@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://cw0mho7tmkpw8"]
+[gd_scene load_steps=23 format=3 uid="uid://cw0mho7tmkpw8"]
 
 [ext_resource type="Script" path="res://code/plante.gd" id="1_2f2xv"]
 [ext_resource type="PackedScene" uid="uid://8wgqg76bo7ew" path="res://scenes/plantesScenes/BleCollectionnable.tscn" id="2_67njc"]
 [ext_resource type="Texture2D" uid="uid://bbkvo17uq35ng" path="res://importations/SourceFiles/Textures/PolygonFarm_Texture_01_A.png" id="3_mduor"]
+[ext_resource type="PackedScene" uid="uid://c5fno50kfg0nn" path="res://importations/3d_importations/ble_initial.blend" id="3_tb2ju"]
 [ext_resource type="Shader" path="res://shaders/PrevisualisationPlante.gdshader" id="3_uu22l"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cu0ov"]
@@ -194,13 +195,7 @@ mesh = SubResource("ArrayMesh_qey7m")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_lwamj")
 
-[node name="Initial" type="Node3D" parent="."]
-
-[node name="RootNode" type="Node3D" parent="Initial"]
-
-[node name="Texture" type="MeshInstance3D" parent="Initial/RootNode"]
-mesh = SubResource("ArrayMesh_qey7m")
-skeleton = NodePath("")
+[node name="Initial" parent="." instance=ExtResource("3_tb2ju")]
 
 [node name="BleEtape2" type="Node3D" parent="."]
 visible = false

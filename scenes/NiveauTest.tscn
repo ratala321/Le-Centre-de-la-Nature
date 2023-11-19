@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://qf6ag5p6ts08"]
+[gd_scene load_steps=17 format=3 uid="uid://qf6ag5p6ts08"]
 
 [ext_resource type="PackedScene" uid="uid://dq04vglibsi8r" path="res://scenes/JoueurCanard.tscn" id="1_0iw8u"]
 [ext_resource type="PackedScene" uid="uid://q4uuutngl3k0" path="res://scenes/Coffre.tscn" id="3_ko3p6"]
@@ -10,6 +10,19 @@
 [ext_resource type="Script" path="res://tests/NiveauTest/AppelTests.gd" id="10_erv04"]
 [ext_resource type="PackedScene" uid="uid://brnoks1cft68k" path="res://scenes/Marchand.tscn" id="10_ybpt3"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_77ml1"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_q2r8x"]
+sky_material = SubResource("ProceduralSkyMaterial_77ml1")
+
+[sub_resource type="Environment" id="Environment_cptlc"]
+background_mode = 2
+sky = SubResource("Sky_q2r8x")
+tonemap_mode = 2
+glow_enabled = true
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ckacd"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4xsu1"]
@@ -20,6 +33,14 @@
 size = Vector3(23.7962, 6.90827, 22.6012)
 
 [node name="NiveauTest" type="Node"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.0876834, 0.492252, 0, 0.984503, 0.175367, -0.5, 0.151872, -0.852605, 0, 0, 0)
+light_color = Color(1, 0.784314, 0.6, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cptlc")
 
 [node name="GestionnaireSauvegardeFichier" type="Node" parent="."]
 script = ExtResource("6_n3wjg")
@@ -34,18 +55,6 @@ top_level = true
 
 [node name="JoueurCanard" parent="." instance=ExtResource("1_0iw8u")]
 transform = Transform3D(1, -3.55271e-15, 7.10543e-15, -3.55271e-15, 1, 0, -7.10543e-15, 0, 1, 2.84217e-14, 0.0998027, -2.38419e-07)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.845505, -0.0104825, -0.533864, 0.0122135, 0.999925, -0.000290603, 0.533827, -0.00627466, 0.84557, -0.696256, 1.58441, 3.09883)
-light_energy = 3.992
-light_indirect_energy = 1.072
-light_volumetric_fog_energy = 2.524
-shadow_enabled = true
-shadow_blur = 0.0
-directional_shadow_mode = 0
-directional_shadow_split_1 = 0.413
-directional_shadow_max_distance = 80.0
-sky_mode = 1
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 axis_lock_linear_x = true
