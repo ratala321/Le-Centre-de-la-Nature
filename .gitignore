@@ -10,8 +10,6 @@ export_presets.cfg
 data_*/
 mon_crash.*.json
 *.swp
-importations/SourceFiles
-importations/ArianeAssets
 .gut_editor_config.json
 
 # IDEA
