@@ -1,8 +1,7 @@
-[gd_scene load_steps=71 format=3 uid="uid://dq04vglibsi8r"]
+[gd_scene load_steps=70 format=3 uid="uid://dq04vglibsi8r"]
 
 [ext_resource type="Script" path="res://code/paquetCodeJoueur/joueur_canard.gd" id="1_nea2h"]
-[ext_resource type="PackedScene" uid="uid://btsmjqc2w8pl3" path="res://scenes/vetementsScenes/ChapeauCowboy.tscn" id="2_jrist"]
-[ext_resource type="PackedScene" path="res://importations/bow_teamBlue.gltf.glb" id="2_thlrn"]
+[ext_resource type="PackedScene" uid="uid://b0mm1k2dpaqho" path="res://importations/bow_teamBlue.gltf.glb" id="2_thlrn"]
 [ext_resource type="PackedScene" uid="uid://dcqnxh0sklqav" path="res://scenes/SacGraines.tscn" id="4_s24bb"]
 [ext_resource type="Script" path="res://code/animation_joueur_canard.gd" id="5_q5jv5"]
 [ext_resource type="Script" path="res://code/patron_relais.gd" id="8_impkf"]
@@ -3901,11 +3900,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00788695, 0)
 mesh = SubResource("ArrayMesh_mwwua")
 skeleton = NodePath("")
 
-[node name="PositionChapeau" type="Node3D" parent="KayKit_AnimatedCharacter_v13/KayKit Animated Character2/Skeleton3D/Tete"]
+[node name="PositionChapeau" type="Marker3D" parent="KayKit_AnimatedCharacter_v13/KayKit Animated Character2/Skeleton3D/Tete"]
 transform = Transform3D(1, 1.58249e-07, 1.09666e-09, -1.58244e-07, 0.999848, 0.0174525, 1.66536e-09, -0.0174525, 0.999848, -0.0187343, 0.282219, 0.0286663)
-
-[node name="ChapeauCowboy" parent="KayKit_AnimatedCharacter_v13/KayKit Animated Character2/Skeleton3D/Tete/PositionChapeau" instance=ExtResource("2_jrist")]
-transform = Transform3D(2.88127, 1.64757e-10, 1.119e-08, 8.25474e-10, 3.23204, -1.49012e-08, 1.50948e-08, 3.72529e-08, 3.32614, 0, 0, 0)
 
 [node name="Corps" type="BoneAttachment3D" parent="KayKit_AnimatedCharacter_v13/KayKit Animated Character2/Skeleton3D"]
 bone_name = "Body"

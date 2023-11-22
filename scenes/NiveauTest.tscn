@@ -70,7 +70,7 @@ physics_material_override = SubResource("PhysicsMaterial_ckacd")
 shape = SubResource("WorldBoundaryShape3D_4xsu1")
 
 [node name="Coffre" parent="." instance=ExtResource("3_ko3p6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.367)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 3.367)
 
 [node name="AireInteraction" type="Area3D" parent="Coffre"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -84,7 +84,7 @@ shape = SubResource("BoxShape3D_4ev3r")
 visible = false
 
 [node name="Coffre3" parent="." instance=ExtResource("3_ko3p6")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.9817, 0, -2.27212)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.9817, 0, -2.27212)
 
 [node name="AireInteraction" type="Area3D" parent="Coffre3"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
