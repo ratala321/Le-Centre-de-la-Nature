@@ -14,6 +14,8 @@ func _ready():
 	var dialogues_marchand = get_node("DialoguesMarchand")
 	dialogues_marchand.connect("boutton_quitter_clique", _liberer_joueur_contraintes_interaction)
 
+	process_mode = PROCESS_MODE_WHEN_PAUSED
+
 
 func _physics_process(delta):
 	if client_en_cours:
@@ -31,10 +33,19 @@ func effectuer_interaction_initiale_avec_joueur(joueur : JoueurCanard) -> void:
 
 	get_node("DialoguesMarchand").afficher_options_dialogues_marchand()
 
+	camera_joueur = _obtenir_camera_joueur(joueur)
+	await _lancer_transition_vers_angle_de_vue(camera_joueur)
+
+	get_node("DialoguesMarchand").dialogue_en_cours = true
+
 
 ## Libere le joueur des contraintes etablies pour permettre une interaction fluide avec le marchand.
 func _liberer_joueur_contraintes_interaction() -> void:
 	await _lancer_transition_vers_camera_joueur()
+
+	get_tree().paused = false
+
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 	client_en_cours.relancer_mouvement()
 
@@ -42,10 +53,6 @@ func _liberer_joueur_contraintes_interaction() -> void:
 ## Etablit des contraintes au joueur afin de permettre une interaction fluide avec le marchand.
 func _contraindre_joueur_pour_interaction(joueur : JoueurCanard) -> void:
 	_immobiliser_joueur(joueur)
-
-	camera_joueur = _obtenir_camera_joueur(joueur)
-
-	_lancer_transition_vers_angle_de_vue(camera_joueur)
 
 
 func _immobiliser_joueur(joueur : JoueurCanard) -> void:
@@ -64,7 +71,7 @@ func _lancer_transition_vers_camera_joueur() -> void:
 
 
 func _lancer_transition_vers_angle_de_vue(en_cours_utilisation : Camera3D) -> void:
-	TransitionCamera3d.effectuer_transition_basique_camera_3d(
+	await TransitionCamera3d.effectuer_transition_basique_camera_3d(
 			en_cours_utilisation,
 			angle_vue_marchand,
 			temps_transition_cameras

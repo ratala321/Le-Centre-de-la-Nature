@@ -26,6 +26,7 @@ shape = SubResource("SphereShape3D_v20xc")
 script = ExtResource("2_7r2iq")
 
 [node name="OptionsDialogue" type="Control" parent="DialoguesMarchand"]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5

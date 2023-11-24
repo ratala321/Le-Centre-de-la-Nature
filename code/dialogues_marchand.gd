@@ -1,24 +1,40 @@
 class_name DialoguesMarchand
 extends Node
 
+## Est vrai lorsque le marchand est en cours de dialogue
+var dialogue_en_cours = false
+
 
 func _ready():
 	%ButtonQuitter.connect("pressed", _effectuer_procedure_cacher_interface_dialogue)
-	
+
 	%ButtonDiscuter.connect("pressed", _effectuer_procedure_discussion)
-	
+
 	%ButtonQuitterDialogue.connect("pressed", _afficher_options_apres_dialogue)
+
+	%ButtonMarchander.connect("pressed", _preparer_interface_negociation)
+
+	process_mode = PROCESS_MODE_WHEN_PAUSED
+
+
+func _process(_delta):
+	if Input.is_action_pressed("ui_cancel"):
+		_effectuer_procedure_cacher_interface_dialogue()
 
 
 func afficher_options_dialogues_marchand() -> void:
-	$OptionsDialogue.visible = true
+	get_tree().paused = true
 
-	_lancer_transition_affichage_ui()
+	$OptionsDialogue.visible = true
 
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 
+	_lancer_transition_affichage_ui()
+
 
 func cacher_dialogues_marchand() -> void:
+	dialogue_en_cours = false
+
 	$OptionsDialogue.visible = false
 
 	_lancer_transition_cacher_ui()
@@ -27,17 +43,28 @@ func cacher_dialogues_marchand() -> void:
 signal boutton_quitter_clique
 
 func _effectuer_procedure_cacher_interface_dialogue() -> void:
-	cacher_dialogues_marchand()
+	if dialogue_en_cours:
+		cacher_dialogues_marchand()
 
-	emit_signal("boutton_quitter_clique")
-
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		emit_signal("boutton_quitter_clique")
 
 
 func _afficher_options_apres_dialogue() -> void:
 	$Discussion.visible = false
-	
+
 	$OptionsDialogue.visible = true
+
+
+func _preparer_interface_negociation() -> void:
+	# TODO créer inventaire de marchand
+
+	#if dialogue_en_cours:
+
+	# Obtenir référence à l'inventaire du joueur
+
+	# Afficher interface marchandage
+
+	pass
 
 
 const PREFIXE_CLEF_DIALOGUE : String = "DIALOGUE_MARCHAND_"
@@ -45,13 +72,14 @@ const PREFIXE_CLEF_DIALOGUE : String = "DIALOGUE_MARCHAND_"
 var _suffixe_clef_dialogue : int = 0
 
 func _effectuer_procedure_discussion() -> void:
-	_cacher_options_dialogue_discussion()
+	if dialogue_en_cours:
+		_cacher_options_dialogue_discussion()
 
-	_traduire_dialogue()
+		_traduire_dialogue()
 
-	_afficher_dialogue()
+		_afficher_dialogue()
 
-	_passer_au_prochain_suffixe_dialogue()
+		_passer_au_prochain_suffixe_dialogue()
 
 
 func _cacher_options_dialogue_discussion() -> void:
@@ -83,7 +111,10 @@ func _lancer_transition_affichage_ui() -> void:
 	self.offset.y = OFFSET_BAS_ECRAN_Y
 
 	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(self, "offset", Vector2(self.offset.x, OFFSET_MILIEU_ECRAN_Y), 1.0)
+
+	await tween.finished
 
 
 func _lancer_transition_cacher_ui() -> void:
