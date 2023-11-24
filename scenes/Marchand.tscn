@@ -26,7 +26,6 @@ shape = SubResource("SphereShape3D_v20xc")
 script = ExtResource("2_7r2iq")
 
 [node name="OptionsDialogue" type="Control" parent="DialoguesMarchand"]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -42,55 +41,64 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
-[node name="PanelDiscuter" type="PanelContainer" parent="DialoguesMarchand/OptionsDialogue"]
-layout_mode = 0
-offset_left = -148.0
-offset_right = -54.0
-offset_bottom = 41.0
+[node name="HBoxContainer" type="HBoxContainer" parent="DialoguesMarchand/OptionsDialogue"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -274.0
+offset_top = -27.5
+offset_right = 274.0
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 60
+alignment = 1
 
-[node name="MarginDiscuter" type="MarginContainer" parent="DialoguesMarchand/OptionsDialogue/PanelDiscuter"]
+[node name="PanelDiscuter" type="PanelContainer" parent="DialoguesMarchand/OptionsDialogue/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginDiscuter" type="MarginContainer" parent="DialoguesMarchand/OptionsDialogue/HBoxContainer/PanelDiscuter"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="ButtonDiscuter" type="Button" parent="DialoguesMarchand/OptionsDialogue/PanelDiscuter/MarginDiscuter"]
+[node name="ButtonDiscuter" type="Button" parent="DialoguesMarchand/OptionsDialogue/HBoxContainer/PanelDiscuter/MarginDiscuter"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "DISCUTER"
 
-[node name="PanelMarchander" type="PanelContainer" parent="DialoguesMarchand/OptionsDialogue"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="PanelMarchander" type="PanelContainer" parent="DialoguesMarchand/OptionsDialogue/HBoxContainer"]
+layout_mode = 2
 
-[node name="MarginMarchander" type="MarginContainer" parent="DialoguesMarchand/OptionsDialogue/PanelMarchander"]
+[node name="MarginMarchander" type="MarginContainer" parent="DialoguesMarchand/OptionsDialogue/HBoxContainer/PanelMarchander"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="ButtonMarchander" type="Button" parent="DialoguesMarchand/OptionsDialogue/PanelMarchander/MarginMarchander"]
+[node name="ButtonMarchander" type="Button" parent="DialoguesMarchand/OptionsDialogue/HBoxContainer/PanelMarchander/MarginMarchander"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "MARCHANDER"
 
-[node name="PanelQuitter" type="PanelContainer" parent="DialoguesMarchand/OptionsDialogue"]
-layout_mode = 0
-offset_left = 180.0
-offset_right = 244.0
-offset_bottom = 40.0
+[node name="PanelQuitter" type="PanelContainer" parent="DialoguesMarchand/OptionsDialogue/HBoxContainer"]
+layout_mode = 2
 
-[node name="MarginQuitter" type="MarginContainer" parent="DialoguesMarchand/OptionsDialogue/PanelQuitter"]
+[node name="MarginQuitter" type="MarginContainer" parent="DialoguesMarchand/OptionsDialogue/HBoxContainer/PanelQuitter"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="ButtonQuitter" type="Button" parent="DialoguesMarchand/OptionsDialogue/PanelQuitter/MarginQuitter"]
+[node name="ButtonQuitter" type="Button" parent="DialoguesMarchand/OptionsDialogue/HBoxContainer/PanelQuitter/MarginQuitter"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "QUITTER"
@@ -98,39 +106,54 @@ text = "QUITTER"
 [node name="Discussion" type="Control" parent="DialoguesMarchand"]
 visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 90.0
+offset_right = 20.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="PanelDialogue" type="PanelContainer" parent="DialoguesMarchand/Discussion"]
-layout_mode = 0
-offset_left = 556.0
-offset_top = 408.0
-offset_right = 596.0
-offset_bottom = 448.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -169.0
+offset_top = -34.0
+offset_right = 169.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="DialoguesMarchand/Discussion/PanelDialogue"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DialoguesMarchand/Discussion/PanelDialogue"]
+layout_mode = 2
+
+[node name="MarginContainerTexte" type="MarginContainer" parent="DialoguesMarchand/Discussion/PanelDialogue/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="Dialogue" type="Label" parent="DialoguesMarchand/Discussion/PanelDialogue/MarginContainer"]
+[node name="Dialogue" type="Label" parent="DialoguesMarchand/Discussion/PanelDialogue/VBoxContainer/MarginContainerTexte"]
 unique_name_in_owner = true
 layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 2
 
-[node name="PanelQuitterDialogue" type="PanelContainer" parent="DialoguesMarchand/Discussion"]
-layout_mode = 0
-offset_left = 515.0
-offset_top = 532.0
-offset_right = 647.0
-offset_bottom = 572.0
-
-[node name="MarginContainer" type="MarginContainer" parent="DialoguesMarchand/Discussion/PanelQuitterDialogue"]
+[node name="MarginContainerBoutton" type="MarginContainer" parent="DialoguesMarchand/Discussion/PanelDialogue/VBoxContainer"]
 layout_mode = 2
 
-[node name="ButtonQuitterDialogue" type="Button" parent="DialoguesMarchand/Discussion/PanelQuitterDialogue/MarginContainer"]
+[node name="ButtonQuitterDialogue" type="Button" parent="DialoguesMarchand/Discussion/PanelDialogue/VBoxContainer/MarginContainerBoutton"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "quitter dialogue"
