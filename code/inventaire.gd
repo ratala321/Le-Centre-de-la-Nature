@@ -28,7 +28,7 @@ func ready_instance_inventaire() -> void:
 
 
 func _physics_process(_delta):
-	if self.visible and Input.is_key_pressed(KEY_Q):
+	if self.visible and Input.is_action_pressed("ui_cancel"):
 		cacher_interface()
 
 
