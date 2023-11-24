@@ -16,9 +16,19 @@ func _ready():
 	$Camera3DJoueur.make_current()
 
 
+var _jeu_en_pause : bool = false
+
+func _notification(what):
+	if what == NOTIFICATION_PAUSED:
+		_jeu_en_pause = true
+
+	if what == NOTIFICATION_UNPAUSED:
+		_jeu_en_pause = false
+
+
 func _input(event):
 	# Mouvement de la camera basee sur la direction de la souris
-	if event is InputEventMouseMotion:
+	if not _jeu_en_pause and event is InputEventMouseMotion:
 		var direction_mouvement_souris : Vector2 = event.relative * sensibilite_camera
 
 		_actualiser_valeur_rotation_camera(direction_mouvement_souris)
@@ -38,7 +48,7 @@ const TOUR_HORIZONTAL_GAUCHE_COMPLET : float = 540
 const TOUR_HORIZONTAL_DROITE_COMPLET : float = -180
 func _actualiser_valeur_rotation_camera(direction_mouvement_souris : Vector2) -> void:
 	rotation_verticale_camera += direction_mouvement_souris.y
-	
+
 	rotation_verticale_camera = clampf(rotation_verticale_camera,
 		ROTATION_VERTICALE_MAXIMALE_BAS, ROTATION_VERTICALE_MAXIMALE_HAUT)
 
@@ -46,5 +56,5 @@ func _actualiser_valeur_rotation_camera(direction_mouvement_souris : Vector2) ->
 
 
 ## Permet de conserver la rotation de la camera malgre la rotation du joueur
-func conserver_rotation_camera(vecteurRotation) -> void:
-	set_global_rotation_degrees(vecteurRotation)
+func conserver_rotation_camera(vecteur_rotation) -> void:
+	set_global_rotation_degrees(vecteur_rotation)
