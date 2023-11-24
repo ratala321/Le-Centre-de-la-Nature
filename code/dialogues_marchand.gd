@@ -62,7 +62,7 @@ func _preparer_interface_negociation() -> void:
 
 	# Obtenir référence à l'inventaire du joueur
 
-	# Afficher interface marchandage
+	# Afficher interface negociation
 
 	pass
 
@@ -105,6 +105,9 @@ const OFFSET_BAS_ECRAN_Y : int = 400
 
 const OFFSET_MILIEU_ECRAN_Y : int = 0
 
+## Temps de transition de l'affichage ou de la disparition de l'UI
+@export var _temps_transition_ui : float = 1.0
+
 func _lancer_transition_affichage_ui() -> void:
 	var tween : Tween = get_tree().create_tween()
 
@@ -112,7 +115,8 @@ func _lancer_transition_affichage_ui() -> void:
 
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	tween.tween_property(self, "offset", Vector2(self.offset.x, OFFSET_MILIEU_ECRAN_Y), 1.0)
+	tween.tween_property(
+		self, "offset", Vector2(self.offset.x, OFFSET_MILIEU_ECRAN_Y), _temps_transition_ui)
 
 	await tween.finished
 
@@ -122,4 +126,5 @@ func _lancer_transition_cacher_ui() -> void:
 
 	self.offset.y = OFFSET_MILIEU_ECRAN_Y
 
-	tween.tween_property(self, "offset", Vector2(self.offset.x, OFFSET_BAS_ECRAN_Y), 1.0)
+	tween.tween_property(
+		self, "offset", Vector2(self.offset.x, OFFSET_BAS_ECRAN_Y), _temps_transition_ui)

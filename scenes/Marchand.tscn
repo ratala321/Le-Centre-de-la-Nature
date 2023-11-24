@@ -15,6 +15,7 @@ sleeping = true
 lock_rotation = true
 freeze = true
 script = ExtResource("1_lnmhk")
+temps_transition_cameras = 1.2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_52ebl")
@@ -24,6 +25,7 @@ shape = SubResource("SphereShape3D_v20xc")
 
 [node name="DialoguesMarchand" type="CanvasLayer" parent="." groups=["InterfaceEnJeu"]]
 script = ExtResource("2_7r2iq")
+_temps_transition_ui = 0.7
 
 [node name="OptionsDialogue" type="Control" parent="DialoguesMarchand"]
 visible = false
