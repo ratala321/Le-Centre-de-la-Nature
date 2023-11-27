@@ -4,9 +4,9 @@ extends CanvasLayer
 
 
 ## Chaque dictionnaire doit contenir trois clefs :[br]
-## - nom_dans_inventaire : String[br]
-## - chemin_scene_objet : String[br]
-## - donnees_objet_inventaire : Dictionary["parametre_correspondant_dans_objet" : valeurParametre]
+## - [param nom_dans_inventaire] : String[br]
+## - [param chemin_scene_objet] : String[br]    le chemin vers le .tscn dans res://[br]
+## - [param donnees_objet_inventaire] : Dictionary["parametre_correspondant_dans_objet" : valeurParametre]
 @export var inventaire_par_defaut : Array[Dictionary]
 
 var liste_inventaire : ItemList
