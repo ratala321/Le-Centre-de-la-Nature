@@ -5,6 +5,7 @@
 
 [node name="InventaireMarchand" type="CanvasLayer" groups=["InterfaceEnJeu"]]
 script = ExtResource("1_blk4u")
+inventaire_par_defaut = null
 
 [node name="InterfaceUtilisateur" type="Control" parent="."]
 layout_mode = 3

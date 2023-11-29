@@ -1,8 +1,9 @@
 class_name DialoguesMarchand
-extends Node
+extends CanvasLayer
 
-## Est vrai lorsque le marchand est en cours de dialogue
-var dialogue_en_cours = false
+
+## Est vrai lorsque le marchand est en cours de dialogue.
+var dialogue_en_cours : bool = false
 
 
 func _ready():
@@ -25,8 +26,8 @@ func _process(_delta):
 func afficher_options_dialogues_marchand() -> void:
 	get_tree().paused = true
 
-	$OptionsDialogue.visible = true
-
+	$OptionsDialogue.show()
+	
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 
 	_lancer_transition_affichage_ui()
@@ -35,9 +36,10 @@ func afficher_options_dialogues_marchand() -> void:
 func cacher_dialogues_marchand() -> void:
 	dialogue_en_cours = false
 
-	$OptionsDialogue.visible = false
-
-	_lancer_transition_cacher_ui()
+	await _lancer_transition_cacher_ui()
+	
+	_inventaire_marchand.hide()
+	$OptionsDialogue.hide()
 
 
 signal boutton_quitter_clique
@@ -46,7 +48,7 @@ func _effectuer_procedure_cacher_interface_dialogue() -> void:
 	if dialogue_en_cours:
 		cacher_dialogues_marchand()
 
-		emit_signal("boutton_quitter_clique")
+		boutton_quitter_clique.emit()
 
 
 func _afficher_options_apres_dialogue() -> void:
@@ -55,10 +57,19 @@ func _afficher_options_apres_dialogue() -> void:
 	$OptionsDialogue.visible = true
 
 
+@export var _inventaire_marchand : CanvasLayer
+
+## Contenu de l'inventaire du joueur en contact avec le marchand.[br]
+var liste_inventaire_joueur : ItemList
+
 func _preparer_interface_negociation() -> void:
 	# TODO créer inventaire de marchand
+	if dialogue_en_cours:	
+		_inventaire_marchand.offset.y = 0
+		
+		_cacher_options_dialogue_discussion()
 
-	#if dialogue_en_cours:
+		_inventaire_marchand.show()
 
 	# Obtenir référence à l'inventaire du joueur
 
@@ -83,7 +94,7 @@ func _effectuer_procedure_discussion() -> void:
 
 
 func _cacher_options_dialogue_discussion() -> void:
-	$OptionsDialogue.visible = false
+	$OptionsDialogue.hide()
 
 
 func _traduire_dialogue() -> void:
@@ -115,6 +126,8 @@ func _lancer_transition_affichage_ui() -> void:
 
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.set_parallel(true)
+	
 	tween.tween_property(
 		self, "offset", Vector2(self.offset.x, OFFSET_MILIEU_ECRAN_Y), _temps_transition_ui)
 
@@ -123,8 +136,17 @@ func _lancer_transition_affichage_ui() -> void:
 
 func _lancer_transition_cacher_ui() -> void:
 	var tween : Tween = get_tree().create_tween()
+	
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.set_parallel(true)
 
 	self.offset.y = OFFSET_MILIEU_ECRAN_Y
 
 	tween.tween_property(
 		self, "offset", Vector2(self.offset.x, OFFSET_BAS_ECRAN_Y), _temps_transition_ui)
+	
+	tween.tween_property(
+		_inventaire_marchand, "offset",
+		Vector2(_inventaire_marchand.offset.x, OFFSET_BAS_ECRAN_Y * 2), _temps_transition_ui)
+	
+	await tween.finished

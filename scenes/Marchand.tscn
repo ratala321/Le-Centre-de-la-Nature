@@ -24,8 +24,9 @@ mesh = SubResource("BoxMesh_52ebl")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_v20xc")
 
-[node name="DialoguesMarchand" type="CanvasLayer" parent="." groups=["InterfaceEnJeu"]]
+[node name="DialoguesMarchand" type="CanvasLayer" parent="." node_paths=PackedStringArray("_inventaire_marchand") groups=["InterfaceEnJeu"]]
 script = ExtResource("2_7r2iq")
+_inventaire_marchand = NodePath("../InventaireMarchand")
 _temps_transition_ui = 0.7
 
 [node name="OptionsDialogue" type="Control" parent="DialoguesMarchand"]
@@ -162,9 +163,9 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "quitter dialogue"
 
+[node name="InventaireMarchand" parent="." instance=ExtResource("4_k12x3")]
+visible = false
+
 [node name="RelaisInteractionJoueur" type="Node" parent="."]
 script = ExtResource("2_7h8n8")
 nom_methode_relais = "effectuer_interaction_initiale_avec_joueur"
-
-[node name="InventaireMarchand" parent="." instance=ExtResource("4_k12x3")]
-visible = false
