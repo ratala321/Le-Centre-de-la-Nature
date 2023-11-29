@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://brnoks1cft68k"]
+[gd_scene load_steps=7 format=3 uid="uid://brnoks1cft68k"]
 
 [ext_resource type="Script" path="res://code/marchand.gd" id="1_lnmhk"]
 [ext_resource type="Script" path="res://code/patron_relais.gd" id="2_7h8n8"]
 [ext_resource type="Script" path="res://code/dialogues_marchand.gd" id="2_7r2iq"]
+[ext_resource type="PackedScene" uid="uid://ck2mloxah7sif" path="res://scenes/inventaire_marchand.tscn" id="4_k12x3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_52ebl"]
 size = Vector3(1, 1.9, 1)
@@ -164,3 +165,6 @@ text = "quitter dialogue"
 [node name="RelaisInteractionJoueur" type="Node" parent="."]
 script = ExtResource("2_7h8n8")
 nom_methode_relais = "effectuer_interaction_initiale_avec_joueur"
+
+[node name="InventaireMarchand" parent="." instance=ExtResource("4_k12x3")]
+visible = false

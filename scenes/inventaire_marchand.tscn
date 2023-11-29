@@ -1,0 +1,134 @@
+[gd_scene load_steps=3 format=3 uid="uid://ck2mloxah7sif"]
+
+[ext_resource type="Script" path="res://code/inventaire_marchand.gd" id="1_blk4u"]
+[ext_resource type="Script" path="res://code/gestionnaire_negociation.gd" id="2_8g56v"]
+
+[node name="InventaireMarchand" type="CanvasLayer" groups=["InterfaceEnJeu"]]
+script = ExtResource("1_blk4u")
+
+[node name="InterfaceUtilisateur" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PanelEntete" type="PanelContainer" parent="InterfaceUtilisateur"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 52.0
+offset_top = -166.0
+offset_right = 241.0
+offset_bottom = -126.0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="InterfaceUtilisateur/PanelEntete"]
+layout_mode = 2
+
+[node name="Entete" type="Label" parent="InterfaceUtilisateur/PanelEntete/MarginContainer"]
+layout_mode = 2
+text = "Inventaire Marchand"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ListeInventaire" type="ItemList" parent="InterfaceUtilisateur"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 52.0
+offset_top = -102.5
+offset_right = 245.0
+offset_bottom = 152.5
+grow_vertical = 2
+max_columns = 2
+
+[node name="PanelEnteteNegociation" type="PanelContainer" parent="InterfaceUtilisateur"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.5
+offset_top = -174.0
+offset_right = 76.5
+offset_bottom = -134.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="InterfaceUtilisateur/PanelEnteteNegociation"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="InterfaceUtilisateur/PanelEnteteNegociation/MarginContainer"]
+layout_mode = 2
+text = "Contenu négociation"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="PanelNegociation" type="PanelContainer" parent="InterfaceUtilisateur"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -113.5
+offset_right = 154.0
+offset_bottom = 161.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InterfaceUtilisateur/PanelNegociation"]
+layout_mode = 2
+
+[node name="ListeNegociation" type="ItemList" parent="InterfaceUtilisateur/PanelNegociation/VBoxContainer"]
+custom_minimum_size = Vector2(0, 230)
+layout_mode = 2
+
+[node name="MarginHautBasOptions" type="MarginContainer" parent="InterfaceUtilisateur/PanelNegociation/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InterfaceUtilisateur/PanelNegociation/VBoxContainer/MarginHautBasOptions"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="MarginGaucheOptions" type="MarginContainer" parent="InterfaceUtilisateur/PanelNegociation/VBoxContainer/MarginHautBasOptions/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="Confirmation" type="Button" parent="InterfaceUtilisateur/PanelNegociation/VBoxContainer/MarginHautBasOptions/HBoxContainer/MarginGaucheOptions"]
+layout_mode = 2
+text = "Confirmer"
+
+[node name="Reinitialisation" type="Button" parent="InterfaceUtilisateur/PanelNegociation/VBoxContainer/MarginHautBasOptions/HBoxContainer"]
+layout_mode = 2
+text = "Réinitialiser
+"
+
+[node name="MarginDroiteOptions" type="MarginContainer" parent="InterfaceUtilisateur/PanelNegociation/VBoxContainer/MarginHautBasOptions/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Quitter" type="Button" parent="InterfaceUtilisateur/PanelNegociation/VBoxContainer/MarginHautBasOptions/HBoxContainer/MarginDroiteOptions"]
+layout_mode = 2
+text = "Quitter"
+
+[node name="GestionnnaireNegociation" type="Node" parent="." node_paths=PackedStringArray("_liste_inventaire_marchand", "_confirmation", "_reinitialisation", "_quitter")]
+script = ExtResource("2_8g56v")
+_liste_inventaire_marchand = NodePath("../InterfaceUtilisateur/ListeInventaire")
+_confirmation = NodePath("../InterfaceUtilisateur/PanelNegociation/VBoxContainer/MarginHautBasOptions/HBoxContainer/MarginGaucheOptions/Confirmation")
+_reinitialisation = NodePath("../InterfaceUtilisateur/PanelNegociation/VBoxContainer/MarginHautBasOptions/HBoxContainer/Reinitialisation")
+_quitter = NodePath("../InterfaceUtilisateur/PanelNegociation/VBoxContainer/MarginHautBasOptions/HBoxContainer/MarginDroiteOptions/Quitter")
