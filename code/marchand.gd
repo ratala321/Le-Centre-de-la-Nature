@@ -32,6 +32,9 @@ func effectuer_interaction_initiale_avec_joueur(joueur : JoueurCanard) -> void:
 	_contraindre_joueur_pour_interaction(joueur)
 
 	get_node("DialoguesMarchand").afficher_options_dialogues_marchand()
+	get_node("DialoguesMarchand").liste_inventaire_joueur =(
+		joueur.inventaire_joueur.liste_inventaire
+	)
 
 	camera_joueur = _obtenir_camera_joueur(joueur)
 	await _lancer_transition_vers_angle_de_vue(camera_joueur)
@@ -42,9 +45,9 @@ func effectuer_interaction_initiale_avec_joueur(joueur : JoueurCanard) -> void:
 ## Libere le joueur des contraintes etablies pour permettre une interaction fluide avec le marchand.
 func _liberer_joueur_contraintes_interaction() -> void:
 	await _lancer_transition_vers_camera_joueur()
-
+	
 	get_tree().paused = false
-
+	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 	client_en_cours.relancer_mouvement()
