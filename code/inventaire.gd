@@ -27,9 +27,16 @@ func ready_instance_inventaire() -> void:
 	pass
 
 
+## Permet a une instance d'inventaire de deleguer la tache de cacher l'interface.[br]
+var _gestion_input_independante : bool = true
+
 func _physics_process(_delta):
-	if self.visible and Input.is_action_pressed("ui_cancel"):
+	if _gestion_input_independante and self.visible and Input.is_action_pressed("ui_cancel"):
 		cacher_interface()
+
+
+func set_gestion_input_independante(valeur : bool) -> void:
+	_gestion_input_independante = valeur
 
 
 func _determiner_chemin_fichier_sauvegarde_partiel() -> String:
