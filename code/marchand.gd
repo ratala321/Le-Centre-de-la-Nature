@@ -52,6 +52,8 @@ func _liberer_joueur_contraintes_interaction() -> void:
 
 	client_en_cours.relancer_mouvement()
 
+	client_en_cours = null
+
 
 ## Etablit des contraintes au joueur afin de permettre une interaction fluide avec le marchand.
 func _contraindre_joueur_pour_interaction(joueur : JoueurCanard) -> void:

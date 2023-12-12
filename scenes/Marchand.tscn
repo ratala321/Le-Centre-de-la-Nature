@@ -24,9 +24,8 @@ mesh = SubResource("BoxMesh_52ebl")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_v20xc")
 
-[node name="DialoguesMarchand" type="CanvasLayer" parent="." node_paths=PackedStringArray("_inventaire_marchand") groups=["InterfaceEnJeu"]]
+[node name="DialoguesMarchand" type="CanvasLayer" parent="." groups=["InterfaceEnJeu"]]
 script = ExtResource("2_7r2iq")
-_inventaire_marchand = NodePath("../InventaireMarchand")
 _temps_transition_ui = 0.7
 
 [node name="OptionsDialogue" type="Control" parent="DialoguesMarchand"]

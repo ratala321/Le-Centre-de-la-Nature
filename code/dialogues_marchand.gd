@@ -57,30 +57,22 @@ func _afficher_options_apres_dialogue() -> void:
 	$OptionsDialogue.visible = true
 
 
-@export var _inventaire_marchand : CanvasLayer
+@onready var _inventaire_marchand : CanvasLayer = get_node("../InventaireMarchand")
 
 ## Contenu de l'inventaire du joueur en contact avec le marchand.[br]
 var liste_inventaire_joueur : ItemList
 
 func _preparer_interface_negociation() -> void:
-	# TODO créer inventaire de marchand
 	if dialogue_en_cours:	
 		_inventaire_marchand.offset.y = 0
-		
+
 		_cacher_options_dialogue_discussion()
 
-		_inventaire_marchand.show()
+		var gestionnaire_nego : GestionnaireNegociation =(
+			_inventaire_marchand.get_node("GestionnaireNegociation") as GestionnaireNegociation
+		)
+		gestionnaire_nego.afficher_interface_negociation(liste_inventaire_joueur)
 
-	# Obtenir référence à l'inventaire du joueur
-
-	# Afficher interface negociation
-
-	pass
-
-
-const PREFIXE_CLEF_DIALOGUE : String = "DIALOGUE_MARCHAND_"
-
-var _suffixe_clef_dialogue : int = 0
 
 func _effectuer_procedure_discussion() -> void:
 	if dialogue_en_cours:
@@ -96,6 +88,10 @@ func _effectuer_procedure_discussion() -> void:
 func _cacher_options_dialogue_discussion() -> void:
 	$OptionsDialogue.hide()
 
+
+const PREFIXE_CLEF_DIALOGUE : String = "DIALOGUE_MARCHAND_"
+
+var _suffixe_clef_dialogue : int = 0
 
 func _traduire_dialogue() -> void:
 	print(PREFIXE_CLEF_DIALOGUE + str(_suffixe_clef_dialogue))

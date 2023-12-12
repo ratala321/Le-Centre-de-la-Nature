@@ -127,9 +127,44 @@ theme_override_constants/margin_right = 10
 layout_mode = 2
 text = "Quitter"
 
-[node name="GestionnnaireNegociation" type="Node" parent="." node_paths=PackedStringArray("_liste_inventaire_marchand", "_confirmation", "_reinitialisation", "_quitter")]
+[node name="PanelEnteteJoueur" type="PanelContainer" parent="InterfaceUtilisateur"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 872.0
+offset_top = -166.0
+offset_right = 1061.0
+offset_bottom = -126.0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="InterfaceUtilisateur/PanelEnteteJoueur"]
+layout_mode = 2
+
+[node name="Entete" type="Label" parent="InterfaceUtilisateur/PanelEnteteJoueur/MarginContainer"]
+layout_mode = 2
+text = "Inventaire Joueur"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ListeInventaireJoueur" type="ItemList" parent="InterfaceUtilisateur"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 871.0
+offset_top = -102.0
+offset_right = 1064.0
+offset_bottom = 153.0
+grow_vertical = 2
+max_columns = 2
+icon_scale = 0.1
+
+[node name="GestionnaireNegociation" type="Node" parent="." node_paths=PackedStringArray("_liste_inventaire_marchand", "_liste_inventaire_negociation", "_interface_liste_inventaire_joueur", "_confirmation", "_reinitialisation", "_quitter")]
 script = ExtResource("2_8g56v")
 _liste_inventaire_marchand = NodePath("../InterfaceUtilisateur/ListeInventaire")
+_liste_inventaire_negociation = NodePath("../InterfaceUtilisateur/PanelNegociation/VBoxContainer/ListeNegociation")
+_interface_liste_inventaire_joueur = NodePath("../InterfaceUtilisateur/ListeInventaireJoueur")
 _confirmation = NodePath("../InterfaceUtilisateur/PanelNegociation/VBoxContainer/MarginHautBasOptions/HBoxContainer/MarginGaucheOptions/Confirmation")
 _reinitialisation = NodePath("../InterfaceUtilisateur/PanelNegociation/VBoxContainer/MarginHautBasOptions/HBoxContainer/Reinitialisation")
 _quitter = NodePath("../InterfaceUtilisateur/PanelNegociation/VBoxContainer/MarginHautBasOptions/HBoxContainer/MarginDroiteOptions/Quitter")
