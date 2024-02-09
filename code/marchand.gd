@@ -12,7 +12,7 @@ extends Node3D
 
 func _ready():
 	var dialogues_marchand = get_node("DialoguesMarchand")
-	dialogues_marchand.connect("boutton_quitter_clique", _liberer_joueur_contraintes_interaction)
+	dialogues_marchand.connect("lors_boutton_quitter_clique", _liberer_joueur_contraintes_interaction)
 
 	process_mode = PROCESS_MODE_WHEN_PAUSED
 
@@ -26,20 +26,22 @@ var client_en_cours : JoueurCanard
 
 var camera_joueur : Camera3D
 
+@export var interface_dialogue : DialoguesMarchand
+
 func effectuer_interaction_initiale_avec_joueur(joueur : JoueurCanard) -> void:
 	client_en_cours = joueur
 
 	_contraindre_joueur_pour_interaction(joueur)
 
-	get_node("DialoguesMarchand").afficher_options_dialogues_marchand()
-	get_node("DialoguesMarchand").liste_inventaire_joueur =(
+	interface_dialogue.afficher_options_dialogues_marchand()
+	interface_dialogue.liste_inventaire_joueur =(
 		joueur.inventaire_joueur.liste_inventaire
 	)
 
 	camera_joueur = _obtenir_camera_joueur(joueur)
 	await _lancer_transition_vers_angle_de_vue(camera_joueur)
 
-	get_node("DialoguesMarchand").dialogue_en_cours = true
+	interface_dialogue.dialogue_en_cours = true
 
 
 ## Libere le joueur des contraintes etablies pour permettre une interaction fluide avec le marchand.

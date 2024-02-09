@@ -11,12 +11,13 @@ size = Vector3(1, 1.9, 1)
 [sub_resource type="SphereShape3D" id="SphereShape3D_v20xc"]
 radius = 1.7
 
-[node name="Marchand" type="RigidBody3D"]
+[node name="Marchand" type="RigidBody3D" node_paths=PackedStringArray("interface_dialogue")]
 sleeping = true
 lock_rotation = true
 freeze = true
 script = ExtResource("1_lnmhk")
 temps_transition_cameras = 1.2
+interface_dialogue = NodePath("DialoguesMarchand")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_52ebl")
@@ -24,8 +25,9 @@ mesh = SubResource("BoxMesh_52ebl")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_v20xc")
 
-[node name="DialoguesMarchand" type="CanvasLayer" parent="." groups=["InterfaceEnJeu"]]
+[node name="DialoguesMarchand" type="CanvasLayer" parent="." node_paths=PackedStringArray("_inventaire_marchand") groups=["InterfaceEnJeu"]]
 script = ExtResource("2_7r2iq")
+_inventaire_marchand = NodePath("../InventaireMarchand")
 _temps_transition_ui = 0.7
 
 [node name="OptionsDialogue" type="Control" parent="DialoguesMarchand"]

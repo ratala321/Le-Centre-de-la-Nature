@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://code/inventaire_marchand.gd" id="1_blk4u"]
 [ext_resource type="Script" path="res://code/gestionnaire_negociation.gd" id="2_8g56v"]
 
-[node name="InventaireMarchand" type="CanvasLayer" groups=["InterfaceEnJeu"]]
+[node name="InventaireMarchand" type="CanvasLayer" node_paths=PackedStringArray("gestionnaire_negociation") groups=["InterfaceEnJeu"]]
 script = ExtResource("1_blk4u")
-inventaire_par_defaut = null
+gestionnaire_negociation = NodePath("GestionnaireNegociation")
 
 [node name="InterfaceUtilisateur" type="Control" parent="."]
 layout_mode = 3
@@ -37,7 +37,7 @@ text = "Inventaire Marchand"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ListeInventaire" type="ItemList" parent="InterfaceUtilisateur"]
+[node name="ListeInventaireMarchand" type="ItemList" parent="InterfaceUtilisateur"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 4
@@ -162,7 +162,7 @@ icon_scale = 0.1
 
 [node name="GestionnaireNegociation" type="Node" parent="." node_paths=PackedStringArray("_liste_inventaire_marchand", "_liste_inventaire_negociation", "_interface_liste_inventaire_joueur", "_confirmation", "_reinitialisation", "_quitter")]
 script = ExtResource("2_8g56v")
-_liste_inventaire_marchand = NodePath("../InterfaceUtilisateur/ListeInventaire")
+_liste_inventaire_marchand = NodePath("../InterfaceUtilisateur/ListeInventaireMarchand")
 _liste_inventaire_negociation = NodePath("../InterfaceUtilisateur/PanelNegociation/VBoxContainer/ListeNegociation")
 _interface_liste_inventaire_joueur = NodePath("../InterfaceUtilisateur/ListeInventaireJoueur")
 _confirmation = NodePath("../InterfaceUtilisateur/PanelNegociation/VBoxContainer/MarginHautBasOptions/HBoxContainer/MarginGaucheOptions/Confirmation")
