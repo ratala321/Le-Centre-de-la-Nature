@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://q4uuutngl3k0"]
 
 [ext_resource type="Script" path="res://code/coffre.gd" id="1_8fcg7"]
-[ext_resource type="PackedScene" uid="uid://bq6bctuaqu1ly" path="res://importations/ArianeAssets/coffre.blend" id="3_3fcwu"]
+[ext_resource type="PackedScene" uid="uid://blccg2hvse5pa" path="res://importations/ArianeAssets/coffre.glb" id="2_rpoc6"]
 [ext_resource type="Script" path="res://code/patron_relais.gd" id="3_6xvo8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x48ri"]
@@ -14,7 +14,7 @@ script = ExtResource("1_8fcg7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.471515, 0)
 shape = SubResource("BoxShape3D_x48ri")
 
-[node name="FormatCoffre" parent="." instance=ExtResource("3_3fcwu")]
+[node name="FormatCoffre" parent="." instance=ExtResource("2_rpoc6")]
 
 [node name="RelaisInteractionJoueur" type="Node" parent="."]
 script = ExtResource("3_6xvo8")

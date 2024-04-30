@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Le Centre de la Nature"
 run/main_scene="res://scenes/NiveauTest.tscn"
-config/features=PackedStringArray("4.1", "C#", "Forward Plus")
+config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [dotnet]
@@ -22,6 +22,14 @@ project/assembly_name="PremierTest3d"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://code/": "blue",
+"res://importations/": "pink",
+"res://scenes/": "green"
+}
 
 [input]
 

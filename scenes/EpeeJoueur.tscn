@@ -11,10 +11,10 @@ collision_layer = 2
 collision_mask = 2
 mass = 0.01
 gravity_scale = 0.0
-max_contacts_reported = 2
-contact_monitor = true
 freeze = true
 freeze_mode = 1
+max_contacts_reported = 2
+contact_monitor = true
 script = ExtResource("1_q63ah")
 
 [node name="sword_teamBluegltf" parent="." instance=ExtResource("2_cf527")]
