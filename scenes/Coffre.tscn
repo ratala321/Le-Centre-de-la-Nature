@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://q4uuutngl3k0"]
 
-[ext_resource type="Script" path="res://code/coffre.gd" id="1_8fcg7"]
+[ext_resource type="Script" uid="uid://e8g3v31427bu" path="res://code/coffre.gd" id="1_8fcg7"]
 [ext_resource type="PackedScene" uid="uid://blccg2hvse5pa" path="res://importations/ArianeAssets/coffre.glb" id="2_rpoc6"]
-[ext_resource type="Script" path="res://code/patron_relais.gd" id="3_6xvo8"]
+[ext_resource type="Script" uid="uid://dn1tvjub53wbn" path="res://code/patron_relais.gd" id="3_6xvo8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x48ri"]
 size = Vector3(1.12778, 1, 1)

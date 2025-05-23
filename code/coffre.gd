@@ -4,7 +4,7 @@ extends AbstractObjetInteractif
 
 func effectuer_interaction_avec_joueur(joueur : JoueurCanard) -> void:
 	var inventaire_coffre : AbstractInventaire = $InventaireCoffre as AbstractInventaire
-
+	
 	if joueur.has_node("InventaireJoueur"):
 		_afficher_interfaces(inventaire_coffre, joueur.inventaire_joueur)
 

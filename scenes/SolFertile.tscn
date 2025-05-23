@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://bhltammokhs6o"]
 
-[ext_resource type="Script" path="res://code/sol_fertile.gd" id="1_3qncb"]
-[ext_resource type="Script" path="res://code/espace_plante.gd" id="4_ei2sf"]
+[ext_resource type="Script" uid="uid://bpv44hjs64uon" path="res://code/sol_fertile.gd" id="1_3qncb"]
+[ext_resource type="Script" uid="uid://cnem0v8da6h6q" path="res://code/espace_plante.gd" id="4_ei2sf"]
 [ext_resource type="PackedScene" uid="uid://cw0mho7tmkpw8" path="res://scenes/plantesScenes/BleScene.tscn" id="4_hy0se"]
-[ext_resource type="Script" path="res://code/patron_relais.gd" id="5_nctuk"]
+[ext_resource type="Script" uid="uid://dn1tvjub53wbn" path="res://code/patron_relais.gd" id="5_nctuk"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qoflg"]
 size = Vector3(23, 0.8, 21)

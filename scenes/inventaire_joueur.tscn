@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cckcrlxvfyuku"]
 
-[ext_resource type="Script" path="res://code/paquetCodeJoueur/inventaire_joueur.gd" id="1_gt6oj"]
+[ext_resource type="Script" uid="uid://cjg5vvbetehgl" path="res://code/paquetCodeJoueur/inventaire_joueur.gd" id="1_gt6oj"]
 
 [node name="InventaireJoueur" type="CanvasLayer" groups=["InterfaceEnJeu"]]
 script = ExtResource("1_gt6oj")

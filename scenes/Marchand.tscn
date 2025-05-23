@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://brnoks1cft68k"]
 
-[ext_resource type="Script" path="res://code/marchand.gd" id="1_lnmhk"]
-[ext_resource type="Script" path="res://code/patron_relais.gd" id="2_7h8n8"]
-[ext_resource type="Script" path="res://code/dialogues_marchand.gd" id="2_7r2iq"]
+[ext_resource type="Script" uid="uid://dw7udolvpwegs" path="res://code/marchand.gd" id="1_lnmhk"]
+[ext_resource type="Script" uid="uid://dn1tvjub53wbn" path="res://code/patron_relais.gd" id="2_7h8n8"]
+[ext_resource type="Script" uid="uid://b0hbhsexpdpi8" path="res://code/dialogues_marchand.gd" id="2_7r2iq"]
 [ext_resource type="PackedScene" uid="uid://ck2mloxah7sif" path="res://scenes/inventaire_marchand.tscn" id="4_k12x3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_52ebl"]

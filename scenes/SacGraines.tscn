@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dcqnxh0sklqav"]
 
-[ext_resource type="Script" path="res://code/sac_graine.gd" id="1_d2lr3"]
+[ext_resource type="Script" uid="uid://d2okdlnvixh8p" path="res://code/sac_graine.gd" id="1_d2lr3"]
 [ext_resource type="PackedScene" uid="uid://dwxu4ortxbwx5" path="res://importations/3d_importations/kaykit_spooktober_1.1/Models/gltf/candyBag.gltf.glb" id="3_edy0g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_prrt7"]

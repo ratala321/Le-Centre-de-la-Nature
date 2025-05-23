@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ck2mloxah7sif"]
 
-[ext_resource type="Script" path="res://code/inventaire_marchand.gd" id="1_blk4u"]
-[ext_resource type="Script" path="res://code/gestionnaire_negociation.gd" id="2_8g56v"]
+[ext_resource type="Script" uid="uid://du12mj8i16trv" path="res://code/inventaire_marchand.gd" id="1_blk4u"]
+[ext_resource type="Script" uid="uid://t3yiy76do0na" path="res://code/gestionnaire_negociation.gd" id="2_8g56v"]
 
 [node name="InventaireMarchand" type="CanvasLayer" node_paths=PackedStringArray("gestionnaire_negociation") groups=["InterfaceEnJeu"]]
 script = ExtResource("1_blk4u")
