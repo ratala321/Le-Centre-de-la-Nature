@@ -56,7 +56,7 @@ func _copier_inventaire_joueur_vers_interface(liste_inventaire_joueur : ItemList
 ## Appelee lors de la selection d'un objet dans l'interface de vente representant[br]
 ## l'inventaire du joueur.
 func _lors_selection_objet_interface_joueur(index: int,
-		at_position: Vector2, mouse_button_index: int):
+		_at_position: Vector2, _mouse_button_index: int):
 	print("index de l'objet sélectionné dans l'interface négo du joueur " + str(index))
 	pass
 

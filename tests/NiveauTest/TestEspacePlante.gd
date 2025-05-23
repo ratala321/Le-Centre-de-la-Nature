@@ -56,7 +56,7 @@ func _testRetirerPrevisualisationFonctionnel(espaceTest) -> void:
 
 
 func _preparerTestRetirerPrevisualisationFonctionnel() -> Area3D:
-	const SacGraine = preload("res://scenes/SacGraines.tscn")
-	var sacGraine = SacGraine.instantiate()
+	const SacGraineScene = preload("res://scenes/SacGraines.tscn")
+	var sacGraine = SacGraineScene.instantiate()
 	add_child(sacGraine)
 	return sacGraine.get_node("AireDetectionEspacePlante")
