@@ -101,7 +101,7 @@ func _creer_aire_interaction() -> Area3D:
 
 
 func _creer_instance_inventaire() -> AbstractInventaire:
-	var scene_inventaire_coffre : PackedScene = load("res://scenes/InventaireCoffre.tscn")
+	var scene_inventaire_coffre : PackedScene = load("res://scenes/inventaire_coffre.tscn")
 	
 	return autoqfree(scene_inventaire_coffre.instantiate())
 
